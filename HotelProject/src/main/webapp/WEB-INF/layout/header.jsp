@@ -35,7 +35,9 @@
         
         
 		<c:if test="${admin != null }"> <!-- 관리자 아이디로 접속시에만 보이는 메뉴 -->
-			<li>관리자 메뉴</li>
+			<li>관리자 메뉴</li>		
+			
+			<li><a href="adminMain.do">관리자메인</a></li>
 			<li><a href="adminBook.do">예약현황</a></li>
 			<li><a href="adminOrder.do">주문현황</a></li>
 			<li><a href="adminDb.do">DB관리</a></li>
