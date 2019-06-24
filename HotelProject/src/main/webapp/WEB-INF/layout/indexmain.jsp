@@ -12,7 +12,9 @@
 
 <c:if test="${currentCustomer == null }">
 
-	db테스트 : ${hotelTotalCount }<br><br>
+	
+	
+	
 
 	현재 객실에 머물고 있는 고객이 아니거나, 비 로그인 상태에서 보여지는 메인화면 <br><Br>
 	
@@ -27,6 +29,10 @@
 	
 	등등..
 
+	db테스트 : ${hotelTotalCount }<br><br>
+	
+	부분적으로커밋되는지 확인 
+	
 </c:if>
 <c:if test="${currentCustomer != null }">
 

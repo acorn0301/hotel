@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class HotelDao  extends SqlSessionDaoSupport{
 
 	public int getTotalCount() {
-		System.out.println("hdao!! gettotalcount!!");
+		
 		return getSqlSession().selectOne("adminTotalCount");
 		
 	}

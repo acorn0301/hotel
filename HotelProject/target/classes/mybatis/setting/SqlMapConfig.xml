@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
  	<typeAliases>
-		<typeAlias type="spring.data.HotelDto" alias="hdto"/>
+<!-- 		<typeAlias type="spring.data.HotelDto" alias="hdto"/>
 		<typeAlias type="spring.data.MemberDto" alias="mbdto"/>
 		<typeAlias type="spring.data.BookDto" alias="bdto"/>
 		<typeAlias type="spring.data.EmpDto" alias="edto"/>
@@ -13,17 +13,17 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 		<typeAlias type="spring.data.QnaDto" alias="qdto"/>
 		<typeAlias type="spring.data.QnaReplyDto" alias="qrdto"/>
 		<typeAlias type="spring.data.ReviewDto" alias="rvdto"/>
-		<typeAlias type="spring.data.RoomDto" alias="rmdto"/>
+		<typeAlias type="spring.data.RoomDto" alias="rmdto"/> -->
 
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/sql/AdminSql.xml"/>
-		<mapper resource="mybatis/sql/BookSql.xml"/>
+<!-- 		<mapper resource="mybatis/sql/BookSql.xml"/>
 		<mapper resource="mybatis/sql/MemberSql.xml"/>
 		<mapper resource="mybatis/sql/MenuSql.xml"/>
 		<mapper resource="mybatis/sql/OrderSql.xml"/>
 		<mapper resource="mybatis/sql/QnaSql.xml"/>
-		<mapper resource="mybatis/sql/ReviewSql.xml"/>
+		<mapper resource="mybatis/sql/ReviewSql.xml"/> -->
 	</mappers>
 </configuration>
 
