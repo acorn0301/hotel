@@ -31,7 +31,7 @@
 
 	db테스트 : ${hotelTotalCount }<br><br>
 	
-	부분적으로커밋되는지 확인 
+	부분적으로커밋되는지 확인 1 / 확인 2
 	
 </c:if>
 <c:if test="${currentCustomer != null }">
