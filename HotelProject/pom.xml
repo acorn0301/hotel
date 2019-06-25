@@ -140,7 +140,7 @@
 				<artifactId>ojdbc</artifactId>
 				<version>14</version>
 				<scope>system</scope>
-				<systemPath>/Users/jenny/Desktop/Acorn/springwork/SpringTilesMybatis/src/main/webapp/WEB-INF/ojdbc14.jar</systemPath>
+				<systemPath>/Users/jenny/Desktop/Acorn/git/hotel/HotelProject/src/main/webapp/WEB-INF/ojdbc14.jar</systemPath>
 			</dependency>
 		
 		
