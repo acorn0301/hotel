@@ -59,6 +59,9 @@
 		<li><a href="hotellist.do">지점안내</a></li>
 		<li><a href="reviewlist.do">후기게시판</a></li>
 		<li><a href="qnalist.do">문의게시판</a></li>
+		<li><a href="roomaservice.do">룸서비스</a></li>
+		<li><a href="booking.do">예약하기</a></li>
+		
         
         
       </ul>
