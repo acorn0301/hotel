@@ -11,7 +11,7 @@
 </head>
 <body>
 
-footer 내용이 들어갑니다.
+footer 내용이 들어갑니다 테스
 
 </body>
 </html>
