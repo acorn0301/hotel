@@ -36,6 +36,8 @@
 	영은이 테스트
 	혜수언니 테스트
 	배고파요..
+	나도..
+	
 </c:if>
 <c:if test="${currentCustomer != null }">
 
