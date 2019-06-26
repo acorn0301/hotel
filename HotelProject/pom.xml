@@ -5,6 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   
+  <!-- oracle-driver-search-path ojdbc6 서버에서 받기 위해 필요한 리파지토리  -->
+ <repositories>
+	 <repository>
+		 <id>codelds</id>
+		 <url> https://code.lds.org/nexus/content/groups/main-repo  </url>
+	 </repository>
+</repositories> 
+  
     <properties>
 
 		<!-- Generic properties -->
@@ -135,14 +143,24 @@
 				<artifactId>commons-dbcp</artifactId>
 				<version>1.4</version>
 			</dependency>
-					<dependency>
+			
+			
+			<!-- ojdbc 수동으로 넣 -->
+	<!-- 		<dependency>
 				<groupId>ojdbc</groupId>
 				<artifactId>ojdbc</artifactId>
 				<version>14</version>
 				<scope>system</scope>
 				<systemPath>/Users/jenny/Desktop/Acorn/git/hotel/HotelProject/src/main/webapp/WEB-INF/ojdbc14.jar</systemPath>
-			</dependency>
+			</dependency> -->
 		
+		 
+		 <!-- ojdbc 서버에서 받기 -->
+		  <dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
 		
 
 	</dependencies>	
