@@ -40,6 +40,8 @@
 	뭐먹을까요
 	
 	화이팅 !
+	
+	혜정테스트
 </c:if>
 <c:if test="${currentCustomer != null }">
 
