@@ -42,6 +42,8 @@
 	화이팅 !
 	
 	혜정테스트
+	
+	장희테스트
 </c:if>
 <c:if test="${currentCustomer != null }">
 
