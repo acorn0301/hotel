@@ -37,7 +37,7 @@
 	혜수언니 테스트
 	배고파요..
 	나도..
-	
+	뭐먹을까요
 </c:if>
 <c:if test="${currentCustomer != null }">
 
