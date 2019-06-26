@@ -38,6 +38,8 @@
 	배고파요..
 	나도..
 	뭐먹을까요
+	
+	화이팅 !
 </c:if>
 <c:if test="${currentCustomer != null }">
 
