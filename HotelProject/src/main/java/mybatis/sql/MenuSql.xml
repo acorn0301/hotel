@@ -3,5 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="menu">
-
+	<select id="menuTotalCount" resultType="int">
+		select count(*) from menu
+	</select>
+	<select id="menuList" resultType="mndto" parameterType="int">
+		select * from menu where menu_type_num=#{menu_type_num}
+	</select>
+	<select id="menuTypeMaxNum" resultType="int">
+		select max(menu_type_num) from menu order by menu_type_num
+	</select>
+	<select id="menuCartList" parameterType="int" resultType="mndto">
+		select * from menu where menu_num=#{menu_num}
+	</select>
+	<insert id="roomOrderInsert" parameterType="odto">
+		insert into room_order values
+		(orderseq.nextval,sysdate,#{room_num},#{member_num},#{menu_num},#{memo},#{room_status})
+	</insert>
 </mapper>
