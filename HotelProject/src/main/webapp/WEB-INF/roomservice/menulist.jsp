@@ -20,6 +20,7 @@ function openModal(title,img,desc,num){
  	$(".modalImg").attr("src",img);
 	$(".modalDesc").text(desc);
 	$(".modalCart").attr("onclick","location.href='roomaservice.do?menu_num="+num+"'");
+	$(".modalOrder").attr("onclick","location.href='cart.do?menu_num="+num+"'");
 }
 
 
@@ -81,8 +82,8 @@ function openModal(title,img,desc,num){
 					<div class="modal-footer">
 				<button type="button" class="modalCart btn btn-default" data-dismiss="modal"
 				onclick="">담기</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-				onclick="location.href=''">바로주문</button>
+				<button type="button" class="modalOrder btn btn-default" data-dismiss="modal"
+				onclick="">바로주문</button>
 				</div>
 			</div>
 		</div>

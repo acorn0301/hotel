@@ -30,13 +30,12 @@ public class MenuController {
 		
 		session.removeAttribute("cart_list");
 		
-		System.out.println(menu_num);
-		
+		//장바구니에 아무것도 없으면 "" 저장
 		if(session.getAttribute("cart_list") == null)
 		{
 			session.setAttribute("cart_list", "");
-			
 		}
+		
 		
 		//담기 버튼을 눌렀을때
 		if(menu_num != "0" ){
@@ -76,6 +75,7 @@ public class MenuController {
 			request.setAttribute(menuList[i], list.get(i));
 		}
 		
+		request.setAttribute("menu_num", menu_num);
 		request.setAttribute("container", "../roomservice/menulist.jsp");
 		request.setAttribute("menuTotalCount", menuTotalCount);
 		
@@ -86,14 +86,17 @@ public class MenuController {
 	@RequestMapping("/cart.do")
 	public String cart(HttpServletRequest request,
 			HttpSession session,
-			@RequestParam(value="menu_num",defaultValue="0") String menu_num)
+			@RequestParam(value="menu_num", defaultValue="0") int menu_num)
 	{
+		System.out.println("카트두 실행시 메뉴넘"+menu_num);
+		String cartlist = (String)session.getAttribute("cart_list");
 		
-		if(Integer.parseInt(menu_num) == 0){
-			System.out.println("메뉴넘 0임"+menu_num);
+		if(cartlist == "")
+		{
+			System.out.println("장바구니 널널널널널널널");
 		}
 		
-		String cartlist = (String)session.getAttribute("cart_list");
+		System.out.println(cartlist);
 		
 		while(cartlist.contains(",,")){
 			cartlist=cartlist.replace(",,", ",");
@@ -115,12 +118,14 @@ public class MenuController {
 		}
 		
 		//sql menulist에서 menu_num where 해서 name,price 얻어오기
+		request.setAttribute("menu_num", menu_num);
 		request.setAttribute("list", list);
 		request.setAttribute("size", list.size());
 		request.setAttribute("cart_list", cartlist);
 		request.setAttribute("container", "../roomservice/cart.jsp");
 		
 		return "layout/home";
+		
 	}
 	
 	//장바구니 일부 품목 삭제

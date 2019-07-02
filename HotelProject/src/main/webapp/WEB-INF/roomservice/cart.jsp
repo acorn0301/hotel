@@ -10,10 +10,17 @@
 <link rel="stylesheet" href="css/hsStyle.css">
 </head>
 <body>
-${size}
-<br>
-${cart_list}
-<br>
+카트리스트: ${cart_list} <br>
+카트사이즈: ${size} <br>
+menu_num: ${menu_num} <br>
+
+<!-- 장바구니에 아무것도 없을때 뜨는 페이지 -->
+<c:if test="${menu_num == 0}">
+	메뉴넘 000000000 장바구니 없음!!!
+</c:if>
+
+<!-- 장바구니에  물건이 있을때 뜨는 페이지 -->
+<c:if test="${menu_num != 0 }">
 <form action="orderform.do">
 	<table class="table">
 		<tr>
@@ -52,6 +59,7 @@ ${cart_list}
 			</tr>
 	</table>
 </form>
+</c:if>
 </body>
 </html>
 
