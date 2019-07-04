@@ -3,5 +3,43 @@
 #mainHeader{
 	
 	height : 50px;
-	background: beige;
+}
+#mainContainer{
+	margin-top: -20px;
+	padding : 0px 10px 10px 10px;
+	min-height: 500px;
+}
+
+#footer_div{
+	background-color: #f1ebd6; 
+	text-align: center;
+	padding: 15px 0 15px 0;
+}
+#footer_copyright_div{
+	text-align: center;
+	font-size: 9px;
+	color: rgba(51, 51, 51, .6);
+	padding: 8px 0 8px 0;
+}
+#footer_menu_div{
+	padding: 0px 20px 10px 20px;
+}
+#footer_menu_div span{
+	margin: 5px 15px 10px 15px;
+	color: #827664;
+	font-size: 13px;
+}
+
+.sns_icon{
+	margin: 5px 5px 10px 5px;
+	color: #827664;
+	font-size: 20px;
+}
+.sns_icons{
+	padding: 0 5px 0 50px;
+}
+
+#footer_sns_language{
+	font-size: 13px;
+	color: #827664;
 }

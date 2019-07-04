@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/jhStyle.css">
 
 </head>
 <body>
@@ -19,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="home.do">The HOTEL</a>
+      <a class="navbar-brand" href="home.do">1st HOTEL</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -53,7 +54,7 @@
 			<li><a href="mypage.do"><span class="glyphicon glyphicon-user"></span>&nbsp;마이페이지</a></li>		
 		</c:if>
 		
-		 <!-- 로그인 되어있으면 바로 보여주고 안되어있으면 로그인할래 비회원조회할래 물어볼것 (컨트롤러에서 처리함) -->
+		 <!— 로그인 되어있으면 바로 보여주고 안되어있으면 로그인할래 비회원조회할래 물어볼것 (컨트롤러에서 처리함) —>
 		<li><a href="bookingCheck.do">예약확인</a></li>
 		
 		<li><a href="hotellist.do">지점안내</a></li>
@@ -65,12 +66,9 @@
         
         
       </ul>
- <!--      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      </ul> -->
+      
+
     </div>
 
 </body>
 </html>
-

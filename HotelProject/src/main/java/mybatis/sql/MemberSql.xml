@@ -3,5 +3,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+   <!-- 회원가입(회원추가) -->
+   <insert id="memberInsert" parameterType="mbdto">
+      insert into member(member_num,id,password,name,gender,birth,phone,email,joinday,grade) values (
+      memberseq.nextval,#{id},#{password},#{name},#{gender},#{birth},#{phone},#{email},sysdate,'c')
+   </insert>
 
+   <!-- 로그인 (id와 pw가 일치하면1 없으면0 사용자 정보 담고있는 객체 반환)-->
+   <select id="login" parameterType="HashMap" resultType="int"> 
+	  select count(*) from member where id=#{id} and password=#{password}
+   </select>
+   
+	<!-- 아이디 비밀번호로 member_num 얻기 -->
+	<select id="getMembernum" parameterType="HashMap" resultType="int">
+		select member_num from member where id=#{id} and password=#{password}
+	</select>
+	
 </mapper>
