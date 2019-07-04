@@ -7,4 +7,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from hotel
 	</select>
 
+	<select id="adminGetBookListStatus0" resultType="int">
+		select count(*) from book where book_status='예약 접수'
+	</select>
+
+	<select id="adminGetBookListCheckIn" resultType="int">
+		select count(*) from book where TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+	</select>
+	
+	<select id="adminGetBookListCheckOut" resultType="int">
+		select count(*) from book where TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+	</select>
+	
+	<select id="adminGetBookListWaiting" resultType="int">
+		select count(*) from book where book_status='예약 완료'		
+	</select>
+	
+	<select id="adminGetOrderListStatus0" resultType="int">
+		select count(*) from room_order where room_status='접수'
+	</select>
+	
+	<select id="adminGetOrderListStatus1" resultType="int">
+		select count(*) from room_order where room_status='준비중'
+	</select>
+	
+	
 </mapper>

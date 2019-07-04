@@ -72,4 +72,12 @@ public class QnaDao extends SqlSessionDaoSupport{
 		
 		getSqlSession().update("qnaUpdateData", qdto);
 	}
+	
+	//조회수 올리기
+	public void updateReadCount(int board_num) {
+		
+		getSqlSession().update("qnaReadCount", board_num);
+	}
+	
+	
 }

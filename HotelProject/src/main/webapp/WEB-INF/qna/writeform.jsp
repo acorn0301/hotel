@@ -42,23 +42,25 @@ function cancelChk(pageNum){
 		<input type="text" name="subject" class="inputbox" id="subject" title="제목" placeholder="제목" required="required">
 	</div>
 	
-	<!-- 비로그인 상태에 한해 작성자 란을 띄워준다. -->
-	<c:if test="${sessionScope.member_num == null}">
+<%-- 	<!-- 비로그인 상태에 한해 작성자 란을 띄워준다. -->
+	<c:if test="${sessionScope.member_num == null}"> --%>
 		<div class="form_group">
 			<input type="text" name="writer" class="inputbox" id="writer" title="작성자" placeholder="작성자" value="" required="required">
 		</div>
 		<div class="form_group">
 			<input type="password" name="board_pass" class="inputbox" id="password" title="비밀번호" placeholder="비밀번호" value="" required="required">
 		</div>
-	</c:if>
-	<!-- 로그인 회원의 경우 작성자란이 자동으로 이름으로 들어간다. -->	
+<%-- 	</c:if>
+ --%><%-- 	<!-- 로그인 회원의 경우 작성자란이 자동으로 이름으로 들어간다. -->	
 	<c:if test="${sessionScope.member_num != null}">
 		<input type="hidden" name="writer" value="${writer }">
 	</c:if>
-	
+	 --%>
 	
 	<div class="textbox">
-		<textarea name="content" id="content" class="blind" rows="15" cols="40"> </textarea>
+		<!-- <textarea name="content" id="content" class="blind" rows="15" cols="40"> </textarea> -->
+		<textarea id="reply_content" name="content" placeholder="내용을 입력하세요." class="write_textarea" rows="3" cols="30" ></textarea>
+		
 	</div>
 	
 	<div class="btns_group"> 

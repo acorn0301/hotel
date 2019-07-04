@@ -70,4 +70,9 @@ public class QnaService {
 		
 		qdao.updateData(qdto);
 	}
+	
+	//조회수 올리기
+	public void updateReadCount(int board_num) {
+		qdao.updateReadCount(board_num);
+	}
 }

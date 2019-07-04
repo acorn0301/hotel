@@ -1,3 +1,13 @@
+/* 태그에 직접 준 css */
+h1{
+	font-weight: 900;
+	margin: 0;
+}
+
+ul{
+	list-style: none;
+}
+
 /* qna > list.jsp */
 
 .qnatable{
@@ -23,6 +33,7 @@
 	text-align: center;
 	width: 50px;
 	background: WhiteSmoke;
+	padding: 5px;
 	
 }
 
@@ -53,6 +64,16 @@
 	font-size : 0.7rem;
 	color: lightgrey;
 }
+.qna_write_btn_div a{
+	position: relative;
+	left: 60%;
+	top: -20px;
+}
+.qna_write_btn_div button{
+	background-color: palegoldenrod;
+}
+
+
 
 
 /* qna > writeform.jsp */
@@ -246,4 +267,213 @@ a{
 	margin-left: 5px;
     color: #999;
     font-size: 13px;
+}
+
+
+/* 댓글란을 위한 css  */
+
+.qna_comment_area{
+	
+}
+
+.section_comment{
+	position: relative;
+    padding: 20px 15px 0;
+    border-top: 1px solid #ececec;
+}
+
+.section_comment_top{
+	display: block;
+    position: relative;
+    height: 23px;
+    padding-bottom: 4px;
+}
+.section_comment_top ul{
+	border-bottom: 1px solid #ededed;
+	list-style: none;
+}
+
+.comment_content_wrap{
+	padding: 0 15px;
+}
+.comment_write_wrap{
+	margin: 15px 0 11px;
+}
+.comment_box_write{
+	position: relative;
+}
+.comment_box_write_inner{
+	position: relative;
+    background-color: #fff;
+    border: 1px solid #b3b3b3;
+}
+.comment_box_profile_area{
+	position: relative;
+    height: 30px;
+    padding: 10px 14px 0;
+}
+.comment_box_write_area{
+	overflow: hidden;
+    max-width: 100%;
+}
+.comment_box_upload_area{
+	height: 43px;
+    border-top: 1px solid #ededed;
+}
+.li_comment{
+	position: relative;
+    padding: 12px 0;
+    border-bottom: 1px solid #ececec;
+}
+.li_comment_content{
+	padding: 10px 0 10px 0;
+}
+
+.comment_box_write_inbox{
+	position: relative;
+    padding: 11px 12px 10px;
+    background-color: #fff;
+}
+
+.comment_textarea{
+	z-index: 20;
+    height: 100px;
+    display: block;
+    position: relative;
+    
+    width: 100%;
+    
+    border: 0;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
+    line-height: 20px;
+    -webkit-appearance: none;
+    resize: none;
+}
+
+.write_textarea{
+	z-index: 20;
+    height: 200px;
+    display: block;
+    position: relative;
+    
+    width: 100%;
+    
+    border: 0;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
+    line-height: 20px;
+    -webkit-appearance: none;
+    resize: none;
+}
+
+.comment_btn_upload{
+	top: auto;
+    height: 44px;
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    min-width: 69px;
+    background: sienna;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+
+
+/* 관리자 페이지 메인을 위한 css */
+
+.dashboard_div{
+	
+	padding: 10px;
+}
+
+.dashboard_div_title{
+	padding-left: 5px;
+}
+
+.dashboard_div_table{
+	
+	border: 1px solid grey;
+	border-radius: 10px;
+}
+
+.dashboard_div_table ul{
+	padding : 0;
+	margin : 0;
+}
+
+.dashboard_li_div{
+	font-size: 13pt;
+	padding: 10px 10px 10px 20px;
+	border-bottom: 1px solid lightgrey;
+}
+.li_last{
+	border : 0;
+}
+
+.dashboard_li_number{
+	float:right;
+	padding-right:20px;
+	font-weight: bold;
+	font-size: 18pt;
+	position: relative;
+	top: -5px;
+}
+
+.dashboar_li_label{
+	width: 100px;
+	color: royalblue;
+}
+
+
+
+
+/* header부분을 위한 css */
+
+.navbar-inverse{
+	background-color: #F1E3C4;
+}
+.navbar{
+	border : 0;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover{
+	background-color: #F1E3C4;
+		
+}
+.navbar-toggle{
+	border : 0;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+	border-color: #F1E3C4;
+}
+.icon-bar{
+	background-color: #5D4C35;
+}
+.navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-brand{
+	color: #5D4C35;
+}
+.navbar-inverse .navbar-toggle .icon-bar{
+	background-color: #5D4C35;
+	
+}
+.navbar-toggle .icon-bar{
+	width: 25px;
+}
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover{
+	color: #5D4C35;
+}
+.navbar-toggle .icon-bar+.icon-bar{
+	margin-top: 6px;
+}
+.navbar-toggle{
+	margin-right: 8px;
 }

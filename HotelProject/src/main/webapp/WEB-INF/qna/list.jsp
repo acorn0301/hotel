@@ -12,8 +12,6 @@
 </head>
 <body>
 
-총 ${totalCount } 개의 글이 있습니다.
-
 <script>
 	function getContent(board_num,pageNum){
 		
@@ -23,8 +21,12 @@
 </script>
 
 <br> 
+
+<div class="title_div">
+	<h1>문의게시판</h1>
+</div>
 <table class="qnatable">
-	<caption>Q & A</caption>
+	<caption></caption>
 	
 
 	<c:forEach var="dto" items="${list }" varStatus="i">
@@ -50,9 +52,6 @@
 	</c:forEach>
 </table>
 
-<div>
-	<a href="qnaform.do?pageNum=${currentPage }"><i class="fa fa-edit"></i></a>
-</div>
 
 
 
@@ -81,7 +80,22 @@
 		</c:if>
 	</ul>
 </div>
+<!-- 페이징 끝 -->
 
+<!-- 글쓰기 버튼 -->
+<div class="qna_write_btn_div">
+	<a href="qnaform.do?pageNum=${currentPage }">
+		<button class="btn btn-lg btn-default">
+			<i class="far fa-question-circle"></i> 문의하기 
+		</button>
+		
+	</a>
+</div>
+<!-- 글쓰기 버튼 끝 -->
+
+
+<!-- 임시로 잠시 쓸게요.. -->
+<button class="btn" onclick="location.href='admin.do'">관리자페이지</button>
  
 </body>
 </html>

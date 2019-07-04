@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.QnaDto;
+import spring.data.QnaReplyDto;
+import spring.service.QnaReplyService;
 import spring.service.QnaService;
 
 @Controller
@@ -22,14 +24,19 @@ public class QnaController {
 	
 	@Autowired
 	QnaService qservice;
+	
+	@Autowired
+	QnaReplyService qrservice;
 
 	//문의게시판 버튼을 눌렀을때 
 	@RequestMapping("/qnalist.do")
-	public String list(HttpServletRequest request, @RequestParam(value="pageNum", defaultValue="1") int currentPage) {
+	public String list(HttpServletRequest request, @RequestParam(value="pageNum", defaultValue="1") int currentPage, HttpSession session) {
 		
-		//여기에 qna 데이타베이스 테이블로부터 리스트를 가져오는 코드를 짭니다.(dao, dto 클래스파일은 이미 spring.data에 있어요)
-		//많이 해봤죠?? 페이징 처리해서 하면 됨! 
-		//주석은 최대한 친절하고 꼼꼼하게 달아주세요 *^^*
+		//일단 임시로 로그인 기능 구현... 
+		//무조건 이장희(alice01)로 로그인됨
+		//추후 로그인 기능 추가시 아래 코드는 삭제바람
+		session.setAttribute("member_num", "3");
+		
 		
 		
 		//페이징 처리에 필요한 변수들 선언
@@ -162,12 +169,40 @@ public class QnaController {
 	
 	
 	
-	//문의게시판에서 게시글을 눌렀을 때 
+	//글 내용 보기
 	@RequestMapping("/qnacontent.do")
-	public String content(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum) {
+	public String content(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum, HttpSession session) {
 
+		// 해당 글의 조회수를 ++ 한다.
+		qservice.updateReadCount(board_num);
+		
+		// 해당 글의 내용을 db로부터 가져온다.
 		QnaDto qdto = qservice.getData(board_num);
 				
+		//해당 글에 달린 댓글들을 db로부터 가져온다.
+		List<QnaReplyDto> replylist = qrservice.getQnaReplyList(board_num);
+		
+		//세션에 저장된 member_num을 가져온다.
+		String member_num = "";
+		String member_name = "";
+		if(session.getAttribute("member_num")!=null) {
+			member_num = (String)session.getAttribute("member_num");
+			member_name = qservice.getWriter(Integer.parseInt(member_num));
+		}else {
+			member_num = "no";
+		}
+
+		request.setAttribute("member_num", member_num);
+		request.setAttribute("member_name", member_name);
+		//member_num != "no"일 때에만 댓글 작성창을 보여주려고 한다. 
+		
+		
+		//댓글들의 총 갯수를 가져온다.
+		int replyTotalCount = qservice.getReplyTotalCount(board_num);
+		
+		request.setAttribute("board_num", board_num);
+		request.setAttribute("replyTotalCount", replyTotalCount);
+		request.setAttribute("replylist", replylist);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("qdto", qdto);
 		request.setAttribute("container", "../qna/content.jsp");
@@ -229,6 +264,18 @@ public class QnaController {
 		
 	
 		qservice.updateData(qdto);
+		request.setAttribute("board_num", board_num);
+		request.setAttribute("pageNum", pageNum);
+		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num;
+
+	}
+	
+	//댓글 등록 버튼을 눌렀을 때 
+	@RequestMapping(value="/qnareplyinsert.do", method=RequestMethod.POST)
+	public String insertReply(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum, @ModelAttribute QnaReplyDto qrdto) {		
+		
+		qrservice.insertReply(qrdto);
+		
 		request.setAttribute("board_num", board_num);
 		request.setAttribute("pageNum", pageNum);
 		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num;
