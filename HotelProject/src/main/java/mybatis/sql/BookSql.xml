@@ -41,6 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	
+	<!-- 비회원, 예약확인을 위한 최소한의 정보 저장 -->
+	<!-- <insert id="" parameterType="">
+	
+	</insert> -->
+	
+	
 	<!-- 비회원 예약정보 db저장 -->
 	<insert id="insertBook_notMember" parameterType="bdto">
 		insert into book values (bookseq.nextval, #{member_num}, #{check_in}, #{check_out}, #{room_num}, #{head_count}, #{book_memo}, #{book_status}, sysdate, #{add_bed}, #{breakfast_count})
