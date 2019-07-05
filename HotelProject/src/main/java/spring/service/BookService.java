@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import spring.data.BookDao;
+import spring.data.BookDto;
 import spring.data.HotelDto;
 import spring.data.RoomDto;
 
@@ -22,10 +23,32 @@ public class BookService {
 		return bdao.HotelLocalList();
 	}
 	
+	
 	//객실 리스트
-	public List<RoomDto> RoomList()
+	public List<RoomDto> RoomList(BookDto bdto)
 	{
-		return bdao.RoomList();
+		return bdao.RoomList(bdto);
+	}
+	
+	
+	//룸num에 따른 호텔지점명
+	public List<HotelDto> hotelLocal(int num)
+	{
+		return bdao.hotelLocal(num);
+	}
+	
+	
+	//예약정보 DB에 삽입
+	public void insertBook(BookDto dto)
+	{
+		bdao.insertBook(dto);
+	}
+	
+	
+	//비예약정보 DB에 삽입
+	public void insertBook_notMember(BookDto dto)
+	{
+		bdao.insertBook_notMember(dto);
 	}
 
 }

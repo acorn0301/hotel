@@ -11,19 +11,24 @@ function headCountFunction(n){
 		text.value=1; // 0 이하 숫자 불가능
 	}
 	
-	if(text.value>=5)
+	if(text.value>=7)
 	{
-		text.value=4; // 5 이상 숫자 불가능
+		text.value=6; // 5 이상 숫자 불가능
 	}
 }
 
+
+//페이지 첫 접속이 아닐시, session에 저장된 호텔 지점을 select 상태로
+//var Local = sessionStorage.getItem(localList);
+//hotelLocal = (String)session.getAttribute("hotelLocal");
+//$(".formHotelLocal").val(hotelLocal).prop("selected",true)
 
 
 //STEP 2 페이지
 $(document).ready(function(){
 	
 	//자세히 보기 클릭시 팝업
-	$('#aboutRoom').click(function(){
+	$('.aboutRoomMD').click(function(){
 		$('#aboutRoomModalBack').removeClass('aboutRoomModalBack');
 	});
 	
@@ -40,7 +45,7 @@ $(document).ready(function(){
 
 function modalData(name,img,type,max,config,price){
 	$(".modalRoomName").text(name);
-	$(".modalRoomImg").attr("src",("images/room/standard/"+img));
+	$(".modalRoomImg").attr("src",("images/room/"+img));
 	$(".modalRoomType").text(type);
 	$(".modalRoommax").text(max);
 	$(".modalRoomConfig").text(config);
@@ -52,21 +57,42 @@ function modalData(name,img,type,max,config,price){
 
 // STEP 3 페이지
 //침대 수 버튼 클릭시 증가 및 감소
-function bedCountFunction(n){
+function bedCountFunction(n,m){
 	var bedtext = document.getElementById("formBedCountValue"); // <input="text" id="bedCountValue"> 선택
 	bedtext_val = parseInt(bedtext.value); // 폼 값을 숫자열로 변환
 	bedtext_val += n; // 계산
 	bedtext.value = bedtext_val; // 계산된 값을 바꾼다
 	
-	if(bedtext.value<=0)
+	
+	
+	if(m<=3)
 	{
-		bedtext.value=0; // 0 미만 숫자 불가능
+		if(bedtext.value<=0)
+		{
+			bedtext.value=0; // 0 미만 숫자 불가능
+		}
+		
+		if(bedtext.value>=1)
+		{
+			bedtext.value=1; // m-1 이상 숫자 불가능
+		}
 	}
 	
-	if(bedtext.value>=4)
+	
+	if(m>=3)
 	{
-		bedtext.value=3; // 5 이상 숫자 불가능
+		if(bedtext.value<=0)
+		{
+			bedtext.value=0; // 0 미만 숫자 불가능
+		}
+		
+		if(bedtext.value>=3)
+		{
+			bedtext.value=3; // m-1 이상 숫자 불가능
+		}
 	}
+	
+	
 }
 
 
@@ -80,22 +106,22 @@ function bedAddPriceFunction(){
 
 
 //조식인원 수 버튼 클릭시 증가 및 감소
-function breakfastCountFunction(n){
+function breakfastCountFunction(n,m){
 	var bftext = document.getElementById("formBreakfastCountValue"); // <input="text" id="bedCountValue"> 선택
 	bftext_val = parseInt(bftext.value); // 폼 값을 숫자열로 변환
 	bftext_val += n; // 계산
 	bftext.value = bftext_val; // 계산된 값을 바꾼다
 	
-	var headCount = "<%= session.getAttribute('headCount') %>";
+	//var headCount = "<%= session.getAttribute('headCount') %>";
 	
 	if(bftext.value<=0)
 	{
 		bftext.value=0; // 0 미만 숫자 불가능
 	}
 	
-	if(bftext.value>=headCount)
+	if(bftext.value>=m)
 	{
-		bftext.value=headCount; // 해당 인원 이상 수 불가능
+		bftext.value=m; // 해당 인원 이상 수 불가능
 	}
 }
 
@@ -128,3 +154,4 @@ function reservationSubmit(index){
 	
 	document.optionForm.submit();
 }
+

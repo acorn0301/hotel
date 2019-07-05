@@ -28,7 +28,7 @@
 
 	<!-- 상단 예약 단계 표시 -->
 	<!-- 페이지가 달라짐에 따라(step 값에 따라) bold 클래스로 강조 -->
-	<c:if test="${step==1 or step==2 or step==3 or step==4}">
+	<c:if test="${step==0 or step==1 or step==2 or step==3 or step==4}">
 		<div id="step">
 			<ul>
 				<c:if test="${step==0}">
@@ -38,10 +38,11 @@
 					</li>
 				</c:if>
 				<c:if test="${step!=0}">
-					<li class="gray">
-						STEP 1<br>
-						호텔 검색
-					</li>
+						<li class="gray">
+							STEP 1<br>
+							호텔 검색
+						</li>
+					</a>
 				</c:if>
 					
 				<c:if test="${step==1}">
@@ -50,11 +51,23 @@
 						객실 선택
 					</li>
 				</c:if>
+				
+				
 				<c:if test="${step!=1}">
-					<li class="gray">
-						STEP 2<br>
-						객실 선택
-					</li>
+					<c:if test="${room_num=='0' }">
+						<li class="gray">
+							STEP 2<br>
+							객실 선택
+						</li>
+					</c:if>
+					
+					<c:if test="${room_num!='0' }">
+							<li class="gray">
+								STEP 2<br>
+								객실 선택
+							</li>
+						</a>
+					</c:if>
 				</c:if>
 					
 				<c:if test="${step==2}">
@@ -103,37 +116,41 @@
 				<form action="booking.do" method="post">
 				
 					<!-- 호텔 지점 선택 -->
-					<select class="formHotelLocal" name="hotelLocal">
-						<c:forEach var="hdto" items="${localList }">
-							<option>${hdto.hotel_local}</option>
-						</c:forEach>
-					</select>
+						<select class="formHotelLocal" name="hotel_num">
+							<c:forEach var="hdto" items="${localList }">
+								<option value="${hdto.hotel_num}">${hdto.hotel_local}</option>
+							</c:forEach>
+						</select>
 				
 				
 					<!-- 객실 타입 선택 -->
-					<div class="formRoomSelect">
+					<!-- <div class="formRoomSelect">
 						<label><input type="radio" name="roomType" value="스탠다드" checked="checked">스탠다드</label>
 						<label><input type="radio" name="roomType" value="디럭스">디럭스</label>
 						<label><input type="radio" name="roomType" value="그랜드">그랜드</label>
-					</div>
+					</div> -->
+					
 						
 						
 					<!-- 체크인 날짜 선택 -->
 					<span class="smalltext">체크인</span>
-					<input type="date" name="checkIn" required="required" class="rightFloat">
+					<input type="date" name="check_in" required="required" class="rightFloat">
+					
+					
 					
 					<hr>
 						
 					<!-- 체크아웃 날짜 선택 -->
 					<span class="smalltext">체크아웃</span>
-					<input type="date" name="checkOut" required="required" class="rightFloat">
+					<input type="date" name="check_out" required="required" class="rightFloat">
 						
 					<hr>
 						
 						
 					<!-- 인원 입력 -->
 					<span class="smalltext">인원</span>
-					<input type="text" id="formHeadCountValue" class="countBorderNone" name="headCount" value="1" size="5" class="rightFloat">
+					<input type="text" id="formHeadCountValue" class="countBorderNone" name="head_count" value="1" size="5" class="rightFloat">
+					
 					<button type="button" onclick="headCountFunction(-1)" class="headCountBtn rightFloat">-</button>
 					<button type="button" onclick="headCountFunction(1)" class="headCountBtn rightFloat">+</button>
 					
@@ -141,6 +158,7 @@
 					<br><br>
 					
 					<!-- 검색버튼 -->
+					<input type="hidden" name="hotel_num" value="${hotel_num}">
 					<input type="hidden" name="step" value="1">	
 					<input type="submit" id="reservationBtn1" value="객실검색">
 					
@@ -171,20 +189,22 @@
 				
 					<!-- 지점 -->
 					<span class="hotelLocalText">
-					${sessionScope.hotelLocal }
+						<c:forEach var="hdto" items="${hotelList }">
+							${hdto.hotel_local}
+						</c:forEach>
 					</span>
 					&nbsp;
 					
 					<!-- 객실 타입 -->
-					<span class="roomTypeText">
+					<%-- <span class="roomTypeText">
 					${sessionScope.roomType }
-					</span>
+					</span> --%>
 					
 					&nbsp;
 					
 					<!-- 인원 -->
 					<span class="headCountText">
-					${sessionScope.headCount }명
+					${sessionScope.head_count }명
 					</span>
 					
 					<hr>
@@ -192,14 +212,14 @@
 					<!-- 체크인 날짜 -->
 					<div class="checkInDiv">
 					 <span class="smalltext">체크인</span><br>
-					 ${sessionScope.checkIn }
+					 ${sessionScope.check_in }
 					</div>
 					
 					
 					<!-- 체크아웃 날짜 -->
 					<div class="checkOutDiv">
 					 <span class="smalltext">체크아웃</span><br>
-					 ${sessionScope.checkOut }
+					 ${sessionScope.check_out }
 					</div>
 					
 				</div>
@@ -233,17 +253,27 @@
 								</div>
 								
 								
-								<img src="images/room/standard/${rmdto.room_img }" alt="객실이미지">
+								<img src="images/room/${rmdto.room_img }" alt="객실이미지">
 								
 								<!-- 자세히보기 버튼을 누르면 해당 객실의 데이타 전달 -->
-								<button type="button" id="aboutRoom" onclick="modalData('${rmdto.room_name }','${rmdto.room_img }','${rmdto.type }','${rmdto.max }','${rmdto.room_config }','${rmdto.price }')">자세히 보기</button>
+								<div class="width50">
+									<button type="button" class="aboutRoomMD" onclick="modalData('${rmdto.room_name }','${rmdto.room_img }','${rmdto.type }','${rmdto.max }','${rmdto.room_config }','${rmdto.price }')">자세히 보기</button>
+								</div>
 								
 								<!-- 다음 페이지로 이동 -->
 								<input type="hidden" name="step" value="2">	
 								<input type="hidden" name="room_num" value="${rmdto.room_num }">
 								<input type="hidden" name="room_config" value="${rmdto.room_config }">
-								<input type="hidden" name="room_price" value="${rmdto.price }">
-								<input type="submit" value="예약하기" id="reservationBtn2">
+								<input type="hidden" name="price" value="${rmdto.price }">
+								<input type="hidden" name="room_name" value="${rmdto.room_name }">
+								<input type="hidden" name="type" value="${rmdto.type }">
+								<input type="hidden" name="hotel_num" value="${hdto.hotel_num}">
+								
+								
+								
+								<div class="width50">
+									<input type="submit" value="예약하기" id="reservationBtn2">
+								</div>
 							</form>
 						</div>
 					</div>
@@ -275,7 +305,7 @@
 							
 							<div class="aboutRoomOption">
 								<span class="smalltext aboutRoomSub">옵션</span>
-								<span class="modalRoomType"></span>
+								<span class="modalRoomType" name="type"></span>
 								
 								<br>
 								
@@ -290,7 +320,7 @@
 								<br>
 								
 								<span class="smalltext aboutRoomSub">가격</span>
-								<span class="modalRoomPrice" name="room_price"></span>
+								<span class="modalRoomPrice" name="price"></span>
 							</div>
 							
 						</div>
@@ -305,42 +335,46 @@
 	<!-- "STEP 3 옵션 선택" 페이지 -->
 	<c:if test="${step==2 }">
 		<div id="step3Page">
+		
 			<h1>옵션</h1>
 			<div>객실 이용에 필요한 <b>옵션 사항</b>을 선택하세요.</div>
 			
 			<div class="subTitle">
-				<h4>침대</h4>
+				<h4>침대 추가&nbsp;&nbsp;<span class="smalltext">40,000원</span></h4>
 			</div>
 			
 			<!-- 폼 -->
 			<form action="booking.do" method="post" name="optionForm">
-				<div>
-					<label><input type="radio" name="bedType" value="트윈" checked="checked">트윈</label>
+				<!-- <div>
+					<label><input type="radio" name="type" value="트윈" checked="checked">트윈</label>
 					<br>
-					<label><input type="radio" name="bedType" value="더블">더블</label>
+					<label><input type="radio" name="type" value="더블">더블</label>
 					<br>
-					<label><input type="radio" name="bedType" value="패밀리트윈">패밀리 트윈</label>
-				</div>
+					<label><input type="radio" name="type" value="패밀리트윈">패밀리 트윈</label>
+				</div> -->
+				
 				
 				<div class="bedAddDiv">
-					<span class="smalltext">침대 추가</span><br>
-					<input type="text" id="formBedCountValue" class="countBorderNone" name="bedCount" value="0" size="2">개
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" onclick="bedCountFunction(-1), bedAddPriceFunction()" class="bedCountBtn">-</button>
-					<button type="button" onclick="bedCountFunction(1), bedAddPriceFunction()" class="bedCountBtn">+</button>
-					<b class="rightFloat"><input type="text" id="bedAddPrice" name="bedCountPrice" value="0" size="4" class="bedCountBorderNone" readonly="readonly">원</b>
+					<!-- <span class="smalltext">침대 추가</span><br> -->
+					<div class="bedPriceDiv">
+						<input type="text" id="formBedCountValue" class="countBorderNone" name="add_bed" value="0" size="2">개
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="bedCountFunction(-1, ${sessionScope.head_count}), bedAddPriceFunction()" class="bedCountBtn">-</button>
+						<button type="button" onclick="bedCountFunction(1, ${sessionScope.head_count}), bedAddPriceFunction()" class="bedCountBtn">+</button>
+						<b class="rightFloat"><input type="text" id="bedAddPrice" name="bedCountPrice" value="0" size="4" class="bedCountBorderNone" readonly="readonly">원</b>
+					</div>
 				</div>
 				
 				
 				<div class="subTitle">
-					<h4>조식 인원</h4>
+					<h4>조식 인원&nbsp;&nbsp;<span class="smalltext">25,000원</span></h4>
 				</div>
 				
 				<div class="breakfastAddDiv">
-					<input type="text" id="formBreakfastCountValue" class="countBorderNone" name="breakfastCount" value="0" size="2">명
+					<input type="text" id="formBreakfastCountValue" class="countBorderNone" name="breakfast_count" value="0" size="2">명
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<button type="button" onclick="breakfastCountFunction(-1), breakfastAddPriceFunction()" class="breakfastCountBtn">-</button>
-					<button type="button" onclick="breakfastCountFunction(1), breakfastAddPriceFunction()" class="breakfastCountBtn">+</button>
+					<button type="button" onclick="breakfastCountFunction(-1, ${sessionScope.head_count}), breakfastAddPriceFunction()" class="breakfastCountBtn">-</button>
+					<button type="button" onclick="breakfastCountFunction(1, ${sessionScope.head_count}), breakfastAddPriceFunction()" class="breakfastCountBtn">+</button>
 					<b class="rightFloat"><input type="text" id="breakfastAddPrice" name="breakfastCountPrice" value="0" size="4" class="breakfastCountBorderNone" readonly="readonly">원</b>
 				</div>
 				
@@ -349,8 +383,12 @@
 					<h4>추가 요청사항</h4>
 				</div>
 				
-				<textarea rows="5" placeholder="호텔 이용시 요청 또는 문의하실 사항이 있으면 입력해 주십시오." name="requestContents" value="requestContents"></textarea>
+				<div class="textareaDiv">
+					<textarea rows="4" placeholder="호텔 이용시 요청 또는 문의하실 사항이 있으면 입력해 주십시오." name="book_memo" value="requestContents"></textarea>
+				</div>
 				
+				<input type="hidden" name="room_num" value="${room_num }">
+				<input type="hidden" name="hotel_num" value="${hotel_num}">
 				<input type="button" class="reservationBtn3" onclick="reservationSubmit(3)" value="비회원 예약">
 				<input type="button" class="reservationBtn3" onclick="reservationSubmit(4)" value="회원 예약">
 				
@@ -362,12 +400,12 @@
 	</c:if>
 	
 	
-	<!-- ------------------------------------------------- -->
+	<!-- --------------------------------------------------------- -->
 	<!-- STEP 4 예약확인 페이지 -->
 	
-	<!-- 비회원 예약 -->
+	<!------------------- 비회원 예약확인 페이지(member_num이 없음) ----------------->
 	<c:if test="${step==3 }">
-		<div id="step3Page">
+		<div id="step4Page">
 		
 			<h1>비회원 예약</h1>
 			
@@ -379,83 +417,356 @@
 					<h4>비회원 정보</h4>
 				</div>
 				
+				<!-- 비회원 정보 입력 -->
 				<div class="reservationBorder">
 					<div class="reservationContents">
-					
 						<span class="smalltext noaccountSub">이름</span>
 						<input type="text" placeholder="이름을 입력해주세요" required="required">
+						
 						<br>
-						<span class="smalltext noaccountSub">이메일</span>
-						<input type="email" placeholder="이메일을 입력해주세요" required="required">
-						<br>
+						
 						<span class="smalltext noaccountSub">전화번호</span>
-						<input type="number" placeholder="전화번호를 입력해주세요" required="required">
-				
+						<input type="tel" placeholder="전화번호를 입력해주세요" required="required">
 					</div>
 				</div>	
 				
+				
+				<!-- 입력했던 예약 정보 출력 -->
 				
 				<div class="subTitle">
 					<h4>예약 정보</h4>
 				</div>
 				
+				
 				<div class="reservationBorder">
 					<div class="reservationContents">
-						${sessionScope.hotelLocal }
-						<br>
-						${sessionScope.roomType}
-						<br>
-						${sessionScope.headCount}
-						<br>
-						${sessionScope.checkIn}
-						<br>
-						${sessionScope.checkOut}
-						<br>
-						${sessionScope.room_config}
-						<br>
-						${sessionScope.room_price}
-						<br>
-						${sessionScope.bedType}
-						<br>
-						${sessionScope.bedCount}
-						<br>
-						${sessionScope.breakfastCount}
-						<br>
+						<div>
+							<span class="smalltext noaccountSub">객실</span>
+							<span class="contents">${sessionScope.room_name}</span>
+							<span class="contents">${room_name}</span>
+							
+							<!-- DB저장을 위한 객실번호(room_num) 값 넘기기 -->
+							<input type="hidden" name="room_num" value="${room_num }">
+						</div>
 						
-						<c:if test="${sessionScope.requestContents==0}">
-							<div>요청사항 없음</div>
+						
+						<div>
+							<span class="smalltext noaccountSub">인원</span>
+							<span class="contents">${sessionScope.head_count}명</span>
+							
+							<!-- DB저장을 위한 인원(head_count) 값 넘기기 -->
+							<input type="hidden" name="head_count" value="${sessionScope.head_count}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">체크인</span>
+							<span class="contents">${sessionScope.check_in}</span>
+							
+							<!-- DB저장을 위한 체크인(check_in) 값 넘기기 -->
+							<input type="hidden" name="check_in" value="${sessionScope.check_in}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">체크아웃</span>
+							<span class="contents">${sessionScope.check_out}</span>
+							
+							<!-- DB저장을 위한 체크아웃(check_out) 값 넘기기 -->
+							<input type="hidden" name="check_out" value="${sessionScope.check_out}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">룸구성</span>
+							<span class="contents">${sessionScope.room_config}</span>
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">침대</span>
+							<span class="contents">${sessionScope.type}</span>
+						</div>
+				
+						
+						
+						
+						<h5>옵션</h5>
+						
+						
+						<!-- 침대를 추가했다면 갯수표시 / 미추가시 "없음" 표시 -->
+						<div>
+							<span class="smalltext noaccountSub">침대 추가</span>
+							<c:if test="${sessionScope.add_Bed==0}">
+								<span class="contents">없음</span>
+							</c:if>
+							<c:if test="${sessionScope.add_Bed!=0}">
+								<span class="contents">${sessionScope.add_bed}개</span>
+							</c:if>
+						</div>
+						
+						<!-- 조식인원이 있을시 인원 표시 / 없을시 "없음" 표시 -->
+						<div>
+							<span class="smalltext noaccountSub">조식</span>
+							<c:if test="${sessionScope.breakfast_count==0}">
+								<span class="contents">없음</span>
+							</c:if>
+							<c:if test="${sessionScope.breakfast_count!=0}">
+								<span class="contents">${sessionScope.breakfast_count}명</span>
+							</c:if>
+						</div>
+						
+						
+						
+						<!-- 금액 -->
+						
+						<!-- 침대추가나 조식인원이 있을 시 표시 (없으면 객실가격이 곧 total가격이므로 표시할 필요없음) -->
+						<c:if test="${sessionScope.add_bed!=0 or sessionScope.breakfast_count!=0}">
+						<hr>
+							<!-- 기본 객실금액 표시 -->
+							<div>
+								<span class="smalltext noaccountSub">객실 금액</span>
+								<span class="contents">${sessionScope.price}원</span>
+							</div>
 						</c:if>
-						<c:if test="${sessionScope.requestContents!=null}">
-							<div>${sessionScope.requestContents}</div>
+						
+						<!-- 침대추가가 있을 때 침대추가 금액 표시 -->
+						<c:if test="${sessionScope.add_bed!=0}">
+							<div>
+								<span class="smalltext noaccountSub">침대 추가 금액</span>
+								<span class="contents">${sessionScope.bedCountPrice}원</span>
+							</div>
 						</c:if>
+						
+						<!-- 조식인원이 있을 때 조식 금액 표시 -->
+						<c:if test="${sessionScope.breakfast_count!=0}">
+							<div>
+								<span class="smalltext noaccountSub">조식 금액</span>
+								<span class="contents">${sessionScope.breakfastCountPrice}원</span>
+							</div>
+						</c:if>
+						
+						<!-- 총 요금 합계 -->
+						<div class="totalPriceDiv">
+							<span class="smalltext noaccountSub">요금 합계</span>
+							<span id="totalPrice" class="contents">${sessionScope.price+sessionScope.bedCountPrice+sessionScope.breakfastCountPrice} 원</span>
+						</div>
 					</div>
 				</div>
 				
-				<input type="hidden" name="step" value="5">	
+				
+
+				<!-- 요청사항 -->
+				<div>
+					<span class="smalltext noaccountSub requestSub">요청사항</span>
+					<div class="textareaDiv">
+						<textarea rows="4" placeholder="${sessionScope.book_memo }" name="book_memo" value="requestContents" readonly="readonly"></textarea>
+						<!-- 요청사항(book_memo) 값 넘기기 -->
+						<input type="hidden" name="book_memo" value="${sessionScope.book_memo}">
+					</div>
+				</div>
+
+				
+
+				<!-- 현재 로그인 기능이 구현되지 않아 임의로 멤버번호 1을 부여함 -->
+				<input type="hidden" name="member_num" value="1">
+				
+				<!-- 객실상태(book_status)를 "예약대기" 상태로 -->
+				<input type="hidden" name="book_status" value="예약대기">
+				
+				
 				<input type="submit" id="reservationBtn1" value="예약신청">
 			</form>
 		</div>
 	</c:if>
 	
 	
-	<!-- 회원 예약 -->
+	<!--------- 회원 예약 --------------->
 	<c:if test="${step==4 }">
 	
-		<!-- 로그인시 예약확인 페이지 -->
-		<c:if test="${member_num!=null }">
-			(현재 로그인)예약확인
+		<!------------------- 로그인시 예약확인 페이지(member_num이 있음) ----------------->
+		<c:if test="${member_num==null }">
+			<div id="step5Page">
+		
+			<h1>회원 예약</h1>
+			
+			<div>예약 정보를 확인해주세요..</div>
+			
+			<form action="insert.do" method="post">
+						
+						
+				<!-- 입력했던 예약 정보 출력 -->
+				
+				<div class="subTitle">
+					<h4>예약 정보</h4>
+				</div>
+				
+				
+				<div class="reservationBorder">
+					<div class="reservationContents">
+						<div>
+							<span class="smalltext noaccountSub">호텔</span>
+							<span id="reserveHotel" class="contents">
+							
+								<!-- 호텔번호(hotel_num)에 맞는 호텔지점이름 출력 -->
+								<c:forEach var="hdto" items="${hotelList }">
+									${hdto.hotel_local}
+								</c:forEach>
+								
+							</span>
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">객실</span>
+							<span class="contents">${sessionScope.room_name}</span>
+							<span class="contents">${room_name}</span>
+							
+							<!-- DB저장을 위한 객실번호(room_num) 값 넘기기 -->
+							<input type="hidden" name="room_num" value="${room_num }">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">인원</span>
+							<span class="contents">${sessionScope.head_count}명</span>
+							
+							<!-- DB저장을 위한 인원(head_count) 값 넘기기 -->
+							<input type="hidden" name="head_count" value="${sessionScope.head_count}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">체크인</span>
+							<span class="contents">${sessionScope.check_in}</span>
+							
+							<!-- DB저장을 위한 체크인(check_in) 값 넘기기 -->
+							<input type="hidden" name="check_in" value="${sessionScope.check_in}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">체크아웃</span>
+							<span class="contents">${sessionScope.check_out}</span>
+							
+							<!-- DB저장을 위한 체크아웃(check_out) 값 넘기기 -->
+							<input type="hidden" name="check_out" value="${sessionScope.check_out}">
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">룸구성</span>
+							<span class="contents">${sessionScope.room_config}</span>
+						</div>
+						
+						
+						<div>
+							<span class="smalltext noaccountSub">침대</span>
+							<span class="contents">${sessionScope.type}</span>
+						</div>
+				
+						
+						
+						
+						<h5>옵션</h5>
+						
+						
+						<!-- 침대를 추가했다면 갯수표시 / 미추가시 "없음" 표시 -->
+						<div>
+							<span class="smalltext noaccountSub">침대 추가</span>
+							<c:if test="${sessionScope.add_Bed==0}">
+								<span class="contents">없음</span>
+							</c:if>
+							<c:if test="${sessionScope.add_Bed!=0}">
+								<span class="contents">${sessionScope.add_bed}개</span>
+							</c:if>
+						</div>
+						
+						<!-- 조식인원이 있을시 인원 표시 / 없을시 "없음" 표시 -->
+						<div>
+							<span class="smalltext noaccountSub">조식</span>
+							<c:if test="${sessionScope.breakfast_count==0}">
+								<span class="contents">없음</span>
+							</c:if>
+							<c:if test="${sessionScope.breakfast_count!=0}">
+								<span class="contents">${sessionScope.breakfast_count}명</span>
+							</c:if>
+						</div>
+						
+						
+						
+						<!-- 금액 -->
+						
+						<!-- 침대추가나 조식인원이 있을 시 표시 (없으면 객실가격이 곧 total가격이므로 표시할 필요없음) -->
+						<c:if test="${sessionScope.add_bed!=0 or sessionScope.breakfast_count!=0}">
+						<hr>
+							<!-- 기본 객실금액 표시 -->
+							<div>
+								<span class="smalltext noaccountSub">객실 금액</span>
+								<span class="contents">${sessionScope.price}원</span>
+							</div>
+						</c:if>
+						
+						<!-- 침대추가가 있을 때 침대추가 금액 표시 -->
+						<c:if test="${sessionScope.add_bed!=0}">
+							<div>
+								<span class="smalltext noaccountSub">침대 추가 금액</span>
+								<span class="contents">${sessionScope.bedCountPrice}원</span>
+							</div>
+						</c:if>
+						
+						<!-- 조식인원이 있을 때 조식 금액 표시 -->
+						<c:if test="${sessionScope.breakfast_count!=0}">
+							<div>
+								<span class="smalltext noaccountSub">조식 금액</span>
+								<span class="contents">${sessionScope.breakfastCountPrice}원</span>
+							</div>
+						</c:if>
+						
+						<!-- 총 요금 합계 -->
+						<div class="totalPriceDiv">
+							<span class="smalltext noaccountSub">요금 합계</span>
+							<span id="totalPrice" class="contents">${sessionScope.price+sessionScope.bedCountPrice+sessionScope.breakfastCountPrice} 원</span>
+						</div>
+					</div>
+				</div>
+				
+				
+
+				<!-- 요청사항 -->
+				<div>
+					<span class="smalltext noaccountSub requestSub">요청사항</span>
+					<div class="textareaDiv">
+						<textarea rows="4" placeholder="${sessionScope.book_memo }" name="book_memo" value="requestContents" readonly="readonly"></textarea>
+						<!-- 요청사항(book_memo) 값 넘기기 -->
+						<input type="hidden" name="book_memo" value="${sessionScope.book_memo}">
+					</div>
+				</div>
+
+				
+
+				<!-- 현재 로그인 기능이 구현되지 않아 임의로 멤버번호 1을 부여함 -->
+				<input type="hidden" name="member_num" value="1">
+				
+				<!-- 객실상태(book_status)를 "예약대기" 상태로 -->
+				<input type="hidden" name="book_status" value="예약대기">
+				
+				
+				<input type="submit" id="reservationBtn1" value="예약신청">
+			</form>
+		</div>
 		</c:if>
 		
 		<!-- 비로그인시 로그인 페이지 -->
-		<c:if test="${member_num==null }">
+		<c:if test="${member_num!=null }">
 			(현재 로그아웃)로그인페이지 띄우기
 		</c:if>
 	</c:if>
 
  	
 	<c:if test="${step==5}">
-		<div id="step5Page">
-			<div id="step5PageContents">
+		<div id="step6Page">
+			<div id="step6PageContents">
 				<img src="images/etc/check.png" alt="check" class="icon2">
 				<br>
 				<h2>예약되었습니다</h2>

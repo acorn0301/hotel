@@ -50,7 +50,8 @@ li{
 /* 작은 글씨 클래스 */
 .smalltext{
 	font-weight: bold;
-	color: gray;
+	color: sienna;
+	opacity: 0.8;
 }
 
 
@@ -58,8 +59,7 @@ li{
 h1{
 	font-weight: 900;
 	margin: 0;
-	margin: 0;
-	padding: 7rem 0 2rem 0;
+	padding: 6rem 0 2rem 0;
 }
 
 
@@ -82,12 +82,16 @@ h1{
 	width: 25%;
 	float: left;
 	text-align: center;
-	padding: 0 0 1.2rem 0;
-	border-bottom: 1px solid gray;
-	font-size: 1.3rem;
+	padding: 0 0 1rem 0;
+	border-bottom: 1px solid #bbb;
+	font-size: 1.2rem;
+	line-height: 1.2;
+	color: #ccc;
 }
 
-
+#step .bold{
+	color: black;
+}
 
 
 
@@ -105,7 +109,7 @@ h1{
 
 /* 설정칸 컨텐츠 */
 .reservationContents{
-	padding: 2rem;
+	padding: 15px 25px;
 }
 
 
@@ -114,6 +118,7 @@ h1{
 	width: 100%;
 	border-radius: 5px;
 	padding: 10px 5px;
+	margin: 1rem 0 3rem;
 }
 
 
@@ -181,7 +186,7 @@ h1{
 /* '다시 설정하기' div */
 .reSetting{
 	margin-bottom: 1.5rem;
-	padding-top: 7rem;
+	padding-top: 5.5rem;
 }
 
 
@@ -282,8 +287,8 @@ h1{
 
 
 /* 자세히보기 버튼 */
-#aboutRoom{
-	width: 49.4%;
+.aboutRoomMD{
+ 	width: 100%;
 	padding: 0.8rem 0;
 	border: none;
 	background-color: PaleGoldenRod;
@@ -292,11 +297,19 @@ h1{
 
 /* 예약하기 버튼 */
 #reservationBtn2{
-	width: 49.4%;
+	width: 100%;
 	padding: 0.8rem 0;
 	border: none;
 	background-color: Sienna;
 	color: white;
+}
+
+
+.width50{
+	margin: 0;
+	padding: 0;
+	width: 49%;
+	display: inline-block;
 }
 
 
@@ -389,9 +402,19 @@ h1{
 	margin: 2rem 0;
 }
 
+.textareaDiv{
+	text-align: center;
+	margin-bottom: 1.6rem;
+}
 
 textarea{
-	width:100%
+	width:90%;
+
+}
+
+
+.bedPriceDiv{
+	margin-top: 1.2rem;
 }
 
 
@@ -407,27 +430,158 @@ textarea{
 
 
 
-/* ----------------------------STEP 4 예약확인------------------ */
-
+/* ----------------------STEP 4 예약확인------------------ */
+/* --------------------------- ㄴ 비회원 예약확인------------------ */
 .noaccountSub{
-	width: 70px;
+	width: 100px;
 	display: inline-block;
 	margin: 1.2rem 0;
 }
 
 
+/* 호텔지점글씨 강조 */
+#reserveHotel{
+	font-size: 2rem;
+	font-weight: bold;
+	
+}
+
+
+#step4Page .noaccountSub{
+
+}
+
+
+
+#step4Page #totalPrice{
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+
+#step4Page .contents{
+	float: right;
+	margin-top: 1rem;
+
+}
+
+
+#step4Page hr{
+	border: solid 1px palegoldenrod;
+}
+
+#step4Page .reservationContents h5{
+	display: block;
+	padding: 1rem;
+	font-weight: bold;
+	margin: 3rem 0 1rem;
+	background-color: palegoldenrod;
+	opacity: 0.8;
+}
+
+
+.totalPriceDiv{
+	margin: 3rem 0 1.5rem;
+	padding: 1rem 0 0;
+	border-top: 2px solid sienna;
+	
+}
+
+
+.subTitle .smalltext{
+	font-size: 1.3rem;
+	opacity: 0.6;
+}
+
+
+.requestSub{
+	padding-left: 25px;
+	margin-top: 2rem;
+}
+
+
+#step4Page .textareaDiv textarea{
+	background-color: #eee;
+}
+
+
+
+
+/* ----------------------STEP 4 예약확인------------------ */
+/* --------------------------- ㄴ 회원 예약확인------------------ */
+
+
+.noaccountSub{
+	width: 100px;
+	display: inline-block;
+	margin: 1.2rem 0;
+}
+
+
+/* 호텔지점글씨 강조 */
+#reserveHotel{
+	font-size: 2rem;
+	font-weight: bold;
+	
+}
+
+#step5Page #totalPrice{
+	font-size: 2.5rem;
+	font-weight: bold;
+}
+
+
+#step5Page .contents{
+	float: right;
+	margin-top: 1rem;
+
+}
+
+
+#step5Page hr{
+	border: solid 1px palegoldenrod;
+}
+
+#step5Page .reservationContents h5{
+	display: block;
+	padding: 1rem;
+	font-weight: bold;
+	margin: 3rem 0 1rem;
+	background-color: palegoldenrod;
+	opacity: 0.8;
+}
+
+
+.totalPriceDiv{
+	margin: 3rem 0 1.5rem;
+	padding: 1rem 0 0;
+	border-top: 2px solid sienna;
+	
+}
+
+
+.requestSub{
+	padding-left: 25px;
+	margin-top: 2rem;
+}
+
+
+#step5Page .textareaDiv textarea{
+	background-color: #eee;
+}
+
 
 /* --------------------- STEP 5 예약완료--------------------------- */
 
-#step5Page{
+#step6Page{
 	text-align: center;
 }
 
-#step5PageContents{
+#step6PageContents{
 	padding-top: 50%;
 }
 
-#step5Page h2{
+#step6Page h2{
 	font-weight: 600;
 }
 
