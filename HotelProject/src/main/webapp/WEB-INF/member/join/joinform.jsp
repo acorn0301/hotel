@@ -6,12 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/yeStyle.css">
-<style type="text/css">
-	#joinForm {margin: 20px;}
-	/* div #user_id {display: inline-block; float: left;} */
-	#idBtn {display: inline-block; float: left;}
-	#joinOk {width: 150px;}
-</style>
 <script src="js/yeScript.js"></script>
 <script src="https://kit.fontawesome.com/073cb107c5.js"></script>
 <meta charset="UTF-8">
@@ -19,69 +13,97 @@
 </head>
 
 <body>
-<script type="text/javascript">
 
+<script type="text/javascript">
+function check(){
+	
+	if(join.id.value.length < 7){
+ 		$('#user_id').val('');
+		$('#user_id').attr('placeholder','아이디는 7자리 이상 입력해주세요!');
+		return false;
+	}
+	
+	if(join.password.value.length < 8){
+		$('#user_pw').val('');
+		$('#user_pw').attr('placeholder','비밀번호는 8자리 이상 입력해주세요!');
+		return false;
+	}
+	
+	if(join.password.value != join.password2.value){
+		$('#user_pw2').val('');
+		$('#user_pw2').attr('placeholder','비밀번호가 맞지않습니다 다시확인해주세요!');
+		return false;
+	}
+	
+	if(join.name.value.length < 2){
+		$('#user_name').val('');
+		$('#user_name').attr('placeholder', '이름 2자리 이상 입력해주세요!');
+		return false;
+	}
+	
+	if(isNaN(join.phone.value)){
+		$('#user_phone').val('');
+		$('#user_phone').attr('placeholder','11자리 숫자만 입력해주세요!');
+		return false;
+	}
+	
+	// 이메일 유효성 정규식검사
+    var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	if(!regExp.test(join.email.value)) {
+        $('#user_email').val('');
+		$('#user_email').attr('placeholder','이메일 주소가 유효하지 않습니다!');
+    	return false;
+	}
+	 
+	return true;
+	
+}
 </script>
 
 <div id="joinForm">
-<h3>회원가입&nbsp;&nbsp;<i class="fas fa-user-plus"></i></h3>
+<div class="headTit">
+	<h2 class="tit">회원가입&nbsp;&nbsp;<i class="fas fa-user-plus"></i></h2>
+</div>
 <br>
-<form class="form-inline" action="joinok.do" method="post">
+<form name="join" class="form-inline" action="joinok.do" method="post" onsubmit="return check()">
+	<div class="form_group"></div>
 	<!-- 아이디 -->
-	<div class="form-group" id="formid">
-		<label for="user_id">아이디</label> 
-		<input type="text" class="form-control" id="user_id" name="id" placeholder="아이디">
-		<button type="button" class="btn pull-right" id="idBtn" onclick="checkId()">중복확인</button>
-		<span id="chkMsg"></span>
-	</div><br>
+	<div id="formid">
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_id" name="id" placeholder="아이디" required="required">
+		</div>
+	</div>
 
 	<!-- 비밀번호 -->
-	<div class="form-group">
-		<label for="user_pw">비밀번호</label>
-		<input type="password" class="form-control" id="user_pw" name="password" placeholder="비밀번호">
-	</div><br>
+	<div>
+		<div class="form_group">
+		<input type="password" class="inputbox" id="user_pw" name="password" placeholder="비밀번호" required="required">
+		</div>
+	</div>
 
 	<!-- 비밀번호 확인 -->
-	<div class="form-group">
-		<label for="user_pw2">비밀번호 확인</label> 
-		<input type="password" class="form-control" id="user_pw2" name="password2" placeholder="비밀번호 확인">
-	</div><br>
-
-	<!-- 이름 -->
-	<div class="form-group">
-		<label for="user_name">이름</label> 
-		<input type="text" class="form-control" id="user_name" name="name" placeholder="이름">
-	</div><br>
-
-	<!-- 성별 -->
-	<div class="form-group">
-	<label for="user_gender">성별</label><br>
-	<div class="btn-group" data-toggle="buttons">
-		<label for="user_gender" class="btn btn-default active"> 
-		<input type="radio" name="gender" id="gen_m" autocomplete="off" checked value="M">남성
-		</label> 
-		
-		<label class="btn btn-default active"> 
-		<input type="radio" name="gender" id="gen_f" autocomplete="off" value="F">여성
-		</label> 
-			
-		<label class="btn btn-default active"> 
-		<input type="radio" name="gender" id="gen_n" autocomplete="off" value="N">비공개
-		</label>
+	<div>
+		<div class="form_group">
+		<input type="password" class="inputbox" id="user_pw2" name="password2" placeholder="비밀번호 확인" required="required">
+		</div>
 	</div>
 	
+	<!-- 이름 -->
+	<div>
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_name" name="name" placeholder="이름" required="required">
+		</div>
 	</div><br>
 
 	<!-- 전화번호 -->
-	<div class="form-group">
-		<label for="user_phone">전화번호</label> 
-		<input type="text" class="form-control" id="user_phone" name="phone" placeholder="하이픈(-) 없이 입력해주세요">
+	<div class="telForm">
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_phone" name="phone" placeholder="전화번호" required="required" maxlength="11">
+		</div>
 	</div><br>
 
 	<!-- 생년월일 -->
-	<div class="form-group">
-		<label for="user_birth">생년월일</label><br>
-		
+	<div class="dateForm">
 		<select id="year" name="year" class="custom-select">
 			<c:set var="n" value="1900" />
 			<c:forEach begin="1900" end="2019">
@@ -108,18 +130,21 @@
 			</c:forEach>
 		</select>
 		<span>일 &nbsp;</span>
-		
-	</div><br>
+	</div>
+
+
+	<div class="form_group"></div>
 	
 	<!-- 이메일 -->
-	<div class="form-group">
-		<label for="user_email">이메일</label> 
-		<input type="text" class="form-control" name="email" id="user_email" placeholder="acorn@acorn.com">
+	<div>
+		<div class="form_group">
+		<input type="text" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
+		</div>
 	</div><br>
 	
 	<div class="col-sm-3 text-center">
-		<input type="submit" class="btn btn-basic" value="가입 완료" id="joinOk">
-	</div>
+		<input type="submit"  value="가입 완료" id="joinOk">
+	</div><br>
 
 </form>
 </div>

@@ -12,6 +12,9 @@
 <body>
 
 아이디 찾기 
+<form action="" method="post">
+
+</form>
 
 </body>
 </html>

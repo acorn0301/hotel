@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
    <!-- 회원가입(회원추가) -->
    <insert id="memberInsert" parameterType="mbdto">
-      insert into member(member_num,id,password,name,gender,birth,phone,email,joinday,grade) values (
-      memberseq.nextval,#{id},#{password},#{name},#{gender},#{birth},#{phone},#{email},sysdate,'c')
+      insert into member(member_num,id,password,name,birth,phone,email,joinday,grade) values (
+      memberseq.nextval,#{id},#{password},#{name},#{birth},#{phone},#{email},sysdate,'c')
    </insert>
 
    <!-- 로그인 (id와 pw가 일치하면1 없으면0 사용자 정보 담고있는 객체 반환)-->

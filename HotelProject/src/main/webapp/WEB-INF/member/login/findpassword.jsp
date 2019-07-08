@@ -12,6 +12,9 @@
 <body>
 
 비밀번호 찾기 
+<form action="" method="post">
+
+</form>
 
 </body>
 </html>

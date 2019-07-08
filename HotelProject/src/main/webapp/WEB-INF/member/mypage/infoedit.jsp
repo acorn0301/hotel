@@ -5,45 +5,100 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/yeStyle.css">
+<style type="text/css">
+
+</style>
+<script src="js/yeScript.js"></script>
+<script src="https://kit.fontawesome.com/073cb107c5.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
+
 <body>
 
-나의 정보를 수정할 수 있는 폼이 뜬다. 
-완료 후 mypage.do 호출해서 mypage 메인으로 돌아가도록 해주자 
-
-<h3>정보 수정</h3>
-<div>
+<div id="EditForm">
 <form class="form-inline" action="mypage.do" method="post">
-아이디
-<input type="text" name="id" class="form-control" autofocus="autofocus" required="required" placeholder="아이디"><input type="button" value="중복확인" class="btn btn-sm btn-basic"><br><br>
+<h4>내 정보 수정&nbsp;&nbsp;<i class="fas fa-user-edit"></i></h4>
+<br>
+	<div class="form_group"></div>
+	<!-- 아이디 -->
+	<div id="formid">
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_id" name="id" placeholder="아이디" readonly="readonly" value="${mbdto.id}">
+		</div>
+	</div>
 
-비밀번호
-<input type="password" name="pass" class="form-control" required="required" placeholder="비밀번호" ><br>
+	<!-- 비밀번호 -->
+	<div>
+		<div class="form_group">
+		<input type="password" class="inputbox" id="user_pw" name="password" placeholder="비밀번호" required="required">
+		</div>
+	</div>
 
-비밀번호 확인
-<input type="password" name="passok" class="form-control" required="required" placeholder="비밀번호확인" ><br>
+	<!-- 비밀번호 확인 -->
+	<div>
+		<div class="form_group">
+		<input type="password" class="inputbox" id="user_pw2" name="password2" placeholder="비밀번호 확인" required="required">
+		</div>
+	</div>
+	
+	<!-- 이름 -->
+	<div>
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_name" name="name" placeholder="이름" required="required" value="${mbdto.name}">
+		</div>
+	</div><br>
 
-이름
-<input type="text" name="name" class="form-control" value="dto.name"><br>
+	<!-- 전화번호 -->
+	<div class="telForm">
+		<div class="form_group">
+		<input type="text" class="inputbox" id="user_phone" name="phone" placeholder="전화번호" required="required" maxlength="11">
+		</div>
+	</div><br>
 
-성별
-<input type="radio" name="gender" class="form-control" checked="checked" value="남성">남성
-<input type="radio" name="gender" class="form-control" value="여성">여성
-<input type="radio" name="gender" class="form-control" value="비공개">비공개<br><br>
+	<!-- 생년월일 -->
+	<div class="dateForm">
+		<select id="year" name="year" class="custom-select">
+			<c:set var="n" value="1900" />
+			<c:forEach begin="1900" end="2019">
+				<option value="${n}">${n}</option>
+				<c:set var="n" value="${n+1}" />
+			</c:forEach>
+		</select>
+		<span>년 &nbsp;</span>
+		
+		<select id="month" name="month" class="custom-select">
+			<c:set var="n" value="1" />
+			<c:forEach begin="1" end="12">
+				<option value="${n}">${n}</option>
+				<c:set var="n" value="${n+1}" />
+			</c:forEach>
+		</select>
+		<span>월 &nbsp;</span>
+		
+		<select id="day" name="day" class="custom-select">
+			<c:set var="n" value="1" />
+			<c:forEach begin="1" end="31">
+				<option value="${n}">${n}</option>
+				<c:set var="n" value="${n+1}" />
+			</c:forEach>
+		</select>
+		<span>일 &nbsp;</span>
+	</div>
 
-전화번호
-<input type="text" name="tel" class="form-control" placeholder="하이픈(-) 없이 입력해주세요"><br>
-
-생년월일
-<input type="date" name="birth" class="form-control" ><br>
-
-이메일
-<input type="text" name="email" class="form-control" placeholder="acorn@email.com"><br>
-
-<input type="submit" class="btn btn-l btn-default" value="수정하기">
+  	<div class="form_group"></div>
+	
+	<!-- 이메일 -->
+	<div>
+		<div class="form_group">
+		<input type="text" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
+		</div>
+	</div><br>
+	
+	<div class="col-sm-3 text-center">
+		<input type="submit"  value="수정 완료" id="editOk">
+	</div><br>
 
 </form>
 </div>

@@ -19,7 +19,7 @@ public class MemberController {
    @Autowired
    private MemberService mservice;
 
-   //로그인 버튼 클릭시  -> 로그인 폼 
+   // 로그인 버튼 클릭시  -> 로그인 폼 
    @RequestMapping("/login.do")
    public String loginForm(HttpServletRequest request) {
 	  
@@ -54,26 +54,26 @@ public class MemberController {
 		   session.setAttribute("member_num", mservice.getMembernum(id, pwd));
 		   return "layout/home"; 
 	   }else{
-		   request.setAttribute("msg", "아이디 or 비밀번호를 다시 확인해주세요");
+		   request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
 		   request.setAttribute("container", "../member/login/loginmain.jsp");
 
 		   return "layout/home";
 	   }
    }
    
-   //로그아웃 버튼 클릭시 
+   // 로그아웃 버튼 클릭시 
    @RequestMapping("/logout.do")
    public String logout(HttpSession session) {
       
-	  session.invalidate();
+	  session.removeAttribute("member_num");
 	   
       //로그아웃 되는 로직을 짜보세요.
       //세션도 깔끔하게 지워줍시다. 
       
-      return "layout/home";
+      return "redirect:home.do";
    }
    
-   //회원가입 버튼 클릭시 
+   // 회원가입 버튼 클릭시 
    @RequestMapping("/join.do")
    public String joinform(HttpServletRequest request) {
             
@@ -82,7 +82,7 @@ public class MemberController {
       return "layout/home";
    }
    
-   //비회원으로 로그인 버튼 클릭시
+   // 비회원으로 로그인 버튼 클릭시
    @RequestMapping("/nonMemberLogin.do")
    public String nonMemberLogin(HttpServletRequest request) {
       
@@ -91,15 +91,25 @@ public class MemberController {
       return "layout/home";
    }
    
-   //마이페이지 버튼 클릭시
+   // 마이페이지 버튼 클릭시
    @RequestMapping("/mypage.do")
    public String mypage(HttpServletRequest request, HttpSession session) {
       
 //      String member_num = (String)session.getAttribute("member_num");
       
       //넘겨받은 member_num을 이용해 mypage 를 보여줍니다.
-      
+	   
       request.setAttribute("container", "../member/mypage/mypage.jsp");
+      
+      return "layout/home";
+   }
+   
+   // 내 정보수정 클릭
+   @RequestMapping("/infoEdit.do")
+   public String infoEdit(HttpServletRequest request) {
+      
+      
+      request.setAttribute("container", "../member/mypage/infoedit.jsp");
       
       return "layout/home";
    }
@@ -115,6 +125,25 @@ public class MemberController {
      request.setAttribute("container", "../member/join/joincomplete.jsp");
       
      return "layout/home";
+   }
+   
+   // 아이디 찾기 클릭시
+   @RequestMapping("/findId.do")
+   public String findId(HttpServletRequest request) {
+	   
+      request.setAttribute("container", "../member/login/findid.jsp");
+      
+      return "layout/home";
+   }
+   
+   
+   // 비밀번호 찾기 클릭시
+   @RequestMapping("/findPw.do")
+   public String findPw(HttpServletRequest request) {
+	   
+      request.setAttribute("container", "../member/login/findpassword.jsp");
+      
+      return "layout/home";
    }
    
 }
