@@ -10,21 +10,47 @@
 <link rel="stylesheet" href="css/hsStyle.css">
 <!-- <script src="js/hsScript.js"></script> -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 <body>
-
 <script>
 function openModal(title,img,desc,menu_num){
-
+		
+	var qty = 1;
+	   
 	$(".modalTitle").text(title);
  	$(".modalImg").attr("src",img);
 	$(".modalDesc").text(desc);
-	/* $(".hidden_menu_num").val(menu_num); */
- 	$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty=1'");
- 	$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty=1'");
+	
+ 	$("#qty").val(qty);
+ 	
+ 	// 수량 - 버튼, 0 이하 선택 불가능
+  	$(".minus").click(function(){
+ 		$("#qty").val(--qty);
+ 		console.log(qty);
+ 		if(qty < 1){
+ 			qty = 1;
+ 			$("#qty").val(qty);
+ 		} 
+ 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 	}); 
+ 	
+ 	// 수량 + 버튼, 10 이상 선택 불가능
+  	$(".plus").click(function(){
+ 		$("#qty").val(++qty); 
+ 		console.log(qty);
+ 		if(qty > 10){ 
+ 			qty = 10;
+ 			$("#qty").val(qty);
+ 		}
+ 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 	});
+ 	
+ 	$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'"); //+"&qty="+qty_val+"'"
+ 	$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
 }
-
-
 </script>
 
 
@@ -48,17 +74,25 @@ function openModal(title,img,desc,menu_num){
 		</a>
    	</div>
   </section> --%>
+  
+ <div class="hyebody">
+ <div class="qna_body_title_div">
+	<div class="qna_title_text">룸서비스</div>
+</div>
  
   
 <a href="cart.do">
-	<img alt="장바구니" src="images/menu/icon.png" class="icon">
+	<div style="background-color: #ffffff; border-radius: 1000;">
+	<i class='icon fas fa-shopping-cart'
+	style='font-size:48px; color:#685845;'></i>
+	</div>
 </a>
 
-<br><br><br><br>
+<br>
 
 <div class="container">
 	<!-- Modal -->
-		 <div class="modal fade" id="myModal" role="dialog">
+		 <div class="center_div modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -67,21 +101,26 @@ function openModal(title,img,desc,menu_num){
 					</div>
 					<div class="modal-body">
 						<img class="modalImg" src="" width="100%">
+							<br><br>
 						<p class="modalDesc">
 						
 						</p>
 					</div>
 					<div class="modal-footer">
-					
-<!-- 				<form action="roomaservice.do">
- -->					<!-- <input type="hidden" class="hidden_menu_num" name="menu_num" value="">
-					<input type="hidden" name="qty" value="1"> -->
-					
-					<button type="button" class="modalCart btn btn-default" data-dismiss="modal" >담기</button>				
-			
-				<!-- </form> -->
-				<button type="button" class="modalOrder btn btn-default" data-dismiss="modal"
-				onclick="">바로주문</button>
+					<div class="center_div">
+
+               <button type="button" class="button minus" onclick="">-</button> <!-- headCountFunction(-1) -->
+             	  <input type="text" id="qty" class="form_control center inputQty" name="qty" value="" size="5">
+               <button type="button" class="button plus" onclick="">+</button> <!-- headCountFunction(1) -->
+               
+					</div>
+					<br>
+					<div class="center_div">
+					<button type="button" class="button modalOrder" data-dismiss="modal"
+					onclick="">바로주문</button>&nbsp;&nbsp;
+					<button type="button" class="button modalCart" data-dismiss="modal" >담기</button>	
+						<br>			
+					</div>
 				</div>
 			</div>
 		</div>
@@ -93,13 +132,15 @@ function openModal(title,img,desc,menu_num){
 <main class="et-main"> 
 <section class="et-slide" id="tab-Breakfast">
   <div class="row">
+  	<div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Breakfast</div></div>
   		<c:forEach var="mndto" items="${list0}" varStatus="i">
     		<div class="col-xs-6">
     			<a href="#" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
-	    			<br>
 	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+	    			<br>
     			</a>
     		</div>
     	</c:forEach>
@@ -229,6 +270,7 @@ function openModal(title,img,desc,menu_num){
 
 <br><br><br><br>
 
+</div>
 </body>
 </html>
 

@@ -1,3 +1,10 @@
+button.button{
+	padding: 5px 5px 5px 5px;
+    border: 0;
+    font-size: 17px;
+    color: #f1ebd6;
+    background-color: #3a3125;
+}
 div.complete_msg{
 	text-align: center;
 }
@@ -5,11 +12,18 @@ div.totalPrice{
 	float: right;
 	margin-right: 10px;
 }
+input.center{
+	text-align: center;
+}
 div.center_div{
 	text-align: center;
 }
-img.icon{
-	width: 33.3%;
+i.icon{
+	width: 20%;
+    position: fixed;
+    top: 75%;
+    right: 10%;
+    z-index: 10;
 }
 .menu_div{
 	width: 33.3%;
@@ -20,11 +34,52 @@ img.icon{
 .menu_div_contents{
 	padding: 20px;
 }
-
-
+.qna_body_title_div{
+	height: 40px;
+    background-color: #685845;
+    margin-top: -20px;
+    color: white;
+    
+}
+.qna_title_text{
+	line-height: 38px;
+    font-size: 17px;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 25px 0 40px;
+}
+.hyebody{
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.admin_title_div {
+    line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
 /* css 파일 */
 a{
+	color: #696969;
   text-decoration: none;
+}
+a:hover{
+	color: #696969;
+	text-decoration: none;
+}
+a:visited{
+	color: #696969;
+	text-decoration: none;
 }
 .et-hero-tabs{
  display: flex;
