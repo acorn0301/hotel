@@ -19,12 +19,12 @@
 		<td colspan="3"><b>주문내역</b></td>
 	</tr>
 		<c:set var="sum" value="0"/>
-	<c:forEach var="mndto" items="${mnlist}">
+	<c:forEach var="mndto" items="${onelist}">
 	<tr>
 		<td>${mndto.menu_name_kor}</td>
-		<td>${mndto.qty}</td>
-		<td><i>${mndto.menu_price * mndto.qty}</i></td>
-		<c:set var="sum" value="${sum + mndto.menu_price * mndto.qty}"/>
+		<td>${qty}</td>
+		<td><i>${mndto.menu_price}</i></td>
+		<c:set var="sum" value="${sum+mndto.menu_price}"/>
 	</tr>
 	</c:forEach>
 </table>
