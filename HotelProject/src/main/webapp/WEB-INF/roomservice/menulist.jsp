@@ -8,19 +8,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/hsStyle.css">
-<script src="js/hsScript.js"></script>
+<!-- <script src="js/hsScript.js"></script> -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 </head>
 <body>
 
 <script>
-function openModal(title,img,desc,num){
+function openModal(title,img,desc,menu_num){
 
 	$(".modalTitle").text(title);
  	$(".modalImg").attr("src",img);
 	$(".modalDesc").text(desc);
-	$(".modalCart").attr("onclick","location.href='roomaservice.do?menu_num="+num+"'");
-	$(".modalOrder").attr("onclick","location.href='cart.do?menu_num="+num+"'");
+	/* $(".hidden_menu_num").val(menu_num); */
+ 	$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty=1'");
+ 	$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty=1'");
 }
 
 
@@ -47,16 +48,7 @@ function openModal(title,img,desc,num){
 		</a>
    	</div>
   </section> --%>
-  
-  <!-- onclick="isEmpty(${totalSize})"
-  function isEmpty(totalSize){
-	if(totalSize == 0){
-		alert('메뉴를 담아주세요');
-	}else{
-		location.href='cart.do';
-	}
-}
-<span class="badge">${totalSize}</span> -->
+ 
   
 <a href="cart.do">
 	<img alt="장바구니" src="images/menu/icon.png" class="icon">
@@ -80,8 +72,14 @@ function openModal(title,img,desc,num){
 						</p>
 					</div>
 					<div class="modal-footer">
-				<button type="button" class="modalCart btn btn-default" data-dismiss="modal"
-				onclick="">담기</button>
+					
+<!-- 				<form action="roomaservice.do">
+ -->					<!-- <input type="hidden" class="hidden_menu_num" name="menu_num" value="">
+					<input type="hidden" name="qty" value="1"> -->
+					
+					<button type="button" class="modalCart btn btn-default" data-dismiss="modal" >담기</button>				
+			
+				<!-- </form> -->
 				<button type="button" class="modalOrder btn btn-default" data-dismiss="modal"
 				onclick="">바로주문</button>
 				</div>

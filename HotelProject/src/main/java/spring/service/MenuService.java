@@ -7,12 +7,17 @@ import org.springframework.stereotype.Service;
 
 import spring.data.MenuDao;
 import spring.data.MenuDto;
+import spring.data.OrderDao;
+import spring.data.OrderDetailDao;
+import spring.data.OrderDetailDto;
+import spring.data.OrderDto;
 
 @Service
 public class MenuService {
 	@Autowired
 	private MenuDao mndao;
 	
+	///////// menu TABLE /////////
 	public int menuTotalCount()
 	{
 		return mndao.menuTotalCount();

@@ -10,4 +10,10 @@ public class OrderDao extends SqlSessionDaoSupport{
 	{
 		getSqlSession().insert("roomOrderInsert",odto);
 	}
+	
+	//room_order 테이블 max 숫자 구하기
+	public int roomOrderMax(){
+		int n = getSqlSession().selectOne("roomOrderMax");
+		return n;
+	}
 }

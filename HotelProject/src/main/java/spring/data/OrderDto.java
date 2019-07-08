@@ -7,10 +7,17 @@ public class OrderDto {
 	private Timestamp time;
 	private int room_num;
 	private int member_num;
-	private int menu_num;
 	private String memo;
 	private String room_status;
+	private int total_price;
 	
+	
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
 	public int getOrder_num() {
 		return order_num;
 	}
@@ -34,12 +41,6 @@ public class OrderDto {
 	}
 	public void setMember_num(int member_num) {
 		this.member_num = member_num;
-	}
-	public int getMenu_num() {
-		return menu_num;
-	}
-	public void setMenu_num(int menu_num) {
-		this.menu_num = menu_num;
 	}
 	public String getMemo() {
 		return memo;

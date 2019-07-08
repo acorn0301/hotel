@@ -9,10 +9,15 @@ import spring.data.OrderDto;
 @Service
 public class OrderService {
 	@Autowired
-	OrderDao odao;
+	 OrderDao odao;
 	
 	public void roomOrderInsert(OrderDto odto)
 	{
 		odao.roomOrderInsert(odto);
+	}
+	
+	public int roomOrderMax()
+	{
+		return odao.roomOrderMax();
 	}
 }

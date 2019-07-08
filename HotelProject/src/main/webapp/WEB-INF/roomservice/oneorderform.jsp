@@ -12,10 +12,10 @@
 <body>
 <h2>주문하기</h2>
 <br>
-<form action="ordercomplete.do">
+<form action="oneordercomplete.do">
 	<table class="table">
 		<c:set var="sum" value="0"/>
-		<c:forEach var="mndto" items="${mnlist}" varStatus="i">
+		<c:forEach var="mndto" items="${onelist}" varStatus="i">
 			<tr>
 				<td>
 					${i.count}
@@ -24,16 +24,16 @@
 					<b>${mndto.menu_name_kor}</b>
 				</td>
 				<td>
-					${mndto.qty}
+					${qty}
 					<!-- hidden -->
-					<input type="hidden" name="cnt" value="${mndto.qty}">
+					<input type="hidden" name="qty" value="${qty}">
 				</td>
 				<td>
-					<i>${mndto.menu_price * mndto.qty}</i>
-					<c:set var="sum" value="${sum + mndto.menu_price * mndto.qty}"/>
+					<i>${mndto.menu_price}</i>
+					<c:set var="sum" value="${sum+mndto.menu_price}"/>
 					<!-- hidden -->
-					<%-- <input type="hidden" name="order_num" value="${maxOrderNum}"> --%>
 					<input type="hidden" name="menu_num" value="${mndto.menu_num}">
+					<%-- <input type="hidden" name="order_num" value="${maxOrderNum}"> --%>
 				</td>
 			</tr>
 		</c:forEach>

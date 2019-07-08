@@ -9,8 +9,15 @@ public class MenuDto {
 	private String menu_img;
 	private String menu_desc;
 	private int menu_type_num;
+	private int qty;
 	
 	
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
 	public int getMenu_type_num() {
 		return menu_type_num;
 	}

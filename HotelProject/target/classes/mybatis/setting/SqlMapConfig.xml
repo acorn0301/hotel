@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 		<typeAlias type="spring.data.QnaReplyDto" alias="qrdto"/>
 		<typeAlias type="spring.data.ReviewDto" alias="rvdto"/>
 		<typeAlias type="spring.data.RoomDto" alias="rmdto"/> 
+		<typeAlias type="spring.data.OrderDetailDto" alias="oddto"/> 
+		
 
 	</typeAliases>
 	<mappers>
@@ -24,6 +26,7 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 		<mapper resource="mybatis/sql/OrderSql.xml"/>
 		<mapper resource="mybatis/sql/QnaSql.xml"/>
 		<mapper resource="mybatis/sql/ReviewSql.xml"/> 
+		
 	</mappers>
 </configuration>
 
