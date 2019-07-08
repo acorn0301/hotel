@@ -1,0 +1,592 @@
+/* 태그에 직접 준 css */
+h1{
+	font-weight: 900;
+	margin: 0;
+}
+
+ul{
+	list-style: none;
+}
+
+.qna_body{
+	margin: 0px -10px 0px -10px;
+}
+
+
+/* qna > list.jsp */
+
+.qnatable{
+	width : 100%;
+	border-top : 1px solid lightgrey;
+}
+
+.tr2{
+	border-bottom: 1px solid lightgrey;
+}
+
+.td_subject{
+	padding : 5px 10px 0 5px;
+	
+}
+.td_category{
+	padding: 0 0 0 10px;
+	width: 40px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.td_reply{
+	text-align: center;
+	width: 50px;
+	background: WhiteSmoke;
+	padding: 5px;
+	
+}
+
+.td_etc{
+	padding: 0 5px 5px 5px;
+
+	font-size : 0.7em;
+	color: grey;
+}
+
+.text_reply{
+	font-size: 0.7em;
+	color: lightgrey;
+}
+
+.text_reply_num{
+	font-size: 1em;
+}
+
+.qnatable a:link{
+	color : black;
+}
+.qnatable a:visited{
+	color : black;
+}
+
+.span_category{
+	font-size : 0.7rem;
+	color: lightgrey;
+}
+.qna_write_btn_div a{
+	position: relative;
+	left: 60%;
+	top: -20px;
+}
+.qna_write_btn_div button{
+	background-color: palegoldenrod;
+}
+
+
+
+
+/* qna > writeform.jsp */
+
+.form_group{
+	
+	background-color: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.inputbox{
+	border: 0;
+    padding: 11px 20px;
+    height: 48px;
+    font-size: 16px;
+    width: 100%;
+  
+    color: black;
+    vertical-align: top;
+    -webkit-appearance: none;
+
+    -webkit-box-sizing: border-box;
+    border-radius: 2px;
+}
+
+
+.selectbox{
+	
+	
+	border: 0;
+    padding: 11px 20px;
+    height: 48px;
+    font-size: 16px;
+    
+    background: url(https://ssl.pstatic.net/static/m/cafe/mobile/sp_wm_vert_x2_20151228.png);
+    background-position: 100% -2px;
+    background-size: 60px 300px;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: 100% -51px;
+    
+    width: 100%;
+    
+    color: black;
+    vertical-align: top;
+    -webkit-appearance: none;
+
+    -webkit-box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.textbox{
+	width: 100%;
+	border-bottom: 1px solid #cfd1d4;
+    padding: 8px;
+}
+
+.btns_group{
+	
+	padding: 15px 15px 80px 15px;
+	
+}
+
+.btn_cell{
+	
+	padding-left: 5px;
+	padding-right: 5px;
+	float: left;
+    width: 50%;
+    -webkit-box-sizing: border-box;
+    
+}
+
+
+
+.btn_cell button{
+	width: 100%;
+}
+
+.btn_submit{
+	background-color: palegoldenrod;
+	
+}
+
+
+/* qna content 부분을 위한.. */
+
+.qna_content_div{
+	clear: both;
+    width: 100%;
+    background-color: white;
+}
+
+.qna_title_div{
+	position: relative;
+    margin: 0 15px;
+    padding: 18px 0 20px;
+    border-bottom: 1px solid #ececec;
+}
+
+.qna_body_title_div{
+	height: 40px;
+    background-color: #685845;
+    margin-top: -20px;
+    color: white;
+    
+}
+.qna_title_text{
+	line-height: 38px;
+    font-size: 17px;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0 25px 0 40px;
+}
+
+.qna_title{
+	
+	margin-bottom: 18px;
+    font-size: 24px;
+    color: #222;
+    font-weight: normal;
+    word-break: break-all;
+}
+
+.qna_writer_wrap{
+	height: 40px;
+}
+
+.qna_writer_wrap .info{
+	padding-right: 80px;
+    line-height: 16px;
+}
+.qna_aside_layer{
+	position: absolute;
+    bottom: 30px;
+    right: -13px;
+    width: 30px;
+    height: 30px;
+}
+
+.qna_aside_layer .btn_aside{
+	
+    width: 30px;
+    height: 34px;
+    text-align: center;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.qna_option_layer{
+	
+	display: none;
+	position: absolute;
+    right: 11px;
+    width: 180px;
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    z-index: 15;
+}
+
+li{
+	list-style: none;
+}
+
+a{
+	color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.qna_aside_layer>a{
+	color: #999;
+}
+
+.btn_aside{
+	font-size: 15pt;
+}
+
+.btn_aside_li{
+	padding-top: 7px;
+	display: block;
+    position: relative;
+    height: 39px;
+    padding-left: 17px;
+    line-height: 38px;
+    font-size: 15px;
+    color : black;
+}
+
+.qna_post_content{
+	overflow: hidden;
+    clear: both;
+    padding: 14px 15px 50px;
+    color: #111;
+    line-height: 1.45;
+    word-break: break-all;
+    word-wrap: break-word;
+    min-height: 200px;
+}
+
+.info_date{
+	color: #999;
+    font-size: 13px;
+}
+
+.info_readcount{
+	margin-left: 5px;
+    color: #999;
+    font-size: 13px;
+}
+
+
+/* 댓글란을 위한 css  */
+
+.qna_comment_area{
+	
+}
+
+.section_comment{
+	position: relative;
+    padding: 20px 15px 0;
+    border-top: 1px solid #ececec;
+}
+
+.section_comment_top{
+	display: block;
+    position: relative;
+    height: 23px;
+    padding-bottom: 4px;
+}
+.section_comment_top ul{
+	border-bottom: 1px solid #ededed;
+	list-style: none;
+}
+
+.comment_content_wrap{
+	padding: 0 15px;
+}
+.comment_write_wrap{
+	margin: 15px 0 11px;
+}
+.comment_box_write{
+	position: relative;
+}
+.comment_box_write_inner{
+	position: relative;
+    background-color: #fff;
+    border: 1px solid #b3b3b3;
+}
+.comment_box_profile_area{
+	position: relative;
+    height: 30px;
+    padding: 10px 14px 0;
+}
+.comment_box_write_area{
+	overflow: hidden;
+    max-width: 100%;
+}
+.comment_box_upload_area{
+	height: 43px;
+    border-top: 1px solid #ededed;
+}
+.li_comment{
+	position: relative;
+    padding: 12px 0;
+    border-bottom: 1px solid #ececec;
+}
+.li_comment_content{
+	padding: 10px 0 10px 0;
+}
+
+.comment_box_write_inbox{
+	position: relative;
+    padding: 11px 12px 10px;
+    background-color: #fff;
+}
+
+.comment_textarea{
+	z-index: 20;
+    height: 100px;
+    display: block;
+    position: relative;
+    
+    width: 100%;
+    
+    border: 0;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
+    line-height: 20px;
+    -webkit-appearance: none;
+    resize: none;
+}
+
+.write_textarea{
+	z-index: 20;
+    height: 200px;
+    display: block;
+    position: relative;
+    
+    width: 100%;
+    
+    border: 0;
+    background-color: transparent;
+    font-size: 16px;
+    color: #000;
+    line-height: 20px;
+    -webkit-appearance: none;
+    resize: none;
+}
+
+.comment_btn_upload{
+	top: auto;
+    height: 44px;
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    min-width: 69px;
+    background: sienna;
+    border: 1px solid rgba(0,0,0,0.1);
+    font-size: 15px;
+    line-height: 100%;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    z-index: 10;
+}
+
+
+
+/* 관리자 페이지 메인을 위한 css */
+
+.dashboard_div{
+	
+	padding: 0 0px 0px 10px;
+}
+
+.dashboard_div_title{
+	padding-left: 5px;
+}
+
+.dashboard_div_table{
+	
+	border-radius: 10px;
+	margin: 0px;
+}
+
+.dashboard_div_table ul{
+	padding : 0;
+	margin : 0;
+}
+
+.dashboard_li_div{
+	font-size: 11pt;
+	padding: 10px 10px 10px 20px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.dashboard_li_div i{
+	margin-right: 5px;
+}
+.li_last{
+	border : 0;
+}
+
+.dashboard_li_number{
+	float:right;
+	padding-right:20px;
+	font-weight: bold;
+	font-size: 15pt;
+	position: relative;
+	top: -5px;
+}
+
+.dashboar_li_label{
+	width: 100px;
+	color: royalblue;
+}
+
+.admin_body{
+	margin : 0 -10px 0 -20px;
+}
+
+.dashboard_li_gun{
+	font-size: 11pt;
+	color: grey;
+	font-weight: lighter;
+	position:relative;
+	top: -1px;
+}
+
+
+.admin_title_div{
+	line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+    
+    
+}
+
+.dashboard_qna_div{
+	 margin-bottom: 20px;
+	
+}
+
+.dashboard_qna_divs{
+	float:left;
+	width: 33.3%;
+	border-right: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+	padding: 15px 10px 10px 10px;
+	padding-bottom: 0px;
+	text-align: center;
+	font-size: 11pt;
+}
+.dashboard_qna_divs i{
+	font-size: 20pt;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+
+.badge_number{
+	position:relative;
+	top: -45px;
+	right: -25px;
+}
+
+.badge{
+	background-color: #b36154;
+}
+.dashboard_qna_divs_text{
+	position: relative;
+    top: -20px;
+}
+
+/* 관리자 컬러 */
+
+.color1{
+	color: #ddc173;
+}
+.color2{
+	color: #91a16a;
+}
+.color3{
+	color: #738986;
+}
+.color4{
+	color: #8e8680;	
+}
+.color5{
+	color: #b36154;
+}
+.color6{
+	color: #cc9999;
+}
+.color7{
+	color: #996666;
+}
+
+.li_last_right{
+	border-right: 0;
+}
+
+
+
+
+
+/* 페이징 처리 꾸미 */
+
+.pagination>li>a{
+	color: #827664;
+}
+
+
+
+
+/* 예약 리스트 페이지를 위한.. */
+
+.list_hotel_local{
+	color: grey;
+}
+.list_room_local{
+	margin-left: 10px;
+}
+.dashboard_li_div2{
+	font-size: 11pt;
+	padding: 10px 10px 10px 20px;
+	border-bottom: 1px solid lightgrey;
+}
+.booklist_div{
+}
+
+.list_status, .list_name, .list_id, .list_book_day{
+	color: grey;
+	font-weight: ;
+}
+.list_check_in_out{
+	font-weight: lighter;
+	font-size: 20pt;
+}
