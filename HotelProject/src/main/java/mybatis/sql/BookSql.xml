@@ -2,6 +2,58 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="book">
 
+	<!-- 호텔 지점 리스트 SQL -->
+	<select id="HotelLocalList" resultType="hdto">
+		select * from hotel
+	</select>
+	
+	<!-- 객실 리스트 SQL -->
+	<!-- <select id="RoomList" resultType="rmdto">
+		select * from room
+	</select> -->
+	
+	
+	<!-- 조건에 맞는 객실 리스트 SQL -->
+	<select id="RoomList" parameterType="bdto" resultType="rmdto">
+		<![CDATA[select room_num, room_name, type, max, price, hotel_num, room_config, room_local, room_img from room 
+		where 
+		max = #{head_count} 
+		and
+		hotel_num = #{hotel_num}
+		and 
+		room_num not in 
+		(select room_num from book where (check_in < #{check_in} and check_out > #{check_out}) or (check_in < #{check_out} and check_out > #{check_in}) or (check_in >= #{check_in} and check_out <= #{check_out}))]]>
+	</select>
+	
+	
+	<!-- room_num에 따른 지점명 출력 (Room 테이블 해당 room_num의 hotel_num로 hotel_local 알기) -->
+	<select id="hotelLocal" parameterType="int" resultType="hdto">
+		select * from hotel where hotel_num=#{hotel_num}
+	</select>
+	
+
+	<!-- 예약정보 db에 저장 -->
+	<select id="insertBook" parameterType="bdto">
+		insert into book values (bookseq.nextval, #{member_num}, #{check_in}, #{check_out}, #{room_num}, #{head_count}, #{book_memo}, #{book_status}, sysdate, #{add_bed}, #{breakfast_count})
+	</select>
+	
+	
+	<!-- 비회원 // 예약확인을 위한 최소한의 회원가입 정보 저장 (이름이랑 폰번호만 삽입됨) -->
+	<select id="insertInfo_notMember" parameterType="mbdto">
+		insert into member values (memberseq.nextval, 'nc_id', 'nc_password', #{name}, sysdate, sysdate, 'nc_email', #{phone}, 'NC')
+	</select>
+	
+	
+	
+	
+	<!-- 비회원 예약정보 db저장 (ncNumber는 member 테이블에서 가장 높은 member_num을 select한 값임)-->
+	<select id="insertBook_notMember" parameterType="bdto">
+		insert into book values (bookseq.nextval, 1, #{check_in}, #{check_out}, #{room_num}, #{head_count}, #{book_memo}, #{book_status}, sysdate, #{add_bed}, #{breakfast_count})
+	</select>
+	
+	
+	
 </mapper>
