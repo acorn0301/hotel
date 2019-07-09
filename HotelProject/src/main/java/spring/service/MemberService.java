@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import spring.data.MemberDao;
 import spring.data.MemberDto;
+import spring.data.QnaDto;
 
 @Service
 public class MemberService {
@@ -30,6 +31,21 @@ public class MemberService {
    {
 	   return mbdao.getMembernum(id, password);
    }
+   
+   
+   // 회원 정보 가져오기
+ 	public MemberDto getMemberData(int member_num) 
+ 	{
+ 		return mbdao.getMemberData(member_num);
+ 	}
+ 	
+    // 회원 정보 수정
+    public void updateMember(MemberDto mbdto)
+    {
+ 	   mbdao.updateMember(mbdto);
+    }
+    
+
 
 
 }

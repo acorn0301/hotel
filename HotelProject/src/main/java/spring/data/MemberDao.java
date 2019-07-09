@@ -34,4 +34,19 @@ public class MemberDao extends SqlSessionDaoSupport{
 	   
 	   return getSqlSession().selectOne("member.getMembernum", map);
    }
+   
+   // 회원정보 얻기
+   public MemberDto getMemberData(int member_num)
+   {
+	   return getSqlSession().selectOne("member.getMemberData", member_num);
+   }
+   
+
+   // 회원정보 수정
+   public void updateMember(MemberDto mbdto)
+	{
+		getSqlSession().update("member.infoEdit", mbdto);
+	}
+   
+   
 }

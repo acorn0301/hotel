@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.MemberDto;
+import spring.data.QnaDto;
 import spring.service.MemberService;
 
 @Controller
@@ -22,7 +23,6 @@ public class MemberController {
    // 로그인 버튼 클릭시  -> 로그인 폼 
    @RequestMapping("/login.do")
    public String loginForm(HttpServletRequest request) {
-	  
       request.setAttribute("container", "../member/login/loginmain.jsp");
 	  request.setAttribute("msg", "");
 
@@ -46,12 +46,13 @@ public class MemberController {
 	   
 	   int chk = mservice.loginCheck1(id, pwd);
 
-	   System.out.println(chk);
+//	   System.out.println(chk);
 	   if(chk > 0){
 		   request.setAttribute("container", "../layout/indexmain.jsp");
 		   request.setAttribute("msg", "환영합니다 ");
 		   
 		   session.setAttribute("member_num", mservice.getMembernum(id, pwd));
+		   
 		   return "layout/home"; 
 	   }else{
 		   request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
@@ -98,22 +99,39 @@ public class MemberController {
 //      String member_num = (String)session.getAttribute("member_num");
       
       //넘겨받은 member_num을 이용해 mypage 를 보여줍니다.
-	   
+
       request.setAttribute("container", "../member/mypage/mypage.jsp");
       
       return "layout/home";
    }
    
-   // 내 정보수정 클릭
+   // 내 정보수정 클릭 (수정 폼 이동)
    @RequestMapping("/infoEdit.do")
-   public String infoEdit(HttpServletRequest request) {
-      
-      
+   public String infoEdit(HttpServletRequest request, HttpSession session) {
+
+	   /*int member_num = (Integer)session.getAttribute("member_num");*/
+//	  System.out.println(session.getAttribute("member_num"));
+
+	  int member_num = (Integer)session.getAttribute("member_num");
+	  
+	  MemberDto mbdto = mservice.getMemberData(member_num);
+	  request.setAttribute("mbdto", mbdto);
+	  
       request.setAttribute("container", "../member/mypage/infoedit.jsp");
       
       return "layout/home";
    }
    
+   // 내 정보수정 처리
+   @RequestMapping("/infoEditComplete.do")
+   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto) {
+     
+	   mservice.updateMember(mbdto);
+	   
+	   request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
+	   return "layout/home";
+
+   }
    
    // 가입완료 버튼 클릭시
    @RequestMapping(value="/joinok.do", method=RequestMethod.POST)

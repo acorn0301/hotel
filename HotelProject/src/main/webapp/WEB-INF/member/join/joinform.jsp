@@ -105,10 +105,10 @@ function check(){
 	<!-- 생년월일 -->
 	<div class="dateForm">
 		<select id="year" name="year" class="custom-select">
-			<c:set var="n" value="1900" />
-			<c:forEach begin="1900" end="2019">
+			<c:set var="n" value="2019" />
+			<c:forEach begin="1940" end="2019">
 				<option value="${n}">${n}</option>
-				<c:set var="n" value="${n+1}" />
+				<c:set var="n" value="${n-1}" />
 			</c:forEach>
 		</select>
 		<span>년 &nbsp;</span>

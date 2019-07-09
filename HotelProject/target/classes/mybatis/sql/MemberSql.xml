@@ -19,4 +19,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select member_num from member where id=#{id} and password=#{password}
 	</select>
 	
+	
+	<!-- member_num으로 회원정보 얻기 -->
+	<select id="getMemberData" parameterType="int" resultType="mbdto">
+		select * from member where member_num=#{member_num}
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="infoEdit" parameterType="mbdto">
+ 		update member set password=#{password},phone=#{phone},email=#{email} where member_num=#{member_num}
+	</update>
+	
+	
 </mapper>

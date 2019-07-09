@@ -14,13 +14,14 @@
 <body>
 <div id="joincomplete">
 <form class="form-inline" action="login.do" method="post">
+<br>
 <h1><i class="fas fa-bullhorn"></i></h1>
 <h3>가입을 축하합니다 !</h3>
 <b>1st HOTEL</b> 가입이 완료되었습니다<br>
 로그인 후 다양한 서비스를 이용하실 수 있습니다<br>
 <br>
 <div>
-<input type="submit" id="loginGo" class="btn btn-basic" value="로그인 하러가기">
+<input type="submit" id="loginGo" value="로그인 하러가기">
 </div>
 </form>
 </div>
