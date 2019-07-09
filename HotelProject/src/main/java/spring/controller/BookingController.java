@@ -29,6 +29,9 @@ public class BookingController {
 	@Autowired
 	private BookService bookService;
 	
+	int bedPrice = 40000;
+	int breakfastPrice = 25000;
+	
 	
 	//예약확인 버튼을 눌렀을 때
 	@RequestMapping("/bookingCheck.do")
@@ -62,20 +65,9 @@ public class BookingController {
 	@RequestMapping("/booking.do")
 	public String toStep1(HttpServletRequest request, 
 			@RequestParam(value="step",defaultValue="0") int step,
-			@RequestParam(value="head_count", required=false, defaultValue="0") int head_count,
-			@RequestParam(value="room_name", required=false, defaultValue="0") String room_name,
-			@RequestParam(value="check_in",  required=false, defaultValue="0") String check_in,
-			@RequestParam(value="check_out",  required=false, defaultValue="0") String check_out,
-			@RequestParam(value="hotel_num", required=false, defaultValue="0") int hotel_num,
-			@RequestParam(value="room_num", required=false, defaultValue="0") int room_num,
-			@RequestParam(value="room_config", required=false, defaultValue="0") String room_config,
-			@RequestParam(value="price", required=false, defaultValue="0") String price,
-			@RequestParam(value="type", required=false, defaultValue="0") String type,
-			@RequestParam(value="add_bed", required=false, defaultValue="0") int add_bed,
-			@RequestParam(value="breakfast_count", required=false, defaultValue="0") int breakfast_count,
-			@RequestParam(value="book_memo", required=false, defaultValue="요청사항 없음") String book_memo,
-			@RequestParam(value="bedCountPrice", required=false, defaultValue="0") int bedCountPrice,
-			@RequestParam(value="breakfastCountPrice", required=false, defaultValue="0") int breakfastCountPrice,
+			@ModelAttribute BookDto bdto,
+			@ModelAttribute RoomDto rmdto,
+			@ModelAttribute HotelDto hdto,
 			HttpSession session
 			)
 	{
@@ -93,82 +85,151 @@ public class BookingController {
 		// 값 넘기기
 		else if(step==1)
 		{
-			
-			session.setAttribute("head_count",head_count); //세션에 인원 저장
-			session.setAttribute("check_in", check_in); //세션에 체크인날짜 저장
-			session.setAttribute("check_out", check_out); //세션에 체크아웃날짜 저장
-			session.setAttribute("hotel_num", hotel_num); //세션에 호텔지점숫자 저장
-			
-			BookDto bdto=new BookDto();
-			
-			bdto.setHead_count(head_count);
-			bdto.setCheck_in(check_in);
-			bdto.setCheck_out(check_out);
-			bdto.setHotel_num(hotel_num);
+			// bdto에 해당하는 값을 mybdto에 저장
+			session.setAttribute("mybdto", bdto);
 			
 			
-			//객실 리스트
+		/*	// roomdto에 해당하는 값을 myrmdto에 저장
+			session.setAttribute("myrmdto", rmdto);*/
+			
+		
+			//호텔지점에 따라 호텔 이름 출력
+			System.out.println("hotel_num " + hdto.getHotel_num());
+			HotelDto hdto2 = bookService.getHotel(hdto.getHotel_num());
+			request.setAttribute("hdto", hdto2);
+			session.setAttribute("myhdto", hdto2);
+			
+			//객실 리스트 출력
 			List<RoomDto> roomList=bookService.RoomList(bdto);
 			request.setAttribute("roomList", roomList);
 			
-			
-			//호텔지점에 따라 호텔 이름 출력
-			HotelDto hdto=new HotelDto();
-			List<HotelDto> hotelList=bookService.hotelLocal(hotel_num);
-			request.setAttribute("hotelList", hotelList);
 			
 		}
 		
 		//'STEP 3 옵션 선택' 페이지로 넘어갈 때
 		else if(step==2)
 		{
-			session.setAttribute("room_num", room_num); //세션에 룸넘버 저장
-			session.setAttribute("room_config", room_config); //세션에 룸구성 저장
-			session.setAttribute("price", price); //세션에 룸가격 저장
-			session.setAttribute("room_name", room_name); //세션에 객실이름 저장
-			session.setAttribute("type", type); //세션에 침대타입 저장 
-			request.setAttribute("head_count", head_count); //세션에 인원수 저장 
+			// BookDto 클래스 bdto1 생성
+			BookDto bdto1 = new BookDto();
 			
+			// bdto1에 mybdto 세션 값 삽입 
+			bdto1 = (BookDto)session.getAttribute("mybdto");
+			
+			// bdto1에 room_num 값 삽입
+			bdto1.setRoom_num(bdto.getRoom_num());
+			
+			// 세션에 bdto1를 mybdto에 넣기
+			session.setAttribute("mybdto", bdto1);			
+			
+			
+			
+			
+			
+		/*	// RoomDto 클래스 rmdto1 생성
+			RoomDto rmdto1 = new RoomDto();
+						*/
+			// rmdto1에 myrmdto 세션 값 삽입 
+			/*rmdto1 = (RoomDto)session.getAttribute("myrmdto");
+			
+			
+						
+			// bdto1에 데이터 삽입
+			rmdto1.setRoom_num(rmdto.getRoom_num());
+			rmdto1.setPrice(rmdto.getPrice());
+			rmdto1.setType(rmdto.getType());
+			rmdto1.setRoom_img(rmdto.getRoom_img());
+			rmdto1.setRoom_config(rmdto.getRoom_config());
+			rmdto1.setMax(rmdto.getMax());
+						*/
+			int room_num = rmdto.getRoom_num();
+			
+			RoomDto rmdto1 = bookService.getRoomData(room_num);
+			
+			session.setAttribute("myrmdto", rmdto1);
+			
+			System.out.println("bed" + bdto.getAdd_bed());
+			
+			session.setAttribute("bedCountPrice", bdto.getAdd_bed()*bedPrice);
+			session.setAttribute("breakfastCountPrice", bdto.getBreakfast_count()*breakfastPrice);
+			
+//			session.setAttribute("myrmdto", rmdto);
+//			
+//			// 세션에 rmdto1를 myrmdto에 넣기
+//			session.setAttribute("myrmdto", rmdto);
+//			
+			
+			
+			// hoteldto에 해당하는 값을 myhdto에 저장
+/*
+			// HotelDto 클래스 hdto1 생성
+			HotelDto hdto3 = new HotelDto();
+
+			// hdto1에 myhdto 세션 값 삽입 
+			hdto3 = (HotelDto)session.getAttribute("myhdto");
+
+			// 세션에 hdto1를 myhdto에 넣기
+			session.setAttribute("myhdto", hdto3);*/
 		}
 		
 		
 		//'STEP 4 예약확인(비회원)' 페이지로 넘어갈 때
 		else if(step==3)
 		{
-			session.setAttribute("room_num", room_num); //세션에 룸넘버 저장
-			session.setAttribute("add_bed", add_bed); //세션에 침대추가갯수 저장
-			session.setAttribute("breakfast_count", breakfast_count); //세션에 조식인원 저장
-			session.setAttribute("bedCountPrice", bedCountPrice); //세션에 침대추가 금액 저장
-			session.setAttribute("breakfastCountPrice", breakfastCountPrice); //세션에 조식금액 저장
-			session.setAttribute("book_memo", book_memo); //세션에 요청사항 저장
+			// hdto2를 새로 만들어 myhdto 값을 받아온 후 사용한다
+			HotelDto hdto2=new HotelDto();
+			hdto2 = (HotelDto)session.getAttribute("myhdto");
+			request.setAttribute("hdto", hdto2);
 			
-			//System.out.println(hotel_num);
 			
-			//호텔지점에 따라 호텔 이름 출력
-			HotelDto hdto=new HotelDto();
-			List<HotelDto> hotelList=bookService.hotelLocal(hotel_num);
-			request.setAttribute("hotelList", hotelList);
-
+			// rmdto2를 새로 만들어 myrmdto 값을 받아온 후 사용한다
+			RoomDto rmdto2=new RoomDto();
+			rmdto2 = (RoomDto)session.getAttribute("myrmdto");
+			request.setAttribute("rmdto", rmdto2);
+			
+			
+			
+			
+			// BookDto 클래스 bdto2 생성
+			BookDto bdto2 = new BookDto();
+			
+			// bdto2에 mybdto 세션 값 삽입 
+			bdto2 = (BookDto)session.getAttribute("mybdto");
+			
+			// bdto2에 데이터 삽입
+			bdto2.setAdd_bed(bdto.getAdd_bed());
+			bdto2.setBook_memo(bdto.getBook_memo());
+			bdto2.setBreakfast_count(bdto.getBreakfast_count());
+			
+			// 세션에 bdto2를 mybdto에 넣기
+			session.setAttribute("mybdto", bdto2);
+			
+			
 		}
 		
 		
 		//'STEP 4 예약확인(회원)' 페이지로 넘어갈 때
 		else if(step==4)
-		{
-			session.setAttribute("room_num", room_num); //세션에 룸넘버 저장
-			session.setAttribute("add_bed", add_bed); //세션에 침대갯수 저장
-			session.setAttribute("breakfast_count", breakfast_count); //세션에 조식인원 저장
-			session.setAttribute("bedCountPrice", bedCountPrice); //세션에 침대추가 금액 저장
-			session.setAttribute("breakfastCountPrice", breakfastCountPrice); //세션에 조식금액 저장
-			session.setAttribute("book_memo", book_memo); //세션에 요청사항 저장
-			
+		{		
 			//호텔지점에 따라 호텔 이름 출력
-			HotelDto hdto=new HotelDto();
-			List<HotelDto> hotelList=bookService.hotelLocal(hotel_num);
-			request.setAttribute("hotelList", hotelList);
+			HotelDto hdto2=new HotelDto();
+			hdto2 =bookService.getHotel(hdto.getHotel_num());
+			request.setAttribute("hdto", hdto2);
+			
+			
+			// BookDto 클래스 bdto2 생성
+			BookDto bdto2 = new BookDto();
+
+			// bdto2에 mybdto 세션 값 삽입 
+			bdto2 = (BookDto)session.getAttribute("mybdto");
+
+			// bdto2에 데이터 삽입
+			bdto2.setAdd_bed(bdto.getAdd_bed());
+			bdto2.setBook_memo(bdto.getBook_memo());
+			bdto2.setBreakfast_count(bdto.getBreakfast_count());
+
+			// 세션에 bdto2를 mybdto에 넣기
+			session.setAttribute("mybdto", bdto2);
 		}
-		
-		
 		
 			
 		// 다음 페이지로 이동
@@ -179,7 +240,7 @@ public class BookingController {
 	
 	
 	
-	//비회원예약 - 예약하기 버튼 클릭시
+/*	//비회원예약 - 예약하기 버튼 클릭시
 	@RequestMapping(value="/insertNotMember.do")
 	public String insertBook_notMember(
 			@RequestParam(value="name", defaultValue="alice") String name,
@@ -194,40 +255,52 @@ public class BookingController {
 //		
 		//완료 페이지로 이동
 		return "redirect:booking.do?step=5";
-	}
+	}*/
 	
-	@PostMapping("/insertNC.do")
-	public String insertnc(@ModelAttribute MemberDto mbdto){
-				
+	
+	
+	//비회원예약페이지에서 - 예약하기 버튼 클릭시
+	@RequestMapping(value="/insertNC.do", method=RequestMethod.POST)
+	public String insertnc(@ModelAttribute MemberDto mbdto,HttpSession session,
+			@ModelAttribute BookDto bdto)
+	{		
+		//비회원 정보를 member테이블에 저장
 		bookService.insertInfo_notMember(mbdto);
 		
-		return "redirect:booking.do?step=5";
-
-	}
-	
-	@RequestMapping("/test1.do")
-	public String test(@RequestParam(value="name", defaultValue="alice") String name){
-		System.out.println(name);
-
+		//member_num 의 최대값(방금 가입한 회원) 을 예약정보에 삽입
+		int member_num = bookService.maxMemberNum();
+		
+		
+		BookDto bdto3= new BookDto();
+		bdto3 = (BookDto)session.getAttribute("mybdto");
+		bdto3.setMember_num(member_num);
+		session.setAttribute("mybdto",bdto3);
+		
+		
+		//예약정보 저장
+		bookService.insertBook(bdto3);
+		
 		
 		return "redirect:booking.do?step=5";
-
 	}
-	
-	
 	
 	
 
 	
 	//회원예약 - 예약하기 버튼 클릭시
 	@RequestMapping(value="/insert.do", method=RequestMethod.POST)
-	public String insertBook(@ModelAttribute BookDto bdto)
+	public String insertBook(HttpSession session,@ModelAttribute BookDto bdto)
 	{
+		BookDto bdto3= new BookDto();
+		bdto3 = (BookDto)session.getAttribute("mybdto");
+		bdto3.setMember_num((Integer)session.getAttribute("member_num"));
+		session.setAttribute("mybdto",bdto3);
 		
-		//BookDto에 저장
-		bookService.insertBook(bdto);
 		
-		//완료 페이지로 이동
+		//예약정보 저장
+		bookService.insertBook(bdto3);
+		
+		
 		return "redirect:booking.do?step=5";
 	}
 	

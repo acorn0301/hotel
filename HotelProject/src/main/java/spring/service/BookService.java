@@ -33,9 +33,9 @@ public class BookService {
 	
 	
 	//룸num에 따른 호텔지점명
-	public List<HotelDto> hotelLocal(int num)
+	public HotelDto getHotel(int num)
 	{
-		return bdao.hotelLocal(num);
+		return bdao.getHotel(num);
 	}
 	
 	
@@ -58,5 +58,16 @@ public class BookService {
 	{
 		bdao.insertBook_notMember(bdto);
 	}
+	
+	
+	//(비회원 예약시) 최대 membernum 구하기
+	public int maxMemberNum()
+	{
+		return bdao.maxMemberNum();
+	}
 
+	//룸 넘버로 룸정보 모두 가져오기
+	public RoomDto getRoomData(int room_num){
+		return bdao.getRoomData(room_num);
+	}
 }
