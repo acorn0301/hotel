@@ -18,11 +18,11 @@ input.center{
 div.center_div{
 	text-align: center;
 }
-i.icon{
-	width: 20%;
+img.icon{
+    width: 80px;
     position: fixed;
-    top: 75%;
-    right: 10%;
+    bottom: 20px;
+    right: 20px;
     z-index: 10;
 }
 .menu_div{
@@ -68,6 +68,22 @@ i.icon{
     margin-top: -20px;
     margin-bottom: 20px;
 }
+.row{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* css 파일 */
 a{
 	color: #696969;

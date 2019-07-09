@@ -82,10 +82,7 @@ function openModal(title,img,desc,menu_num){
  
   
 <a href="cart.do">
-	<div style="background-color: #ffffff; border-radius: 1000;">
-	<i class='icon fas fa-shopping-cart'
-	style='font-size:48px; color:#685845;'></i>
-	</div>
+	<img alt="장바구니" src="images/menu/carticon.svg" class="icon">
 </a>
 
 <br>
