@@ -54,7 +54,7 @@
 			<li><a href="mypage.do"><span class="glyphicon glyphicon-user"></span>&nbsp;마이페이지</a></li>		
 		</c:if>
 		
-		 <!— 로그인 되어있으면 바로 보여주고 안되어있으면 로그인할래 비회원조회할래 물어볼것 (컨트롤러에서 처리함) —>
+		 <!-- 로그인 되어있으면 바로 보여주고 안되어있으면 로그인할래 비회원조회할래 물어볼것 (컨트롤러에서 처리함) -->
 		<li><a href="bookingCheck.do">예약확인</a></li>
 		
 		<li><a href="hotellist.do">지점안내</a></li>
@@ -62,6 +62,10 @@
 		<li><a href="qnalist.do">문의게시판</a></li>
 		<li><a href="roomaservice.do">룸서비스</a></li>
 		<li><a href="booking.do">예약하기</a></li>
+		
+<!-- 		임시로 관리자 페이지 열어둡니다 
+ -->		<li><a href="admin.do">관리자페이지</a></li>
+		
 		
         
         

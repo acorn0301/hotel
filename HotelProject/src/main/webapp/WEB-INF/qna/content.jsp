@@ -92,6 +92,10 @@
 			</ul>
 		</div>
 		
+		
+		
+		
+		<!-- 로그인 시에만 댓글 창이 열린다. -->
 		<c:if test="${member_num != 'no' }">
 			<div class="comment_content_wrap">
 				<div class="comment_write_wrap">		
