@@ -53,6 +53,8 @@ public class MemberController {
 			   
 			   String url = (String)session.getAttribute("url");
 			   session.removeAttribute("url");
+			   session.setAttribute("member_num", mservice.getMembernum(id, pwd));
+
 			   
 			   return "redirect:" + url;
 		   }
