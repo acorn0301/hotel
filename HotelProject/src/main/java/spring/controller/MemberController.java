@@ -51,7 +51,10 @@ public class MemberController {
 		   
 		   if(session.getAttribute("url") != null ){
 			   
-			   return "redirect:" + (String)session.getAttribute("url");
+			   String url = (String)session.getAttribute("url");
+			   session.removeAttribute("url");
+			   
+			   return "redirect:" + url;
 		   }
 		   
 		   
