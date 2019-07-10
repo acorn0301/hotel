@@ -86,17 +86,12 @@
 <!-- 글쓰기 버튼 -->
 <div class="qna_write_btn_div">
 	<a href="qnaform.do?pageNum=${currentPage }">
-		<button class="btn btn-lg btn-default">
-			<i class="far fa-question-circle"></i> 문의하기 
-		</button>
+		<img src="images/icon/writeicon.svg">
 		
 	</a>
 </div>
 <!-- 글쓰기 버튼 끝 -->
 
-
-<!-- 임시로 잠시 쓸게요.. -->
-<button class="btn" onclick="location.href='admin.do'">관리자페이지</button>
  </div>
 </body>
 </html>

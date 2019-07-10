@@ -422,13 +422,28 @@ textarea{
 
 /* 예약하기 버튼 */
 .reservationBtn3{
-	width: 49.4%;
+	width: 100%;
 	padding: 2rem 0;
 	border: none;
 	background-color: Sienna;
 	color: white;
 	margin-top: 1rem;
 }
+
+.reservationBtn3_1{
+	float: left;
+    width: 50%;
+    padding-right: 10px;
+}
+.reservationBtn3_2{
+	float: left;
+    width: 50%;
+    
+}
+.floatClear{
+	clear:both;
+}
+
 
 
 
@@ -591,5 +606,5 @@ textarea{
 	background-color: white;
 	border: 1px solid #ccc;
 	padding: 1.2rem 0;
-	width: 49.4%
+	width: 49%
 }

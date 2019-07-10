@@ -25,9 +25,9 @@ public class BookDao extends SqlSessionDaoSupport{
 	
 
 	//룸num에 따른 호텔 지점명 출력
-	public List<HotelDto> hotelLocal(int num)
+	public HotelDto getHotel(int num)
 	{
-		return getSqlSession().selectList("hotelLocal", num);
+		return getSqlSession().selectOne("getHotel", num);
 	}
 	
 
@@ -49,5 +49,17 @@ public class BookDao extends SqlSessionDaoSupport{
 	public void insertBook_notMember(BookDto bdto)
 	{
 		getSqlSession().insert("insertBook_notMember", bdto);	
+	}
+	
+	
+	//(비회원 예약시) 최대member_num 구하기
+	public int maxMemberNum()
+	{
+		return getSqlSession().selectOne("maxMemberNum");
+	}
+	
+	//룸 넘버로 룸정보 모두 가져오기
+	public RoomDto getRoomData(int room_num){
+		return getSqlSession().selectOne("getRoomData", room_num);
 	}
 }

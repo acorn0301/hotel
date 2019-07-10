@@ -35,7 +35,7 @@ public class QnaController {
 		//일단 임시로 로그인 기능 구현... 
 		//무조건 이장희(alice01)로 로그인됨
 		//추후 로그인 기능 추가시 아래 코드는 삭제바람
-		session.setAttribute("member_num", "3");
+		//session.setAttribute("member_num", "3");
 		
 		
 		
