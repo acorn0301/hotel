@@ -18,27 +18,6 @@
 <body>
 <script type="text/javascript">
 
-
-/* 	$("select[name='year'] option:selected").val();
-	$("select[name='month'] option:selected").val();
-	$("select[name='day'] option:selected").val(); */
-/* 	
-	$("#year option:selected").val();
-	$("select[name='year'] option:selected").val();
-	$("select[name='year']").val(); */
-	
-/* 
-	var year = document.getElementById("year");
-	var val;
-	for(i=0; i<year.options.length; i++) {
-	    if(year.options[i].selected == true) {
-	        val = year.options[i].value;
-	        break;
-	    }
-	}
-	 */
-	
-
 function check(){
 
 	if(edit.password.value.length < 8){
@@ -70,8 +49,6 @@ function check(){
 	return true;
 	
 }
-
-
 </script>
 
 <div id="EditForm">
@@ -127,7 +104,7 @@ function check(){
 			</c:forEach>
 		</select>
 		<span>년 &nbsp;</span>
-		
+	
 		<select id="month" name="month" class="custom-select">
 			<c:set var="n" value="1" />
 			<c:forEach begin="1" end="12">
@@ -164,6 +141,7 @@ function check(){
 	<div class="col-sm-3 text-center">
 		<input type="submit" value="수정 완료" id="editOk">
 	</div><br>
+
 </form>
 </div>
 </body>

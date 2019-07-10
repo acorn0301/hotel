@@ -48,6 +48,13 @@ public class MemberController {
 
 //	   System.out.println(chk);
 	   if(chk > 0){
+		   
+		   if(session.getAttribute("url") != null ){
+			   
+			   return "redirect:" + (String)session.getAttribute("url");
+		   }
+		   
+		   
 		   request.setAttribute("container", "../layout/indexmain.jsp");
 		   request.setAttribute("msg", "환영합니다 ");
 		   
@@ -74,7 +81,18 @@ public class MemberController {
       return "redirect:home.do";
    }
    
-   // 회원가입 버튼 클릭시 
+   
+   // 회원가입 버튼 클릭시 (회원가입 이용약관 동의 페이지)
+   @RequestMapping("/joinagree.do")
+   public String joinagree(HttpServletRequest request) {
+            
+      request.setAttribute("container", "../member/join/joinagree.jsp");
+      
+      return "layout/home";
+   }
+   
+   
+   // 회원가입 폼 (이용약관에서 동의-> 클릭시 회원가입 폼 이동)
    @RequestMapping("/join.do")
    public String joinform(HttpServletRequest request) {
             
@@ -139,6 +157,7 @@ public class MemberController {
                      @RequestParam("year")String year, @RequestParam("month")String month, @RequestParam("day")String day) {
      
     mbdto.setBirth(year + "-" + month +"-" + day); // 생년월일 값 따로 전송
+    
      mservice.insertMember(mbdto);
      request.setAttribute("container", "../member/join/joincomplete.jsp");
       

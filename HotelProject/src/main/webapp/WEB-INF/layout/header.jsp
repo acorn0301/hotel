@@ -47,7 +47,7 @@
 	
 		<c:if test="${member_num == null }"> <!-- 로그아웃 상태에서만 보이는 메뉴 -->
 			<li><a href="login.do"><span class="glyphicon glyphicon-log-in"></span>&nbsp;로그인</a></li>
-			<li><a href="join.do"><span class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
+			<li><a href="joinagree.do"><span class="glyphicon glyphicon-user"></span>&nbsp;회원가입</a></li>
 		</c:if>
 		<c:if test="${member_num != null }"> <!-- 로그인 상태에서만 보이는 메뉴 -->
 			<li><a href="logout.do"><span class="glyphicon glyphicon-log-out"></span>&nbsp;로그아웃</a></li>		

@@ -138,7 +138,7 @@ function check(){
 	<!-- 이메일 -->
 	<div>
 		<div class="form_group">
-		<input type="text" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
+		<input type="email" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
 		</div>
 	</div><br>
 	
