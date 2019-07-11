@@ -1,5 +1,6 @@
 package spring.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.AdminBookDto;
+import spring.data.AdminOrderDetailDto;
+import spring.data.AdminOrderDto;
+import spring.data.MemberDto;
 import spring.service.AdminService;
 
 @Controller
@@ -48,9 +52,13 @@ public class AdminController {
 		//준비중인 룸서비스 건수 얻기
 		int ostatus1 = aservice.getOrderListStatus1();
 		
+		//완료된 룸서비스 건수 얻기
+		int ostatus2 = aservice.getOrderListStatus2();
+		
 		
 		request.setAttribute("ostatus0", ostatus0);
 		request.setAttribute("ostatus1", ostatus1);
+		request.setAttribute("ostatus2", ostatus2);
 	
 		
 		//예약 문의 건수 얻기
@@ -75,7 +83,15 @@ public class AdminController {
 	@RequestMapping("/adminBookList.do")
 	public String adminBookList(HttpServletRequest request, @RequestParam String book_status) {
 		
-		List<AdminBookDto> list = aservice.getBookListByStatus(book_status);
+		List<AdminBookDto> list = null;
+		
+		if(book_status.equals("ChkIn")) {
+			list = aservice.getBookListCheckInToday();
+		}else if(book_status.equals("ChkOut")) {
+			list = aservice.getBookListCheckOutToday();
+		}else {
+			list = aservice.getBookListByStatus(book_status);
+		}		
 		
 		request.setAttribute("book_status", book_status);
 		request.setAttribute("list", list);
@@ -88,14 +104,53 @@ public class AdminController {
 	//개별 예약 리스트를 보여준다
 	@RequestMapping("/adminBookListDetail.do")
 	public String adminBookDetail(HttpServletRequest request, @RequestParam int book_num) {
-		
-		
-		
-		AdminBookDto abdto = aservice.getBookList(aservice.getBookDto(book_num));
-		
-		
+	
+		AdminBookDto abdto = aservice.getBookDetail(book_num);
+			
 		request.setAttribute("abdto", abdto);
-		request.setAttribute("container", "../admin/manage/book.jsp");
+		request.setAttribute("container", "../admin/manage/bookdetail.jsp");
+
+		return "layout/home";
+		
+	}
+	
+	//주문 리스트 보여준다 
+	@RequestMapping("/adminOrderList.do")
+	public String adminOrderList(HttpServletRequest request, @RequestParam String room_status) {
+		
+		List<AdminOrderDto> list = aservice.getOrderListByStatus(room_status);
+		
+		for(AdminOrderDto a:list) {
+			List<AdminOrderDetailDto> temp = aservice.getOrderDetailByOrderNum(a.getOrder_num());
+			a.setOrder_detail(temp);
+		}
+		
+		request.setAttribute("room_status", room_status);
+		
+		request.setAttribute("list", list);
+		request.setAttribute("container", "../admin/manage/orders.jsp");
+
+		return "layout/home";
+		
+	}
+	
+	@RequestMapping("/adminOrderListDetail.do")
+	public String adminOrderDetail(HttpServletRequest request, @RequestParam int order_num) {
+		
+		AdminOrderDto aodto = aservice.getOrderData(order_num); 
+		List<AdminOrderDetailDto> oddto = aservice.getOrderDetailByOrderNum(order_num);
+		aodto.setOrder_detail(oddto);
+		
+		int totalPrice = 0;
+		
+		for(AdminOrderDetailDto a:oddto) {
+			totalPrice += a.getMenu_price()*a.getQty();
+		}
+		
+		
+		request.setAttribute("totalPrice", totalPrice);
+		request.setAttribute("aodto", aodto);
+		request.setAttribute("container", "../admin/manage/orderdetail.jsp");
 
 		return "layout/home";
 		

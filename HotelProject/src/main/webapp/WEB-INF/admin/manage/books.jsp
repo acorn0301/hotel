@@ -32,6 +32,7 @@
 			
 				<c:forEach items="${list}" var="dto">
 					<li>
+						<div onClick="location.href='adminBookListDetail.do?book_num=${dto.book_num}'">
 						<div class="dashboard_li_div2">
 							<div class="booklist_div">
 								<span class="list_hotel_local">${dto.hotel_local }점</span>
@@ -54,7 +55,10 @@
 							
 							<div class="booklist_div">
 								<span class="list_name">${dto.name }님</span>
-								<span class="list_id">(${dto.id })</span>
+								<span class="list_id">
+									<c:if test="${dto.id != 'nc_id' }"> (${dto.id })</c:if>
+									<c:if test="${dto.id == 'nc_id' }"> (비회원예약)</c:if>
+								</span>
 								<span class="list_book_day color3"><fmt:formatDate value="${dto.book_day }" pattern="yyyy-MM-dd HH:mm"/></span>
 							</div>
 							
@@ -66,6 +70,7 @@
 									<span class="list_status">(${book_status })</span>
 								
 							</div>
+						</div>
 						</div>
 					</li>	
 				</c:forEach>

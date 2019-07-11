@@ -630,3 +630,39 @@ a{
       .twinkle5{
           animation : twinkle 4.9s infinite;
       }
+      
+      
+ 
+ 
+ 
+/* 예약 상세 페이지를 위한 css */
+
+.bookdetail_label{
+	width: 50px;
+	border-right : 1px solid lightgrey;
+}
+
+.bookdetail_table{
+	width: 100%;
+	font-size: 
+}
+
+.bookdetail_table_tr{
+	border-bottom: 1px solid lightgrey;
+}
+.bookdetail_table_th{
+	width: 30%;
+	border-right: 1px solid lightgrey;
+	
+}
+.bookdetail_table_td{
+	padding: 10px 10px 10px 20px;
+	
+}
+
+
+/* 주문내역 상세 페이지를 위한 css  */
+.tr_strong{
+	border-bottom: 1px solid grey;
+}
+

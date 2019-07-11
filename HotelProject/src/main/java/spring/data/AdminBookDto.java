@@ -9,17 +9,31 @@ public class AdminBookDto {
 	private int member_num;
 	private String name;
 	private String id;
+	private String phone;
+	private String email;
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	private Timestamp check_in;
 	private Timestamp check_out;
 	
 	private int room_num;
+	private int room_local;
 	private String room_name;
 	private String type;
 	private int price;
 	private int hotel_num;
 	private String hotel_local;
-	private int room_local;
 	
 	private int head_count;
 	private String book_memo;
@@ -27,6 +41,8 @@ public class AdminBookDto {
 	private Timestamp book_day;
 	private int add_bed;
 	private int breakfast_count;
+	
+	
 	public int getBook_num() {
 		return book_num;
 	}

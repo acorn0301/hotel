@@ -33,13 +33,13 @@
 				
 			</li>
 			<li>
-				<div class="dashboard_li_div" >
+				<div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=ChkIn'">
 				<i class='fas fa-sign-in-alt color2'></i>
 				 체크인 	<div class="dashboard_li_number color2" > ${statusCheckIn } <span class="dashboard_li_gun">건</span> 
 				 </div>
 				 </div>
 			</li>
-			<li><div class="dashboard_li_div">
+			<li><div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=ChkOut'">
 				<i class='fas fa-sign-out-alt color3'></i>
 				 체크아웃 <div class="dashboard_li_number color3"> ${statusCheckOut } <span class="dashboard_li_gun">건</span> </div></div></li>
 			<li>
@@ -57,17 +57,17 @@
 	</div>
 	<div class="dashboard_div_table">
 		<ul>
-			<li><div class="dashboard_li_div">
+			<li><div class="dashboard_li_div" onclick="location.href='adminOrderList.do?room_status=접수'">
 				<i class='fas fa-bell color5' ></i>
 				신규주문 <div class="dashboard_li_number color5">${ostatus0 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>
-			<li><div class="dashboard_li_div ">
+			<li><div class="dashboard_li_div " onclick="location.href='adminOrderList.do?room_status=준비중'">
 				<i class='fas fa-hamburger color2'></i>
-				처리중 <div class="dashboard_li_number color2">${ostatus1 } <span class="dashboard_li_gun">건</span></div></div>
+				준비중 <div class="dashboard_li_number color2">${ostatus1 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>
-			<li><div class="dashboard_li_div li_last">
+			<li><div class="dashboard_li_div li_last" onclick="location.href='adminOrderList.do?room_status=완료'">
 				<i class='fas fa-concierge-bell color3' ></i>
-				처리완료 <div class="dashboard_li_number color3" >${ostatus1 } <span class="dashboard_li_gun">건</span></div></div>
+				처리완료 <div class="dashboard_li_number color3" >${ostatus2 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>
 		</ul>
 	</div>	

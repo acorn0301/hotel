@@ -37,6 +37,11 @@ public class AdminDao extends SqlSessionDaoSupport{
 	public int getOrderListStatus1() {
 		return getSqlSession().selectOne("adminGetOrderListStatus1");
 	}
+	//준비중인 룸서비스 건수를 출력
+		public int getOrderListStatus2() {
+			return getSqlSession().selectOne("adminGetOrderListStatus2");
+		}
+	
 	
 	//카테고리별 문의 수 출력
 	public int getQnaByCategory(String category) {
@@ -56,6 +61,41 @@ public class AdminDao extends SqlSessionDaoSupport{
 	//예약 상태에 따른 리스트 분류
 	public List<AdminBookDto> getBookListByStatus(String book_status){
 		return getSqlSession().selectList("adminGetBookListByStatus", book_status);
+	}
+	
+	//오늘 체크인 하는 예약 리스트 가져오기
+	public List<AdminBookDto> getBookListCheckInToday(){
+		return getSqlSession().selectList("adminGetBookListCheckInToday");
+	}
+	
+	//오늘 체크아웃하는 예약 리스트 가져오기 
+	public List<AdminBookDto> getBookListCheckOutToday(){
+		return getSqlSession().selectList("adminGetBookListCheckOutToday");
+	}
+	
+	//멤버 넘으로 멤버 정보 가져오기
+	public MemberDto getMemberData(int member_num) {
+		return getSqlSession().selectOne("adminGetMemberData", member_num);
+	}
+	
+	//개별 자세한 예약 정보 가져오기
+	public AdminBookDto getBookDetail(int book_num) {
+		return getSqlSession().selectOne("adminGetBookDetail", book_num);
+	}
+	
+	//주문상태에 따른 룸서비스 주문 목록 가져오기 
+	public List<AdminOrderDto> getOrderListByStatus(String room_status){
+		return getSqlSession().selectList("adminGetOrderListByStatus", room_status);
+	}
+	
+	//상세 주문내역 및 메뉴 정보 가져오기 
+	public List<AdminOrderDetailDto> getOrderDetailByOrderNum(int order_num){
+		return getSqlSession().selectList("adminGetOrderDetailByOrderNum", order_num);
+	}
+	
+	//개별 주문내역 가져오기 
+	public AdminOrderDto getOrderData(int order_num) {
+		return getSqlSession().selectOne("adminGetOrderData", order_num);
 	}
 	
 }
