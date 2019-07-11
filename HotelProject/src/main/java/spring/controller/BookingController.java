@@ -38,10 +38,15 @@ public class BookingController {
 	public String booking(HttpSession session,HttpServletRequest request) {
 		
 		//만약 로그인 후에 예약확인 버튼을 눌렀다면 분명 세션에 member_num이 저장되어있을 것이다.
-		String member_num = (String)session.getAttribute("member_num");
+		
+		int member_num = 0;
+		if(session.getAttribute("member_num")!=null){
+			member_num = (Integer)session.getAttribute("member_num");
+		}
+				
 		
 		//로그인이 된 상태에서 예약확인을 눌렀을 때
-		if(member_num != null) {
+		if(member_num != 0) {
 			
 			//받아온 member_num으로 부터 book 테이블을 조회해서 해당 member_num을 가진 예약내역을 출력하시오 
 			
@@ -65,6 +70,7 @@ public class BookingController {
 	@RequestMapping("/booking.do")
 	public String toStep1(HttpServletRequest request, 
 			@RequestParam(value="step",defaultValue="0") int step,
+			@RequestParam(value="repeat",defaultValue="0") int repeat,
 			@ModelAttribute BookDto bdto,
 			@ModelAttribute RoomDto rmdto,
 			@ModelAttribute HotelDto hdto,
@@ -192,25 +198,34 @@ public class BookingController {
 			// BookDto 클래스 bdto2 생성
 			BookDto bdto2 = new BookDto();
 			
+			
 			// bdto2에 mybdto 세션 값 삽입 
 			bdto2 = (BookDto)session.getAttribute("mybdto");
+			
+			//요청사항없을 시 표기
+			if(bdto.getBook_memo() == "")
+			{
+				bdto.setBook_memo("요청사항 없음");
+			}
 			
 			// bdto2에 데이터 삽입
 			bdto2.setAdd_bed(bdto.getAdd_bed());
 			bdto2.setBook_memo(bdto.getBook_memo());
 			bdto2.setBreakfast_count(bdto.getBreakfast_count());
 			
+			
+			
+			
 			// 세션에 bdto2를 mybdto에 넣기
 			session.setAttribute("mybdto", bdto2);
-			
-			
 		}
 		
 		
 		//'STEP 4 예약확인(회원)' 페이지로 넘어갈 때
 		else if(step==4)
-		{		
-			//호텔지점에 따라 호텔 이름 출력
+		{	
+			if(repeat!=1){
+				
 			HotelDto hdto2=new HotelDto();
 			hdto2 =bookService.getHotel(hdto.getHotel_num());
 			request.setAttribute("hdto", hdto2);
@@ -221,6 +236,14 @@ public class BookingController {
 
 			// bdto2에 mybdto 세션 값 삽입 
 			bdto2 = (BookDto)session.getAttribute("mybdto");
+			
+			System.out.println("memo: " + bdto.getBook_memo());
+			
+			//요청사항없을 시 표기
+			if(bdto.getBook_memo() == "")
+			{
+				bdto.setBook_memo("요청사항 없음");
+			}
 
 			// bdto2에 데이터 삽입
 			bdto2.setAdd_bed(bdto.getAdd_bed());
@@ -229,7 +252,19 @@ public class BookingController {
 
 			// 세션에 bdto2를 mybdto에 넣기
 			session.setAttribute("mybdto", bdto2);
+			}
+			
+			
+			
+
+			if(session.getAttribute("member_num")==null)
+			{
+				session.setAttribute("url", "booking.do?step=4&repeat=1");
+				return "redirect:login.do";
+			}
 		}
+		
+		
 		
 			
 		// 다음 페이지로 이동
@@ -300,8 +335,6 @@ public class BookingController {
 		//예약정보 저장
 		bookService.insertBook(bdto3);
 		
-		
 		return "redirect:booking.do?step=5";
 	}
-	
 }

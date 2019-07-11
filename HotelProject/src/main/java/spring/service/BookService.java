@@ -52,14 +52,7 @@ public class BookService {
 		bdao.insertInfo_notMember(mbdto);
 	}
 	
-	
-	//비회원 예약정보 DB에 삽입
-	public void insertBook_notMember(BookDto bdto)
-	{
-		bdao.insertBook_notMember(bdto);
-	}
-	
-	
+
 	//(비회원 예약시) 최대 membernum 구하기
 	public int maxMemberNum()
 	{

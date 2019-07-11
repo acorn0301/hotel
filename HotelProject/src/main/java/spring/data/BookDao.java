@@ -45,13 +45,6 @@ public class BookDao extends SqlSessionDaoSupport{
 	}
 	
 	
-	//비예약정보 DB에 삽입
-	public void insertBook_notMember(BookDto bdto)
-	{
-		getSqlSession().insert("insertBook_notMember", bdto);	
-	}
-	
-	
 	//(비회원 예약시) 최대member_num 구하기
 	public int maxMemberNum()
 	{

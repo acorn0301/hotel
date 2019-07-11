@@ -410,8 +410,14 @@ h1{
 }
 
 textarea{
-	width:90%;
+	width:95%;
 
+}
+
+.optionSpan{
+	font-size: 2rem;
+	margin-left: 20px;
+	font-weight: bold;
 }
 
 
@@ -455,12 +461,14 @@ textarea{
 	margin: 1.2rem 0;
 }
 
+#step3
+
 
 /* 호텔지점글씨 강조 */
-#reserveHotel{
+.reserveHotel{
 	font-size: 2rem;
 	font-weight: bold;
-	
+	padding-top: 0.7rem;
 }
 
 
@@ -528,15 +536,9 @@ textarea{
 /* --------------------------- ㄴ 회원 예약확인------------------ */
 
 
-.noaccountSub{
-	width: 100px;
-	display: inline-block;
-	margin: 1.2rem 0;
-}
-
 
 /* 호텔지점글씨 강조 */
-#reserveHotel{
+.reserveHotel{
 	font-size: 2rem;
 	font-weight: bold;
 	
