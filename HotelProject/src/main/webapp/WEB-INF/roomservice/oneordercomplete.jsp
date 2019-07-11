@@ -10,10 +10,13 @@
 <link rel="stylesheet" href="css/hsStyle.css">
 </head>
 <body>
-<h2>주문완료</h2>
 <br>
-ㅇㅇㅇ님의 주문이 완료되었습니다.
+<h2>주문완료</h2>
 <br><br>
+<div class="center_div">
+<b>${member_name}</b>님의 주문이 완료되었습니다.
+</div>
+<br>
 <table class="table">
 	<tr>
 		<td colspan="3"><b>주문내역</b></td>

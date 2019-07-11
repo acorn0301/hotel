@@ -39,7 +39,7 @@
 		</c:forEach>
 	</table>
 					<!-- room_order 데이터 테스트 -->
-					<input type="hidden" name="member_num" value="3">
+					<input type="hidden" name="member_num" value="${sessionScope.member_num}">
 					<input type="hidden" name="room_status" value="접수">
 					<input type="hidden" name="total_price" value="${sum}">
 					

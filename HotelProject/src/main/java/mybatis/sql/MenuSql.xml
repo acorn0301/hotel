@@ -8,30 +8,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from menu
 	</select>
 	<select id="menuList" resultType="mndto" parameterType="int">
-		select * from menu where menu_type_num=#{menu_type_num}
+		select *
+		from menu where menu_type_num=#{menu_type_num}
 	</select>
 	<select id="menuTypeMaxNum" resultType="int">
-		select max(menu_type_num) from menu order by menu_type_num
+		select max(menu_type_num)
+		from menu order by menu_type_num
 	</select>
 	<select id="menuCartList" parameterType="int" resultType="mndto">
-		select * from menu where menu_num=#{menu_num}
+		select
+		* from menu where menu_num=#{menu_num}
 	</select>
-	
-	
+
+
 	<insert id="roomOrderInsert" parameterType="odto">
-		insert into room_order values
+		insert into
+		room_order values
 		(orderseq.nextval,sysdate,#{member_num},#{memo},#{room_status},#{total_price})
 	</insert>
 	<select id="roomOrderMax" resultType="int">
-		select max(order_num) from room_order
+		select max(order_num) from
+		room_order
 	</select>
-	
-	
+
+
 	<insert id="OrderDetailInsert" parameterType="oddto">
-		insert into order_detail values
+		insert into
+		order_detail values
 		(detailseq.nextval,#{order_num},#{menu_num},#{qty})
 	</insert>
 	<select id="OrderDetailList" resultType="oddto">
-		select * from order_detail
+		select * from
+		order_detail
+	</select>
+
+	<select id="MemberName" resultType="string" parameterType="int">
+		select name from member where member_num=#{member_num}
+	</select>
+
+	<select id="MemberRoom" resultType="int" parameterType="int">
+		<![CDATA[select room_local from room r,book b
+		where
+		TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') <= TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		and
+		TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') >= TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		and r.room_num = b.room_num
+		and member_num=#{member_num}]]>
 	</select>
 </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import spring.data.CartDto;
+import spring.data.MemberDto;
 import spring.data.MenuDto;
 import spring.data.OrderDetailDto;
 import spring.data.OrderDto;
@@ -37,10 +38,10 @@ public class MenuController {
 	public String menuList(HttpSession session,
 			HttpServletRequest request)
 	{
-
+		//session.setAttribute("mnlist", null);
 		//메뉴에서 룸서비스를 눌렀을 때 실행 할 일
 		//1. 메뉴를 예쁘게 보여준다.
-
+		
 		// 메뉴 리스트 출력 반복
 		int menuMaxNum = mnservice.menuTypeMaxNum() + 1;
 
@@ -71,7 +72,8 @@ public class MenuController {
 	@RequestMapping("/insertcart.do")
 	public String insertCart(HttpServletRequest request,
 			HttpSession session,
-			@ModelAttribute CartDto cdto)
+			@ModelAttribute CartDto cdto,
+			@RequestParam(value="qty",defaultValue="1") int qty)
 	{
 		//session.removeAttribute("cdtolist");
 		//담기버튼을 눌렀을 때 할 일
@@ -84,7 +86,7 @@ public class MenuController {
 		//7. 다시 roomaservice.do 를 호출한다.
 
 		//ArrayList<CartDto> clist = new ArrayList<CartDto>(); 
-
+		
 		if(cdto.getMenu_num() == 0)
 		{
 			session.setAttribute("cdtolist", "");
@@ -116,7 +118,7 @@ public class MenuController {
 				//메뉴넘 꺼내서 파이널리스트에 가지고 있는지 파악
 				for(CartDto f:finallist){
 					if(c.getMenu_num()==f.getMenu_num()){
-						f.setQty(f.getQty()+1);
+						f.setQty(f.getQty()+qty);
 						already++;
 						break;
 					}
@@ -175,7 +177,7 @@ public String cart(HttpServletRequest request,
 public String oneCart(HttpServletRequest request,
 		HttpSession session,
 		@RequestParam(value="menu_num", defaultValue="0") int menu_num,
-		@RequestParam(value="pty",defaultValue="1") int qty)
+		@RequestParam(value="qty",defaultValue="1") int qty)
 {
 	List<MenuDto> onelist=new ArrayList<MenuDto>();
 	onelist.add(mnservice.menuCartList(menu_num));
@@ -192,16 +194,26 @@ public String oneCartComplete(HttpSession session,
 		HttpServletRequest request,
 		@ModelAttribute OrderDto odto,
 		@ModelAttribute OrderDetailDto oddto,
+		@ModelAttribute MemberDto mbdto,
 		@RequestParam(value="menu_num", defaultValue="0") int menu_num,
-		@RequestParam(value="pty",defaultValue="1") int qty){
+		@RequestParam(value="pty",defaultValue="1") int qty,
+		@RequestParam int member_num){
 	
 	//주문 1개 값 얻어서 데이터 저장
 	List<MenuDto> onelist=new ArrayList<MenuDto>();
 	onelist.add(mnservice.menuCartList(menu_num));
 	
+	
+	//member_num 이용해서 name 얻고 보내기
+	session.getAttribute("member_num");
+	
 	oservice.roomOrderInsert(odto);
-
-//	//max order_num 얻기
+	String name = mnservice.MemberName(member_num);
+	
+	
+	request.setAttribute("member_name",name);
+	
+	//max order_num 얻기
 	int maxOrderNum = oservice.roomOrderMax();	
 	
 	request.setAttribute("maxOrderNum", maxOrderNum);	
@@ -233,8 +245,8 @@ public String cartDelete(HttpServletRequest request,
 		@ModelAttribute CartDto cdto
 		)
 {
-	System.out.println("메뉴넘!:"+menu_num);
-	System.out.println("수량!:"+qty);
+	//System.out.println("메뉴넘!:"+menu_num);
+	//System.out.println("수량!:"+qty);
 	
 	//세션 카트리스트 전체 삭제
 	//session.getAttribute("cdtolist");
@@ -263,7 +275,7 @@ public String cartDelete(HttpServletRequest request,
 	int m = mnlist.size();
 	if( m == 0 )
 	{
-		session.setAttribute("mnlist", 0);
+		session.setAttribute("mnlist", null);
 	}
 	
 	return "redirect:cart.do";
@@ -294,44 +306,13 @@ public String manycartDelete(HttpServletRequest request,
 			}
 		}
 		
-		/*int nums=Integer.parseInt(nn);
-		
-		for(int i=0 ; i<mnlist.size() ; i++){
-			
-			if(nums == mnlist.get(i).getMenu_num()){
-				mnlist.remove(i);
-			}
-		}*/
 	}
-	
 	
 	session.setAttribute("mnlist", mnlist);
 	
-	
-//	List<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
-//	
-//	for(int i=0 ; i<mnlist.size() ; i++){
-//		if(cdto.getMenu_num() == mnlist.get(i).getMenu_num()){
-//			mnlist.remove(i);
-//		}
-//	}
-//	
-//	session.setAttribute("mnlist", mnlist);
-//	
-//	List<CartDto> clist = (ArrayList<CartDto>)session.getAttribute("cdtolist");
-//	
-//	for(int i=0 ; i<clist.size() ; i++){
-//		if(cdto.getMenu_num() == clist.get(i).getMenu_num()){
-//			clist.remove(i);
-//		}
-//	}
-//	
-//	session.setAttribute("clist", clist);
-//	
 	int m = mnlist.size();
-	if( m == 0 )
-	{
-		session.setAttribute("mnlist", 0);
+	if( m == 0 ){
+		session.setAttribute("mnlist", null);
 	}
 	
 	menu_nums= "";
@@ -342,13 +323,34 @@ public String manycartDelete(HttpServletRequest request,
 @RequestMapping("/orderform.do")
 public String orderform(HttpSession session,
 		HttpServletRequest request,
+		@RequestParam String menu_nums,
 		@ModelAttribute MenuDto mndto)
 {
-//	//max order_num 얻기
-//	int maxOrderNum = oservice.roomOrderMax();	
-//	
-//	request.setAttribute("maxOrderNum", maxOrderNum);
-	request.setAttribute("mnlist", session.getAttribute("mnlist"));
+	
+	ArrayList<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
+	
+	String []nums=menu_nums.split(",");
+	int []intnums = new int[nums.length];
+	
+	for(int i=0;i<intnums.length;i++){
+		intnums[i] = Integer.parseInt(nums[i]);
+	}
+	
+	for(int i=0; i<intnums.length; i++){
+		int alive = 0;
+		for(int j=0; j<mnlist.size(); j++){
+			if(intnums[i] == mnlist.get(i).getMenu_num()){
+				alive ++;
+				break;
+			}
+		}
+		if(alive == 0){
+			mnlist.remove(i);
+		}
+	}
+
+	session.setAttribute("mnlist", mnlist);
+	request.setAttribute("mnlist", mnlist);
 	request.setAttribute("container", "../roomservice/orderform.jsp");
 	return "layout/home";
 }
@@ -363,8 +365,17 @@ public String orderComplete(HttpSession session,
 		@ModelAttribute OrderDto odto,
 		@ModelAttribute OrderDetailDto oddto,
 		@RequestParam(value="menu_num", defaultValue="0") int menu_num,
-		@RequestParam(value="pty",defaultValue="1") int qty)
+		@RequestParam(value="pty",defaultValue="1") int qty,
+		@RequestParam int member_num)
 {
+	
+	//member_num 이용해서 name 얻고 보내기
+	session.getAttribute("member_num");
+	
+	oservice.roomOrderInsert(odto);
+	String name = mnservice.MemberName(member_num);
+	
+	request.setAttribute("member_name",name);
 	
 	//room_order 테이블에 저장
 	oservice.roomOrderInsert(odto);
@@ -397,4 +408,22 @@ public String orderComplete(HttpSession session,
 	return "layout/home";
 }
 
+
+//////호텔 소개 페이지////////
+
+	//룸 소개
+	@RequestMapping("/room.do")
+	public String hotelRoom(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/room.jsp");
+		return "layout/home";
+	}
+
+	//위치
+	@RequestMapping("/hoteladdress.do")
+	public String hotelAddr(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/address.jsp");
+		return "layout/home";
+	}
 }

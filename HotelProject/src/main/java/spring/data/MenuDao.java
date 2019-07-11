@@ -36,4 +36,9 @@ public class MenuDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("menuCartList", menu_num);
 	}
 	
+	//멤버넘버에 따른 정보
+	public String MemberName(int member_num)
+	{
+		return getSqlSession().selectOne("MemberName", member_num);
+	}
 }

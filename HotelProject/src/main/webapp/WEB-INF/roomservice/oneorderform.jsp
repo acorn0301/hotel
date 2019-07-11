@@ -12,7 +12,7 @@
 <body>
 <h2>주문하기</h2>
 <br>
-<form action="oneordercomplete.do">
+<form action="oneordercomplete.do?member_num=${sessionScope.member_num}">
 	<table class="table">
 		<c:set var="sum" value="0"/>
 		<c:forEach var="mndto" items="${onelist}" varStatus="i">
@@ -39,7 +39,7 @@
 		</c:forEach>
 	</table>
 					<!-- room_order 데이터 테스트 -->
-					<input type="hidden" name="member_num" value="3">
+					<input type="hidden" name="member_num" value="${sessionScope.member_num}">
 					<input type="hidden" name="room_status" value="접수">
 					<input type="hidden" name="total_price" value="${sum}">
 					
@@ -52,7 +52,7 @@
 	<div class="center_div">
 	<h4>이대로 주문하시겠습니까?</h4>
 		<button type="button" class="btn btn-md btn-default"
-		onclick="location.href='roomaservice.do'">더 추가하기</button>
+		onclick="location.href='roomaservice.do'">장바구니로 이동</button>
 		<button type="submit" class="btn btn-md btn-default">주문하기</button>
 	</div>
 </form>

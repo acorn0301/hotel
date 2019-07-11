@@ -1,20 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>     
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title></title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="css/hsStyle.css">
 </head>
 <body>
-우리는 다양한 체인점을 갖고있다
-서울 광화문점
-제주점
-등등....
+<div class="admin_subject_div">
+<div class="admin_subject_text">
+	<a href="hotellist.do" class="subject_a">개요</a>
+	<a href="room.do" class="subject_a">1st HOTEL</a>
+	<a href="hoteladdress.do" class="subject_a">위치</a>
+	<div class="subject_bar"></div>
+</div></div>
+	
+<div class="admin_title_div">
+<div class="admin_title_text">
+	개&nbsp;&nbsp;요
+</div></div>
 
+개요설명
 </body>
 </html>
-

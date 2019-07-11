@@ -1,13 +1,83 @@
-button.button{
-	padding: 5px 5px 5px 5px;
+/* 장바구니 css */
+.null_cart_btn{
+    width: 50%;
+    height: 35px;
+    line-height: 20px;
+    margin: 0;
     border: 0;
-    font-size: 17px;
+    padding: 0;
+    font-size: 13px;
+    font-weight: bold;
     color: #f1ebd6;
     background-color: #3a3125;
 }
+div.null_cart{
+	width: 100%; 
+    text-align: center;
+    padding-top: 110px;
+}
+i.i_price{
+	float: right;
+}
+input.modal_input{
+	text-align: center;
+    border: 0;
+    font-weight: bold;
+    font-size: 13pt;
+}
+button.plus_button, button.minus_button{
+	color: #f1ebd6;
+    background-color: #3a3125;
+    border: 0;
+    border-radius: 500px;
+   	width: 25px;
+    height: 25px;
+}
+button.modal_button{
+	width: 35%;
+    padding: 5px 5px 5px 5px;
+    border: 0;
+    font-size: 14px;
+    color: #f1ebd6;
+    background-color: #3a3125;
+}
+button.cart_sm_button{
+	border: 0;
+    border-radius: 3px;
+    padding: 3px 8px 3px 8px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #f1e3c4;
+    background-color: #5d4c35;
+}
+button.cart_button{
+	float: left;
+	border: 0;
+    border-radius: 3px;
+    padding: 3px 8px 3px 8px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: #f1e3c4;
+    background-color: #5d4c35;
+}
+table.table{
+	width: 100%;
+	text-align: center;
+}
+
+table.table th{
+	text-align: center;
+}
+table.table td{
+	padding-top: 20px;
+}
+
+/* 주문완료 css */
 div.complete_msg{
 	text-align: center;
 }
+
+/* 총 주문액 css */
 div.totalPrice{
 	float: right;
 	margin-right: 10px;
@@ -19,10 +89,10 @@ div.center_div{
 	text-align: center;
 }
 img.icon{
-    width: 60px;
+	width: 50px;
     position: fixed;
     bottom: 20px;
-    right: 20px;
+    right: 25px;
     z-index: 10;
 }
 .menu_div{
@@ -56,7 +126,50 @@ img.icon{
 	margin-left: -10px;
 	margin-right: -10px;
 }
-.admin_title_div {
+
+/* 호텔 소개 페이지 css */
+.subject_bar{
+	color: #f1ebd6;
+    height: 3px;
+    width: 100%;
+    display: flex;
+    width: 100%;
+    background: #f1ebd6;
+    margin-bottom: -5px;
+    margin-top: 5px;
+}
+.subject_a{
+	color: #f1ebd6;
+	text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-decoration: none;
+}
+.subject_a:hover{
+	color: #f1ebd6;
+	text-align: center;
+    text-decoration: none;
+}
+.subject_a:visited{
+	color: #f1ebd6;
+	text-align: center;
+    text-decoration: none;
+}
+.admin_subject_div{
+	text-align: center;
+	line-height: 100%;
+    display: block;
+    padding: 12px 12px;
+    background: #685845;
+    color: #f1ebd6;
+    font-size: 13px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+/* 공통 css */
+.admin_title_div{
     line-height: 100%;
     display: block;
     padding: 12px 15px;
@@ -67,6 +180,12 @@ img.icon{
     letter-spacing: -.025em;
     margin-top: -20px;
     margin-bottom: 20px;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.admin_title_text{
+	text-align: center;
+    margin: 0px 15px 0px 15px;
 }
 .row{
 	margin-left: 0;
@@ -74,29 +193,21 @@ img.icon{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-/* css 파일 */
-a{
-	color: #696969;
-  text-decoration: none;
-}
-a:hover{
-	color: #696969;
+/* 메뉴리스트 a링크 */
+.list_a{
+	color: #333333;
 	text-decoration: none;
 }
-a:visited{
-	color: #696969;
+.list_a:hover{
+	color: #333333;
 	text-decoration: none;
 }
+.list_a:visited{
+	color: #333333;
+	text-decoration: none;
+}
+
+/* 외부 css 파일 */
 .et-hero-tabs{
  display: flex;
  flex-direction: column;

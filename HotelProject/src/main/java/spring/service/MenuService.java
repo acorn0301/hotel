@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import spring.data.MemberDto;
 import spring.data.MenuDao;
 import spring.data.MenuDto;
 import spring.data.OrderDao;
@@ -38,6 +39,11 @@ public class MenuService {
 	{
 		
 		return mndao.menuCartList(menu_num);
+	}
+	
+	public String MemberName(int member_num)
+	{
+		return mndao.MemberName(member_num);
 	}
 	
 }

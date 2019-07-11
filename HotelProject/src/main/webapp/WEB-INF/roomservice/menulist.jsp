@@ -106,16 +106,16 @@ function openModal(title,img,desc,menu_num){
 					<div class="modal-footer">
 					<div class="center_div">
 
-               <button type="button" class="button minus" onclick="">-</button> <!-- headCountFunction(-1) -->
-             	  <input type="text" id="qty" class="form_control center inputQty" name="qty" value="" size="5">
-               <button type="button" class="button plus" onclick="">+</button> <!-- headCountFunction(1) -->
+               <button type="button" class="minus_button minus" onclick="">-</button> <!-- headCountFunction(-1) -->
+             	  &nbsp;<input type="text" id="qty" class="modal_input center inputQty" name="qty" value="" size="1">&nbsp;
+               <button type="button" class="plus_button plus" onclick="">+</button> <!-- headCountFunction(1) -->
                
 					</div>
 					<br>
 					<div class="center_div">
-					<button type="button" class="button modalOrder" data-dismiss="modal"
+					<button type="button" class="modal_button modalOrder" data-dismiss="modal"
 					onclick="">바로주문</button>&nbsp;&nbsp;
-					<button type="button" class="button modalCart" data-dismiss="modal" >담기</button>	
+					<button type="button" class="modal_button modalCart" data-dismiss="modal" >담기</button>	
 						<br>			
 					</div>
 				</div>
@@ -133,131 +133,177 @@ function openModal(title,img,desc,menu_num){
 		<div class="admin_title_text">&nbsp;&nbsp;Breakfast</div></div>
   		<c:forEach var="mndto" items="${list0}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
 
-<br><br><br><br><br><br>
+<br><br>
 
  <section class="et-slide" id="tab-Specialties">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Specialties</div></div>
   		<c:forEach var="mndto" items="${list1}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
  
- <br><br><br><br><br><br>
+<br><br>
  
  <section class="et-slide" id="tab-Bakery">
   <div class="row">
+    	<div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Bakery</div></div>
   		<c:forEach var="mndto" items="${list2}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
 
-<br><br><br><br><br><br>
+<br><br>
 
  <section class="et-slide" id="tab-Appetizers">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Appetizers</div></div>
   		<c:forEach var="mndto" items="${list3}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
  
- <br><br><br><br><br><br>
+<br><br>
 
  
   <section class="et-slide" id="tab-Pastas">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Pastas</div></div>
   		<c:forEach var="mndto" items="${list4}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
  
- <br><br><br><br><br><br>
+<br><br>
  
   <section class="et-slide" id="tab-Dessert">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Dessert</div></div>
   		<c:forEach var="mndto" items="${list5}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
  
- <br><br><br><br><br><br>
+<br><br>
  
   <section class="et-slide" id="tab-Beverage">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Beverage</div></div>
   		<c:forEach var="mndto" items="${list6}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div>
     			</a>
     		</div>
     	</c:forEach>
   	</div>
  </section>
  
- <br><br><br><br><br><br>
+<br><br>
  
   <section class="et-slide" id="tab-Drink">
   <div class="row">
+  <div class="admin_title_div">
+		<div class="admin_title_text">&nbsp;&nbsp;Drink</div></div>
   		<c:forEach var="mndto" items="${list7}" varStatus="i">
     		<div class="col-xs-6">
-    			<a href="#" data-toggle="modal" data-target="#myModal"
+    			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
     			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
 	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+	    			<div class="center_div">
+	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
-	    			<b>${mndto.menu_name_eng}</b>&nbsp;<i>${mndto.menu_price}</i>
+					<fmt:formatNumber pattern=",000">${mndto.menu_price}</fmt:formatNumber>
+	    			<br><br>
+	    			</div> 
     			</a>
     		</div>
     	</c:forEach>
@@ -265,7 +311,7 @@ function openModal(title,img,desc,menu_num){
  </section>
 </main>
 
-<br><br><br><br>
+<br><br>
 
 </div>
 </body>
