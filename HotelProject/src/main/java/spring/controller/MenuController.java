@@ -372,7 +372,6 @@ public String orderComplete(HttpSession session,
 	//member_num 이용해서 name 얻고 보내기
 	session.getAttribute("member_num");
 	
-	oservice.roomOrderInsert(odto);
 	String name = mnservice.MemberName(member_num);
 	
 	request.setAttribute("member_name",name);
@@ -384,11 +383,6 @@ public String orderComplete(HttpSession session,
 	int maxOrderNum = oservice.roomOrderMax();	
 	
 	request.setAttribute("maxOrderNum", maxOrderNum);	
-	
-	
-	//room_order에 저장한 후 max 넘을 구해서
-	//orderdetail 테이블에 넣어야 하는데 세션에 저장되어있는 cdtolist가 있으니
-	//세션에 저장한 cdtolist를 orderdetailtable에 넣어주면 됨!
 	
 	//orderdetail 테이블에 데이터 보내기
 	session.getAttribute("mnlist");
