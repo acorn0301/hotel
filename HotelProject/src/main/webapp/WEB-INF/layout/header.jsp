@@ -57,6 +57,8 @@
 		 <!-- 로그인 되어있으면 바로 보여주고 안되어있으면 로그인할래 비회원조회할래 물어볼것 (컨트롤러에서 처리함) -->
 		<li><a href="bookingCheck.do">예약확인</a></li>
 		
+		<li><a href="hotelroom.do">객실</a></li>
+		
 		<li><a href="hotellist.do">지점안내</a></li>
 		<li><a href="reviewlist.do">후기게시판</a></li>
 		<li><a href="qnalist.do">문의게시판</a></li>

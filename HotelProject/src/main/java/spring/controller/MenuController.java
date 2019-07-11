@@ -405,19 +405,45 @@ public String orderComplete(HttpSession session,
 
 //////호텔 소개 페이지////////
 
-	//룸 소개
-	@RequestMapping("/room.do")
-	public String hotelRoom(HttpServletRequest request){
-		
-		request.setAttribute("container", "../hotel/room.jsp");
-		return "layout/home";
-	}
-
 	//위치
 	@RequestMapping("/hoteladdress.do")
 	public String hotelAddr(HttpServletRequest request){
 		
 		request.setAttribute("container", "../hotel/address.jsp");
+		return "layout/home";
+	}
+	
+///////객실 소개 페이지////////
+	
+	//룸 소개
+	@RequestMapping("/hotelroom.do")
+	public String hotelRoom(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/room.jsp");
+		return "layout/home";
+	}	
+	
+	//스탠다드 룸 소개
+	@RequestMapping("/standard.do")
+	public String hotelStandardRoom(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/standard.jsp");
+		return "layout/home";
+	}
+	
+	//디럭스 룸 소개
+	@RequestMapping("/deluxe.do")
+	public String hotelDeluxeRoom(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/deluxe.jsp");
+		return "layout/home";
+	}
+	
+	//그랜드 룸 소개
+	@RequestMapping("/grand.do")
+	public String hotelGrandRoom(HttpServletRequest request){
+		
+		request.setAttribute("container", "../hotel/grand.jsp");
 		return "layout/home";
 	}
 }

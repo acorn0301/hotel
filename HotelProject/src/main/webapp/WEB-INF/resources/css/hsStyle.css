@@ -126,23 +126,123 @@ img.icon{
 	margin-left: -10px;
 	margin-right: -10px;
 }
+/* 객실 안내 페이지 css */
+.border_twin,
+.border_double{
+	border: 1px solid #0000001f;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.InRoomText,
+.InHotelText,
+.HotelInfoText,
+.FloorPlanText{
+	padding-bottom: 40px;
+    font-size: 10pt;
+    color: #808080;
+    line-height: 23px;
+}
+.room_detail_subject{
+	color: #353333;
+}
+.room_detail{
+	line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #66594c;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-right: -10px;
+    margin-left: -10px;
+    border-top: 1px solid #cbbba9;
+	border-bottom: 1px solid #cbbba999;
+}
+.room_center_div{
+	text-align: center;
+	width: 100%;
 
+}
+.room_btn1{
+	width: 47%;
+	border: 0;
+	background: #8f8272;
+    min-width: 110px;
+    height: 40px;
+    line-height: 38px;
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    vertical-align: middle;
+    text-align: center;
+}
+.room_btn2{
+	width: 47%;
+	border: 0;
+	background: #66594c;
+    min-width: 110px;
+    height: 40px;
+    line-height: 38px;
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #f1ebd6;
+    vertical-align: middle;
+    text-align: center;
+}
+.room_st{
+	padding: 10px 10px 5px 10px;
+    color: #666;
+    font-size: 14px;
+    line-height: 160%;
+    margin-top: 5px;
+}
+.room_span{
+	color: #836644;
+    margin-right: 40px;
+    line-height: 23px;
+    margin-left: 5px;
+}
+.room_span_1{
+	color: #836644;
+    margin-right: 30px;
+    line-height: 23px;
+    margin-left: 5px;
+}
+.room_span_2{
+	color: #836644;
+    margin-right: 23px;
+    line-height: 23px;
+    margin-left: 5px;
+}
+.room_div{
+	font-size: 10pt;
+	color: #808080;
+}
+	
 /* 호텔 소개 페이지 css */
 .subject_bar{
-	color: #f1ebd6;
+    color: #f1ebd6;
     height: 3px;
-    width: 100%;
     display: flex;
-    width: 100%;
+    width: 12%;
     background: #f1ebd6;
     margin-bottom: -5px;
     margin-top: 5px;
+    margin-left: 40px;
 }
 .subject_a{
 	color: #f1ebd6;
 	text-align: center;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
     text-decoration: none;
 }
 .subject_a:hover{
@@ -162,15 +262,20 @@ img.icon{
     padding: 12px 12px;
     background: #685845;
     color: #f1ebd6;
-    font-size: 13px;
+    font-size: 17px;
     margin-top: -20px;
     margin-bottom: 20px;
     margin-right: -10px;
     margin-left: -10px;
 }
-/* 공통 css */
-.admin_title_div{
-    line-height: 100%;
+.hr_bar{
+	background-color: #8a6d3b5c;
+	height: 1px;
+	margin-bottom: 10px;
+	margin-top: -3px;
+}
+.admin_title_div_list{
+	line-height: 100%;
     display: block;
     padding: 12px 15px;
     background: #f1ebd6;
@@ -182,14 +287,72 @@ img.icon{
     margin-bottom: 20px;
     margin-right: -10px;
     margin-left: -10px;
+    border-top: 1px solid #cbbba9;
+    border-bottom: 1px solid #cbbba9;
+}
+.admin_title_div_list_center{
+	line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-right: -10px;
+    margin-left: -10px;
+    border-top: 1px solid #cbbba9;
+    border-bottom: 1px solid #cbbba9;
+    text-align: center;	
+}
+.list_left_div{
+	margin-top: 10px;
+	text-align: left;
+    width: 100%;
+    letter-spacing: 0.05em;
+    color: #666;
+}
+
+/* 공통 css */
+
+/* 이미지 100% 클래스 */
+.imgallwidth{
+	width: 100%
+}
+.admin_title_div{
+    line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+    margin-top: -20px;
+    margin-bottom: 20px;
+    margin-right: 0px;
+    margin-left: -10px;
 }
 .admin_title_text{
-	text-align: center;
+	//text-align: center;
     margin: 0px 15px 0px 15px;
 }
 .row{
 	margin-left: 0;
 	margin-right: 0;
+}
+
+/* a태그 공통으로 이벤트효과 없애기 */
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+a:visited{
+	text-decoration: none;
 }
 
 

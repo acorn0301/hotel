@@ -22,13 +22,13 @@
 		<a href="hotellist.do" class="subject_a">개요</a>
 		<a href="room.do" class="subject_a">1st HOTEL</a>
 		<a href="hoteladdress.do" class="subject_a">위치</a>
-		<div class="subject_bar"></div>
+		<!-- <div class="subject_bar"></div> -->
 	</div>
 </div>
 <!-- 소제목 -->
 <div class="admin_title_div">
 	<div class="admin_title_text">
-		개&nbsp;&nbsp;요
+		지점별 위치
 	</div>
 </div>
 
