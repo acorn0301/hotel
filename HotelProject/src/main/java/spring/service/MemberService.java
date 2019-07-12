@@ -78,5 +78,10 @@ public class MemberService {
     	mbdao.setPw(mbdto);
     }
 
+    //아이디랑 이메일이 일치하는 데이터 갯수 출력
+    public int IdEmailMatchCount(MemberDto mbdto)
+    {
+    	return mbdao.IdEmailMatchCount(mbdto);
+    }
 
 }

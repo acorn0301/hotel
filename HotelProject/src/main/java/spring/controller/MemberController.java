@@ -316,19 +316,43 @@ public class MemberController {
    private JavaMailSender mailSender;
 	
    @RequestMapping(value="/findPw.do", method=RequestMethod.POST)
-   public String sendPwMail(@RequestParam Map<String, Object> paramMap, HttpServletRequest request){
+   public String sendPwMail(
+		   //@RequestParam Map<String, Object> paramMap,
+		   HttpServletRequest request,
+		   @ModelAttribute MemberDto mbdto){
 	   
+//	   String name = (String) paramMap.get("name");
+//	   String e_mail = (String) paramMap.get("email");
+//	   String pw = mservice.getPw(paramMap);
+	   int chk = mservice.IdEmailMatchCount(mbdto);
+//	   String pwpw="hyehye11";
 	   
-	   String name = (String) paramMap.get("name");
-	   String e_mail = (String) paramMap.get("email");
-       String password = mservice.getPw(paramMap);
-		
-       if(password != null){
-    	   
-    	   emdto.setContent("귀하의 비밀번호는 "+password+" 입니다."); // 이메일로 보낼 내용
-    	   emdto.setReceiver(e_mail); // 받는이의 이메일 주소
-    	   emdto.setSubject("[ 1st Hotel ] "+name+"님의 임시 비밀번호 안내 메일입니다."); // 이메일 제목 
+	   String pwpw = ""; 
+	   for(int i=0; i<8; i++) { 
+		   int rndVal = (int)(Math.random() * 62); 
+		   if(rndVal < 10) { 
+			   pwpw += rndVal; 
+		   } else if(rndVal > 35) { 
+			   pwpw += (char)(rndVal + 61); 
+		   } else { 
+			   pwpw += (char)(rndVal + 55); 
+		   } 
+	   } System.out.println("tempPassword : " + pwpw);
 
+	   
+       if(chk > 0){
+    	   
+    	   //emdto.setContent("귀하의 임시 비밀번호는 "+pw+" 입니다."); // 이메일로 보낼 내용
+    	   emdto.setContent("귀하의 임시 비밀번호는 "+pwpw+" 입니다."); // 이메일로 보낼 내용
+    	   emdto.setReceiver(mbdto.getEmail()); // 받는이의 이메일 주소
+    	   emdto.setSubject("[ 1st Hotel ] "+mbdto.getId()+"님의 임시 비밀번호 안내 메일입니다."); // 이메일 제목 
+    	   
+    	   //mbdto.setPassword(pwpw);
+    	   String inputPass = pwpw;
+    	   String pass = passEncoder.encode(inputPass);
+    	   mbdto.setPassword(pass);
+    	   mservice.setPw(mbdto);
+	      	
     	   try{
     		   MimeMessage message = mailSender.createMimeMessage();
     		   MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -357,7 +381,5 @@ public class MemberController {
        }
 		
 	}
-   
-   
    
 }

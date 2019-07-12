@@ -46,7 +46,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 임시 비밀번호로 변경 -->
 	<update id="setPw" parameterType="mbdto">
-		update member set password=#{password} where name=#{name} and email=#{email}
+		update member set password=#{password} where id=#{id}
 	</update>
+	
+	<!-- 아이디랑 이메일이 일치하는 데이터 갯수 출력  -->
+	<select id="IdEmailMatchCount" parameterType="mbdto" resultType="int">
+		select count(*) from member where id=#{id} and email=#{email}
+	</select>
 
 </mapper>

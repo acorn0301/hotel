@@ -85,4 +85,10 @@ public class MemberDao extends SqlSessionDaoSupport{
 	   getSqlSession().update("member.setPw", mbdto);
    }
    
+   //아이디랑 이메일이 일치하는 데이터 갯수 출력
+   public int IdEmailMatchCount(MemberDto mbdto)
+   {
+	   return getSqlSession().selectOne("IdEmailMatchCount",mbdto);
+   }
+   
 }

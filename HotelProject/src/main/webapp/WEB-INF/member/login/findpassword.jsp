@@ -21,7 +21,7 @@
 		<div class="form_group"></div>
 		
 		<div class="form_group">
-			<input type="text" name="name" placeholder="이름" class="inputbox" />
+			<input type="text" name="id" placeholder="아이디" class="inputbox" />
 		</div>
 
 		<div class="form_group">
