@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-<title>Member List</title>
+<title>Emp List</title>
 
 </head>
 <body>
@@ -18,20 +18,20 @@
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
-		<div class="qna_title_text">회원관리</div>
+		<div class="qna_title_text">직원관리</div>
 	</div>
 
 	
 	<div class="dashboard_div">
 		<div class="admin_title_div">
-			<div class="admin_title_text">회원목록</div>
+			<div class="admin_title_text">직원목록</div>
 		</div>
 		<div class="dashboard_div_table">
 			<ul>
 			
 				<c:forEach items="${list}" var="dto">
 					<li>
-						<div onClick="location.href='adminBookListDetail.do?member_num=${dto.member_num}'">
+						<div onClick="location.href='adminEmpListDetail.do?emp_num=${dto.emp_num}'">
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><i class="fas fa-user-circle user_icon"></i></div>

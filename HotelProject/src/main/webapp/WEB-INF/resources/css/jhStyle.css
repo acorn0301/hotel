@@ -717,7 +717,6 @@ a{
 /* 메뉴 리스트 페이지를 위한 css
  */
  
-.img_thumbnail_circle{
+.user_list_div_1 img{
 	width: 30px;
-	
 }

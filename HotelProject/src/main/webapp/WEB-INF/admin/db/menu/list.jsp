@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-<title>Menu List</title>
+<title>Member List</title>
 
 </head>
 <body>
@@ -31,11 +31,11 @@
 			
 				<c:forEach items="${list}" var="dto">
 					<li>
-						<div onClick="location.href='adminBookListDetail.do?menu_num=${dto.menu_num}'">
+						<div onClick="location.href='adminMenuListDetail.do?menu_num=${dto.menu_num}'">
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
-									<div class="user_list_divs user_list_div_1"><img class="img_thumbnail_circle img-circle" src="${dto.menu_img }"></div>
-									<div class="user_list_divs user_list_div_2">${dto.menu_name_kor } (${dto.id })</div>
+									<div class="user_list_divs user_list_div_1"><img class="img-circle" src=${dto.menu_img }></div>
+									<div class="user_list_divs user_list_div_2">${dto.menu_name_kor }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>
 							</div>
@@ -67,24 +67,24 @@
 	<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${startPage > 1 }">
-				<li><a href="qnalist.do?pageNum=${1}">처음으로</a>
+				<li><a href="adminMenuList.do?pageNum=${1}">처음으로</a>
 			</c:if>
 			<c:if test="${startPage > 1 }">
-				<li><a href="qnalist.do?pageNum=${startPage-1 }"><-</a>
+				<li><a href="adminMenuList.do?pageNum=${startPage-1 }"><-</a>
 			</c:if>
 			<c:forEach var="pp" begin="${startPage}" end="${endPage}" varStatus="i">
 				<c:if test="${pp==currentPage }">
-					<li><a style="color:red" href="qnalist.do?pageNum=${pp }">${pp }</a></li>
+					<li><a style="color:red" href="adminMenuList.do?pageNum=${pp }">${pp }</a></li>
 				</c:if>
 				<c:if test="${pp!=currentPage }">
-					<li><a href="qnalist.do?pageNum=${pp }">${pp }</a></li>
+					<li><a href="adminMenuList.do?pageNum=${pp }">${pp }</a></li>
 				</c:if>
 			</c:forEach>
 			<c:if test="${endPage < totalPage}">
-				<li><a href="qnalist.do?pageNum=${endPage+1}">-></a>
+				<li><a href="adminMenuList.do?pageNum=${endPage+1}">-></a>
 			</c:if>
 			<c:if test="${endPage < totalPage }">
-				<li><a href="qnalist.do?pageNum=${totalPage}">끝으로</a>
+				<li><a href="adminMenuList.do?pageNum=${totalPage}">끝으로</a>
 			</c:if>
 		</ul>
 	</div>
