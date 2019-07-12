@@ -34,7 +34,7 @@ public class MenuController {
 
 
 	//룸서비스 눌렀을때
-	@RequestMapping("roomaservice.do")
+	@RequestMapping("/roomaservice.do")
 	public String menuList(HttpSession session,
 			HttpServletRequest request)
 	{
