@@ -18,6 +18,7 @@ import spring.data.AdminOrderDto;
 import spring.data.MemberDto;
 import spring.data.MenuDto;
 import spring.data.QnaDto;
+import spring.data.RoomDto;
 import spring.service.AdminService;
 
 @Controller
@@ -324,8 +325,19 @@ public class AdminController {
 	
 	//관리자 -> 호텔 db관리 리스트
 	@RequestMapping("/adminHotelList.do")
-	public String adminHotelList(HttpServletRequest request) {
+	public String adminHotelList(HttpServletRequest request, @RequestParam(value="pageNum", defaultValue="1") int currentPage, HttpSession session) {
 		
+		List<RoomDto> list1 = aservice.getRoomListByHotel(10);
+		List<RoomDto> list2 = aservice.getRoomListByHotel(11);
+		
+		String hotel_local1 = aservice.getHotelLocalByHotelNum(10);
+		String hotel_local2 = aservice.getHotelLocalByHotelNum(11);
+		
+
+		request.setAttribute("list1", list1);
+		request.setAttribute("list2", list2);
+		request.setAttribute("hotel_local1", hotel_local1);
+		request.setAttribute("hotel_local2", hotel_local2);
 		request.setAttribute("container", "../admin/db/hotel/list.jsp");
 
 		return "layout/home";

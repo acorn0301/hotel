@@ -130,4 +130,15 @@ public class AdminDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("adminGetTotalMenuCount");
 	}
 	
+	
+	//호텔 별 객실 리스트 가져오기
+	public List<RoomDto> getRoomListByHotel(int hotel_num){
+		return getSqlSession().selectList("adminGetRoomListByHotel", hotel_num);
+	}
+	
+	//호텔 넘버별 호텔 이름 가져오기
+	public String getHotelLocalByHotelNum(int hotel_num) {
+		return getSqlSession().selectOne("adminGetHotelLocalByHotelNum", hotel_num);
+	}
+	
 }

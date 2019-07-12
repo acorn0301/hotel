@@ -14,6 +14,7 @@ import spring.data.BookDao;
 import spring.data.BookDto;
 import spring.data.MemberDto;
 import spring.data.MenuDto;
+import spring.data.RoomDto;
 
 @Service
 public class AdminService {
@@ -134,5 +135,15 @@ public class AdminService {
 	//메뉴 목록 페이징 처리해서 가져오기
 	public List<MenuDto> getMenuList(int start, int end){
 		return adao.getMenuList(start, end);
+	}
+	
+	//호텔 별 객실 리스트 가져오기
+	public List<RoomDto> getRoomListByHotel(int hotel_num){
+		return adao.getRoomListByHotel(hotel_num);
+	}
+	
+	//호텔 넘버별 호텔 이름 가져오기
+	public String getHotelLocalByHotelNum(int hotel_num) {
+		return adao.getHotelLocalByHotelNum(hotel_num);
 	}
 }
