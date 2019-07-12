@@ -167,7 +167,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="adminGetMenuList" resultType="mndto" parameterType="HashMap">
-		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from member order by menu desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from menu order by menu_num asc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
 	</select>
 	
+	<select id="adminGetRoomListByHotel" resultType="rmdto" parameterType="int">
+		select * from room where hotel_num=#{hotel_num} order by room_local
+	</select>
+	
+	<select id="adminGetHotelLocalByHotelNum" resultType="String" parameterType="int">
+		select hotel_local from hotel where hotel_num=#{hotel_num}
+	</select>
+	
+	
+	<select id="adminGetEmpList" resultType="edto">
+		select e.*, m.* from emp e, member m where e.member_num = m.member_num
+	</select>
 </mapper>
