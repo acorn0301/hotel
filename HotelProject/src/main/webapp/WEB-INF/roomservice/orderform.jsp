@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="css/hsStyle.css">
 </head>
 <body>
-<h2>주문하기</h2>
+<div class="hyebody">
+<div class="margin_div">
+<h2 class="margin_h2">주문하기</h2>
 <br>
 <form action="ordercomplete.do">
 	<table class="table">
@@ -48,14 +50,17 @@
 	<b>추가 요청사항</b> 
 <br><br>
 	<textarea  class="form-control" rows="5" name="memo" placeholder="룸서비스 이용시 요청 하실 사항이 있으시면 입력해 주십시오."></textarea>
-		<br><br>
+		<br>
 	<div class="center_div">
 	<h4>이대로 주문하시겠습니까?</h4>
-		<button type="button" class="btn btn-md btn-default"
-		onclick="location.href='roomaservice.do'">더 추가하기</button>
-		<button type="submit" class="btn btn-md btn-default">주문하기</button>
+		<button type="button"
+		 onClick="location.href='roomaservice.do'" class="room_btn1">더 추가하기</button>
+		<button type="submit"
+		 onClick="openAddrJeju()" class="room_btn2">주문하기</button>
 	</div>
 </form>
 <br><br>
+</div>
+</div>
 </body>
 </html>

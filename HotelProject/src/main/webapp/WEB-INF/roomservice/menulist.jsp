@@ -80,10 +80,12 @@ function openModal(title,img,desc,menu_num){
 	<div class="qna_title_text">룸서비스</div>
 </div>
  
-  
+<div class="size_badge_su">
 <a href="cart.do">
 	<img alt="장바구니" src="images/menu/carticon.svg" class="icon">
+	<span class="size_badge_susu badge">${size}</span>
 </a>
+</div>
 
 <br>
 

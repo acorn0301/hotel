@@ -64,7 +64,7 @@ $(function(){
 		디럭스
 	</div>
 </div>
-
+<div class="margin_div">
 <!-- 소개 -->
 <img class="imgallwidth mySlides w3-animate-left" alt="디럭스룸이미지" src="images/room/deluxe/6.jpg">
 <img class="imgallwidth mySlides w3-animate-left" alt="디럭스룸이미지" src="images/room/deluxe/11.jpg">
@@ -168,7 +168,7 @@ $(function(){
 <img alt="더블룸" src="images/room/standard/24.jpg" class="imgallwidth">
 </div>
 </div>
-
+</div>
 </div>
 <script>
 var myIndex = 0;

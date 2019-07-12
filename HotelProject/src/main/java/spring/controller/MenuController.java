@@ -38,9 +38,13 @@ public class MenuController {
 	public String menuList(HttpSession session,
 			HttpServletRequest request)
 	{
-		//session.setAttribute("mnlist", null);
-		//메뉴에서 룸서비스를 눌렀을 때 실행 할 일
-		//1. 메뉴를 예쁘게 보여준다.
+
+		if(session.getAttribute("mnlist")!=null){
+			List<MenuDto> size=(ArrayList<MenuDto>)session.getAttribute("mnlist");
+			request.setAttribute("size",size.size());
+		}else{
+			request.setAttribute("size", 0);
+		}
 		
 		// 메뉴 리스트 출력 반복
 		int menuMaxNum = mnservice.menuTypeMaxNum() + 1;
@@ -208,9 +212,12 @@ public String oneCartComplete(HttpSession session,
 	session.getAttribute("member_num");
 	
 	oservice.roomOrderInsert(odto);
+	
+	//member_num 사용해서 주문자명, 주문자호수 가져오기
 	String name = mnservice.MemberName(member_num);
+	int room_local = mnservice.MemberRoom(member_num);
 	
-	
+	request.setAttribute("room_local", room_local);
 	request.setAttribute("member_name",name);
 	
 	//max order_num 얻기
@@ -373,7 +380,9 @@ public String orderComplete(HttpSession session,
 	session.getAttribute("member_num");
 	
 	String name = mnservice.MemberName(member_num);
+	int room_local = mnservice.MemberRoom(member_num);
 	
+	request.setAttribute("room_local", room_local);
 	request.setAttribute("member_name",name);
 	
 	//room_order 테이블에 저장

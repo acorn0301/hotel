@@ -63,7 +63,7 @@ $(function(){
 		그랜드
 	</div>
 </div>
-
+<div class="margin_div">
 <!-- 소개 -->
 <img class="imgallwidth mySlides w3-animate-left"  alt="그랜드룸이미지"  src="images/room/grand/13.jpg">
 <img class="imgallwidth mySlides w3-animate-left" alt="그랜드룸이미지" src="images/room/grand/15.jpg">
@@ -163,7 +163,7 @@ $(function(){
 <img alt="더블룸" src="images/room/grand/8.gif" class="imgallwidth">
 </div>
 </div>
-
+</div>
 </div>
 <script>
 var myIndex = 0;

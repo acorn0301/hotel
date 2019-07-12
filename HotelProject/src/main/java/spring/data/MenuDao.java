@@ -41,4 +41,10 @@ public class MenuDao extends SqlSessionDaoSupport{
 	{
 		return getSqlSession().selectOne("MemberName", member_num);
 	}
+	
+	//멤버넘 사용해서 호수 가져오기
+	public int MemberRoom(int member_num)
+	{
+		return getSqlSession().selectOne("MemberRoom",member_num);
+	}
 }

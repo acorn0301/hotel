@@ -10,10 +10,13 @@
 <link rel="stylesheet" href="css/hsStyle.css">
 </head>
 <body>
+<div class="hyebody">
+<div class="margin_div">
+<h2 class="margin_h2">주문완료</h2>
 <br>
-<h2>주문완료</h2>
-<br><br>
 <div class="center_div">
+<i class='fas fa-check' style='font-size:50px; color:#3a3125;'></i>
+<br><br>
 <b>${member_name}</b>님의 주문이 완료되었습니다.
 </div>
 <br>
@@ -34,18 +37,20 @@
 <br>
 	<div class="totalPrice"><b>Total </b> <c:out value="${sum}"/> </div>
 
-<br><br><br>
+<br><br><br><br>
 
 	<div class="complete_msg">
-		약 <b>30분</b> 뒤 <b>호수(*)</b>로 찾아가도록 하겠습니다. <br>
+		약 <b>30분</b> 뒤 <b>${room_local}호</b>로 찾아가도록 하겠습니다. <br>
 		이용해주셔서 감사합니다.
 	</div>
 <br>	
 		<div class="center_div">
-			<button type="button" class="btn btn-lg btn-default"
+			<button type="button" class="null_cart_btn"
 			onclick="location.href='home.do'">메인으로 돌아가기</button>
 		</div>
 <br><br>
+</div>
+</div>
 </body>
 </html>
 

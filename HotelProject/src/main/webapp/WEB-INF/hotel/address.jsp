@@ -36,11 +36,6 @@
 </div>
 
 	<!-- 버튼 클릭시 주소 이동 -->	
-<!-- 	<div class="groupbtns btn-group">
-		<button type="button" onClick="openAddrSeoul()"
-		class="room_btn1">서울</button>
-		<button type="button" onClick="openAddrJeju()" class="room_btn2">제주</button>
-	</div> -->
 	<div class="groupbtns btn-group">
 		<button type="button" onClick="openAddrSeoul()"
 		class="room_btn1">서울</button>

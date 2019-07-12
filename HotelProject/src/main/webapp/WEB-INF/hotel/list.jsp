@@ -25,7 +25,7 @@
 		개요
 	</div>
 </div>
-
+<div class="margin_div">
 <div class="center_div">
 <h5><strong>First Group Affiliate</strong></h5>
 호텔 1st는 수많은 국빈의 방문과 국제행사를 치러내며 '퍼스트 그룹을 대표하는 얼굴', <br>
@@ -81,6 +81,7 @@ Premium Lifestyle Leading Company <br>
 모든 고객에게 정성을 다합니다.<br>
 모든 신라인은 서로를 존중합니다.<br>
 </div> <br><br>
+</div>
 </div>
 </body>
 </html>

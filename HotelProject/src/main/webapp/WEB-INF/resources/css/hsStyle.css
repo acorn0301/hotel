@@ -1,4 +1,25 @@
 /* 장바구니 css */
+.size_badge_su{
+	float: left;
+    width: 33.3%;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding: 15px 10px 10px 10px;
+    padding-bottom: 0px;
+    text-align: center;
+    font-size: 11pt;
+}
+.size_badge_susu{
+	color: #ffffff;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 10;
+    background-color: #b36154;
+}
+.margin_h2{
+	padding-top: 10px;
+}
 .null_cart_btn{
     width: 50%;
     height: 35px;
@@ -236,6 +257,10 @@ img.icon{
 	
 } */
 /* 호텔 소개 페이지 css */
+.margin_div{
+	margin-right: 10px;
+	margin-left: 10px;
+}
 .groupbtns{
     width: 100%;
     margin-left: 2%;

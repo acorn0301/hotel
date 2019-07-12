@@ -18,7 +18,7 @@
 		객실
 	</div>
 </div>
-
+<div class="margin_div">
 <!-- 스탠다드 내용 -->
 <div class="admin_title_div_list_center">
 	<div class="admin_title_text">
@@ -72,6 +72,7 @@
 <br>
 </div>
 <br>
+</div>
 </div>
 </body>
 </html>
