@@ -1,16 +1,15 @@
 	#loginForm a {color: gray;}
 	a:HOVER{ text-decoration: none; font-weight: bold;}
 	
-	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree {
+	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm{
 		margin: -10px;
 	}
 	#idBtn {display: inline-block; float: left;}
 	.loginMsg {margin: 5px 15px;}
 	.dateForm {margin-bottom: 15px; padding: 0 20px;}
-	.genderForm{margin-bottom: 15px;}
 	.telForm {margin-top: -15px;}
 	
-	#joincomplete{text-align: center;}
+	#joincomplete, #findPwOkForm, #findIdOkForm{text-align: center;}
 	
 	#chkmsg { color: red;}
 	#loginPlus {text-align: center; font-size: 13px;}
@@ -18,7 +17,7 @@
 	#editNo {text-align: right;}
 
 
-#loginOk, #joinOk, #editOk, #mypageGo, #loginGo{
+#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk{
     display: block;
     width: 100%;
     height: 45px;
@@ -34,6 +33,19 @@
 	
 	.inputbox {
     border: 0;
+    padding: 11px 20px;
+    height: 48px;
+    font-size: 16px;
+    width: 100%;
+    color: black;
+    vertical-align: top;
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    border-radius: 2px;
+	}
+	
+	.user_id{
+	border: 0;
     padding: 11px 20px;
     height: 48px;
     font-size: 16px;
@@ -62,6 +74,10 @@
 	.linkLIst a{ text-decoration:none; color:#666}
 	.linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
 
+
+/* input[class="user_id"]::-webkit-input-placeholder{
+        color:red;
+    } */
 
 
 .error {

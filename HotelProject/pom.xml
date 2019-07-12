@@ -153,7 +153,7 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> 
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -180,6 +180,50 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.3</version>
 		</dependency>
+		
+		
+		<!-- 중복확인 추가부분 -->
+		<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>2.9.4</version>
+		</dependency>
+		
+		<dependency> 
+		<groupId>com.fasterxml.jackson.datatype</groupId> 		
+		<artifactId>jackson-datatype-jsr310</artifactId>
+		 <version>2.9.4</version>
+		</dependency>
+		
+		
+		<!-- 비번찾기 email 추가부분 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>${spring-framework.version}</version>
+      </dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+    		<groupId>javax.mail</groupId>
+    		<artifactId>mail</artifactId>
+    		<version>1.4.6</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-mail</artifactId>
+            <version>${spring-framework.version}</version>
+        </dependency>
+		
+		
+		<!--  Spring jdbc 오류부분 -->
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-jdbc</artifactId>
+          <version>${spring-framework.version}</version>
+      </dependency>
 
 
 	</dependencies>

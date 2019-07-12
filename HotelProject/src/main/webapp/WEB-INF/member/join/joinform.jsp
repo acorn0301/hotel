@@ -15,6 +15,32 @@
 <body>
 
 <script type="text/javascript">
+
+// 아이디 중복 검사(1이면 중복 / 0이면중복X 사용가능)
+function idChk(){
+	var id = $('#user_id').val();
+//	alert(id);
+
+	$.ajax({
+		url : 'idCheck.do?id=' + id,
+		type : 'get',
+		cache : false,
+		success : function(res) {
+//			console.log(res.count);
+			if (res.count == 1) {
+				// 1 이면 존재하는 아이디 (중복)
+				$('#user_id').val('');
+				$('#user_id').attr('placeholder','사용중인 아이디입니다!');
+/* 				$('#user_id').css('color','red'); */
+//				$('#user_id').addClass(".id");
+				$("#joinOk").attr("disabled", true);
+			} 
+		}, error : function() {
+					console.log("실패"+error);
+		}
+	});
+};
+
 function check(){
 	
 	if(join.id.value.length < 7){
@@ -58,41 +84,37 @@ function check(){
 	return true;
 	
 }
+
+
 </script>
 
 <div id="joinForm">
 <div class="headTit">
 	<h2 class="tit">회원가입&nbsp;&nbsp;<i class="fas fa-user-plus"></i></h2>
 </div>
+
 <br>
 <form name="join" class="form-inline" action="joinok.do" method="post" onsubmit="return check()">
 	<div class="form_group"></div>
 	<!-- 아이디 -->
-	<div id="formid">
-		<div class="form_group">
-		<input type="text" class="inputbox" id="user_id" name="id" placeholder="아이디" required="required">
-		</div>
+	<div class="form_group">
+		<input type="text" class="user_id" id="user_id" name="id" placeholder="아이디" required="required" onblur="idChk()">
 	</div>
+	<div class="check_font" id="id_check"></div>
 
 	<!-- 비밀번호 -->
-	<div>
-		<div class="form_group">
+	<div class="form_group">
 		<input type="password" class="inputbox" id="user_pw" name="password" placeholder="비밀번호" required="required">
-		</div>
 	</div>
 
 	<!-- 비밀번호 확인 -->
-	<div>
-		<div class="form_group">
+	<div class="form_group">
 		<input type="password" class="inputbox" id="user_pw2" name="password2" placeholder="비밀번호 확인" required="required">
-		</div>
 	</div>
 	
 	<!-- 이름 -->
-	<div>
-		<div class="form_group">
+	<div class="form_group">
 		<input type="text" class="inputbox" id="user_name" name="name" placeholder="이름" required="required">
-		</div>
 	</div><br>
 
 	<!-- 전화번호 -->
@@ -136,10 +158,8 @@ function check(){
 	<div class="form_group"></div>
 	
 	<!-- 이메일 -->
-	<div>
-		<div class="form_group">
+	<div class="form_group">
 		<input type="email" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
-		</div>
 	</div><br>
 	
 	<div class="col-sm-3 text-center">

@@ -9,7 +9,6 @@
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/073cb107c5.js"></script>
 <link rel="stylesheet" href="css/yeStyle.css">
-
 <script src="js/yeScript.js"></script>
 
 </head>
@@ -51,11 +50,11 @@
 <br>
 
 <div id="loginPlus">
-<a href="join.do" id="joinPage">회원가입</a>
+<a href="joinagree.do" id="joinPage">회원가입</a>
 |
-<a href="findId.do" id="findId">아이디 찾기</a>
+<a href="findIdform.do" id="findId">아이디 찾기</a>
 |
-<a href="findPw.do" id="findPw">비밀번호 찾기</a>
+<a href="findPwform.do" id="findPw">비밀번호 찾기</a>
 </div>
 </form>
 </div>
