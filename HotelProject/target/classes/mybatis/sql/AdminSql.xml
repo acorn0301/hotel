@@ -138,6 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         r.hotel_num = h.hotel_num and
         
         o.room_status = #{room_status}
+        order by o.time
 	</select>
 	
 	<select id="adminGetOrderDetailByOrderNum" parameterType="int" resultType="spring.data.AdminOrderDetailDto">
@@ -148,6 +149,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and mn.menu_num = od.menu_num
 		and od.order_num=#{order_num}
 	
+	</select>
+	
+	
+	<select id="adminGetTotalMemberCount" resultType="int">
+		select count(*) from member
+	</select>
+	
+	
+	<select id="adminGetMemberList" resultType="mbdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from member order by member_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
+	</select>
+	
+	
+	<select id="adminGetTotalMenuCount" resultType="int">
+		select count(*) from menu
+	</select>
+	
+	<select id="adminGetMenuList" resultType="mndto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from member order by menu desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
 	</select>
 	
 </mapper>

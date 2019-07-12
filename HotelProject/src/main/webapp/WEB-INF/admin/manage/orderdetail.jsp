@@ -76,11 +76,7 @@
 		<table class="bookdetail_table">
 		
 			<c:forEach items="${aodto.order_detail }" var="oddto">
-				<tr class="bookdetail_table_tr">
-					<td class="bookdetail_table_th bookdetail_table_td">메뉴번호</td>
-					<td class="bookdetail_table_td"> ${oddto.menu_num } </td>	
-				</tr>
-				
+
 				<tr class="bookdetail_table_tr">
 					<td class="bookdetail_table_th bookdetail_table_td">메뉴명</td>
 					<td class="bookdetail_table_td"> ${oddto.menu_name_kor } (${oddto.menu_type })</td>	

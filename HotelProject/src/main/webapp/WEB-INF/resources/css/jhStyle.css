@@ -529,6 +529,13 @@ a{
     top: -20px;
 }
 
+
+.clearBoth{
+	clear:both;
+}
+
+
+
 /* 관리자 컬러 */
 
 .color1{
@@ -551,6 +558,12 @@ a{
 }
 .color7{
 	color: #996666;
+}
+.color8{
+	color: #86A3C3;
+}
+.color9{
+	color: #bc6ca7;
 }
 
 .li_last_right{
@@ -666,3 +679,45 @@ a{
 	border-bottom: 1px solid grey;
 }
 
+
+
+/* 회원 리스트 페이지를 위한 css  */
+.user_list_divs{
+	float: left;	
+}
+
+
+.userlist_div{
+	min-height: 30px;
+}
+
+.user_icon{
+	font-size: 2em;
+	color: lightgrey;
+}
+.arrow_right{
+	font-size: 2em;
+	color: lightgrey;
+}
+.user_list_div_1{
+	width: 50px;
+}
+.user_list_div_2{
+	width: 60%;
+	padding-top: 5px;
+}
+.user_list_div_3{
+	width:20px;
+	float: right;
+	padding-right:20px;
+	text-align: right;
+}
+
+
+/* 메뉴 리스트 페이지를 위한 css
+ */
+ 
+.img_thumbnail_circle{
+	width: 30px;
+	
+}

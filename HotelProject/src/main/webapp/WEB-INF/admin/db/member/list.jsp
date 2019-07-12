@@ -6,73 +6,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<title>Member List</title>
+
 </head>
 <body>
-
-
 
 
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
-		<div class="qna_title_text">룸서비스관리</div>
+		<div class="qna_title_text">회원관리</div>
 	</div>
 
 	
 	<div class="dashboard_div">
 		<div class="admin_title_div">
-			<div class="admin_title_text">${room_status }</div>
+			<div class="admin_title_text">회원목록</div>
 		</div>
 		<div class="dashboard_div_table">
 			<ul>
 			
-				<c:forEach items="${list}" var="dto" >
+				<c:forEach items="${list}" var="dto">
 					<li>
-						<div onClick="location.href='adminOrderListDetail.do?order_num=${dto.order_num}'">
-						<div class="dashboard_li_div2">
-<!-- 							<span class="arrowRight"><i class="fas fa-angle-right"></i></span>
- -->							<div class="booklist_div">
-								<span class="list_hotel_local">${dto.hotel_local }점</span>
-								<span class="list_room_local color2">${dto.room_local}호 &nbsp;&nbsp;</span>
-								<%-- <span>
-									
-									<span class="list_hotel_local"><i class='fas fa-user color1'></i>&nbsp;${dto.head_count }&nbsp;</span>
-									
-									<c:if test="${dto.add_bed > 0}">
-										<span class="glyphicon glyphicon-bed color6"></span>&nbsp;
-									</c:if>
-									
-									<c:if test="${dto.breakfast_count >0 }">
-										<i class='fas fa-utensils color7' ></i>
-									</c:if>
-									
-									
-								</span>  --%>
+						<div onClick="location.href='adminBookListDetail.do?member_num=${dto.member_num}'">
+							<div class="dashboard_li_div2">
+								<div class="userlist_div">
+									<div class="user_list_divs user_list_div_1"><i class="fas fa-user-circle user_icon"></i></div>
+									<div class="user_list_divs user_list_div_2">${dto.name } (${dto.id })</div>
+									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
+								</div>
 							</div>
-							
-							<div class="booklist_div">
-								<span class="list_name">${dto.name }님</span>
-								<span class="list_id">(${dto.id })</span>
-								<span class="list_book_day color3"><fmt:formatDate value="${dto.time }" pattern="yyyy-MM-dd HH:mm"/></span>
-							</div>
-							
-							<div class="booklist_div">
-									
-									<c:forEach items="${dto.order_detail }" var="oddto">
-										<div>
-											<span>${oddto.menu_name_kor }</span>
-											<span>  ${oddto.qty } 개</span>
-										</div>
-									</c:forEach>
-								
-							</div>
-		
 						</div>
-						</div>
+						
+						<div class="clearBoth"></div>
+						
+						
 					</li>	
 				</c:forEach>
 			<%-- 	<li><div class="dashboard_li_div">
@@ -90,9 +61,41 @@
 			</ul>
 		</div>	
 	</div>
-
+	
+	
+	<!-- 페이징 처리 -->
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${startPage > 1 }">
+				<li><a href="qnalist.do?pageNum=${1}">처음으로</a>
+			</c:if>
+			<c:if test="${startPage > 1 }">
+				<li><a href="qnalist.do?pageNum=${startPage-1 }"><-</a>
+			</c:if>
+			<c:forEach var="pp" begin="${startPage}" end="${endPage}" varStatus="i">
+				<c:if test="${pp==currentPage }">
+					<li><a style="color:red" href="qnalist.do?pageNum=${pp }">${pp }</a></li>
+				</c:if>
+				<c:if test="${pp!=currentPage }">
+					<li><a href="qnalist.do?pageNum=${pp }">${pp }</a></li>
+				</c:if>
+			</c:forEach>
+			<c:if test="${endPage < totalPage}">
+				<li><a href="qnalist.do?pageNum=${endPage+1}">-></a>
+			</c:if>
+			<c:if test="${endPage < totalPage }">
+				<li><a href="qnalist.do?pageNum=${totalPage}">끝으로</a>
+			</c:if>
+		</ul>
+	</div>
+	<!-- 페이징 끝 -->
 
 </div>
+
+</body>
+</html>
+
+
 
 </body>
 </html>

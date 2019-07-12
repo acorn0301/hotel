@@ -13,6 +13,7 @@ import spring.data.AdminOrderDto;
 import spring.data.BookDao;
 import spring.data.BookDto;
 import spring.data.MemberDto;
+import spring.data.MenuDto;
 
 @Service
 public class AdminService {
@@ -113,5 +114,25 @@ public class AdminService {
 	//개별 주문내역 가져오기 
 	public AdminOrderDto getOrderData(int order_num) {
 		return adao.getOrderData(order_num);
+	}
+	
+	//총 회원  수 가져오기
+	public int getMemberTotalCount() {
+		return adao.getMemberTotalCount();
+	}
+
+	//회원 목록 페이징 처리해서 가져오기 
+	public List<MemberDto> getMemberList(int start, int end){	
+		return adao.getMemberList(start, end);
+	}
+	
+	//총 메뉴 수 가져오기
+	public int getMenuTotalCount() {
+		return adao.getMenuTotalCount();
+	}
+	
+	//메뉴 목록 페이징 처리해서 가져오기
+	public List<MenuDto> getMenuList(int start, int end){
+		return adao.getMenuList(start, end);
 	}
 }

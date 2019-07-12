@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 <link rel="stylesheet" href="css/jhStyle.css">
 
@@ -72,6 +73,10 @@
 		</ul>
 	</div>	
 </div>
+
+
+
+
 <div class="dashboard_div">
 	<div class="admin_title_div">
 		<div class="admin_title_text">문의사항</div>
@@ -104,7 +109,109 @@
 	
 </div>
 
-<br><br><br><br>
+<div class="clearBoth"></div>
+
+
+<div class="dashboard_div">
+	<div class="admin_title_div">
+		<div class="admin_title_text">DB관리</div>
+	</div>
+	
+	<div class="dashboard_qna_div">
+	
+	
+		<div class="dashboard_qna_divs" onclick="location.href='adminMemberList.do'">
+			<div class="icon_with_badge">
+				<i class='fas fa-users color8'></i>
+			</div>
+				<br>
+				<div class="dashboard_qna_divs_text"><span>회원관리</span></div> 	
+		</div>
+		
+		
+		<div class="dashboard_qna_divs" onclick="location.href='adminMenuList.do'">
+			<div class="icon_with_badge">
+				<i class='fas fa-hamburger color9'></i>
+			</div>	
+				<br>
+			
+				<div class="dashboard_qna_divs_text"><span>메뉴관리</span></div> 		
+		</div>
+		
+		
+		<div class="dashboard_qna_divs li_last_right" onclick="location.href='adminHotelList.do'">
+			<div class="icon_with_badge">
+				<i class='fas fa-hotel color4'></i>
+			</div>			
+				<br>
+				<div class="dashboard_qna_divs_text"><span>호텔관리</span></div>
+		</div>
+		
+		
+		
+	</div>
+	<div class="clearBoth"></div>
+	
+	<div class="dashboard_qna_div">
+		<div class="dashboard_qna_divs">
+			<div class="icon_with_badge">
+				<i class='fas fa-user-tie color2'></i>
+			</div>
+			
+				<br>
+			
+				<div class="dashboard_qna_divs_text"><span>직원관리</span></div> 
+			
+		</div>
+		<div class="dashboard_qna_divs">
+			<div class="icon_with_badge">
+				<i class='fas fa-comments color1'></i>
+			</div>	
+				<br>
+			
+				<div class="dashboard_qna_divs_text"><span>리뷰관리</span></div> 		
+		</div>
+		<div class="dashboard_qna_divs li_last_right">
+			<div class="icon_with_badge">
+				<i class='fas fa-sitemap color6'></i>
+			</div>
+				
+				<br>
+				
+				<div class="dashboard_qna_divs_text"><span>사이트관리</span></div>
+		</div>
+	</div>
+	
+	
+<!-- 	<div class="dashboard_qna_div">
+		<div class="dashboard_qna_divs">
+			<div class="icon_with_badge">
+				<i class='fas fa-phone color1'></i>
+			</div>
+				<div class="dashboard_qna_divs_text"><span>호텔관리</span></div> 
+			
+		</div>
+		<div class="dashboard_qna_divs">
+			<div class="icon_with_badge">
+				<i class='fas fa-home color2'></i>
+			</div>	
+				<div class="dashboard_qna_divs_text"><span>직원관리</span></div> 		
+		</div>
+		<div class="dashboard_qna_divs li_last_right">
+			<div class="icon_with_badge">
+				<i class='fas fa-money-bill-wave color3'></i>
+			</div>
+				<div class="dashboard_qna_divs_text"><span>공지사항</span></div>
+		</div>
+	</div> -->
+	
+	
+	
+</div>
+
+<div class="clearBoth"></div>
+
+
 
 </div>
 </body>

@@ -1,6 +1,8 @@
 package spring.data;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -96,6 +98,36 @@ public class AdminDao extends SqlSessionDaoSupport{
 	//개별 주문내역 가져오기 
 	public AdminOrderDto getOrderData(int order_num) {
 		return getSqlSession().selectOne("adminGetOrderData", order_num);
+	}
+	
+	//총 회원  수 가져오기
+	public int getMemberTotalCount() {
+		return getSqlSession().selectOne("adminGetTotalMemberCount");
+	}
+	
+	//회원 목록 페이징 처리해서 가져오기 
+	public List<MemberDto> getMemberList(int start, int end){
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return getSqlSession().selectList("adminGetMemberList", map);
+	}
+	
+	//메뉴 목록 페이징 처리해서 가져오기
+	public List<MenuDto> getMenuList(int start, int end){
+		
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		return getSqlSession().selectList("adminGetMenuList", map);
+	}
+	
+	//총 메뉴 수 가져오기
+	public int getMenuTotalCount() {
+		return getSqlSession().selectOne("adminGetTotalMenuCount");
 	}
 	
 }
