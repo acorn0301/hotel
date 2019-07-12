@@ -217,13 +217,27 @@ public class MemberController {
    }
    
    // 내 정보수정 처리
+//   @RequestMapping("/infoEditComplete.do")
+//   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto) {
+//     
+//	   mservice.updateMember(mbdto);
+//	   
+//	   request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
+//	   return "layout/home";
+//
+//   }
+   
+   // 내 정보수정 처리
    @RequestMapping("/infoEditComplete.do")
-   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto) {
-     
-	   mservice.updateMember(mbdto);
-	   
-	   request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
-	   return "layout/home";
+   public String infoEditComplete(HttpServletRequest request,
+         @ModelAttribute MemberDto mbdto) {
+      String inputPass = mbdto.getPassword();
+      String pass = passEncoder.encode(inputPass);
+      mbdto.setPassword(pass);
+      mservice.updateMember(mbdto);
+
+      request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
+      return "layout/home";
 
    }
    
