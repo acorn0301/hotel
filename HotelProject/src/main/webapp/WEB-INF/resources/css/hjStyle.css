@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+#hjBody,#hjBody2{
+	font-size: 11pt;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
 /*------------- 페이지 공용 클래스 ---------------*/
 
 
@@ -59,27 +65,68 @@ li{
 h1{
 	font-weight: 900;
 	margin: 0;
-	padding: 4.5rem 0 2rem 0;
+	padding: 50px 0 25px 0;
+}
+
+
+.caption{
+	margin-bottom: 20px;
 }
 
 
 
+/* --------- CSS 통일하기위한 클래스 name 겹치는 css */
+
+.qna_body_title_div{
+	height: 40px;
+    background-color: #685845;
+    color: white;
+    margin: -20px -10px 0;
+}
+
+.qna_title_text{
+	line-height: 38px;
+    font-size: 17px;
+    font-weight: normal;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.admin_title_div{
+	line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+}
+
+
+.color2{
+	color: sienna;
+}
 
 /*---------------- STEP 부분 CSS -------------- */
 
 
-#step{
+#hjBody #step{
 	display:block;
 	width: 100%;
 	padding-top: 15px;
 }
 
-#step ul{
+#hjBody #step ul{
 	padding:0;
 	
 }
 
-#step li{
+#hjBody #step li{
 	width: 25%;
 	float: left;
 	text-align: center;
@@ -91,7 +138,7 @@ h1{
 	
 }
 
-#step .bold{
+#hjBody #step .bold{
 	color: black;
 }
 
@@ -103,14 +150,14 @@ h1{
 
 
 /* 설정칸 테두리 */
-.reservationBorder{
-	border: 1px solid gray;
-	border-radius: 2rem;
+#hjBody .reservationBorder{
+	/* border: 1px solid #ccc;
+	border-radius: 2rem; */
 }
 
 
 /* 설정칸 컨텐츠 */
-.reservationContents{
+#hjBody .reservationContents{
 	padding: 15px 25px;
 }
 
@@ -118,9 +165,9 @@ h1{
 /* 호텔 지점 select 스타일 */
 .formHotelLocal{
 	width: 100%;
-	border-radius: 5px;
-	padding: 10px 5px;
+	padding: 7px 5px 10px;
 	margin: 1rem 0 3rem;
+	border: 3px solid #685845;
 }
 
 
@@ -131,18 +178,22 @@ h1{
 
 
 /* 객실타입 라디오버튼 마진 */
-.formRoomSelect{
+#hjBody .formRoomSelect{
 	margin: 3rem 0;
 }
 
 
+/* .hasDatepicker{
+	width: 150px;
+} */
+
 
 
 /* 인원 수 증감 버튼 */
-.headCountBtn, .bedCountBtn, .breakfastCountBtn{
+#hjBody .headCountBtn, .bedCountBtn, .breakfastCountBtn{
 	width: 3rem;
 	height: 3rem;
-	background-color: palegoldenrod;
+	background-color: #f1ebd6;
 	border: none;
 	border-radius: 50px;
 	margin-right: 10px;
@@ -152,7 +203,7 @@ h1{
 
 
 /* step1 인원  */
-.countBorderNone{
+#hjBody .countBorderNone{
 	border: none;
 	font-weight: bold;
 	text-align: center;
@@ -166,8 +217,7 @@ h1{
 	border: none;
 	font-weight: bold;
 	text-align: right;
-	font-size: 1.2em;
-	margin-right: 0.7rem;
+	font-size: 1em;
 }
 
 
@@ -176,9 +226,20 @@ h1{
 	width: 100%;
 	padding: 2rem 0;
 	border: none;
-	background-color: Sienna;
+	background-color: #685845;
 	color: white;
 	margin-top: 2rem;
+}
+
+
+/* #formHeadCountValue{
+	margin-right: 40px;
+	color: #685845;
+} */
+
+
+#step1Page #datepicker1{
+	
 }
 
 
@@ -188,42 +249,58 @@ h1{
 /* '다시 설정하기' div */
 .reSetting{
 	margin-bottom: 1.5rem;
-	padding-top: 5.5rem;
+	padding-top: 4rem;
 }
 
 
 /* '다시 설정하기' 글자 스타일 */
 .reSetting>a{
 	color: gray;
+	font-size: 10pt;
 	font-weight: 700;
 }
 
 .reSetting img{
-	opacity: 0.7;
+	opacity: 0.5;
 }
 
 /* 세팅창 테두리 */
 .searchSetting{
-	border: 1px solid gray;
 	border-radius: 1.2rem;
+}
+
+.settingSub{
+	padding: 2px 0 8px;
+	border-bottom: 1px solid #ccc;
+}
+
+.settingCheck{
+	padding: 8px 0 0 0;
 }
 
 
 /* 세팅창 컨텐츠 */
 .searchSettingContents{
-	padding: 2rem;
+	padding: 1rem;
 }
 
+.headCountText{
+	font-size: 10pt;
+	color: gray;
+}
 
 .hotelLocalText{
-	font-size: 2.5rem;
+	font-size: 13pt;
 	font-weight: bold;
 }
 
 
 .roomTypeText,.headCountText{
 	font-size: 1.5rem;
-	font-weight: bold;
+}
+
+.searchSettingContents .smallText{
+	
 }
 
 
@@ -233,21 +310,8 @@ h1{
 }
 
 
-.subTitle{
-	background-color: PaleGoldenRod;
-	margin: 3rem 0 2.5rem 0;
-}
-
-
-.subTitle>h4{
-	font-weight: 900;
-	padding: 1.1rem;
-}
-
 
 .roomListBorder{
-	border: 1px solid lightgray;
-	border-radius: 1.2rem;
 	margin-bottom: 2rem;
 }
 
@@ -347,7 +411,6 @@ h1{
 
 
 #aboutRoomModal{
-	padding: 2rem;
 	background-color: white;
 	border-radius: 10px;
 }
@@ -400,7 +463,7 @@ h1{
 
 /* --------------- STEP 3 옵션 선택 -------------- */
 
-.bedAddDiv{
+.optionDiv{
 	margin: 2rem 0;
 }
 
@@ -410,8 +473,8 @@ h1{
 }
 
 textarea{
-	width:95%;
-
+	width:100%;
+	margin-top: 10px;
 }
 
 .optionSpan{
@@ -441,11 +504,12 @@ textarea{
     width: 50%;
     padding-right: 10px;
 }
+
 .reservationBtn3_2{
 	float: left;
     width: 50%;
-    
 }
+
 .floatClear{
 	clear:both;
 }
@@ -455,6 +519,8 @@ textarea{
 
 /* ----------------------STEP 4 예약확인------------------ */
 /* --------------------------- ㄴ 비회원 예약확인------------------ */
+
+
 .noaccountSub{
 	width: 100px;
 	display: inline-block;
@@ -610,3 +676,209 @@ textarea{
 	padding: 1.2rem 0;
 	width: 49%
 }
+
+
+/* ----------------------------- 메인 CSS ------------------------- */
+
+#main_search .setting{
+	margin-top: -15px;
+}
+
+#main_search2{
+	padding: 0 10px;
+}
+
+#main_search{
+	width: 100%;
+	background-color: #f3f3f3;
+	padding : 10px 10px 20px;
+}
+
+#main_search .setting{
+	width: 100%;
+}
+
+#main_search .search_sub{
+	text-align: center;
+	font-size: 9pt;
+	color: gray;
+	font-weight: bold;
+	height: 10pt;
+}
+
+#main_search .setting_date{
+	width: 65%;
+	display: inline-block;
+	padding: 0;
+	margin: 0 0 0 17px;
+}
+
+#main_search .checkIn{
+	margin-right: 12px;	
+}
+
+#main_search .checkCount{
+	width: 20%;
+	display: inline-block;
+}
+
+
+#main_search .checkIn_date_inner, #main_search .checkOut_date_inner{
+	width: 100%;
+}
+
+#main_search .checkIn_y_m, #main_search .checkOut_y_m{
+	width: 32%;
+	display: inline-block;
+	font-size: 9pt;
+	font-weight: bold;
+}
+
+#main_search .checkIn_year, #main_search .checkOut_year{
+	height: 9pt;
+}
+
+#main_search .checkIn_month, #main_search .checkOut_month{
+	font-size: 11pt;
+}
+
+#main_search .checkIn_day, #main_search .checkOut_day, .count_su{
+	text-align: center;
+	width: 50%;
+	display: inline-block;
+	font-size: 28pt;
+}
+
+#main_search .count_su{
+	text-align: center;
+	width: 40px;
+}
+
+#main_search .countDiv{
+	text-align: center;
+}
+
+#main_search .check_count2{
+	border: none;
+	background-color: #f3f3f3;
+	width: 35px;
+	height: 30pt;
+	text-align: center;
+}
+
+#main_search .checkIn, #main_search .checkOut{
+	width: 45%;
+	display: inline-block;
+}
+
+#main_search .checkCount{
+	margin: 0 0 0 5px;
+}
+
+#main_search #reservationBtn1{
+	margin-top: 7px;
+	background-color: #3a3125
+}
+
+#main_search .check_in_select{
+	/* top: 275px; */
+	position: relative;
+	z-index: 10;
+	width: 100px;
+	height: 65px;
+	display: inline;
+	opacity: 0;
+}
+
+#main_search .check_in_select .form-group{
+	position: absolute;
+	width: 95px;
+    left: 5px;
+    top: -15px;
+}
+
+#main_search .check_out_select .form-group{
+	position: absolute;
+	width: 95px;
+    top: -15px;
+}
+
+#main_search .check_out_select{
+	/* top: 275px; */
+	left: 103px;
+	position: relative;
+	z-index: 10;
+	width: 100px;
+	height: 65px;
+	display: inline;
+	opacity: 0;
+}
+
+
+#main_search .check_in_select input,#main_search .check_out_select input{
+	height:70px;
+	height: 60px;
+}
+	
+/* 모달 */
+
+#main_search #count_modal_back,#main_search #checkIn_modal_back{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+}
+
+
+#main_search .count_modal{
+	margin: 50% 5%;
+	width: 90%;
+	height: 40%;
+	background-color: white;
+}
+
+
+#main_search .checkIn_modal{
+	margin: 20% 5%;
+	width: 90%;
+	height: 80%;
+	background-color: white;
+}
+
+#main_search .count_contents, #main_search .checkIn_contents{
+	padding: 20px;
+}
+
+#main_search #count_modal_back .qna_body_title_div,#main_search #checkIn_modal_back .qna_body_title_div{
+	margin: -20px -20px 20px;
+	
+}
+
+#main_search .count_select{
+	margin: 20px 0 30px 0;
+}
+
+#main_search .modal_text{
+	color: gray;
+}
+
+#main_search #modal_checkokBtn{
+	width: 100%;
+	padding: 2rem 0;
+	border: none;
+	background-color: #685845;
+	color: white;
+	margin-top: 2rem;
+}
+
+#main_search #modal_okBtn{
+	width: 100%;
+	padding: 2rem 0;
+	border: none;
+	background-color: #685845;
+	color: white;
+	margin-top: 2rem;
+}
+

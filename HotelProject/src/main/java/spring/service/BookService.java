@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import spring.data.BookDao;
 import spring.data.BookDto;
+import spring.data.FinalBookDto;
 import spring.data.HotelDto;
 import spring.data.MemberDto;
 import spring.data.RoomDto;
@@ -26,23 +27,23 @@ public class BookService {
 	
 	
 	//객실 리스트
-	public List<RoomDto> RoomList(BookDto bdto)
+	public List<RoomDto> RoomList(FinalBookDto fbdto)
 	{
-		return bdao.RoomList(bdto);
+		return bdao.RoomList(fbdto);
 	}
 	
 	
 	//룸num에 따른 호텔지점명
-	public HotelDto getHotel(int num)
+	public FinalBookDto getHotel(int num)
 	{
 		return bdao.getHotel(num);
 	}
 	
 	
 	//예약정보 DB에 삽입
-	public void insertBook(BookDto bdto)
+	public void insertBook(FinalBookDto fbdto)
 	{
-		bdao.insertBook(bdto);
+		bdao.insertBook(fbdto);
 	}
 	
 	
@@ -60,7 +61,7 @@ public class BookService {
 	}
 
 	//룸 넘버로 룸정보 모두 가져오기
-	public RoomDto getRoomData(int room_num){
+	public FinalBookDto getRoomData(int room_num){
 		return bdao.getRoomData(room_num);
 	}
 }

@@ -1,5 +1,7 @@
 package spring.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,11 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.HotelDao;
+import spring.data.HotelDto;
+import spring.service.BookService;
 import spring.service.HotelService;
 
 @Controller
 public class GeneralController {
 	
+	//bookService에서 메소드 의존성 주입
+	@Autowired
+	private BookService bookService;
+		
 	@Autowired
 	HotelService hservice;
 	
@@ -51,6 +59,10 @@ public class GeneralController {
 		int hotelTotalCount = hservice.getTotalCount();
 		request.setAttribute("hotelTotalCount", hotelTotalCount);
 	
+		
+		// 혜정 - 호텔지점 리스트 출력
+		List<HotelDto> Locallist=bookService.HotelLocalList(); //bookService에 있는 HotelLocalList 가져오기
+		request.setAttribute("localList", Locallist); //리스트에 리스트 저장
 		
 		return "layout/home";
 	}

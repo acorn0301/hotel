@@ -18,23 +18,23 @@ public class BookDao extends SqlSessionDaoSupport{
 	
 	
 	//객실 리스트 출력
-	public List<RoomDto> RoomList(BookDto bdto)
+	public List<RoomDto> RoomList(FinalBookDto fbdto)
 	{
-		return getSqlSession().selectList("RoomList",bdto);
+		return getSqlSession().selectList("RoomList",fbdto);
 	}
 	
 
 	//룸num에 따른 호텔 지점명 출력
-	public HotelDto getHotel(int num)
+	public FinalBookDto getHotel(int num)
 	{
 		return getSqlSession().selectOne("getHotel", num);
 	}
 	
 
 	//예약정보 DB에 삽입
-	public void insertBook(BookDto dto)
+	public void insertBook(FinalBookDto fdto)
 	{
-		getSqlSession().insert("insertBook",dto);	
+		getSqlSession().insert("insertBook",fdto);	
 	}
 	
 	
@@ -52,7 +52,7 @@ public class BookDao extends SqlSessionDaoSupport{
 	}
 	
 	//룸 넘버로 룸정보 모두 가져오기
-	public RoomDto getRoomData(int room_num){
+	public FinalBookDto getRoomData(int room_num){
 		return getSqlSession().selectOne("getRoomData", room_num);
 	}
 }
