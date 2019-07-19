@@ -1,4 +1,3 @@
-
 /* 지도 css */
 #map_ma{
 	height: 300px;
@@ -125,6 +124,7 @@ ul.bxslider {
   height: 32px;
   text-indent: -9999px;
   z-index: 9999;
+  opacity: 0;
 }
 .bx-wrapper .bx-controls-direction a.disabled {
   display: none;

@@ -231,7 +231,7 @@ function checkDate(x,day){
 	// datepicker 선택
 	var date = document.getElementById(x);
 	
-	console.log(date);
+	//console.log(date);
 	
 	// datepicker 의 value 구함
 	date_val = date.value;
@@ -273,14 +273,14 @@ function checkDate(x,day){
 	i = $("#datepicker1").val();
 	o = $("#datepicker2").val();
 	
-	console.log(i);
-	console.log(o);
+//	console.log(i);
+//	console.log(o);
 
 	// 날짜가 같으면 버튼 비활성화
 	if(o == i)
 	{
 		//document.getElementById("check"+day+"_day").innerHTML = dd*1+1;
-		console.log("같음");
+//		console.log("같음");
 		var rsbtn = document.getElementById("reservationBtn1");
 		rsbtn.disabled = true;
 		rsbtn.style.backgroundColor= "#a99e91";
@@ -294,7 +294,7 @@ function checkDate(x,day){
 	}*/
 	else
 	{
-		console.log("같지않음");
+//		console.log("같지않음");
 		var rsbtn = document.getElementById("reservationBtn1");
 		rsbtn.disabled = false;
 		rsbtn.style.backgroundColor= "#3a3125";
@@ -319,8 +319,8 @@ function checkDate(x,day){
 	//input text에 디폴트값 삽입
 	todayDate = (yyyy+"-"+mm+"-"+dd);
 	
-	console.log(todayDate);
-	console.log(o);
+//	console.log(todayDate);
+//	console.log(o);
 	
 	if(o == todayDate)
 	{
@@ -387,7 +387,7 @@ function countFunction(n,m,max){
 	//조식인원추가	
 	bc += m;
 
-		console.log("bc + m " , bc );
+//		console.log("bc + m " , bc );
 		if(bc < 0)
 		{
 			bc=0; // 0 미만 숫자 불가능
@@ -440,7 +440,7 @@ function addMemo(){
 	onclick1 += "&book_memo=" + memo + "'";
 	onclick2 += "&book_memo=" + memo + "'";
 	
-	console.log(onclick1);
+//	console.log(onclick1);
 	
 	$("#reservationBtn3_1").attr("onclick", onclick1);
 	$("#reservationBtn3_2").attr("onclick", onclick2);
