@@ -14,7 +14,7 @@
 <div class="margin_div">
 <h2 class="margin_h2">주문하기</h2>
 <br>
-<form action="ordercomplete.do">
+<form action="ordercomplete.do?member_num=${sessionScope.member_num}">
 	<table class="table">
 		<c:set var="sum" value="0"/>
 		<c:forEach var="mndto" items="${mnlist}" varStatus="i">
@@ -53,10 +53,13 @@
 		<br>
 	<div class="center_div">
 	<h4>이대로 주문하시겠습니까?</h4>
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-offset-2 col-sm-8">
 		<button type="button"
 		 onClick="location.href='roomaservice.do'" class="room_btn1">더 추가하기</button>
-		<button type="submit"
-		 onClick="openAddrJeju()" class="room_btn2">주문하기</button>
+		<button type="submit" class="room_btn2">주문하기</button>
+</div></div></div>
 	</div>
 </form>
 <br><br>

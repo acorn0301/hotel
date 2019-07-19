@@ -35,8 +35,7 @@
 <img alt="" src="images/etc/137.jpg" class="imgallwidth"> <br>
 
 <div class="list_left_div">
-호텔 1st는 천년 역사와 함께 가장 찬란한 문화 예술의 꽃을 피웠던 신라 왕조의 이름에서 유래 하였으며,<br>
-퍼스트그룹 故 에이콘 초대 회장의 뜻에 따라 1979년 3월 개관하였습니다.
+호텔 1st는 퍼스트그룹 故 에이콘 초대 회장의 뜻에 따라 1991년 5월 개관하였습니다.
 </div> <br>
 
 <div class="hr_bar"></div>
@@ -79,7 +78,7 @@ Premium Lifestyle Leading Company <br>
 모든 사업에 최고를 지향합니다.<br>
 모든 업무에서 혁신을 추구합니다.<br>
 모든 고객에게 정성을 다합니다.<br>
-모든 신라인은 서로를 존중합니다.<br>
+모든 퍼스트인은 서로를 존중합니다.<br>
 </div> <br><br>
 </div>
 </div>

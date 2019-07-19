@@ -122,8 +122,14 @@
 		<i class='fas fa-bullhorn' style='font-size:70px; color:#3a3125;'></i>
 		<br><br>
 		<h4><b>장바구니가 비어 있습니다.</b></h4> 
-			<button type="button" class="null_cart_btn"
-			onclick="location.href='roomaservice.do'">목록으로 돌아가기</button>
+		<div class="container">
+  		  <div class="row">
+			<div class="col-sm-offset-3 col-sm-6">
+				<button type="button" class="null_cart_btn"
+				onclick="location.href='roomaservice.do'">목록으로 돌아가기</button>
+			</div>
+		</div>
+	</div>
 </div>
 </c:if>
 

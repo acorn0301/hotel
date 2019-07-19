@@ -44,10 +44,14 @@
 		이용해주셔서 감사합니다.
 	</div>
 <br>	
+<div class="container">
+<div class="row">
+<div class="col-sm-offset-3 col-sm-6">
 		<div class="center_div">
 			<button type="button" class="null_cart_btn"
 			onclick="location.href='home.do'">메인으로 돌아가기</button>
 		</div>
+</div></div></div>
 <br><br>
 </div>
 </div>

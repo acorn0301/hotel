@@ -27,6 +27,8 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 		<mapper resource="mybatis/sql/OrderSql.xml"/>
 		<mapper resource="mybatis/sql/QnaSql.xml"/>
 		<mapper resource="mybatis/sql/ReviewSql.xml"/> 
+		<mapper resource="mybatis/sql/HashSql.xml"/>
+		
 		
 	</mappers>
 </configuration>

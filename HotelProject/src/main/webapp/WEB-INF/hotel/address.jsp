@@ -11,12 +11,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAu9CgTNsqX_Fa3834zZQFqI09MK1sNwEc" ></script>
-<style>
-	#map_ma{height: 300px;
-    clear: both;
-    border: 1px solid #8a6d3b8f;
-    margin: 0px 10px 10px 10px;}
-</style>
+
 </head>
 <body>
 <div class="hyebody">
@@ -34,13 +29,16 @@
 		지점별 위치
 	</div>
 </div>
-
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-offset-2 col-sm-8">
 	<!-- 버튼 클릭시 주소 이동 -->	
 	<div class="groupbtns btn-group">
 		<button type="button" onClick="openAddrSeoul()"
 		class="room_btn1">서울</button>
 		<button type="button" onClick="openAddrJeju()" class="room_btn2">제주</button>
 	</div>
+</div></div></div>
 <br><br>
 
 
