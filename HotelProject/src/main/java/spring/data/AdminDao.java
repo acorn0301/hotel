@@ -61,7 +61,7 @@ public class AdminDao extends SqlSessionDaoSupport{
 	}
 	
 	//예약 상태에 따른 리스트 분류
-	public List<AdminBookDto> getBookListByStatus(String book_status){
+	public List<AdminBookDto> getBookListByStatus(int book_status){
 		return getSqlSession().selectList("adminGetBookListByStatus", book_status);
 	}
 	

@@ -11,9 +11,9 @@
 
 </head>
 <body>
-	<div class="qna_body"> 
+	<div class="react_body"> 
 	
-	<embed src="http://192.168.0.201:3000/${sessionScope.member_num ==null ? 0 : sessionScope.member_num }"  style="width:100%; height:-webkit-fill-available;">
+	<embed src="http://localhost:3000/${sessionScope.member_num ==null ? 0 : sessionScope.member_num }"  style="width:100%; height:-webkit-fill-available;">
 	</div>
 </body>
 </html>

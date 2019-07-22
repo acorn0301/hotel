@@ -25,7 +25,13 @@
 	
 	<div class="dashboard_div">
 		<div class="admin_title_div">
-			<div class="admin_title_text">${book_status }</div>
+			<div class="admin_title_text">
+				<c:if test="${book_status==0 }">예약대기</c:if>
+				<c:if test="${book_status==1 }">예약완료</c:if>
+				<c:if test="${book_status==2 }">체크인</c:if>
+				<c:if test="${book_status==3 }">숙박중</c:if>
+				<c:if test="${book_status==4 }">체크아웃</c:if>
+			</div>
 		</div>
 		<div class="dashboard_div_table">
 			<ul>

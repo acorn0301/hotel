@@ -154,7 +154,7 @@ public class QnaController {
 		//로그인 회원의 경우 작성자 이름 넘어가도록 하기 
 		if(session.getAttribute("member_num")!=null) {
 			
-			int member_num = Integer.parseInt((String)session.getAttribute("member_num"));
+			int member_num = (Integer)session.getAttribute("member_num");
 			request.setAttribute("writer", qservice.getWriter(member_num));
 			
 		}
@@ -183,13 +183,13 @@ public class QnaController {
 		List<QnaReplyDto> replylist = qrservice.getQnaReplyList(board_num);
 		
 		//세션에 저장된 member_num을 가져온다.
-		String member_num = "";
+		int member_num = 0;
 		String member_name = "";
 		if(session.getAttribute("member_num")!=null) {
-			member_num = (String)session.getAttribute("member_num");
-			member_name = qservice.getWriter(Integer.parseInt(member_num));
+			member_num = (Integer)session.getAttribute("member_num");
+			member_name = qservice.getWriter(member_num);
 		}else {
-			member_num = "no";
+			member_num = 0;
 		}
 
 		request.setAttribute("member_num", member_num);

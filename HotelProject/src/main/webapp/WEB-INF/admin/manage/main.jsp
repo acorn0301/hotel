@@ -27,24 +27,24 @@
 	<div class="dashboard_div_table">
 		<ul>
 			<li>
-				<div class="dashboard_li_div" onclick="location.href='adminBookList.do?book_status=예약대기'">
+				<div class="dashboard_li_div" onclick="location.href='adminBookList.do?book_status=0'">
 					<i class='fas fa-check-circle color1' ></i>
 				 	예약대기 <div class="dashboard_li_number color1" > ${status0 } <span class="dashboard_li_gun">건</span> </div>
 				 </div>
 				
 			</li>
 			<li>
-				<div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=ChkIn'">
+				<div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=2'">
 				<i class='fas fa-sign-in-alt color2'></i>
 				 체크인 	<div class="dashboard_li_number color2" > ${statusCheckIn } <span class="dashboard_li_gun">건</span> 
 				 </div>
 				 </div>
 			</li>
-			<li><div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=ChkOut'">
+			<li><div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=4'">
 				<i class='fas fa-sign-out-alt color3'></i>
 				 체크아웃 <div class="dashboard_li_number color3"> ${statusCheckOut } <span class="dashboard_li_gun">건</span> </div></div></li>
 			<li>
-				<div class="dashboard_li_div li_last" onclick="location.href='adminBookList.do?book_status=예약완료'">
+				<div class="dashboard_li_div li_last" onclick="location.href='adminBookList.do?book_status=1s'">
 				<i class='fas fa-check-circle color4'  ></i>
 				 예약완료 <div class="dashboard_li_number color4"> ${status1 } <span class="dashboard_li_gun">건</span></div>
 				 </div>
@@ -58,15 +58,15 @@
 	</div>
 	<div class="dashboard_div_table">
 		<ul>
-			<li><div class="dashboard_li_div" onclick="location.href='adminOrderList.do?room_status=접수'">
+			<li><div class="dashboard_li_div" onclick="location.href='adminOrderList.do?room_status=0'">
 				<i class='fas fa-bell color5' ></i>
 				신규주문 <div class="dashboard_li_number color5">${ostatus0 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>
-			<li><div class="dashboard_li_div " onclick="location.href='adminOrderList.do?room_status=준비중'">
+			<li><div class="dashboard_li_div " onclick="location.href='adminOrderList.do?room_status=1'">
 				<i class='fas fa-hamburger color2'></i>
 				준비중 <div class="dashboard_li_number color2">${ostatus1 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>
-			<li><div class="dashboard_li_div li_last" onclick="location.href='adminOrderList.do?room_status=완료'">
+			<li><div class="dashboard_li_div li_last" onclick="location.href='adminOrderList.do?room_status=2'">
 				<i class='fas fa-concierge-bell color3' ></i>
 				처리완료 <div class="dashboard_li_number color3" >${ostatus2 } <span class="dashboard_li_gun">건</span></div></div>
 			</li>

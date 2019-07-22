@@ -86,18 +86,17 @@ public class AdminController {
 	
 	//예약리스트를 상태별로 가져온다.
 	@RequestMapping("/adminBookList.do")
-	public String adminBookList(HttpServletRequest request, @RequestParam String book_status) {
+	public String adminBookList(HttpServletRequest request, @RequestParam int book_status) {
 		
 		List<AdminBookDto> list = null;
 		
-		if(book_status.equals("ChkIn")) {
+		if(book_status == 1) {
 			list = aservice.getBookListCheckInToday();
-		}else if(book_status.equals("ChkOut")) {
+		}else if(book_status == 4) {
 			list = aservice.getBookListCheckOutToday();
 		}else {
 			list = aservice.getBookListByStatus(book_status);
-		}		
-		
+		}
 		request.setAttribute("book_status", book_status);
 		request.setAttribute("list", list);
 		request.setAttribute("container", "../admin/manage/books.jsp");

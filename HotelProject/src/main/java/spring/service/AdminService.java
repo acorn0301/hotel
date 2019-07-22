@@ -77,7 +77,7 @@ public class AdminService {
 	}
 	
 	//예약 상태에 따른 리스트 분류
-	public List<AdminBookDto> getBookListByStatus(String book_status){
+	public List<AdminBookDto> getBookListByStatus(int book_status){
 		return adao.getBookListByStatus(book_status);
 	}
 	

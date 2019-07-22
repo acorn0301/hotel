@@ -3,5 +3,72 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="review">
-
+	<select id="reviewGetList" resultType="rvdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from 
+		(select r.*, m.member_num, m.id, m.member_pic
+		from review r, book bk, member m
+		where r.book_num=bk.book_num
+		and bk.member_num = m.member_num order by r.review_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>
+	</select>
+	
+	<select id="reviewTotalCount" resultType="int">
+		select count(*) from review
+	</select>
+	
+	<select id="reviewUpdateLike" parameterType="int">
+		update review set review_like = review_like+1 where review_num = #{review_num}
+	</select>
+	
+	<select id="reviewUpdateUnlike" parameterType="int">
+		update review set review_like = review_like-1 where review_num = #{review_num}
+	</select>
+	
+	<select id="reviewReplyGetCount" parameterType="int" resultType="int">
+		select count(*) from review_reply where review_num=#{review_num}
+	</select>
+	
+	<select id="reviewReplyGetList" parameterType="int" resultType="spring.data.ReviewReplyDto">
+		select rr.*, m.id, m.member_pic 
+		from review_reply rr, member m
+		where rr.member_num = m.member_num
+		and rr.review_num = #{review_num}
+		order by review_reply_writeday asc
+	</select>
+	
+	<select id="reviewGetUserInfo" parameterType="int" resultType="mbdto">
+		select * from member where member_num=#{member_num}
+	</select>
+	
+	<select id="reviewInsertReview" parameterType="rvdto">
+		insert into review values (reviewseq.nextval, #{review_clean}, #{review_dining}, #{review_location}, #{review_service},
+		#{review_price}, sysdate, #{review_comment}, 0, #{book_num}, #{review_img})
+	</select>
+	
+	
+	<!-- 댓글 인서트  -->
+	<select id="reviewReplyInsert" parameterType="spring.data.ReviewReplyDto">
+		insert into review_reply values(
+		review_reply_seq.nextval, #{review_num}, #{member_num}, sysdate, #{review_reply_comment})
+	</select>	
+	
+	<!-- 글 삭제하기 -->
+	<select id="reviewDeleteData" parameterType="int">
+		delete from review where review_num = #{review_num}
+	</select>
+	
+	<!-- 특정 게시물에 달린 모든 댓글 삭제하기 -->
+	<select id="reviewDeleteReplies" parameterType="int">
+		delete from review_reply where review_num = #{review_num}
+	</select>
+	
+	<!-- 댓글 삭제하기 -->
+	<select id="reviewDeleteReply" parameterType="int">
+		delete from review_reply where review_reply_num = #{review_reply_num}
+	</select>
+	
+	
+	<!-- 리뷰 넘 넣으면 해당 데이타 가져오게.. -->
+	<select id="reviewGetData" parameterType="int" resultType="rvdto">
+		select * from review where review_num = #{review_num}
+	</select>
 </mapper>

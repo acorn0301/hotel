@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="adminGetBookListStatus0" resultType="int">
-		select count(*) from book where book_status='예약대기'
+		select count(*) from book where book_status=0            
 	</select>
 
 	<select id="adminGetBookListCheckIn" resultType="int">
@@ -48,19 +48,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="adminGetBookListWaiting" resultType="int">
-		select count(*) from book where book_status='예약완료'		
+		select count(*) from book where book_status=1	
 	</select>
 	
 	<select id="adminGetOrderListStatus0" resultType="int">
-		select count(*) from room_order where room_status='접수'
+		select count(*) from room_order where room_status=0
 	</select>
 	
 	<select id="adminGetOrderListStatus1" resultType="int">
-		select count(*) from room_order where room_status='준비중'
+		select count(*) from room_order where room_status=1
 	</select>
 	
 	<select id="adminGetOrderListStatus2" resultType="int">
-		select count(*) from room_order where room_status='완료'
+		select count(*) from room_order where room_status=2
 	</select>
 	
 	<select id="adminGetQnaByCategory" parameterType="String" resultType="int">
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from book where book_num = #{book_num}
 	</select>
 	
-	<select id="adminGetBookListByStatus" parameterType="String" resultType="spring.data.AdminBookDto">
+	<select id="adminGetBookListByStatus" parameterType="int" resultType="spring.data.AdminBookDto">
 		select book_num, add_bed,breakfast_count, b.room_num, hotel_local, room_local, 
 		head_count, check_in, check_out,
 		m.name, m.id, book_day
@@ -121,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         
         o.order_num = #{order_num}    
 	</select>
-	<select id="adminGetOrderListByStatus" parameterType="String" resultType="spring.data.AdminOrderDto">
+	<select id="adminGetOrderListByStatus" parameterType="int" resultType="spring.data.AdminOrderDto">
 		select 
         o.*, 
         
@@ -182,4 +182,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="adminGetEmpList" resultType="edto">
 		select e.*, m.* from emp e, member m where e.member_num = m.member_num
 	</select>
+	
+	
+	
 </mapper>

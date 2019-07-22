@@ -175,6 +175,10 @@ ul{
     width: 100%;
     background-color: white;
 }
+#qna_content_div{
+	margin-left: -10px;
+	margin-right: -10px;
+}
 
 .qna_title_div{
 	position: relative;
@@ -449,9 +453,7 @@ a{
 .dashboard_li_div i{
 	margin-right: 5px;
 }
-.li_last{
-	border : 0;
-}
+
 
 .dashboard_li_number{
 	float:right;
@@ -624,27 +626,28 @@ a{
 
 }
 
-     .twinkle1{
-          animation : twinkle 3s infinite;
-      }
+.twinkle1{
+    animation : twinkle 3s infinite;
+}
 
-      .twinkle2{
-          animation : twinkle 1.6s infinite;
-      }
+.twinkle2{
+    animation : twinkle 1.6s infinite;
+}
 
-      .twinkle3{
-          animation : twinkle 0.9s infinite;
-      }
+.twinkle3{
+    animation : twinkle 0.9s infinite;
+}
 
-      .twinkle4{
-          animation : twinkle 2.5s infinite;
-      }
+.twinkle4{
+    animation : twinkle 2.5s infinite;
+}
 
-      .twinkle5{
-          animation : twinkle 4.9s infinite;
-      }
+.twinkle5{
+    animation : twinkle 4.9s infinite;
+}
+ 
       
-      
+   
  
  
  
@@ -719,4 +722,40 @@ a{
  
 .user_list_div_1 img{
 	width: 30px;
+}
+
+/* 리뷰 작성 페이지를 위한 css */
+
+.review_stars_div>div{
+	padding-top: 10px;
+	text-align: center;
+	font-weight: bold;
+	color: #685845;
+}
+.stars_div{
+	
+	padding-bottom: 10px;
+	border-bottom: 1px solid lightgrey;
+	font-size: 1.8em;
+	color: tan;
+}
+
+.myfileinput{
+	border: 0;
+	height: 50px;
+	padding-top: 15px;
+}
+
+
+
+
+
+.li_last{
+	border : 0;
+}
+
+
+/* 리액트 전용 페이지를 위한 css.. */
+.react_body{
+	margin : -8px;
 }

@@ -54,4 +54,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{id} and email=#{email}
 	</select>
 
+
+		<!-- 장희 수정 시작 -->
+
+	
+	<!-- 로그인 시 현재 숙박중인 회원인지 확인하기 : 숙박중이면 1, 아니면 0을 반환하게 된다. -->
+	<select id="isHere" parameterType="int" resultType="int">
+		<![CDATA[select count(*) from book where
+		member_num = #{member_num}
+		and
+		TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') <=  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') 
+		and
+		TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') >=  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')]]>
+	</select>
+	
+	<!-- 로그인 시 현재 숙박중이거나 체크아웃한지 일주일 이내인지 확인하기 -> 리뷰 작성 가능한지 판단해서 book_num을 반환한다.  -->
+	<!-- 만일 조건에 해당하는 예약내역이 2건 이상인 경우 최근의 예약건만 반환된다. -->
+	<select id="isReviewAvailable" parameterType="int" resultType="int">
+		<![CDATA[select max(book_num) as book_num from 
+		(select book_num from book where
+		member_num = #{member_num}
+		and
+		TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') <=  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') 
+		and
+		TO_CHAR(trunc(check_out+7), 'yyyy-MM-dd HH24miSS') >=  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS'))]]>
+	</select>
+	
+	
+	<!-- 장희 수정 끝 -->
 </mapper>

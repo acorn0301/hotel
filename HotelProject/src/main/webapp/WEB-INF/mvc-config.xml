@@ -13,6 +13,12 @@
 	<mvc:resources location="/WEB-INF/resources/js/" mapping="/js/**"></mvc:resources>            
 	<mvc:resources location="/WEB-INF/resources/css/" mapping="/css/**"></mvc:resources>            
             
+   <!-- file upload setting  -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="maxUploadSize" value="4500000"></property>
+		</bean>
+	<mvc:default-servlet-handler/>        
+            
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="spring.*"></context:component-scan>
 

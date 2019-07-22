@@ -234,7 +234,7 @@
 <!-- 로그인 했을 경우 페이지 -->
 <div class="main_slide_div">
 	<div class="center_div">
-		<span class="main_login_text">손님 환영합니다.</span> <br>
+		<span class="main_login_text">${sessionScope.member_num }님 환영합니다.</span> <br>
 		<button type="button" class="main_login_btn1"
 		onclick="location.href='logout.do'">로그아웃</button>
 	</div>

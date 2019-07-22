@@ -83,5 +83,17 @@ public class MemberService {
     {
     	return mbdao.IdEmailMatchCount(mbdto);
     }
+    
+    //장희 수정 시작
+    //현재 숙박중인 회원인지 판단하기 (0 혹은 1 반환)
+    public int isHere(int member_num) {
+ 	   return mbdao.isHere(member_num);
+    }
+    
+    //현재 숙박 중이거나 체크아웃 한지 일주일 이내인지 확인하여(리뷰 작성 가능한지) null 혹은 book_num을 반환
+    public int isReviewAvailable(int member_num) {
+ 	   return mbdao.isReviewAvailable(member_num);
+    }
+    //장희 수정 끝 
 
 }

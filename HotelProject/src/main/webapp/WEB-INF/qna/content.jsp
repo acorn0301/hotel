@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 </head>
 <body>
 
@@ -60,7 +60,7 @@
 						<a class="btn_aside_li">수정하기&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
 					</li>
 					<li onclick="gotoDeleteForm(${qdto.board_num},${pageNum })">
-						<a class="btn_aside_li">삭제하기&nbsp;&nbsp;<i class="fa fa-trash-o"></i></a>
+						<a class="btn_aside_li">삭제하기&nbsp;&nbsp;<i class="far fa-trash-alt"></i></a>
 					</li>					
 				</ul>
 			</div>
@@ -96,7 +96,7 @@
 		
 		
 		<!-- 로그인 시에만 댓글 창이 열린다. -->
-		<c:if test="${member_num != 'no' }">
+		<c:if test="${member_num != 0 }">
 			<div class="comment_content_wrap">
 				<div class="comment_write_wrap">		
 					<div class="comment_box_write">

@@ -91,6 +91,80 @@ public class MemberController {
 //	   }
 //   }
    
+
+   //장희 추가 시작
+   @RequestMapping(value="/reactLogin.do")
+   public String reactlogin(HttpServletRequest request) {
+	   System.out.println("react login do");
+	   	 
+	      return "member/login/reactLogin";
+   }
+   //리액트 용 로그인프로세스 
+   @RequestMapping(value="/reactLoginProcess.do", method=RequestMethod.POST)
+   public String reactLoginProcess(HttpServletRequest request, HttpSession session,
+         @ModelAttribute MemberDto mbdto, RedirectAttributes rttr)
+   {
+	   
+	   System.out.println("react login process ");
+      MemberDto login = mservice.loginCheck1(mbdto);
+
+      boolean passMatch = passEncoder.matches(mbdto.getPassword(), login.getPassword());
+
+      //로그인 성공시
+      if(login != null && passMatch){
+         session.setAttribute("member", login);
+
+         if(session.getAttribute("url") != null )
+         {
+            String url = (String)session.getAttribute("url");
+            session.removeAttribute("url");
+            session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
+
+            return "redirect:" + url;
+         }
+         
+         request.setAttribute("container", "../layout/indexmain.jsp");
+         request.setAttribute("msg", "환영합니다 ");
+         
+         //멤버 넘 받아서 세션에 올려주기 
+         int member_num = mservice.getMembernum(mbdto.getId(), login.getPassword());
+         session.setAttribute("member_num", member_num);
+    
+         
+         int ishere = mservice.isHere(member_num);
+         System.out.println("ishere " + ishere);
+         if(ishere==1) {
+        	 session.setAttribute("ishere", 1);
+         }else {
+        	 session.setAttribute("ishere", 0);
+         }
+         
+ 
+         
+         int book_num = 0;
+         // 문희쌤 왈 트라이 캐치를 해주자!!
+         try {
+        	 book_num = mservice.isReviewAvailable(member_num);
+         }catch(Exception e) {
+        	 System.out.println(e);
+         }
+         
+         System.out.println("book num " + book_num);
+    	 session.setAttribute("book_num", book_num);
+
+         
+         return "review/reactlist"; 
+         
+      }else{ //실패시
+         session.setAttribute("member", null);
+         rttr.addFlashAttribute("msg",false);
+         request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
+
+         return "member/login/loginmain";
+      }
+   }
+   
+   
    
    // 로그인 처리 - 혜수수정
    @RequestMapping(value="/loginProcess.do", method=RequestMethod.POST)
@@ -116,8 +190,46 @@ public class MemberController {
          
          request.setAttribute("container", "../layout/indexmain.jsp");
          request.setAttribute("msg", "환영합니다 ");
+         
+         int member_num = mservice.getMembernum(mbdto.getId(), login.getPassword());
+         session.setAttribute("member_num", member_num);
+         
+         //장희 수정 시작 
 
-         session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
+         //현재 로그인 한 고객이 숙박중이거나 혹은 체크아웃한지 일주일 이내인지 알아낸다.
+         //이 고객에 한 해 리뷰 작성하기 버튼이 보이기 때문임.
+         // 현재 숙박중 여부를 ishere에 저장, 숙박 or 일주일이내 여부를 book_num 으로 저장 
+         
+         int ishere = mservice.isHere(member_num);
+         System.out.println("ishere " + ishere);
+         if(ishere==1) {
+        	 session.setAttribute("ishere", 1);
+         }else {
+        	 session.setAttribute("ishere", 0);
+         }
+         
+         // 아래 방법으로 북넘을 얻으면 널포인트 익셉션이 뜬다...
+//         int book_num = mservice.isReviewAvailable(member_num);
+//         System.out.println("isreview book num " + book_num);
+//         if(book_num != 0) {
+//        	 session.setAttribute("book_num", book_num);
+//         }else {
+//        	 session.setAttribute("book_num", book_num);
+//         }
+         
+         int book_num = 0;
+         // 문희쌤 왈 트라이 캐치를 해주자!!
+         try {
+        	 book_num = mservice.isReviewAvailable(member_num);
+         }catch(Exception e) {
+        	 System.out.println(e);
+         }
+         
+         System.out.println("book num " + book_num);
+    	 session.setAttribute("book_num", book_num);
+
+         
+         //장희 수정 끝 
 
          return "layout/home"; 
          

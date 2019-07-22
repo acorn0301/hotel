@@ -15,6 +15,14 @@ public class MemberDto {
    private String email;
    private String phone;
    private String grade;
+   private String member_pic;
+   
+   public String getMember_pic() {
+	return member_pic;
+	}
+	public void setMember_pic(String member_pic) {
+		this.member_pic = member_pic;
+	}
    
    public int getMember_num() {
       return member_num;
