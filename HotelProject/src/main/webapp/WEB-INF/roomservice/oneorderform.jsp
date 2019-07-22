@@ -57,7 +57,7 @@
 <div class="row">
 <div class="col-xs-12 col-sm-offset-2 col-sm-8">
 		<button type="button"
-		 onClick="location.href='roomaservice.do'" class="room_btn1">더 추가하기</button>
+		 onClick="location.href='roomaservice.do'" class="room_btn1">취소하기</button>
 		<button type="submit" class="room_btn2">주문하기</button>
 </div></div></div>
 	</div>
