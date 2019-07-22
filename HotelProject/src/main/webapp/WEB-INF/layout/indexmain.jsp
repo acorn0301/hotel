@@ -234,9 +234,33 @@
 <!-- 로그인 했을 경우 페이지 -->
 <div class="main_slide_div">
 	<div class="center_div">
-		<span class="main_login_text">${sessionScope.member_num }님 환영합니다.</span> <br>
-		<button type="button" class="main_login_btn1"
-		onclick="location.href='logout.do'">로그아웃</button>
+		<span class="main_login_text">
+					<c:if test="${sessionScope.book_num == 0 and sessionScope.ishere == 0 }">
+						${sessionScope.name }님 환영합니다.
+					</c:if>
+					<c:if test="${sessionScope.book_num != 0 and sessionScope.ishere == 1}">
+						${sessionScope.name }님 편안한 숙박되세요.
+					</c:if>
+					<c:if test="${sessionScope.book_num != 0 and sessionScope.ishere == 0}">
+						${sessionScope.name }님 편안한 숙박 되셨나요? 후기를 남겨주세요.
+					</c:if>
+						</span> <br>
+		
+		<c:if test="${sessionScope.book_num == 0  }">
+			<button type="button" class="main_login_btn1"
+			onclick="location.href='logout.do'">로그아웃</button>
+		</c:if>
+		
+		<c:if test="${sessionScope.ishere == 1 }">
+			<button type="button" class="main_login_btn1"
+			onclick="location.href='roomaservice.do'">룸서비스</button>
+		</c:if>
+		
+		<c:if test="${sessionScope.book_num != 0 }">
+			<button type="button" class="main_login_btn2"
+			onclick="location.href='reviewwriteform.do'">리뷰작성</button>
+		</c:if>
+	
 	</div>
 </div>	
 

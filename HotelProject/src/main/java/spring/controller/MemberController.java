@@ -149,8 +149,16 @@ public class MemberController {
         	 System.out.println(e);
          }
          
-         System.out.println("book num " + book_num);
     	 session.setAttribute("book_num", book_num);
+    	 
+    	 
+    	 //로그인 한 고객의 grade를 세션에 올려준다.
+    	 String grade = mservice.getMemberData(member_num).getGrade();
+    	 session.setAttribute("grade", grade);
+    	 
+    	 //로그인 한 고객의 이름을 세션에 올려준다 
+    	 String name = mservice.getMemberData(member_num).getName();
+    	 session.setAttribute("name", name);
 
          
          return "review/reactlist"; 
@@ -220,13 +228,27 @@ public class MemberController {
          int book_num = 0;
          // 문희쌤 왈 트라이 캐치를 해주자!!
          try {
+        	 //리뷰 작성이 가능한 고객(숙박중이거나 체크아웃한지 일주일 이내)의 예약번호를 세션에 저장한다.
         	 book_num = mservice.isReviewAvailable(member_num);
          }catch(Exception e) {
         	 System.out.println(e);
          }
          
-         System.out.println("book num " + book_num);
     	 session.setAttribute("book_num", book_num);
+    	 
+    	 
+    	 //로그인 한 고객의 grade를 세션에 올려준다.
+    	 String grade = mservice.getMemberData(member_num).getGrade();
+    	 session.setAttribute("grade", grade);
+    	 
+    	 //로그인 한 고객의 이름을 세션에 올려준다 
+    	 String name = mservice.getMemberData(member_num).getName();
+    	 session.setAttribute("name", name);
+    	 
+    	 //만약 로그인 한 회원이 관리자 일 경우 메인페이지가 아닌 관리자 페이지로 바로 보내준다. 
+    	 if(grade.equals("a")) {
+    		 return "redirect:admin.do";
+    	 }
 
          
          //장희 수정 끝 
@@ -248,6 +270,13 @@ public class MemberController {
    public String logout(HttpSession session) {
       
 	  session.removeAttribute("member_num");
+	  session.removeAttribute("book_num");
+	  session.removeAttribute("grade");
+	  session.removeAttribute("ishere");
+	  session.removeAttribute("name");
+	  session.removeAttribute("container");
+	  session.removeAttribute("msg");
+	  
 	   
       //로그아웃 되는 로직을 짜보세요.
       //세션도 깔끔하게 지워줍시다. 
