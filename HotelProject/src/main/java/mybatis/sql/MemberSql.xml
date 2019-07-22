@@ -82,4 +82,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 장희 수정 끝 -->
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="withdrawal" parameterType="mbdto">
+		delete from member where id=#{id} and password=#{password}
+	</delete>
+	
+	<!-- 아이디로 member_num얻기 (카카오부분) -->
+	<select id="getMembernum_kakao" parameterType="String" resultType="int">
+		select member_num from member where id=#{id}
+	</select>
 </mapper>

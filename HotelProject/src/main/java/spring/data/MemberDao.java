@@ -103,4 +103,16 @@ public class MemberDao extends SqlSessionDaoSupport{
    }
    //장희 수정 끝
    
+   // 회원 탈퇴
+   public void withdrawal(MemberDto mbdto)
+   {
+	   getSqlSession().delete("member.withdrawal", mbdto);
+   }
+   
+   // member_num 값 얻기 (id만 받아서)
+   public int getMembernum_kakao(String id)
+   {
+	   return getSqlSession().selectOne("member.getMembernum_kakao", id);
+   }
+   
 }

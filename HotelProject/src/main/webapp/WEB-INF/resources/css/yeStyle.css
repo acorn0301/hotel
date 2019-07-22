@@ -1,7 +1,8 @@
 	#loginForm a {color: gray;}
 	a:HOVER{ text-decoration: none; font-weight: bold;}
 	
-	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm{
+	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,
+	#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm, .withdrawalForm{
 		margin: -10px;
 	}
 	#idBtn {display: inline-block; float: left;}
@@ -9,15 +10,34 @@
 	.dateForm {margin-bottom: 15px; padding: 0 20px;}
 	.telForm {margin-top: -15px;}
 	
-	#joincomplete, #findPwOkForm, #findIdOkForm{text-align: center;}
+	#joincomplete, #findPwOkForm, #findIdOkForm, .withdrawalForm{text-align: center;}
 	
 	#chkmsg { color: red;}
-	#loginPlus {text-align: center; font-size: 13px;}
+	
+	.loginPlus {text-align: center; font-size: 13px;}
+	.google_login {
+		display:block;
+		text-align: center; 
+		width: 100%;
+		height:35px;
+		line-height:35px;
+		font-size: 17px;
+		border : 1px solid #3a3125;
+		margin-top: -10px;
+	}
+/* 	.google_login a { display: block; }*/	
+	
+	#kakao_btn{border:0px; background-color: white;}
 	
 	#editNo {text-align: right;}
+	
+	.myinfo{text-align: center; }
 
+.kakao_login, .withdrawalbtn{
+	text-align: center;
+}
 
-#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk{
+#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk, #wdok{
     display: block;
     width: 100%;
     height: 45px;
@@ -30,6 +50,17 @@
     color: #f1ebd6;
     background-color: #3a3125;
 }
+
+#withdrawalCancel, #withdrawalOk { 
+	color:white; 
+	display: inline; 
+	font-size: 17px; 
+	height: 40px; 
+	border: 0; 
+	width: 150px;
+}
+#withdrawalOk { background-color : #3a3125;}
+#withdrawalCancel { background-color :#e3dfda;}
 	
 	.inputbox {
     border: 0;
@@ -71,7 +102,7 @@
 	
 	.linkBox{margin:0; padding:0; font-size:15px; line-height:160%; color:#666666;-webkit-text-size-adjust:none; }
 	.linkLIst, .linkLIst li{ list-style:none; margin:15px 0px; padding:10px 5px;}
-	.linkLIst a{ text-decoration:none; color:#666}
+	.linkLIst a{ text-decoration:none; color:#666; display: block;}
 	.linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
 
 
@@ -147,7 +178,7 @@
 .terms_chk_all{ padding: 0 39px;}
 
 .chk {position:relative; margin:45px 0 0 20px;} 
-.chk label {position:absolute; left:0; height:20px; padding:4px 0 0 25px; background:url('images/custom_checkbox2.png') no-repeat;} 
+.chk label {position:absolute; left:0; height:20px; padding:4px 0 0 25px; no-repeat;} 
 .chk input[type="checkbox"]:checked + label {background-position:0 -25px;}
 
 
@@ -237,3 +268,100 @@
 .btn_type+.btn_type {
 	margin-top: 10px
 }
+
+
+
+
+
+
+.profile_photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 15px
+}
+
+.btn_file label .btn2 {
+    color: #333;
+}
+.btn_model .btn2 {
+    border: 1px solid #bfbfbf;
+    background: #fff;
+}
+.btn_model .btn1, .btn_model .btn2, .btn_model .btn3 {
+    min-width: 52px;
+    height: 33px;
+    padding: 10px;
+    color: #a3a3a3;
+}
+.btn_model b, .btn_model>em, .btn_model>span {
+    display: inline-block;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: top;
+    letter-spacing: -1px;
+}
+
+
+.btn_file label {
+    display: inline-block;
+    width: 77px;
+    height: 30px;
+    cursor: pointer;
+}
+.btn_model {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none!important;
+    margin-top:60px;
+    height: 35px;
+    
+}
+
+
+input[type="file" i] {
+    -webkit-appearance: initial;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+}
+
+input[type=file] {
+    display: contents;
+}
+
+.inputbox_file {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 0px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+
+.pic{
+	display: inline-flex;
+}
+
+
+

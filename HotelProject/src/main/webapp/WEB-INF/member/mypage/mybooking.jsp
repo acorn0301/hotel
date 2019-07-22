@@ -11,7 +11,7 @@
 </head>
 <body>
 
-000님의 예약 내역
+${mbdto.name }님의 예약 내역
 <br><br>
 
 </body>

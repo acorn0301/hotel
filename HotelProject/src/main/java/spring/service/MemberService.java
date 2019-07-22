@@ -95,5 +95,17 @@ public class MemberService {
  	   return mbdao.isReviewAvailable(member_num);
     }
     //장희 수정 끝 
+    
+    // 회원 탈퇴
+    public void withdrawal(MemberDto mbdto)
+    {
+    	mbdao.withdrawal(mbdto);
+    }
+
+    // member_num 값 얻기 (id만 받아서)
+    public int getMembernum_kakao(String id)
+    {
+ 	   return mbdao.getMembernum_kakao(id);
+    }
 
 }

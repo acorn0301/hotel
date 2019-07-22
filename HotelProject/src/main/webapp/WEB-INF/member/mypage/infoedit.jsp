@@ -6,6 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/yeStyle.css">
+<link rel="stylesheet" href="images/">
 <style type="text/css">
 
 </style>
@@ -49,6 +50,16 @@ function check(){
 	return true;
 	
 }
+
+
+// 사진변경 버튼 클릭
+function btnChange(){
+	
+}
+
+
+
+
 </script>
 
 <div id="EditForm">
@@ -96,7 +107,7 @@ function check(){
 
 	<!-- 생년월일 -->
 	<div class="dateForm">
-		<select id="year" name="year" class="custom-select">
+		<select id="year" name="year" class="custom-select" disabled="disabled">
 			<c:set var="n" value="2019"/>
 			<c:forEach begin="1940" end="2019" >
 				<option value="${n}">${n}</option>
@@ -105,7 +116,7 @@ function check(){
 		</select>
 		<span>년 &nbsp;</span>
 	
-		<select id="month" name="month" class="custom-select">
+		<select id="month" name="month" class="custom-select" disabled="disabled">
 			<c:set var="n" value="1" />
 			<c:forEach begin="1" end="12">
 				<option value="${n}">${n}</option>
@@ -114,7 +125,7 @@ function check(){
 		</select>
 		<span>월 &nbsp;</span>
 		
-		<select id="day" name="day" class="custom-select">
+		<select id="day" name="day" class="custom-select" disabled="disabled">
 			<c:set var="n" value="1" />
 			<c:forEach begin="1" end="31">
 				<option value="${n}">${n}</option>
@@ -131,17 +142,39 @@ function check(){
 		<div class="form_group">
 		<input type="text" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required" value="${mbdto.email }">
 		</div>
-	</div><br>
-	
-	
-	
+	</div>
+
+	<!-- 프로필사진 -->
+	<div class="pic">
+		<div class="profile_photo">
+			<img id="imgThumb" src="images/mypage/user_pic.jpg" width="80" height="80">
+			<span class="mask"></span>
+		</div>
+		
+		<div class="btn_area_btm">
+			<span class="btn_file">
+			<label for="inputImage" class="btn_model">
+				<b id="btnChangeProfile" class="btn2" onclick="return btnChange()">사진변경</b>
+			</label>
+			
+			<input class="inputbox_file" type="file" id="inputImage" name="profileImage" accept="image/*">
+	        </span>
+		</div>
+	           
+		<a href="javascript:;" class="btn_model">
+		<b id="btnDelete" class="btn2 btn_disable" onclick="">삭제</b>
+		</a>
+     </div>
+     
+	<div class="form_group"></div><br>
 	<!-- hidden -->
 	<input type="hidden" name="member_num" value="${mbdto.member_num}">
 
 	<div class="col-sm-3 text-center">
 		<input type="submit" value="수정 완료" id="editOk">
-	</div><br>
-
+	</div>
+	<br>
+	
 </form>
 </div>
 </body>

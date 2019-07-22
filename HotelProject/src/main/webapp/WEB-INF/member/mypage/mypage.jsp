@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <div id="mypageForm">
 <form action="" method="post">
 <div class="headTit">
@@ -20,9 +21,24 @@
 	</div>
 </div>
 
-<%-- <div>
-${mbdto.name } 님의 정보
-</div> --%>
+<div class="myinfo">
+	<h3>[ ${mbdto.name} ] 님의 마이페이지</h3><br>
+	<div>
+		<img id="imgThumb" src="images/mypage/user_pic.jpg" width="100" height="100">
+		<span class="mask"></span>
+	</div>
+</div>
+
+<div>
+
+</div>
+<!-- 프로필 이미지 -->
+<%-- <c:if test="${mbdto.imagename!='noImg' && mbdto.image=='yes'}">
+	<img src="mypage/${mbdto.imagename}" style="max-width:400px;"><br>
+</c:if>
+<c:if test="${mbdto.imagename!='noImg' && mbdto.image=='no'}">
+	<img src="images/mypage/user_pic.jpg" style="max-width:150px;"><br>
+</c:if> --%>
 
 <div class="linkBox">
 	<ul class="linkLIst">
@@ -30,7 +46,7 @@ ${mbdto.name } 님의 정보
 		<li><a href="roomaservice.do">룸서비스 주문내역</a></li>
 		<li><a href="infoEdit.do">내 정보수정</a></li>
 		<li><a href="qnalist.do">문의하기</a></li>			
-		<li class="last"><a href="">회원탈퇴</a></li>
+		<li class="last"><a href="withdrawal.do">회원탈퇴</a></li>
 	</ul>
 </div>
 

@@ -10,7 +10,7 @@
 <script src="https://kit.fontawesome.com/073cb107c5.js"></script>
 <link rel="stylesheet" href="css/yeStyle.css">
 <script src="js/yeScript.js"></script>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
@@ -44,12 +44,39 @@
 </div>
 
 <b id="chkmsg">${msg}</b><br><br>
-<div class="col-sm-3 text-center">
+<div>
 	<input type="submit" value="로그인" id="loginOk">
-</div>
-<br>
+</div><br>
 
-<div id="loginPlus">
+<%-- <div class="col-sm-3 text-center">
+	<div class="google_login">
+		<i class="fab fa-google-plus-square"></i>
+		<a href="${google_url}">Google 로그인</a>
+	</div>
+</div><br> --%>
+
+<!-- https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://localhost:9000/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll -->
+<!-- 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=648cef1155eab095ac302a90bb64baa6&redirect_uri=http://localhost:9000/HotelProject/kakaoLogin&response_type=code">
+			<img src="images/mypage/kakao_account_login_btn.png" height="40px;">
+		</a> -->
+<!-- 		<a href="https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://localhost:9000/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll">
+			<img src="images/mypage/kakao_account_login_btn.png" height="40px;">
+		</a> -->
+
+<!-- 카카오 로그인 버튼 -->
+	<div class="kakao_login">
+	<c:if test="${userId == null}">
+		<a href="https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://localhost:9000/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll">
+			<img src="images/mypage/kakao_btn.png" height="40px;">
+		</a>
+	</c:if>
+	<c:if test="${userId != null}">
+		<!-- <input type="button" value="로그아웃" onclick="location.href='kakaoLogout.do'"> -->
+	</c:if>
+	
+	</div><br>
+
+<div class="loginPlus">
 <a href="joinagree.do" id="joinPage">회원가입</a>
 |
 <a href="findIdform.do" id="findId">아이디 찾기</a>
@@ -58,5 +85,6 @@
 </div>
 </form>
 </div>
+
 </body>
 </html>

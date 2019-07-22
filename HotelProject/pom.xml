@@ -149,11 +149,11 @@
 			<version>1.1.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-		<dependency>
+ <!-- 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>1.0</version>
-		</dependency> 
+		</dependency>  --> 
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -169,8 +169,12 @@
 
 
 		<!-- ojdbc 수동으로 넣 -->
-		<!-- <dependency> <groupId>ojdbc</groupId> <artifactId>ojdbc</artifactId> 
-			<version>14</version> <scope>system</scope> <systemPath>/Users/jenny/Desktop/Acorn/git/hotel/HotelProject/src/main/webapp/WEB-INF/ojdbc14.jar</systemPath> 
+		<!-- <dependency> 
+		<groupId>ojdbc</groupId> 
+		<artifactId>ojdbc</artifactId> 
+			<version>14</version> 
+			<scope>system</scope> 
+			<systemPath>/Users/jenny/Desktop/Acorn/git/hotel/HotelProject/src/main/webapp/WEB-INF/ojdbc14.jar</systemPath> 
 			</dependency> -->
 
 
@@ -242,10 +246,49 @@
 		
 		
 		<!-- 이미지 리사이징을 위한.. -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.imgscalr</groupId>
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
+		</dependency> -->
+		
+	<!-- commons-io 수동으로 넣기 -->
+	<dependency>
+		<groupId>commons-io</groupId>
+		<artifactId>commons-io</artifactId>
+		<version>1.0</version>
+		<scope>system</scope>
+		<systemPath>C:/Users/y_eun/git/hotel_master2/HotelProject/src/main/webapp/WEB-INF/commons-io-1.0.jar</systemPath>
+	</dependency> 
+	
+	<!-- 이미지 리사이징을 위한.. 수동으로 넣기 -->
+	<dependency>
+		<groupId>org.imgscalr</groupId>
+		<artifactId>imgscalr-lib</artifactId>
+		<version>4.2</version>
+		<scope>system</scope>
+		<systemPath>C:/Users/y_eun/git/hotel_master2/HotelProject/src/main/webapp/WEB-INF/imgscalr-lib-4.2.jar</systemPath>
+	</dependency>
+	
+	<!-- 카카오 -->
+		<!-- httpcore(카카오) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.6</version>
+        </dependency>
+ 
+        <!-- httpclient(카카오) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+	
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.5</version>
 		</dependency>
 
 	</dependencies>

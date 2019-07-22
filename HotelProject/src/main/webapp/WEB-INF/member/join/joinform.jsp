@@ -10,6 +10,17 @@
 <script src="https://kit.fontawesome.com/073cb107c5.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.placeholderChange{
+		color:red;
+	}
+/* 	input::placeholder {
+  	color: red;
+	} */
+	input::placeholder .placeholderChange2{
+		color:red;
+	}
+</style>
 </head>
 
 <body>
@@ -45,31 +56,48 @@ function check(){
 	
 	if(join.id.value.length < 7){
  		$('#user_id').val('');
-		$('#user_id').attr('placeholder','아이디는 7자리 이상 입력해주세요!');
+		/* $('#user_id').attr('placeholder','아이디는 7자리 이상 입력해주세요!'); */
+		$('#user_id').addClass('placeholderChange').val('아이디는 7자리 이상 입력해주세요!').focus(function(){
+			if(this.value == '아이디는 7자리 이상 입력해주세요!' ){
+				$(this).removeClass('placeholderChange').val('');
+			};
+		});
 		return false;
 	}
 	
+	
+	// 비밀번호 / 비밀번호 확인 두개  placeholder 색상 안바뀜 ㅠㅠ
 	if(join.password.value.length < 8){
 		$('#user_pw').val('');
-		$('#user_pw').attr('placeholder','비밀번호는 8자리 이상 입력해주세요!');
+  		$('#user_pw').attr('placeholder','비밀번호는 8자리 이상 입력해주세요!');
 		return false;
 	}
 	
 	if(join.password.value != join.password2.value){
 		$('#user_pw2').val('');
-		$('#user_pw2').attr('placeholder','비밀번호가 맞지않습니다 다시확인해주세요!');
+ 		$('#user_pw2').attr('placeholder','비밀번호가 맞지않습니다 다시확인해주세요!'); 
 		return false;
 	}
 	
 	if(join.name.value.length < 2){
 		$('#user_name').val('');
-		$('#user_name').attr('placeholder', '이름 2자리 이상 입력해주세요!');
+/* 		$('#user_name').attr('placeholder', '이름 2자리 이상 입력해주세요!'); */
+		$('#user_name').addClass('placeholderChange').val('이름 2자리 이상 입력해주세요!').focus(function(){
+			if(this.value == '이름 2자리 이상 입력해주세요!' ){
+				$(this).removeClass('placeholderChange').val('');
+			};
+		});
 		return false;
 	}
 	
 	if(isNaN(join.phone.value)){
 		$('#user_phone').val('');
-		$('#user_phone').attr('placeholder','11자리 숫자만 입력해주세요!');
+/* 		$('#user_phone').attr('placeholder','11자리 숫자만 입력해주세요!'); */
+		$('#user_phone').addClass('placeholderChange').val('11자리 숫자만 입력해주세요!').focus(function(){
+			if(this.value == '11자리 숫자만 입력해주세요!' ){
+				$(this).removeClass('placeholderChange').val('');
+			};
+		});
 		return false;
 	}
 	
@@ -77,7 +105,12 @@ function check(){
     var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 	if(!regExp.test(join.email.value)) {
         $('#user_email').val('');
-		$('#user_email').attr('placeholder','이메일 주소가 유효하지 않습니다!');
+/* 		$('#user_email').attr('placeholder','이메일 주소가 유효하지 않습니다!'); */
+    	$('#user_email').addClass('placeholderChange').val('이메일 주소가 유효하지 않습니다!').focus(function(){
+			if(this.value == '이메일 주소가 유효하지 않습니다!' ){
+				$(this).removeClass('placeholderChange').val('');
+			};
+		});
     	return false;
 	}
 	 
@@ -160,9 +193,17 @@ function check(){
 	<!-- 이메일 -->
 	<div class="form_group">
 		<input type="email" class="inputbox" name="email" id="user_email" placeholder="이메일  (ex) acorn@acorn.com" required="required">
+	</div>
+	
+	<!-- 프로필사진 -->
+	<!--  value="mypage/user_pic.jpg" src="mypage/user_pic.jpg" -->
+	<div>
+		<div class="form_group">
+		<input type="file" class="inputbox" name="upload" alt="프로필 사진">
+		</div>
 	</div><br>
 	
-	<div class="col-sm-3 text-center">
+	<div>
 		<input type="submit"  value="가입 완료" id="joinOk">
 	</div><br>
 
