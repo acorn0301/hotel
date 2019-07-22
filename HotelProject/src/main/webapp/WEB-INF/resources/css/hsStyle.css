@@ -250,7 +250,7 @@ ul.bxslider {
 .main_login_btn1{
     box-sizing: border-box;
     display: inline-block;
-    width: 48%;
+    width: 115px;
     height: 30px;
     line-height: 28px;
     margin-right: 4%;
@@ -265,7 +265,7 @@ ul.bxslider {
 .main_login_btn2{
 box-sizing: border-box;
     display: inline-block;
-    width: 45%;
+    width: 115px;
     height: 30px;
     line-height: 28px;
     border: 1px solid rgba(255, 255, 255, .7);

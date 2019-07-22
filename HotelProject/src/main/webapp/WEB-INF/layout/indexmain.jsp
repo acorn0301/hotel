@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/jhStyle.css">
-<link rel="stylesheet" href="css/hsStyle.css">
+<link rel="stylesheet" href="css/hsStyle.css"> 
 <link rel="stylesheet" href="css/hjStyle.css">
 <script src="js/hsScript.js"></script>
 <script src="js/hjScript.js"></script>
@@ -210,14 +210,10 @@
 <div class="main_slide_div">
 	<div class="center_div">
 		<span class="main_login_text">1st 호텔에 가입하고 다양한 서비스를 누리세요.</span> <br>
-<div class="container">
-<div class="row">
-<div class="col-xs-12 col-sm-offset-2 col-sm-8"> <!-- container/row/col 부트그리드 -->
 		<button type="button" class="main_login_btn1"
 		onclick="location.href='login.do'">로그인</button>
 		<button type="button" class="main_login_btn2"
 		onclick="location.href='joinagree.do'">가입하기</button>
-</div></div></div>
 	</div>
 </div>
 
@@ -239,12 +235,8 @@
 <div class="main_slide_div">
 	<div class="center_div">
 		<span class="main_login_text">손님 환영합니다.</span> <br>
-<div class="container">
-<div class="row">
-<div class="col-xs-12">
 		<button type="button" class="main_login_btn1"
 		onclick="location.href='logout.do'">로그아웃</button>
-</div></div></div>
 	</div>
 </div>	
 

@@ -87,9 +87,9 @@ $(document).ready(function(){
 	});
 	
 	// 팝업 검은 배경 클릭시 팝업 삭제
-	$('.aboutRoomModalBack').click(function(){
+/*	$('.aboutRoomModalBack').click(function(){
 		$('#count_modal_back').addClass('aboutRoomModalBack');
-	});
+	});*/
 })
 
 
