@@ -66,6 +66,7 @@ $(document).ready(function(){
 	// 팝업 검은 배경 클릭시 팝업 삭제
 	$('#aboutRoomModalBack').click(function(){
 		$('#aboutRoomModalBack').addClass('aboutRoomModalBack');
+		
 	});
 	
 	
@@ -85,10 +86,10 @@ $(document).ready(function(){
 		$('#count_modal_back').addClass('aboutRoomModalBack');
 	});
 	
-//	// 팝업 검은 배경 클릭시 팝업 삭제
-//	$('#count_modal_back').click(function(){
-//		$('#count_modal_back').addClass('aboutRoomModalBack');
-//	});
+	// 팝업 검은 배경 클릭시 팝업 삭제
+	$('.aboutRoomModalBack').click(function(){
+		$('#count_modal_back').addClass('aboutRoomModalBack');
+	});
 })
 
 

@@ -190,7 +190,7 @@ h1{
 
 
 /* 인원 수 증감 버튼 */
-#hjBody .headCountBtn, .bedCountBtn, .breakfastCountBtn{
+.headCountBtn, .bedCountBtn, .breakfastCountBtn{
 	width: 3rem;
 	height: 3rem;
 	background-color: #f1ebd6;
@@ -203,7 +203,7 @@ h1{
 
 
 /* step1 인원  */
-#hjBody .countBorderNone{
+.countBorderNone{
 	border: none;
 	font-weight: bold;
 	text-align: center;
@@ -822,7 +822,7 @@ textarea{
 	
 /* 모달 */
 
-#main_search #count_modal_back,#main_search #checkIn_modal_back{
+#count_modal_back,#checkIn_modal_back{
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -832,39 +832,45 @@ textarea{
 }
 
 
-#main_search .count_modal{
+.count_modal{
 	margin: 50% 5%;
 	width: 90%;
-	height: 40%;
+	height: 36%;
 	background-color: white;
 }
 
 
-#main_search .checkIn_modal{
+.count_modal .checkIn_modal{
 	margin: 20% 5%;
 	width: 90%;
 	height: 80%;
 	background-color: white;
 }
 
-#main_search .count_contents, #main_search .checkIn_contents{
+.count_modal .checkIn_contents{
 	padding: 20px;
 }
 
-#main_search #count_modal_back .qna_body_title_div,#main_search #checkIn_modal_back .qna_body_title_div{
+.count_contents{
+	padding: 10px;
+}
+
+.count_modal #count_modal_back .qna_body_title_div,.count_modal #checkIn_modal_back .qna_body_title_div{
 	margin: -20px -20px 20px;
+	padding: 0 -10px;
+	width: 100%;
 	
 }
 
-#main_search .count_select{
+.count_modal .count_select{
 	margin: 20px 0 30px 0;
 }
 
-#main_search .modal_text{
+.count_modal .modal_text{
 	color: gray;
 }
 
-#main_search #modal_checkokBtn{
+.count_modal #modal_checkokBtn{
 	width: 100%;
 	padding: 2rem 0;
 	border: none;
@@ -873,7 +879,7 @@ textarea{
 	margin-top: 2rem;
 }
 
-#main_search #modal_okBtn{
+.count_modal #modal_okBtn{
 	width: 100%;
 	padding: 2rem 0;
 	border: none;
