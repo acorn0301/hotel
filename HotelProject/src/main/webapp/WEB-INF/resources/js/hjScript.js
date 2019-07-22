@@ -76,7 +76,7 @@ $(document).ready(function(){
 		$('#count_modal_back').removeClass('aboutRoomModalBack');
 	});
 	
-	///체크인 클릭시 팝업
+	////체크인 클릭시 팝업
 	/*$('.checkIn').click(function(){
 		$('#checkIn_modal_back').removeClass('aboutRoomModalBack');
 	});*/
