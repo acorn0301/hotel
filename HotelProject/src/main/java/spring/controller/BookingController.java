@@ -18,6 +18,7 @@ import spring.data.HotelDto;
 import spring.data.MemberDto;
 import spring.data.RoomDto;
 import spring.service.BookService;
+import spring.service.MemberService;
 
 
 @Controller
@@ -26,6 +27,9 @@ public class BookingController {
 	//bookService에서 메소드 의존성 주입
 	@Autowired
 	private BookService bookService;
+	
+	@Autowired
+	MemberService mservice;
 	
 	int bedPrice = 40000;
 	int breakfastPrice = 25000;
@@ -370,6 +374,39 @@ public class BookingController {
 		//예약정보 저장
 		bookService.insertBook(fbdto6);
 		
+		
+		//장희 수정 시작 
+		//세션에 ishere, book_num 부분 처리 해줘야한다 (로그인시에만 확인하게끔 되어있었음 - 수정)
+		
+		 //장희 수정 시작 
+		
+        //현재 로그인 한 고객이 숙박중이거나 혹은 체크아웃한지 일주일 이내인지 알아낸다.
+        //이 고객에 한 해 리뷰 작성하기 버튼이 보이기 때문임.
+        // 현재 숙박중 여부를 ishere에 저장, 숙박 or 일주일이내 여부를 book_num 으로 저장 
+        
+		int member_num = (Integer)session.getAttribute("member_num");
+        int ishere = mservice.isHere(member_num);
+        System.out.println("ishere " + ishere);
+        if(ishere==1) {
+       	 session.setAttribute("ishere", 1);
+        }else {
+       	 session.setAttribute("ishere", 0);
+        }
+        
+
+        int book_num = 0;
+        // 문희쌤 왈 트라이 캐치를 해주자!!
+        try {
+       	 //리뷰 작성이 가능한 고객(숙박중이거나 체크아웃한지 일주일 이내)의 예약번호를 세션에 저장한다.
+       	 book_num = mservice.isReviewAvailable(member_num);
+        }catch(Exception e) {
+       	 System.out.println(e);
+        }
+        
+   	 session.setAttribute("book_num", book_num);
+   	 
+		
+		//장희 수정 끝 
 		session.removeAttribute("fbdto");
 		
 		return "redirect:booking.do?step=5";

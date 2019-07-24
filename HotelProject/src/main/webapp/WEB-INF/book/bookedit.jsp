@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>book edit form</title>
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -108,7 +108,7 @@
 				<td class="bookdetail_table_th bookdetail_table_td">객실타입</td>
 				<td class="bookdetail_table_td"> ${abdto.room_name } ${abdto.type }</td>	
 			</tr>
-			<%-- <tr class="bookdetail_table_tr">
+			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">회원명</td>
 				<td class="bookdetail_table_td"> ${abdto.name }(${abdto.id })</td>	
 			</tr>
@@ -119,7 +119,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">체크아웃</td>
 				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_out }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr> --%>
+			</tr>
 		</table>	
 	</div>
 	
