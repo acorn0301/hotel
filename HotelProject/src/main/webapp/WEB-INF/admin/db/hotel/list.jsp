@@ -18,7 +18,11 @@
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
-		<div class="qna_title_text">호텔관리</div>
+		<div class="qna_title_text">
+			<div class="arrow_back" onclick="location.href='admin.do'"><i class="fas fa-chevron-left"></i></div>
+			<div>호텔관리</div>
+			<div class="clearBoth"></div>	
+		</div>
 	</div>
 
 	
@@ -37,7 +41,7 @@
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><img src="images/room/${dto.room_img }"></div>
-									<div class="user_list_divs user_list_div_2">${dto.room_local}호  ${dto.room_name } ${dto.type }</div>
+									<div class="user_list_divs user_list_div_2"> <b>${dto.room_local}호</b>  ${dto.room_name } ${dto.type }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>
 							</div>
@@ -68,7 +72,7 @@
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><img src="images/room/${dto.room_img }"></div>
-									<div class="user_list_divs user_list_div_2">${dto.room_local}호  ${dto.room_name } ${dto.type }</div>
+									<div class="user_list_divs user_list_div_2"><b>${dto.room_local}호 </b> ${dto.room_name } ${dto.type }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>
 							</div>

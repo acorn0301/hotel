@@ -18,7 +18,11 @@
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
-		<div class="qna_title_text">메뉴관리</div>
+		<div class="qna_title_text">
+			<div class="arrow_back" onclick="location.href='admin.do'"><i class="fas fa-chevron-left"></i></div>
+			<div>메뉴관리</div>
+			<div class="clearBoth"></div>	
+		</div>
 	</div>
 
 	
@@ -32,7 +36,7 @@
 				<c:forEach items="${list}" var="dto">
 					<li>
 						<div onClick="location.href='adminMenuListDetail.do?menu_num=${dto.menu_num}'">
-							<div class="dashboard_li_div2">
+							<div class="dashboard_li_div3">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><img class="img-circle" src=${dto.menu_img }></div>
 									<div class="user_list_divs user_list_div_2">${dto.menu_name_kor }</div>

@@ -16,7 +16,11 @@
 <div class="admin_body">
 
 <div class="qna_body_title_div">
-	<div class="qna_title_text">예약상세</div>
+	<div class="qna_title_text">
+			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
+			<div>예약상세</div>
+			<div class="clearBoth"></div>	
+	</div>
 </div>
 
 <div class="dashboard_div">
@@ -34,7 +38,13 @@
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">예약상태</td>
-				<td class="bookdetail_table_td"> ${abdto.book_status }</td>	
+				<td class="bookdetail_table_td">
+					<c:if test="${abdto.book_status==0 }">예약대기</c:if>
+					<c:if test="${abdto.book_status==1 }">예약접수</c:if>
+					<c:if test="${abdto.book_status==2 }">숙박중</c:if>
+					<c:if test="${abdto.book_status==3 }">지난예약</c:if>
+					<c:if test="${abdto.book_status==5 }">취소예약</c:if>
+				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">접수일시</td>
@@ -118,7 +128,7 @@
 	</div>
 	<div class="dashboard_div_table">
 	
-		<table class="bookdetail_table">
+		<table class="bookdetail_table last_table">
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">이름</td>
 				<td class="bookdetail_table_td"> ${abdto.name } (${abdto.id }) 님</td>	
@@ -131,6 +141,24 @@
 				<td class="bookdetail_table_th bookdetail_table_td">이메일</td>
 				<td class="bookdetail_table_td"> ${abdto.email }</td>	
 			</tr>
+			<tr class="dashboard_tr_buttons">
+					<td colspan="2">
+						<button onclick="history.back()">목록으로</button>				
+						
+						<c:if test="${abdto.book_status < 5}">
+							<c:if test="${abdto.book_status <3 }">
+								<button onclick="nextStep()">확인처리</button>
+							</c:if>				
+							<button onclick="bookCancel()">예약취소</button>
+						</c:if>
+						<c:if test="${abdto.book_status == 5}">
+							<button onclick="cancelRevoke()">취소철회</button>
+							<button onclick="bookDelete()">예약삭제</button>				
+						</c:if>
+						<button class="lastBtn" onclick="">정보수정</button>				
+						
+					</td>
+				</tr>
 		
 		</table>	
 	</div>
@@ -139,6 +167,42 @@
 </div>
 </div>
 </div>
+
+
+<script>
+
+
+
+	//확인 처리 버튼을 눌렀을 때  
+	function nextStep(){
+	
+		location.href="adminBookNestStepOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status};			
+	} 
+	
+	//예약 취소 버튼을 눌렀을 때 
+	function bookCancel(){
+		
+		let chk = confirm("예약을 취소하시겠습니까?");
+		if(chk){
+			location.href="adminBookCancelOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status};
+		}			
+	}
+	
+	//취소철회 버튼을 눌렀을 때
+	function cancelRevoke(){
+		
+		location.href="adminBookCancelRevokeOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status};
+			
+				
+	}
+	
+	//예약 삭제 버튼을 눌렀을 때 
+	function bookDelete(){
+		alert('아직 구현되지 않은 기능입니다.');
+	}
+
+
+</script>
 
 </body>
 </html>

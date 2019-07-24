@@ -1,5 +1,7 @@
 package spring.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +32,14 @@ public class QnaController {
 
 	//문의게시판 버튼을 눌렀을때 
 	@RequestMapping("/qnalist.do")
-	public String list(HttpServletRequest request, @RequestParam(value="pageNum", defaultValue="1") int currentPage, HttpSession session) {
-		
-		//일단 임시로 로그인 기능 구현... 
-		//무조건 이장희(alice01)로 로그인됨
-		//추후 로그인 기능 추가시 아래 코드는 삭제바람
-		//session.setAttribute("member_num", "3");
-		
-		
+	public String list(HttpServletRequest request, 
+			@RequestParam(value="pageNum", defaultValue="1") int currentPage, 
+			@RequestParam(value="category", defaultValue="all") String category,
+			@RequestParam(value="fromWhere", defaultValue="menu") String fromWhere,
+			@RequestParam(value="board_status", defaultValue="-1") int board_status,
+			HttpSession session) {
+			
+			
 		
 		//페이징 처리에 필요한 변수들 선언
 				int totalCount; //전체 갯수
@@ -53,7 +55,7 @@ public class QnaController {
 				//1. dao선언
 			
 				//총 글의 갯수를 구한다.
-				totalCount = qservice.getTotalCount();
+				totalCount = qservice.getTotalCount(category, board_status);
 				
 				//총 페이지수를 구한다.
 //				totalPage = (int)Math.ceil((double)totalPage/perBlock);
@@ -95,7 +97,9 @@ public class QnaController {
 				//각 페이지마다 출력할 시작번호
 				no = totalCount -(currentPage-1)*perPage;		
 				
-		List<QnaDto> list = qservice.getList(start, end);
+		List<QnaDto> list = qservice.getList(start, end, category, board_status);
+		
+	
 		
 
 		Date now = new Date();
@@ -130,6 +134,8 @@ public class QnaController {
 		
 		}
 		
+		int size = list.size();
+		
 		request.setAttribute("totalCount",totalCount);
 		request.setAttribute("list", list);
 		request.setAttribute("totalPage", totalPage);
@@ -139,6 +145,12 @@ public class QnaController {
 		request.setAttribute("perPage", perPage);
 		request.setAttribute("perBlock", perBlock);
 		request.setAttribute("currentPage", currentPage);
+		
+		request.setAttribute("fromWhere", fromWhere);
+		request.setAttribute("category", category);
+		request.setAttribute("board_status", board_status);
+		request.setAttribute("size", size);
+
 			
 		request.setAttribute("container", "../qna/list.jsp");
 		
@@ -171,8 +183,11 @@ public class QnaController {
 	
 	//글 내용 보기
 	@RequestMapping("/qnacontent.do")
-	public String content(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum, HttpSession session) {
-
+	public String content(HttpServletRequest request, HttpSession session,
+			@RequestParam int board_num, @RequestParam String pageNum, 
+			@RequestParam String fromWhere, @RequestParam String category,
+			@RequestParam int board_status) {
+		
 		// 해당 글의 조회수를 ++ 한다.
 		qservice.updateReadCount(board_num);
 		
@@ -206,6 +221,10 @@ public class QnaController {
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("qdto", qdto);
 		request.setAttribute("container", "../qna/content.jsp");
+		
+		request.setAttribute("fromWhere", fromWhere);
+		request.setAttribute("category", category);
+		request.setAttribute("board_status", board_status);
 		
 		return "layout/home";
 	}
@@ -248,37 +267,71 @@ public class QnaController {
 	
 	//수정하기 버튼을 눌렀을 때
 	@RequestMapping("/qnaeditform.do")
-	public String editForm(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum) {
+	public String editForm(HttpServletRequest request, 
+			@RequestParam int board_num, @RequestParam String pageNum,
+			@RequestParam String fromWhere, @RequestParam String category,
+			@RequestParam int board_status
+			) {
 			
 		request.setAttribute("password", qservice.getPass(board_num));
 		request.setAttribute("qdto", qservice.getData(board_num));
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("container", "../qna/editform.jsp");
+		
+		
+		request.setAttribute("fromWhere", fromWhere);
+		request.setAttribute("category", category);
+		request.setAttribute("board_status", board_status);
 
 		return "layout/home";
 	}
 	
 	//수정처리
 	@RequestMapping(value="/qnaedit.do", method=RequestMethod.POST)
-	public String edit(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum, @ModelAttribute QnaDto qdto) {
+	public String edit(HttpServletRequest request, 
+			@RequestParam int board_num, @RequestParam String pageNum, 
+			@RequestParam String fromWhere, @RequestParam String category,
+			@RequestParam int board_status,
+			@ModelAttribute QnaDto qdto) {
 		
 	
 		qservice.updateData(qdto);
 		request.setAttribute("board_num", board_num);
 		request.setAttribute("pageNum", pageNum);
-		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num;
+		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num + "&fromWhere=" + fromWhere + "&category=" + category +"&board_status=" + board_status ;
 
 	}
 	
 	//댓글 등록 버튼을 눌렀을 때 
 	@RequestMapping(value="/qnareplyinsert.do", method=RequestMethod.POST)
-	public String insertReply(HttpServletRequest request, @RequestParam int board_num, @RequestParam String pageNum, @ModelAttribute QnaReplyDto qrdto) {		
+	public String insertReply(HttpServletRequest request, 
+			@RequestParam int board_num, @RequestParam String pageNum, 
+			@RequestParam String fromWhere, @RequestParam String category,
+			@RequestParam int board_status,
+			@ModelAttribute QnaReplyDto qrdto, HttpSession session) {		
+		
 		
 		qrservice.insertReply(qrdto);
 		
-		request.setAttribute("board_num", board_num);
-		request.setAttribute("pageNum", pageNum);
-		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num;
+		//만약 댓글을 작성한 사람이 관리자라면
+		//해당 글의 board_status를 1로 변경한다.
+		if(session.getAttribute("grade").equals("a")) {
+			qservice.adminReplyComplete(board_num);
+		}
+		
+		
+		//메서드 간 한글 값 교환시 깨지는 현상이 있다. 되도록 한글 안써야 하는데...
+		//카테고리는 값이 한글이라서 이렇게 처리해서 보내주도록 하자.
+		String category_enc = "";
+		try {
+			category_enc = URLEncoder.encode(category,"utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println(e);
+		}
+				
+		return "redirect:qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num + "&fromWhere=" + fromWhere + "&category=" + category_enc +"&board_status=" + board_status ;
 
 	}
 }

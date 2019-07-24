@@ -70,6 +70,10 @@
 	<input type="hidden" name="pageNum" value="${pageNum }">
 	<input type="hidden" name="board_num" value="${qdto.board_num }">
 	<input type="hidden" name="board_img" value="${qdto.board_img }">
+	<input type="hidden" name="fromWhere" value="${fromWhere}">
+	<input type="hidden" name="category" value="${category}">
+	<input type="hidden" name="board_status" value="${board_status}">
+	
 	
 
 </form>

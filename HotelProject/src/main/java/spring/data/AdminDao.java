@@ -86,7 +86,7 @@ public class AdminDao extends SqlSessionDaoSupport{
 	}
 	
 	//주문상태에 따른 룸서비스 주문 목록 가져오기 
-	public List<AdminOrderDto> getOrderListByStatus(String room_status){
+	public List<AdminOrderDto> getOrderListByStatus(int room_status){
 		return getSqlSession().selectList("adminGetOrderListByStatus", room_status);
 	}
 	
@@ -141,4 +141,33 @@ public class AdminDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("adminGetHotelLocalByHotelNum", hotel_num);
 	}
 	
+	//예약 건 다음 스텝으로 넘기기
+	public void bookNextStep(int book_num) {
+		getSqlSession().update("adminBookNextStep", book_num);
+	}
+	
+	//예약 건 취소하기
+	public void bookCancel(int book_num) {
+		getSqlSession().update("adminBookCancel", book_num);
+	}
+	
+	//예약 건 취소를 철회하기 
+	public void bookCancelRevoke(int book_num) {
+		getSqlSession().update("adminBookCancelRevoke", book_num);
+	}
+	
+	//주문 건 다음 스텝으로 넘기기
+	public void orderNextStep(int order_num) {
+		getSqlSession().update("adminOrderNextStep", order_num);
+	}
+	
+	//주문 건 취소하기
+	public void orderCancel(int order_num) {
+		getSqlSession().update("adminOrderCancel", order_num);
+	}
+	
+	//주문 건 취소를 철회하기
+	public void orderCancelRevoke(int order_num) {
+		getSqlSession().update("adminOrderCancelRevoke", order_num);
+	}
 }

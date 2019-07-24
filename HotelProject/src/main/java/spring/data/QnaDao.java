@@ -12,21 +12,58 @@ public class QnaDao extends SqlSessionDaoSupport{
 
 	
 	//qna 리스트 출력 
-	public List<QnaDto> getList(int start, int end){
+	public List<QnaDto> getList(int start, int end, String category, int board_status){
 		
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		
-		return getSqlSession().selectList("qnaList", map);
+		if(category.equals("all")) {
+			if(board_status == 0) {
+				return getSqlSession().selectList("qnaListStatus0", map);
+			}else {
+				return getSqlSession().selectList("qnaList", map);
+			}
+			
+
+		}else if(category.equals("완료")) {
+			return getSqlSession().selectList("qnaListStatus1", map);
+			
+		}else {
+			map.put("category", category);
+			if(board_status == 0) {
+				map.put("board_status", board_status);
+				return getSqlSession().selectList("qnaListByCategoryStatus0", map);
+			}else {
+				return getSqlSession().selectList("qnaListByCategory", map);
+			}
+		}
 		
 	}
 	
 	//qna 게시물 총 갯수 얻기
-	public int getTotalCount() {
+	public int getTotalCount(String category, int board_status) {
 		
-		return getSqlSession().selectOne("qnaTotalCount");
+		if(category.equals("all")) {
+			if(board_status == 0) {
+				return getSqlSession().selectOne("qnaTotalCountStatus0");
+			}else {
+				return getSqlSession().selectOne("qnaTotalCount");
+			}
+			
+		}else if(category.equals("완료")) {
+			return getSqlSession().selectOne("qnaTotalCountStatus1");
+		}else {
+			if(board_status == 0) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("category",category);
+				map.put("board_status", board_status);
+				return getSqlSession().selectOne("qnaTotalCountByCategoryStatus0", map);
+			}else {
+				return getSqlSession().selectOne("qnaTotalCountByCategory", category);
+			}
+		}
 	}
 	
 	//member_num을 통해 name->writer 얻기
@@ -79,5 +116,10 @@ public class QnaDao extends SqlSessionDaoSupport{
 		getSqlSession().update("qnaReadCount", board_num);
 	}
 	
+	
+	//관리자 답변 완료된 게시물 상태 변경하기
+	public void adminReplyComplete(int board_num) {
+		getSqlSession().update("qnaAdminReplyComplete", board_num);
+	}
 	
 }

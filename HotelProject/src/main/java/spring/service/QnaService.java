@@ -18,14 +18,14 @@ public class QnaService {
 	@Autowired
 	QnaReplyDao qrdao;
 	
-	public List<QnaDto> getList(int start, int end){
+	public List<QnaDto> getList(int start, int end, String category, int board_status){
 		
-		return qdao.getList(start, end);
+		return qdao.getList(start, end, category, board_status);
 	}
 	
-	public int getTotalCount() {
+	public int getTotalCount(String category, int board_status) {
 		
-		return qdao.getTotalCount();
+		return qdao.getTotalCount(category, board_status);
 	}
 	
 	//member_num을 통해 name->writer 얻기
@@ -74,5 +74,10 @@ public class QnaService {
 	//조회수 올리기
 	public void updateReadCount(int board_num) {
 		qdao.updateReadCount(board_num);
+	}
+	
+	//관리자 답변 완료된 게시물 상태 변경하기
+	public void adminReplyComplete(int board_num) {
+		qdao.adminReplyComplete(board_num);
 	}
 }

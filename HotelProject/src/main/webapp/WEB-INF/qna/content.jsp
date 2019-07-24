@@ -27,14 +27,14 @@
 		location.href="qnadeleteform.do?board_num="+board_num+"&pageNum="+pageNum;
 	}
 	
-	function gotoEditForm(board_num, pageNum){
+	function gotoEditForm(board_num, pageNum, fromWhere, category, board_status){
 		
-		location.href="qnaeditform.do?board_num="+board_num+"&pageNum="+pageNum;
+		location.href="qnaeditform.do?board_num="+board_num+"&pageNum="+pageNum + "&fromWhere=" +fromWhere + "&category=" + category + "&board_status=" + board_status;
 	}
 	
-	function gotoList(pageNum){
+	function gotoList(pageNum, fromWhere, category, board_status){
 		
-		location.href="qnalist.do?pageNum="+pageNum;
+		location.href="qnalist.do?pageNum="+pageNum + "&fromWhere=" +fromWhere + "&category=" + category + "&board_status=" + board_status;
 	}
 </script>
 
@@ -42,7 +42,7 @@
 	
 	<!-- 제목 및 메뉴 부분 -->
 	<div class="qna_title_div">
-		<div><span onclick="gotoList(${pageNum})"> < 목록으로</span></div>
+		<div><span onclick="gotoList(${pageNum}, '${fromWhere }', '${category }', ${board_status })"> < 목록으로</span></div>
 		<h2 class="qna_title">${qdto.subject }</h2>
 		<div class="qna_writer_wrap">
 			<div class="info">${qdto.writer }</div>
@@ -56,7 +56,7 @@
 			<a class="btn_aside" onclick="toggleOptionLayer()"><span class="glyphicon glyphicon-option-vertical"></span></a>
 			<div class="qna_option_layer">
 				<ul>
-					<li onclick="gotoEditForm(${qdto.board_num},${pageNum })">
+					<li onclick="gotoEditForm(${qdto.board_num},${pageNum }, '${fromWhere }', '${category }', ${board_status })">
 						<a class="btn_aside_li">수정하기&nbsp;&nbsp;<i class="fa fa-edit"></i></a>
 					</li>
 					<li onclick="gotoDeleteForm(${qdto.board_num},${pageNum })">
@@ -84,7 +84,22 @@
 			<ul>
 				<c:forEach items="${replylist }" var="qrdto">
 					<li class="li_comment">
-						<span><b>${qrdto.name}</b></span><br>
+						<span>
+							<b>
+								<c:if test="${qrdto.grade == 'a' }">
+									<c:if test="${fromWhere == 'admin' }">
+										관리자(${qrdto.name })
+									</c:if>
+									<c:if test="${fromWhere != 'admin' }">
+										관리자
+									</c:if>
+						
+								</c:if>
+								<c:if test="${qrdto.grade != 'a' }">
+									${qrdto.name}
+								</c:if>
+							</b>
+						</span><br>
 						<div class="li_comment_content"> ${qrdto.reply_content }</div>
 						<span class="info_date"><fmt:formatDate value="${qrdto.reply_writeday }" pattern="yyyy-MM-dd HH:mm"/></span>
 					</li>
@@ -103,14 +118,18 @@
 						<form method="post" action="qnareplyinsert.do">
 							<div class="comment_box_write_inner">
 								<div class="comment_box_profile_area">
-									${member_name }
+									<c:if test="${fromWhere == 'admin' }">관리자</c:if>
+									<c:if test="${fromWhere != 'admin' }">${member_name }</c:if>			
 								</div>
 								<div class="comment_box_write_area">
 									<div class="comment_box_write_inbox">
 	                                   <textarea id="reply_content" name="reply_content" placeholder="댓글을 남겨보세요." class="comment_textarea" rows="3" cols="30" ></textarea>
 	                                	<input type="hidden" name="board_num" value="${board_num }">
-	                               		<input type="hidden" name="member_num" value="3">
+	                               		<input type="hidden" name="member_num" value="${member_num }">
 	                               		<input type="hidden" name="pageNum" value="${pageNum }">
+	                               		<input type="hidden" name="fromWhere" value="${fromWhere }">
+	                               		<input type="hidden" name="category" value="${category }">
+	                               		<input type="hidden" name="board_status" value="${board_status }">
 	                               		<!-- 일단 로그인기능이 없으니 member_num은 3으로 준다  -->
 	                                </div>
 								</div>

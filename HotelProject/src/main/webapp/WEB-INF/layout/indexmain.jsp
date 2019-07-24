@@ -253,7 +253,7 @@
 		
 		<c:if test="${sessionScope.ishere == 1 }">
 			<button type="button" class="main_login_btn1"
-			onclick="location.href='roomaservice.do'">룸서비스</button>
+			onclick="location.href='logout.do'">로그아웃</button>
 		</c:if>
 		
 		<c:if test="${sessionScope.book_num != 0 }">

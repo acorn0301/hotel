@@ -16,7 +16,13 @@
 <div class="admin_body">
 
 <div class="qna_body_title_div">
-	<div class="qna_title_text">룸서비스 주문상세</div>
+	<div class="qna_title_text">
+	
+			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
+			<div>주문상세</div>
+			<div class="clearBoth"></div>
+	
+	</div>
 </div>
 
 <div class="dashboard_div">
@@ -34,7 +40,13 @@
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">주문상태</td>
-				<td class="bookdetail_table_td"> ${aodto.room_status }</td>	
+				<td class="bookdetail_table_td">
+					<c:if test="${aodto.room_status==0 }">신규주문</c:if>
+					<c:if test="${aodto.room_status==1 }">준비중</c:if>
+					<c:if test="${aodto.room_status==2 }">처리완료</c:if>
+					<c:if test="${aodto.room_status==3 }">지난주문</c:if>
+					<c:if test="${aodto.room_status==5 }">취소주문</c:if>
+				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">접수일시</td>
@@ -96,7 +108,7 @@
 	</div>
 	<div class="dashboard_div_table">
 	
-		<table class="bookdetail_table">
+		<table class="bookdetail_table last_table">
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">이름</td>
 				<td class="bookdetail_table_td"> ${aodto.name } (${aodto.id }) 님</td>	
@@ -109,6 +121,26 @@
 				<td class="bookdetail_table_th bookdetail_table_td">이메일</td>
 				<td class="bookdetail_table_td"> ${aodto.email }</td>	
 			</tr>
+			
+			
+			<tr class="dashboard_tr_buttons">
+					<td colspan="2">
+						<button onclick="history.back()">목록으로</button>				
+						
+						<c:if test="${aodto.room_status < 5}">
+							<c:if test="${aodto.room_status <3 }">
+								<button onclick="nextStep()">확인처리</button>
+							</c:if>				
+							<button onclick="orderCancel()">주문취소</button>
+						</c:if>
+						<c:if test="${aodto.room_status == 5}">
+							<button onclick="cancelRevoke()">취소철회</button>
+							<button onclick="bookDelete()">주문삭제</button>				
+						</c:if>
+						<button class="lastBtn" onclick="">정보수정</button>				
+						
+					</td>
+				</tr>
 		
 		</table>	
 	</div>
@@ -117,6 +149,45 @@
 </div>
 </div>
 </div>
+
+<script>
+
+	
+
+	//확인 처리 버튼을 눌렀을 때  
+	function nextStep(){
+	
+		location.href="adminOrderNextStepOne.do?order_num=" + ${aodto.order_num} + "&room_status=" + ${aodto.room_status};			
+	} 
+	
+	//예약 취소 버튼을 눌렀을 때 
+	function orderCancel(){
+		
+		let chk = confirm("주문을 취소하시겠습니까?");
+		if(chk){
+			location.href="adminOrderCancelOne.do?order_num=" + ${aodto.order_num} + "&room_status=" + ${aodto.room_status};
+		}			
+	}
+	
+	//취소철회 버튼을 눌렀을 때
+	function cancelRevoke(){
+		
+		location.href="adminOrderCancelRevokeOne.do?order_num=" + ${aodto.order_num} + "&room_status=" + ${aodto.room_status};
+
+				
+	}
+	
+	//예약 삭제 버튼을 눌렀을 때 
+	function bookDelete(){
+		alert('아직 구현되지 않은 기능입니다.');
+	}
+
+		
+	//주문 삭제 버튼을 눌렀을 때 
+	function bookDelete(){
+		alert('아직 구현되지 않은 기능입니다.');
+	}
+</script>
 
 </body>
 </html>

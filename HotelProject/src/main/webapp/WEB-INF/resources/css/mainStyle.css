@@ -84,3 +84,91 @@
 .navbar-toggle{
 	margin-right: 8px;
 }
+
+
+.padding_li{
+	height: 2px;
+    background-color: #0000000f;
+}
+
+
+
+/* 메인로고 관련  */
+
+
+@media (max-width: 768px){
+	
+	.my-navbar-brand{
+		float:none;
+	}
+	.my-navbar-header{
+		text-align: center;
+	}
+	.my-navbar-brand>img{
+		display: inline;
+		padding-top: 12px;
+	}
+	
+}
+
+.navbar-toggle{
+	position: absolute;
+	right: 0px;
+}
+
+
+/* 
+
+.titleLogo{
+	
+	크기가 작을 때
+	
+	display: inline;
+		크기가 커질 때
+	
+	
+}
+
+모바일 사이즈에서의 navbar-brand css : 로고 위치를 중앙으로 해야함 
+.navbar-brand2{ 
+	text-align: center;
+    ft: ;
+    padding: 14px 14px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.my-navbar-brand{
+	
+	크기가 작을 때
+	
+	
+	
+		크기가 커질 때
+	@media (min-width: @grid-float-breakpoint){
+		float: left; 
+    	padding: 20px; 
+    	line-height: 20px; 
+	}
+}
+
+
+.my-navbar-header{
+	
+	크기가 작을 때
+	
+	text-align: center;
+	
+		크기가 커질 때
+	@media (min-width: @grid-float-breakpoint){
+		
+		text-align: left;
+	}
+}
+
+ */
+
+
+/*
+
+
+*/

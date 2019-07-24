@@ -20,6 +20,7 @@ import spring.data.MenuDto;
 import spring.data.QnaDto;
 import spring.data.RoomDto;
 import spring.service.AdminService;
+import spring.service.QnaService;
 
 @Controller
 public class AdminController {
@@ -27,6 +28,8 @@ public class AdminController {
 	@Autowired
 	AdminService aservice;
 	
+	@Autowired
+	QnaService qservice;
 	
 	//관리자 메인페이지를 보여준다 
 	@RequestMapping("/admin.do")
@@ -72,10 +75,13 @@ public class AdminController {
 		int qcategory2 = aservice.getQnaByCategory("객실");
 		//가격 문의 건수 얻기
 		int qcategory3 = aservice.getQnaByCategory("가격");
+		//전체 답변처리 되지 않은 문의 건수 얻기
+		int qcategoryAll = qservice.getTotalCount("all", 0);
 		
 		request.setAttribute("qcategory1", qcategory1);
 		request.setAttribute("qcategory2", qcategory2);
 		request.setAttribute("qcategory3", qcategory3);
+		request.setAttribute("qcategoryAll", qcategoryAll);
 		
 		
 		request.setAttribute("container", "../admin/manage/main.jsp");
@@ -90,13 +96,17 @@ public class AdminController {
 		
 		List<AdminBookDto> list = null;
 		
-		if(book_status == 1) {
+		if(book_status == -1) {
 			list = aservice.getBookListCheckInToday();
-		}else if(book_status == 4) {
+		}else if(book_status == -2) {
 			list = aservice.getBookListCheckOutToday();
 		}else {
 			list = aservice.getBookListByStatus(book_status);
 		}
+		
+		int size = list.size();
+		
+		request.setAttribute("size", size);
 		request.setAttribute("book_status", book_status);
 		request.setAttribute("list", list);
 		request.setAttribute("container", "../admin/manage/books.jsp");
@@ -120,7 +130,7 @@ public class AdminController {
 	
 	//주문 리스트 보여준다 
 	@RequestMapping("/adminOrderList.do")
-	public String adminOrderList(HttpServletRequest request, @RequestParam String room_status) {
+	public String adminOrderList(HttpServletRequest request, @RequestParam int room_status) {
 		
 		List<AdminOrderDto> list = aservice.getOrderListByStatus(room_status);
 		
@@ -129,6 +139,9 @@ public class AdminController {
 			a.setOrder_detail(temp);
 		}
 		
+		int size = list.size();
+		
+		request.setAttribute("size", size);
 		request.setAttribute("room_status", room_status);
 		
 		request.setAttribute("list", list);
@@ -343,6 +356,178 @@ public class AdminController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	//예약건 다음 스텝으로 넘기는 메서드
+	@RequestMapping("/adminBookNestStep.do")
+	public String bookNextStep(HttpServletRequest request, @RequestParam int book_status, @RequestParam String book_nums_str) {
+		
+		String[] book_nums = book_nums_str.split(",");
+		
+		//다음 스텝으로 넘기는 작업을 for문으로 처리한다.
+		for(String b:book_nums) {
+			int b_int = Integer.parseInt(b);
+			aservice.bookNextStep(b_int);
+		}	
+		
+		return "redirect:adminBookList.do?book_status=" + book_status;
+	}
+	
+	//개별 예약건 다음 스텝으로 넘기는 메서드
+	@RequestMapping("/adminBookNestStepOne.do")
+	public String bookNextStepOne(HttpServletRequest request, @RequestParam int book_num, @RequestParam int book_status) {
+		aservice.bookNextStep(book_num);
+		
+		return "redirect:adminBookList.do?book_status=" + book_status;
+	}
+	
+	//예약 내역 취소하는 메서드
+	@RequestMapping("/adminBookCancel.do")
+	public String bookCancel(HttpServletRequest request, @RequestParam int book_status, @RequestParam String book_nums_str) {
+		
+		String[] book_nums = book_nums_str.split(",");
+
+
+		//예약내역을 취소하는 작업을 for문으로 처리한다.
+		for(String b:book_nums) {
+			int b_int = Integer.parseInt(b);
+			aservice.bookCancel(b_int);
+			
+		}
+		
+		return "redirect:adminBookList.do?book_status=" + book_status;
+
+	}
+	
+	
+	//예약 내역 취소를 철회하는 메서드
+	@RequestMapping("/adminBookCancelRevoke.do")
+	public String bookCancelRevoke(HttpServletRequest request, @RequestParam int book_status, @RequestParam String book_nums_str) {
+		
+		String[] book_nums = book_nums_str.split(",");
+
+
+		//예약내역을 취소를 철회하는 작업을 for문으로 처리한다.
+		for(String b:book_nums) {
+			int b_int = Integer.parseInt(b);
+			aservice.bookCancelRevoke(b_int);
+			
+		}
+		
+		return "redirect:adminBookList.do?book_status=" + book_status;
+
+	}
+	
+	
+	//개별 예약 내역 취소하는 메서드
+	@RequestMapping("/adminBookCancelOne.do")
+	public String bookCancelOne(HttpServletRequest request, @RequestParam int book_num, @RequestParam int book_status) {
+		aservice.bookCancel(book_num);
+		
+		return "redirect:adminBookList.do?book_status=" + book_status;
+	}
+	
+	
+	//개별 예약 내역 취소를 철회하는 메서드
+		@RequestMapping("/adminBookCancelRevokeOne.do")
+		public String bookCancelRevokeOne(HttpServletRequest request, @RequestParam int book_num, @RequestParam int book_status) {
+			aservice.bookCancelRevoke(book_num);
+			
+			return "redirect:adminBookList.do?book_status=" + book_status;
+		}
+		
+	
+	
+		
+		
+		
+		
+		
+		
+		
+	
+	//주문건 다음 스텝으로 넘기는 메서드
+	@RequestMapping("/adminOrderNextStep.do")
+	public String orderNextStep(HttpServletRequest request, @RequestParam int room_status, @RequestParam String order_nums_str) {
+
+		String[] order_nums = order_nums_str.split(",");
+		
+		//다음 스텝으로 넘기는 작업을 for문으로 처리한다.
+		for(String o:order_nums) {
+			int o_int = Integer.parseInt(o);
+			aservice.orderNextStep(o_int);
+		}	
+		
+		return "redirect:adminOrderList.do?room_status=" + room_status;
+	}
+	
+	//개별 주문건 다음 스텝으로 넘기는 메서드
+	@RequestMapping("/adminOrderNextStepOne.do")
+	public String orderNextStepOne(HttpServletRequest request, @RequestParam int order_num, @RequestParam int room_status) {
+		aservice.orderNextStep(order_num);
+		
+		return "redirect:adminBookList.do?room_status=" + room_status;
+	}
+	
+	//주문내역 취소하는 메서드
+	@RequestMapping("/adminOrderCancel.do")
+	public String orderCancel(HttpServletRequest request, @RequestParam int room_status, @RequestParam String order_nums_str) {
+		
+		String[] order_nums = order_nums_str.split(",");
+
+		//예약내역을 취소하는 작업을 for문으로 처리한다.
+		for(String o:order_nums) {
+			int o_int = Integer.parseInt(o);
+			aservice.orderCancel(o_int);		
+		}
+		
+		return "redirect:adminOrderList.do?room_status=" + room_status;
+
+	}
+	
+	//개별 주문 내역 취소
+	@RequestMapping("/adminOrderCancelOne.do")
+	public String orderCancelOne(HttpServletRequest request, @RequestParam int room_status, @RequestParam int order_num) {
+		
+		aservice.orderCancel(order_num);
+		
+		return "redirect:adminOrderList.do?room_status=" + room_status;
+
+	}
+	
+	
+	//개별 주문 내역 취소 철회 
+	@RequestMapping("/adminOrderCancelRevokeOne.do")
+	public String orderCancelRevokeOne(HttpServletRequest request, @RequestParam int room_status, @RequestParam int order_num) {
+		
+		aservice.orderCancelRevoke(order_num);
+		
+		return "redirect:adminOrderList.do?room_status=" + room_status;
+
+	}
+	
+	
+	//주문내역 취소를 철회하는 메서드
+		@RequestMapping("/adminOrderCancelRevoke.do")
+		public String orderCancelRevoke(HttpServletRequest request, @RequestParam int room_status, @RequestParam String order_nums_str) {
+			
+			String[] order_nums = order_nums_str.split(",");
+
+			//예약내역을 취소하는 작업을 for문으로 처리한다.
+			for(String o:order_nums) {
+				int o_int = Integer.parseInt(o);
+				aservice.orderCancelRevoke(o_int);
+			}
+			
+			return "redirect:adminOrderList.do?room_status=" + room_status;
+
+		}
 	
 	
 }

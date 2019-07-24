@@ -34,17 +34,17 @@
 				
 			</li>
 			<li>
-				<div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=2'">
+				<div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=-1'">
 				<i class='fas fa-sign-in-alt color2'></i>
 				 체크인 	<div class="dashboard_li_number color2" > ${statusCheckIn } <span class="dashboard_li_gun">건</span> 
 				 </div>
 				 </div>
 			</li>
-			<li><div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=4'">
+			<li><div class="dashboard_li_div"  onclick="location.href='adminBookList.do?book_status=-2'">
 				<i class='fas fa-sign-out-alt color3'></i>
 				 체크아웃 <div class="dashboard_li_number color3"> ${statusCheckOut } <span class="dashboard_li_gun">건</span> </div></div></li>
 			<li>
-				<div class="dashboard_li_div li_last" onclick="location.href='adminBookList.do?book_status=1s'">
+				<div class="dashboard_li_div li_last" onclick="location.href='adminBookList.do?book_status=1'">
 				<i class='fas fa-check-circle color4'  ></i>
 				 예약완료 <div class="dashboard_li_number color4"> ${status1 } <span class="dashboard_li_gun">건</span></div>
 				 </div>
@@ -83,28 +83,36 @@
 	</div>
 	
 	<div class="dashboard_qna_div">
-		<div class="dashboard_qna_divs">
+		<div class="dashboard_qna_divs" onclick="location.href='qnalist.do?category=all&fromWhere=admin&board_status=0'">
 			<div class="icon_with_badge">
-				<i class='fas fa-phone color1'></i>
+				<i class="fas fa-question color1"></i>
+			</div>
+				<span class="badge_number badge">${qcategoryAll }</span>
+				<div class="dashboard_qna_divs_text"><span>전체문의</span></div> 
+			
+		</div>
+		<div class="dashboard_qna_divs" onclick="location.href='qnalist.do?category=예약&fromWhere=admin&board_status=0'">
+			<div class="icon_with_badge">
+				<i class='fas fa-phone color2'></i>
 			</div>
 				<span class="badge_number badge">${qcategory1 }</span>
 				<div class="dashboard_qna_divs_text"><span>예약문의</span></div> 
 			
 		</div>
-		<div class="dashboard_qna_divs">
+		<div class="dashboard_qna_divs li_last_right" onclick="location.href='qnalist.do?category=객실&fromWhere=admin&board_status=0'">
 			<div class="icon_with_badge">
-				<i class='fas fa-home color2'></i>
+				<i class='fas fa-home color6'></i>
 			</div>	
 				<span class="badge_number badge">${qcategory2 }</span>
 				<div class="dashboard_qna_divs_text"><span>객실문의</span></div> 		
 		</div>
-		<div class="dashboard_qna_divs li_last_right">
+		<%-- <div class="dashboard_qna_divs li_last_right" onclick="location.href='qnalist.do?category=가격&fromWhere=admin&board_status=0'">
 			<div class="icon_with_badge">
 				<i class='fas fa-money-bill-wave color3'></i>
 			</div>
 				<span class="badge_number badge">${qcategory3 }</span>
 				<div class="dashboard_qna_divs_text"><span>가격문의</span></div>
-		</div>
+		</div> --%>
 	</div>
 	
 </div>

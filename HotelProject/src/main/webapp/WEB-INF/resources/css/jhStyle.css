@@ -203,9 +203,11 @@ ul{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin: 0 25px 0 40px;
+    margin: 0 25px 0 30px;
 }
-
+.arrow_back{
+	float:left;
+}
 .qna_title{
 	
 	margin-bottom: 18px;
@@ -490,13 +492,21 @@ a{
     color: #5f3a0e;
     font-size: 14px;
     font-weight: bold;
+    letter-spacing: -.025em; 
+    
+    
+}
+.dashboard_selectbox{
+	background-color: #f1ebd6;
+	color: #5f3a0e;
+	font-size: 14px;
+    font-weight: bold;
     letter-spacing: -.025em;
-    
-    
 }
 
 .dashboard_qna_div{
 	 margin-bottom: 20px;
+	 
 	
 }
 
@@ -537,6 +547,45 @@ a{
 }
 
 
+.adminChkBox{
+	width: 20px;
+	height: 20px;
+}
+.dashboard_tr{
+	border-bottom: 1px solid lightgrey;
+	width: 100%;
+}
+.dashboard_table{
+	width: 100%;
+}
+.dashboard_td_chkbox{
+	padding-left: 20px;
+}
+
+.dashboard_tr_buttons button{
+    border: 1px solid #c3b4ae;
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin-right: 0px;
+    font-size: 14px;
+	color: #685845;
+    background-color: #ffffffc7;
+    margin-top:10px;
+    margin-bottom : 10px;
+    vertical-align: middle;
+    
+}
+.dashboard_tr_buttons .lastBtn{
+	margin-right: 0px;
+}
+.dashboard_tr_buttons{
+	background-color: #f3f3f39c;
+	text-align: center;
+}
+.last_table{
+	margin-bottom: -10px;
+}
+
 
 /* 관리자 컬러 */
 
@@ -544,7 +593,7 @@ a{
 	color: #ddc173;
 }
 .color2{
-	color: #91a16a;
+	color: #91a16ad9;
 }
 .color3{
 	color: #738986;
@@ -596,7 +645,29 @@ a{
 .dashboard_li_div2{
 	font-size: 11pt;
 	padding: 10px 10px 10px 20px;
-	border-bottom: 1px solid lightgrey;
+/*  	border-bottom: 1px solid lightgrey;
+ */ }
+.dashboard_li_div3{
+	font-size: 11pt;
+	padding: 10px 10px 10px 20px;
+/*   	border-bottom: 1px solid lightgrey;
+ */ }
+ 
+ 
+.dashboard_li_empty{
+	
+	padding: 40px 20px 20px 20px;
+	text-align: center;
+	font-weight: bold;
+	color: grey;
+	
+	
+}
+
+.dashboard_li_empty i {
+	font-size: 5em;
+	color: lightgrey;
+	padding-bottom: 20px;
 }
 .booklist_div{
 }
@@ -704,6 +775,11 @@ a{
 }
 .user_list_div_1{
 	width: 50px;
+}
+.user_list_div_1 img{
+	border-radius: 100%;
+	width: 30px;
+	border: 1px solid lightgrey;
 }
 .user_list_div_2{
 	width: 60%;

@@ -18,7 +18,11 @@
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
-		<div class="qna_title_text">직원관리</div>
+		<div class="qna_title_text">
+			<div class="arrow_back" onclick="location.href='admin.do'"><i class="fas fa-chevron-left"></i></div>
+			<div>직원관리</div>
+			<div class="clearBoth"></div>	
+		</div>
 	</div>
 
 	

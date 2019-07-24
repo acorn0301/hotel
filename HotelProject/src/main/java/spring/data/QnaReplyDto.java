@@ -12,9 +12,16 @@ public class QnaReplyDto {
 	
 	//qna_reply db에는 없는 항 - 조인을 통해 member 테이블로부터 가져온다 
 	private String name;
+	private String grade;
 	
 	
 	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public String getName() {
 		return name;
 	}

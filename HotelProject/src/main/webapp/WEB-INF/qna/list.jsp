@@ -13,9 +13,9 @@
 <body>
 
 <script>
-	function getContent(board_num,pageNum){
+	function getContent(board_num, pageNum, fromWhere, category, board_status){
 		
-		location.href="qnacontent.do?board_num=" +board_num + "&pageNum=" + pageNum; 
+		location.href="qnacontent.do?board_num=" +board_num + "&pageNum=" + pageNum + "&fromWhere=" + fromWhere + "&category=" + category + "&board_status=" + board_status; 
 	}
 
 </script>
@@ -26,13 +26,43 @@
 <div class="qna_body_title_div">
 	<div class="qna_title_text">문의게시판</div>
 </div>
-<table class="qnatable">
-	<caption></caption>
-	
 
+<c:if test="${fromWhere == 'admin' }">
+
+	<div class="">
+			<select class="selectbox dashboard_selectbox" name="" id="category_select">
+				<option value="all">전체문의</option>
+				<option value="일반">일반문의</option>
+				<option value="예약">예약문의</option>
+				<option value="객실">객실문의</option>
+				<option value="가격">가격문의</option>
+				<option value="환불">환불문의</option>
+				<option value="기타">기타문의</option>
+				<option value="완료">완료문의</option>
+			</select>
+	</div>
+</c:if>
+
+
+<table class="qnatable">
+
+	<c:if test="${size==0 }">
+		<tr >
+			<td colspan="3">
+				<div class="dashboard_li_empty">
+						<i class="fas fa-exclamation-triangle"></i><br>
+								조건에 해당하는 글이 없습니다.
+				</div>
+			</td>
+		</tr>
+	</c:if>
+	
+	
 	<c:forEach var="dto" items="${list }" varStatus="i">
-		<tr class="tr1" onclick="getContent(${dto.board_num},${currentPage })">
-			<td class="td_category" rowspan="2"><a href="content.do?num=${dto.board_num}&pageNum=${currentPage}"><span class="span_category">[${dto.category }]</span></a></td>
+		<tr class="tr1" onclick="getContent(${dto.board_num},${currentPage },'${fromWhere }', '${category }', ${board_status })">
+			<td class="td_category" rowspan="2">
+					<span class="span_category">[${dto.category }]</span>
+			</td>
 			<td class="td_subject">${dto.subject }</td>						
 			<td class="td_reply" rowspan="2">
 				<span class="text_reply_num">${dto.replyCount }</span><br><span class="text_reply">댓글</span>
@@ -41,7 +71,7 @@
 		</tr>
 		<tr class="tr2">
 			
-			<td  class="td_etc" colspan="2">${dto.writer } &nbsp;&nbsp;&nbsp; ${dto.simpletime } &nbsp;&nbsp;&nbsp; ${dto.readcount}  </td> 	
+			<td  class="td_etc" colspan="2">${dto.writer } &nbsp;&nbsp;&nbsp; ${dto.simpletime } &nbsp;&nbsp;<i class="fas fa-eye"></i>&nbsp; ${dto.readcount}  </td> 	
 
 			<%-- <td>
 				<div class="btn-group">
@@ -83,16 +113,37 @@
 </div>
 <!-- 페이징 끝 -->
 
-<!-- 글쓰기 버튼 -->
-<div class="qna_write_btn_div">
-	<a href="qnaform.do?pageNum=${currentPage }">
-		<img src="images/icon/writeicon.svg">
-		
-	</a>
-</div>
+<!-- 글쓰기 버튼 시작-->
+<c:if test="${fromWhere != 'admin' }">
+	<div class="qna_write_btn_div">
+		<a href="qnaform.do?pageNum=${currentPage }">
+			<img src="images/icon/writeicon.svg">
+			
+		</a>
+	</div>
+</c:if>
 <!-- 글쓰기 버튼 끝 -->
 
  </div>
+ <input type="hidden" id="hiddenCategory" value="${category }">
+ 
+<script>
+
+	//category 값으로 상단 셀렉트의 selected 값을 변경시켜주자 
+	let category = $("#hiddenCategory").val();
+	$("#category_select").val(category).prop("selected", true);
+
+	
+	//셀렉트 박스 변경시 조건에 맞는 문의내역을 다시 가져와야 한다.
+	$("#category_select").change(function(){
+		let category = $("#category_select:selected").val();
+		location.href="qnalist.do?category=" + category + "&fromWhere=admin&board_status=0" ;
+	})
+
+
+</script> 
+ 
+ 
 </body>
 </html>
 

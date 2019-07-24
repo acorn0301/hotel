@@ -32,7 +32,7 @@ function cancelChk(pageNum){
 <form action="qnawrite.do" method="post">
 
 	<div class="form_group">
-		<select class="selectbox" name="category">
+		<select class="selectbox " name="category">
 		
 			<option value="일반">문의유형을 선택해주세요</option>
 			<option value="예약">예약</option>

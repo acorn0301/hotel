@@ -12,7 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="adminGetBookListCheckIn" resultType="int">
-		select count(*) from book where TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		select count(*) from book 
+		where TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') and
+		book_status = 1
 	</select>
 	
 	<select id="adminGetBookListCheckInToday" resultType="spring.data.AdminBookDto">
@@ -25,12 +27,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where h.hotel_num = r.hotel_num) a 
 		where b.room_num = a.room_num and
 		b.member_num = m.member_num and
-		TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		TO_CHAR(trunc(check_in), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') and
+		b.book_status = 1
 		order by book_day
 	</select>
 	
 	<select id="adminGetBookListCheckOut" resultType="int">
-		select count(*) from book where TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		select count(*) from book 
+		where TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') and
+		book_status = 2
 	</select>
 	
 	<select id="adminGetBookListCheckOutToday" resultType="spring.data.AdminBookDto">
@@ -43,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where h.hotel_num = r.hotel_num) a 
 		where b.room_num = a.room_num and
 		b.member_num = m.member_num and
-		TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
+		TO_CHAR(trunc(check_out), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS') and
+		b.book_status = 2
 		order by book_day
 	</select>
 	
@@ -60,11 +66,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="adminGetOrderListStatus2" resultType="int">
-		select count(*) from room_order where room_status=2
+		select count(*) from room_order where room_status=2 and 
+		 TO_CHAR(trunc(time), 'yyyy-MM-dd HH24miSS') =  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS')
 	</select>
 	
 	<select id="adminGetQnaByCategory" parameterType="String" resultType="int">
-		select count(*) from qna where category=#{category}
+		select count(*) from qna where category=#{category} and board_status = 0
 	</select>
 	
 	<select id="adminGetBookDetail" parameterType="int" resultType="spring.data.AdminBookDto">
@@ -183,6 +190,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select e.*, m.* from emp e, member m where e.member_num = m.member_num
 	</select>
 	
+	<select id="adminBookNextStep" parameterType="int">
+		update book set book_status = book_status+1 where book_num = #{book_num}
+	</select>
+	
+	<select id="adminBookCancel" parameterType="int">
+		update book set book_status = 5 where book_num = #{book_num}
+	</select>
+	
+	<select id="adminBookCancelRevoke" parameterType="int">
+		update book set book_status = 0 where book_num = #{book_num}
+	</select>
+	
+	
+	<select id="adminOrderNextStep" parameterType="int">
+		update room_order set room_status = room_status+1 where order_num = #{order_num}
+	</select>
+	
+	<select id="adminOrderCancel" parameterType="int">
+		update room_order set room_status = 5 where order_num = #{order_num}
+	</select>
+	
+	<select id="adminOrderCancelRevoke" parameterType="int">
+		update room_order set room_status = 0 where order_num = #{order_num}
+	</select>
 	
 	
 </mapper>

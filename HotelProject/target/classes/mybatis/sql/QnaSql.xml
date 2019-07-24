@@ -7,8 +7,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from qna order by board_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
 	</select>
 	
+	<select id="qnaListByCategory" resultType="qdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from qna where category = #{category} order by board_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
+	</select>
+	
+	<select id="qnaListByCategoryStatus0" resultType="qdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from qna where category = #{category} and board_status = #{board_status} order by board_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
+	</select>
+	
+	<select id="qnaListStatus1" resultType="qdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from qna where board_status = 1 order by board_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
+	</select>
+	
+	<select id="qnaListStatus0" resultType="qdto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from qna where board_status = 0 order by board_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
+	</select>
+	
 	<select id="qnaTotalCount" resultType="int">
 		select count(*) from qna
+	</select>
+	
+	<select id="qnaTotalCountByCategory" resultType="int" parameterType="String">
+		select count(*) from qna where category = #{category}
+	</select>
+	
+	<select id="qnaTotalCountByCategoryStatus0" resultType="int" parameterType="HashMap">
+		select count(*) from qna where category = #{category} and board_status = #{board_status}
+	</select>
+	
+	<select id="qnaTotalCountStatus1" resultType="int">
+		select count(*) from qna where board_status = 1
+	</select>
+	
+	<select id="qnaTotalCountStatus0" resultType="int">
+		select count(*) from qna where board_status = 0
+	</select>
+	
+	<select id="qnaAdminReplyComplete" parameterType="int">
+		update qna set board_status = 1 where board_num = #{board_num}
 	</select>
 	
 	<select id="qnaGetWriter" resultType="String" parameterType="int">
@@ -16,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="qnaInsertData" parameterType="qdto">
-		insert into qna values(boardseq.nextval, #{writer},#{subject},#{content},sysdate,0,#{category},#{board_img},'답변 전',#{board_pass})
+		insert into qna values(boardseq.nextval, #{writer},#{subject},#{content},sysdate,0,#{category},#{board_img},0,#{board_pass})
 	</select>
 	
 	<select id="qnaGetData" parameterType="int" resultType="qdto">
@@ -44,7 +80,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="qnaReplyList" parameterType="int" resultType="qrdto">
-		select reply_num, board_num, reply_content, reply_writeday, a.member_num, b.name from qna_reply a, member b where a.board_num = #{board_num} and a.member_num=b.member_num
+		select reply_num, board_num, reply_content, reply_writeday, a.member_num, b.name, b.grade 
+		from qna_reply a, member b 
+		where a.board_num = #{board_num} 
+		and a.member_num=b.member_num
+		order by reply_writeday asc
 	</select>
 	
 	<select id="qnaReadCount" parameterType="int">
