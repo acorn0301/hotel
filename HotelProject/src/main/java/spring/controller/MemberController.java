@@ -213,14 +213,7 @@ public class MemberController {
 	      if(login != null && passMatch){
 	         session.setAttribute("member", login);
 	
-	         if(session.getAttribute("url") != null )
-	         {
-	            String url = (String)session.getAttribute("url");
-	            session.removeAttribute("url");
-	            session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
 	
-	            return "redirect:" + url;
-	         }
 	         
 	         request.setAttribute("container", "../layout/indexmain.jsp");
 	         request.setAttribute("msg", "환영합니다 ");
@@ -269,6 +262,15 @@ public class MemberController {
 	    	 //로그인 한 고객의 이름을 세션에 올려준다 
 	    	 String name = mservice.getMemberData(member_num).getName();
 	    	 session.setAttribute("name", name);
+	    	 
+	         if(session.getAttribute("url") != null )
+	         {
+	            String url = (String)session.getAttribute("url");
+	            session.removeAttribute("url");
+	            session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
+	
+	            return "redirect:" + url;
+	         }
 	    	 
 	    	 //만약 로그인 한 회원이 관리자 일 경우 메인페이지가 아닌 관리자 페이지로 바로 보내준다. 
 	    	 if(grade.equals("a")) {
