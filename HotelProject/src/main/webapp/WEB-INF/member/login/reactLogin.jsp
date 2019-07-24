@@ -44,7 +44,7 @@
 </div>
 
 <b id="chkmsg">${msg}</b><br><br>
-<div class="col-sm-3 text-center">
+<div class="btncenter">
 	<input type="submit" value="로그인" id="loginOk">
 </div>
 <br>

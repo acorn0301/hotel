@@ -6,13 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="css/yeStyle.css">
 <title>Insert title here</title>
 
 </head>
 <body>
-
-내가 주문한 룸서비스 리스트 
-
+<div id="m_myorderForm">
+	<form action="" method="post">
+	<div class="headTit">
+		<h2 class="tit">룸서비스 주문내역</h2>
+	</div><br><br>
+		
+	</form>
+</div>
 </body>
 </html>
 

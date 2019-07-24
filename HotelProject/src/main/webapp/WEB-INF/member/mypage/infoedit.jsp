@@ -51,19 +51,26 @@ function check(){
 	
 }
 
-
 // 사진변경 버튼 클릭
 function btnChange(){
 	
 }
 
+// 기존 사진 삭제
+function pic_delete(){
+	alert("aa");
+	var that = $(this);
+	$.ajax({
+		url : "pic_delete.do?member_pic"
+	})
+}
 
 
 
 </script>
 
 <div id="EditForm">
-<form name="edit" class="form-inline" action="infoEditComplete.do" method="post" onsubmit="return check()">
+<form name="edit" class="form-inline" action="infoEditComplete.do" method="post" onsubmit="return check()" enctype="multipart/form-data">
 <div class="headTit">
 	<h4 class="tit">내 정보 수정&nbsp;&nbsp;<i class="fas fa-user-edit"></i></h4>
 </div>
@@ -103,10 +110,10 @@ function btnChange(){
 		<div class="form_group">
 		<input type="text" class="inputbox" id="user_phone" name="phone" placeholder="전화번호" required="required" maxlength="11" value="${mbdto.phone }">
 		</div>
-	</div><br>
+	</div>
 
 	<!-- 생년월일 -->
-	<div class="dateForm">
+<%-- 	<div class="dateForm">
 		<select id="year" name="year" class="custom-select" disabled="disabled">
 			<c:set var="n" value="2019"/>
 			<c:forEach begin="1940" end="2019" >
@@ -133,10 +140,8 @@ function btnChange(){
 			</c:forEach>
 		</select>
 		<span>일 &nbsp;</span>
-	</div>
+	</div> --%>
 
-  	<div class="form_group"></div>
-	
 	<!-- 이메일 -->
 	<div>
 		<div class="form_group">
@@ -147,8 +152,12 @@ function btnChange(){
 	<!-- 프로필사진 -->
 	<div class="pic">
 		<div class="profile_photo">
-			<img id="imgThumb" src="images/mypage/user_pic.jpg" width="80" height="80">
+			<div class="select_img">
+				<img src="http://localhost:9000/HotelProject/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
+				<input type="hidden" name="member_pic" value="${mbdto.member_pic }">
+			</div>
 			<span class="mask"></span>
+			
 		</div>
 		
 		<div class="btn_area_btm">
@@ -156,14 +165,34 @@ function btnChange(){
 			<label for="inputImage" class="btn_model">
 				<b id="btnChangeProfile" class="btn2" onclick="return btnChange()">사진변경</b>
 			</label>
-			
-			<input class="inputbox_file" type="file" id="inputImage" name="profileImage" accept="image/*">
+			<input type="hidden" name="isPicChanged" value="0" id="isPicChanged">
+			<input type="file" name="upfile" class="inputbox_file" id="inputImage">
 	        </span>
 		</div>
+		
+		<script type="text/javascript">
+			$("#inputImage").change(function(){
+				if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     	$(".select_img img").attr("src", data.target.result);
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				}
+				
+				// isPicChanged 값을 0-> 1로 변경
+				$("#isPicChanged").val("1");
+			});
+		</script>
 	           
-		<a href="javascript:;" class="btn_model">
-		<b id="btnDelete" class="btn2 btn_disable" onclick="">삭제</b>
-		</a>
+		<span class="btn_model">
+		<b id="btnDelete" class="btn2" onclick="pic_delete()">삭제</b>
+		</span>
+		<script type="text/javascript">
+		
+		
+		</script>
+		
      </div>
      
 	<div class="form_group"></div><br>

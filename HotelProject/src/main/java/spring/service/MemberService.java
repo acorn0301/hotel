@@ -1,11 +1,15 @@
 package spring.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import spring.data.AdminBookDto;
+import spring.data.AdminDao;
+import spring.data.BookDto;
 import spring.data.MemberDao;
 import spring.data.MemberDto;
 
@@ -31,6 +35,10 @@ public class MemberService {
    public MemberDto loginCheck1(MemberDto mbdto)
    {
       return mbdao.loginCheck1(mbdto);
+   }
+   
+   public int idExist(MemberDto mbdto){
+	   return mbdao.idExist(mbdto);
    }
    
    // member_num 얻기
@@ -106,6 +114,22 @@ public class MemberService {
     public int getMembernum_kakao(String id)
     {
  	   return mbdao.getMembernum_kakao(id);
+    }
+    
+    // 마이페이지 - 예약 확인 내역 (member_num으로 예약데이터 얻기)
+  	public List<AdminBookDto> m_getBookList(int member_num){
+  		return mbdao.m_getBookList(member_num);
+  	}
+  	
+  	// 내 예약 확인내역 갯수
+    public int m_GetBookListCount(int member_num)
+    {
+ 	   return mbdao.m_GetBookListCount(member_num);
+    }
+    
+    // 예약 내역 자세히보기
+    public AdminBookDto m_GetBookDetail(int book_num){
+    	return mbdao.m_GetBookDetail(book_num);
     }
 
 }

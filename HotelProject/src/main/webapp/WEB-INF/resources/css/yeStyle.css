@@ -1,10 +1,11 @@
 	#loginForm a {color: gray;}
 	a:HOVER{ text-decoration: none; font-weight: bold;}
 	
-	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,
+	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#m_mybookingForm, #m_myorderForm,
 	#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm, .withdrawalForm{
 		margin: -10px;
 	}
+	
 	#idBtn {display: inline-block; float: left;}
 	.loginMsg {margin: 5px 15px;}
 	.dateForm {margin-bottom: 15px; padding: 0 20px;}
@@ -19,9 +20,9 @@
 		display:block;
 		text-align: center; 
 		width: 100%;
-		height:35px;
+		height:33px;
 		line-height:35px;
-		font-size: 17px;
+		font-size: 15px;
 		border : 1px solid #3a3125;
 		margin-top: -10px;
 	}
@@ -33,13 +34,14 @@
 	
 	.myinfo{text-align: center; }
 
-.kakao_login, .withdrawalbtn{
+ .btncenter{
 	text-align: center;
 }
 
-#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk, #wdok{
-    display: block;
-    width: 100%;
+#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk, #wdok,
+#mybookingForm, #myorderForm{
+/*     display: block; */
+    width: 245px;
     height: 45px;
     line-height: 40px;
     margin: 0;
@@ -49,9 +51,10 @@
     font-weight: bold;
     color: #f1ebd6;
     background-color: #3a3125;
+    border-radius:5px;
 }
 
-#withdrawalCancel, #withdrawalOk { 
+#withdrawalCancel, #withdrawalOk ,#mybookinglist ,#mybookingCancel{ 
 	color:white; 
 	display: inline; 
 	font-size: 17px; 
@@ -59,8 +62,8 @@
 	border: 0; 
 	width: 150px;
 }
-#withdrawalOk { background-color : #3a3125;}
-#withdrawalCancel { background-color :#e3dfda;}
+#withdrawalOk, #mybookingCancel { background-color : #3a3125;}
+#withdrawalCancel, #mybookinglist { background-color :#cfc6b2;}
 	
 	.inputbox {
     border: 0;
@@ -288,8 +291,10 @@
     border: 1px solid #bfbfbf;
     background: #fff;
 }
+
+
 .btn_model .btn1, .btn_model .btn2, .btn_model .btn3 {
-    min-width: 52px;
+/*     min-width: 52px; */
     height: 33px;
     padding: 10px;
     color: #a3a3a3;
@@ -300,6 +305,7 @@
     text-align: center;
     vertical-align: top;
     letter-spacing: -1px;
+    cursor: pointer;
 }
 
 
@@ -365,3 +371,179 @@ input[type=file] {
 
 
 
+
+/* 마이페이지 예약확인,취소 */  
+
+ul,li{ list-style: none; }
+
+.ctnMypage.ctnMypageRsv .msg {
+    border-bottom: #e9e9e9 solid 1px;
+    background: #f0f0f0;
+    padding: 10px 15px 10px 15px;
+    color: #444444;
+}
+.ctnMypage.ctnMypageRsv .rsvCate {
+    padding: 10px 15px;
+    background-color: #faf8f2;
+    color: gray;
+}
+
+.ctnMypage.ctnMypageRsv .rsvInfoBox {
+    margin-bottom: 13px;
+    border-top: 1px solid #5f3a0e;
+    border-bottom: 1px solid #b6b6b6;
+    padding: 6px 0;
+    background-color: #fdf8ef;
+}
+
+.dashboard_div2{
+	
+	padding: 0 0px 0px 10px;
+}
+
+
+.dashboard_div_title{
+	padding-left: 5px;
+}
+
+.dashboard_div_table{
+	border-radius: 10px;
+	margin: 0px;
+}
+
+.dashboard_div_table ul{
+	padding : 0;
+	margin : 0;
+}
+
+.dashboard_li_div{
+	font-size: 11pt;
+	padding: 10px 10px 10px 20px;
+	border-bottom: 1px solid lightgrey;
+}
+
+.dashboard_li_div i{
+	margin-right: 5px;
+}
+
+
+.dashboard_li_number{
+	float:right;
+	padding-right:20px;
+	font-weight: bold;
+	font-size: 15pt;
+	position: relative;
+	top: -5px;
+}
+
+.dashboar_li_label{
+	width: 100px;
+	color: royalblue;
+}
+
+.admin_body{
+	margin : 0 -10px 0 -20px;
+}
+
+.dashboard_li_gun{
+	font-size: 11pt;
+	color: grey;
+	font-weight: lighter;
+	position:relative;
+	top: -1px;
+}
+
+/* 관리자 컬러 */
+
+.color1{
+	color: #ddc173;
+}
+.color2{
+	color: #91a16a;
+}
+.color3{
+	color: #738986;
+}
+.color4{
+	color: #8e8680;	
+}
+.color5{
+	color: #b36154;
+}
+.color6{
+	color: #cc9999;
+}
+.color7{
+	color: #996666;
+}
+.color8{
+	color: #86A3C3;
+}
+.color9{
+	color: #bc6ca7;
+}
+
+.li_last_right{
+	border-right: 0;
+}
+
+/* 예약 리스트 페이지를 위한.. */
+
+.list_hotel_local{
+	color: grey;
+}
+.list_room_local{
+	margin-left: 10px;
+}
+.dashboard_li_div2{
+	font-size: 11pt;
+	padding: 10px 10px 10px 20px;
+	border-bottom: 1px solid lightgrey;
+}
+.booklist_div{
+}
+
+.list_status, .list_name, .list_id, .list_book_day{
+	color: grey;
+	font-weight: ;
+}
+.list_check_in_out{
+	font-weight: lighter;
+	font-size: 20pt;
+}
+
+
+/* 예약 내역 자세히보기 */
+.admin_title_div {
+    line-height: 100%;
+    display: block;
+    padding: 12px 15px;
+    background: #f1ebd6;
+    color: #5f3a0e;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: -.025em;
+}
+
+.bookdetail_label{
+	width: 50px;
+	border-right : 1px solid lightgrey;
+}
+
+.bookdetail_table{
+	width: 100%;
+	font-size: 
+}
+
+.bookdetail_table_tr{
+	border-bottom: 1px solid lightgrey;
+}
+.bookdetail_table_th{
+	width: 30%;
+	border-right: 1px solid lightgrey;
+	
+}
+.bookdetail_table_td{
+	padding: 10px 10px 10px 20px;
+	
+}

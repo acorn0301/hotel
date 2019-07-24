@@ -7,4 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginBcrypt" resultType="mbdto" parameterType="mbdto">
 	 select id, name, password from member where id = #{id}
 	</select>
+	
+	<select id="isIdExist" parameterType="mbdto" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
 </mapper>

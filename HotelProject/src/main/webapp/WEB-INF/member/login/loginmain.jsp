@@ -44,7 +44,7 @@
 </div>
 
 <b id="chkmsg">${msg}</b><br><br>
-<div>
+<div class="btncenter">
 	<input type="submit" value="로그인" id="loginOk">
 </div><br>
 
@@ -64,7 +64,7 @@
 		</a> -->
 
 <!-- 카카오 로그인 버튼 -->
-	<div class="kakao_login">
+	<div class="btncenter">
 	<c:if test="${userId == null}">
 		<a href="https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://localhost:9000/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll">
 			<img src="images/mypage/kakao_btn.png" height="40px;">

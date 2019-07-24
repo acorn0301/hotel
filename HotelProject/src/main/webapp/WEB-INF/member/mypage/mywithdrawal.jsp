@@ -32,7 +32,7 @@
 	</div><br>
 	
 	<b id="chkmsg">${msg}</b><br><br>
-	<div class="withdrawalbtn">
+	<div class="btncenter">
 		<input type="submit" value="회원 탈퇴" id="withdrawalOk">
 		<input type="button" value="취소" id="withdrawalCancel" onclick="history.back()">
 	</div>

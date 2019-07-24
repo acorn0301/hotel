@@ -1,6 +1,7 @@
 package spring.data;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -30,6 +31,10 @@ public class MemberDao extends SqlSessionDaoSupport{
    
    {
       return getSqlSession().selectOne("Hash.loginBcrypt", mbdto);
+   }
+   
+   public int idExist(MemberDto mbdto){
+	   return getSqlSession().selectOne("isIdExist", mbdto);
    }
    
    // member_num 값 얻기
@@ -114,5 +119,22 @@ public class MemberDao extends SqlSessionDaoSupport{
    {
 	   return getSqlSession().selectOne("member.getMembernum_kakao", id);
    }
+   
+   // 마이페이지 - 예약 확인 내역 (member_num으로 예약데이터 얻기)
+   public List<AdminBookDto> m_getBookList(int member_num){
+	   return getSqlSession().selectList("member.m_GetBookList", member_num);
+   }
+   
+   // 내 예약 확인내역 갯수
+   public int m_GetBookListCount(int member_num)
+   {
+	   return getSqlSession().selectOne("member.m_GetBookListCount", member_num);
+   }
+   
+   // 예약 내역 자세히보기
+   public AdminBookDto m_GetBookDetail(int book_num){
+	   return getSqlSession().selectOne("member.m_GetBookDetail", book_num);
+   }
+   
    
 }

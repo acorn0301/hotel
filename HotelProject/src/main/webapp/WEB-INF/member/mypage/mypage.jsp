@@ -24,7 +24,7 @@
 <div class="myinfo">
 	<h3>[ ${mbdto.name} ] 님의 마이페이지</h3><br>
 	<div>
-		<img id="imgThumb" src="images/mypage/user_pic.jpg" width="100" height="100">
+		<img src="http://localhost:9000/HotelProject/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
 		<span class="mask"></span>
 	</div>
 </div>
@@ -42,8 +42,8 @@
 
 <div class="linkBox">
 	<ul class="linkLIst">
-		<li class="first"><a href="bookingCheck.do">예약 확인/취소</a></li>
-		<li><a href="roomaservice.do">룸서비스 주문내역</a></li>
+		<li class="first"><a href="m_bookinglist.do">예약 확인/취소</a></li>
+		<li><a href="m_roomservicelist.do">룸서비스 주문내역</a></li>
 		<li><a href="infoEdit.do">내 정보수정</a></li>
 		<li><a href="qnalist.do">문의하기</a></li>			
 		<li class="last"><a href="withdrawal.do">회원탈퇴</a></li>

@@ -2,6 +2,8 @@ package spring.data;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDto {
    private int member_num;
    private String id;
@@ -16,6 +18,7 @@ public class MemberDto {
    private String phone;
    private String grade;
    private String member_pic;
+   private MultipartFile upfile;
    
    public String getMember_pic() {
 	return member_pic;
@@ -97,6 +100,14 @@ public class MemberDto {
    public void setDay(String day) {
 	   this.day = day;
    }
+   
+   public MultipartFile getUpfile() {
+	   return upfile;
+   }
+   public void setUpfile(MultipartFile upfile) {
+	   this.upfile = upfile;
+   }
+   
    
    
   

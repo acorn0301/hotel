@@ -155,10 +155,10 @@ function check(){
 		<div class="form_group">
 		<input type="text" class="inputbox" id="user_phone" name="phone" placeholder="전화번호" required="required" maxlength="11">
 		</div>
-	</div><br>
+	</div>
 
 	<!-- 생년월일 -->
-	<div class="dateForm">
+<%-- 	<div class="dateForm">
 		<select id="year" name="year" class="custom-select">
 			<c:set var="n" value="2019" />
 			<c:forEach begin="1940" end="2019">
@@ -185,10 +185,7 @@ function check(){
 			</c:forEach>
 		</select>
 		<span>일 &nbsp;</span>
-	</div>
-
-
-	<div class="form_group"></div>
+	</div> --%>
 	
 	<!-- 이메일 -->
 	<div class="form_group">
@@ -203,7 +200,7 @@ function check(){
 		</div>
 	</div><br>
 	
-	<div>
+	<div class="btncenter">
 		<input type="submit"  value="가입 완료" id="joinOk">
 	</div><br>
 

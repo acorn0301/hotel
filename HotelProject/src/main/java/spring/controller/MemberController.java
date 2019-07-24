@@ -1,6 +1,9 @@
 package spring.controller;
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -13,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -22,15 +24,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+import spring.data.AdminBookDto;
+import spring.data.BookDto;
 import spring.data.EmailDto;
 import spring.data.EmailSender;
 import spring.data.MemberDto;
+import spring.data.ReviewDao;
 import spring.service.KakaoAPI;
 import spring.service.MemberService;
+import upload.file.SpringFileWriter;
 
 @Controller
 public class MemberController {
@@ -115,8 +122,8 @@ public class MemberController {
    public String reactLoginProcess(HttpServletRequest request, HttpSession session,
          @ModelAttribute MemberDto mbdto, RedirectAttributes rttr)
    {
+	  if(mservice.idExist(mbdto)==1){ //일단 아이디가 존재하는지 확인  
 	   
-	   System.out.println("react login process ");
       MemberDto login = mservice.loginCheck1(mbdto);
 
       boolean passMatch = passEncoder.matches(mbdto.getPassword(), login.getPassword());
@@ -150,8 +157,6 @@ public class MemberController {
         	 session.setAttribute("ishere", 0);
          }
          
- 
-         
          int book_num = 0;
          // 문희쌤 왈 트라이 캐치를 해주자!!
          try {
@@ -161,7 +166,6 @@ public class MemberController {
          }
          
     	 session.setAttribute("book_num", book_num);
-    	 
     	 
     	 //로그인 한 고객의 grade를 세션에 올려준다.
     	 String grade = mservice.getMemberData(member_num).getGrade();
@@ -174,13 +178,22 @@ public class MemberController {
          
          return "review/reactlist"; 
          
-      }else{ //실패시
-         session.setAttribute("member", null);
-         rttr.addFlashAttribute("msg",false);
-         request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
-
-         return "member/login/loginmain";
-      }
+	      }else{ //아이디는 존재하지만 비밀번호가 틀린 경우
+	    	  session.setAttribute("member", null);
+	          rttr.addFlashAttribute("msg",false);
+	          request.setAttribute("msg", " ※ 아이디와 비밀번호를 다시 확인해주세요");
+	          request.setAttribute("container", "../member/login/reactLogin.jsp");
+	          return "layout/home";
+	      }
+	  
+	  }else{ //아이디가 존재하지 않는 경우 
+	     session.setAttribute("member", null);
+	     rttr.addFlashAttribute("msg",false);
+	     request.setAttribute("msg", " ※ 아이디와 비밀번호를 다시 확인해주세요");
+	     request.setAttribute("container", "../member/login/reactLogin.jsp");
+	     return "layout/home";
+	  }
+         
    }
    
    
@@ -190,86 +203,95 @@ public class MemberController {
    public String loginProcess(HttpServletRequest request, HttpSession session,
          @ModelAttribute MemberDto mbdto, RedirectAttributes rttr)
    {
-      MemberDto login = mservice.loginCheck1(mbdto);
-
-      boolean passMatch = passEncoder.matches(mbdto.getPassword(), login.getPassword());
-
-      //로그인 성공시
-      if(login != null && passMatch){
-         session.setAttribute("member", login);
-
-         if(session.getAttribute("url") != null )
-         {
-            String url = (String)session.getAttribute("url");
-            session.removeAttribute("url");
-            session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
-
-            return "redirect:" + url;
-         }
+	  if(mservice.idExist(mbdto)==1){ //일단 아이디가 존재하는지 확인 
+	  
+	      MemberDto login = mservice.loginCheck1(mbdto);
+	
+	      boolean passMatch = passEncoder.matches(mbdto.getPassword(), login.getPassword());
+	
+	      //로그인 성공시
+	      if(login != null && passMatch){
+	         session.setAttribute("member", login);
+	
+	         if(session.getAttribute("url") != null )
+	         {
+	            String url = (String)session.getAttribute("url");
+	            session.removeAttribute("url");
+	            session.setAttribute("member_num", mservice.getMembernum(mbdto.getId(), login.getPassword()));
+	
+	            return "redirect:" + url;
+	         }
+	         
+	         request.setAttribute("container", "../layout/indexmain.jsp");
+	         request.setAttribute("msg", "환영합니다 ");
+	         
+	         int member_num = mservice.getMembernum(mbdto.getId(), login.getPassword());
+	         session.setAttribute("member_num", member_num);
+	         
+	         //장희 수정 시작 
+	
+	         //현재 로그인 한 고객이 숙박중이거나 혹은 체크아웃한지 일주일 이내인지 알아낸다.
+	         //이 고객에 한 해 리뷰 작성하기 버튼이 보이기 때문임.
+	         // 현재 숙박중 여부를 ishere에 저장, 숙박 or 일주일이내 여부를 book_num 으로 저장 
+	         
+	         int ishere = mservice.isHere(member_num);
+	         System.out.println("ishere " + ishere);
+	         if(ishere==1) {
+	        	 session.setAttribute("ishere", 1);
+	         }else {
+	        	 session.setAttribute("ishere", 0);
+	         }
+	         
+	         // 아래 방법으로 북넘을 얻으면 널포인트 익셉션이 뜬다...
+	//         int book_num = mservice.isReviewAvailable(member_num);
+	//         System.out.println("isreview book num " + book_num);
+	//         if(book_num != 0) {
+	//        	 session.setAttribute("book_num", book_num);
+	//         }else {
+	//        	 session.setAttribute("book_num", book_num);
+	//         }
+	         
+	         int book_num = 0;
+	         // 문희쌤 왈 트라이 캐치를 해주자!!
+	         try {
+	        	 //리뷰 작성이 가능한 고객(숙박중이거나 체크아웃한지 일주일 이내)의 예약번호를 세션에 저장한다.
+	        	 book_num = mservice.isReviewAvailable(member_num);
+	         }catch(Exception e) {
+	        	 System.out.println(e);
+	         }
+	         
+	    	 session.setAttribute("book_num", book_num);
+	    	 
+	    	 //로그인 한 고객의 grade를 세션에 올려준다.
+	    	 String grade = mservice.getMemberData(member_num).getGrade();
+	    	 session.setAttribute("grade", grade);
+	    	 
+	    	 //로그인 한 고객의 이름을 세션에 올려준다 
+	    	 String name = mservice.getMemberData(member_num).getName();
+	    	 session.setAttribute("name", name);
+	    	 
+	    	 //만약 로그인 한 회원이 관리자 일 경우 메인페이지가 아닌 관리자 페이지로 바로 보내준다. 
+	    	 if(grade.equals("a")) {
+	    		 return "redirect:admin.do";
+	    	 }
+	         
+	         //장희 수정 끝 
+	
+	         return "layout/home"; 
          
-         request.setAttribute("container", "../layout/indexmain.jsp");
-         request.setAttribute("msg", "환영합니다 ");
-         
-         int member_num = mservice.getMembernum(mbdto.getId(), login.getPassword());
-         session.setAttribute("member_num", member_num);
-         
-         //장희 수정 시작 
-
-         //현재 로그인 한 고객이 숙박중이거나 혹은 체크아웃한지 일주일 이내인지 알아낸다.
-         //이 고객에 한 해 리뷰 작성하기 버튼이 보이기 때문임.
-         // 현재 숙박중 여부를 ishere에 저장, 숙박 or 일주일이내 여부를 book_num 으로 저장 
-         
-         int ishere = mservice.isHere(member_num);
-         System.out.println("ishere " + ishere);
-         if(ishere==1) {
-        	 session.setAttribute("ishere", 1);
-         }else {
-        	 session.setAttribute("ishere", 0);
-         }
-         
-         // 아래 방법으로 북넘을 얻으면 널포인트 익셉션이 뜬다...
-//         int book_num = mservice.isReviewAvailable(member_num);
-//         System.out.println("isreview book num " + book_num);
-//         if(book_num != 0) {
-//        	 session.setAttribute("book_num", book_num);
-//         }else {
-//        	 session.setAttribute("book_num", book_num);
-//         }
-         
-         int book_num = 0;
-         // 문희쌤 왈 트라이 캐치를 해주자!!
-         try {
-        	 //리뷰 작성이 가능한 고객(숙박중이거나 체크아웃한지 일주일 이내)의 예약번호를 세션에 저장한다.
-        	 book_num = mservice.isReviewAvailable(member_num);
-         }catch(Exception e) {
-        	 System.out.println(e);
-         }
-         
-    	 session.setAttribute("book_num", book_num);
-    	 
-    	 
-    	 //로그인 한 고객의 grade를 세션에 올려준다.
-    	 String grade = mservice.getMemberData(member_num).getGrade();
-    	 session.setAttribute("grade", grade);
-    	 
-    	 //로그인 한 고객의 이름을 세션에 올려준다 
-    	 String name = mservice.getMemberData(member_num).getName();
-    	 session.setAttribute("name", name);
-    	 
-    	 //만약 로그인 한 회원이 관리자 일 경우 메인페이지가 아닌 관리자 페이지로 바로 보내준다. 
-    	 if(grade.equals("a")) {
-    		 return "redirect:admin.do";
-    	 }
-
-         
-         //장희 수정 끝 
-
-         return "layout/home"; 
-         
-      }else{ //실패시
+	      }else{ //아이디는 존재하지만 비밀번호가 틀린 경우
+	    	  session.setAttribute("member", null);
+	          rttr.addFlashAttribute("msg",false);
+	          request.setAttribute("msg", " ※ 아이디와 비밀번호를 다시 확인해주세요");
+	          request.setAttribute("container", "../member/login/loginmain.jsp");
+	          return "layout/home";
+    	  
+	      }
+	      
+	  }else{ //아이디가 존재하지 않는 경우 
          session.setAttribute("member", null);
          rttr.addFlashAttribute("msg",false);
-         request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
+         request.setAttribute("msg", " ※ 아이디와 비밀번호를 다시 확인해주세요");
          request.setAttribute("container", "../member/login/loginmain.jsp");
          return "layout/home";
       }
@@ -287,15 +309,16 @@ public class MemberController {
 	  session.removeAttribute("name");
 	  session.removeAttribute("container");
 	  session.removeAttribute("msg");
+	  session.removeAttribute("fbdto");
+	  session.removeAttribute("url");
+//	  session.invalidate();
 	  
 	  kakao.kakaoLogout((String)session.getAttribute("access_Token"));
       session.removeAttribute("access_Token");
       session.removeAttribute("userId");
 	  
-	   
       //로그아웃 되는 로직을 짜보세요.
       //세션도 깔끔하게 지워줍시다. 
-      
       return "redirect:home.do";
    }
    
@@ -355,6 +378,53 @@ public class MemberController {
 	   return "layout/home";
    }
    
+   // 마이페이지 예약내역 메뉴
+   @RequestMapping("/m_bookinglist.do")
+   public String m_bookinglist(HttpServletRequest request, HttpSession session) {
+	   // member_num으로 예약한 정보리스트를 가져와야함
+	   int member_num = (Integer)session.getAttribute("member_num");
+	   
+	   List<AdminBookDto> list = null;
+		
+//		if(book_status == 1) {
+//			list = aservice.getBookListCheckInToday();
+//		}else if(book_status == 4) {
+//			list = aservice.getBookListCheckOutToday();
+//		}else {
+//			list = aservice.getBookListByStatus(book_status);
+//		}
+	   
+	   	list = mservice.m_getBookList(member_num);
+	   	int bookCount = mservice.m_GetBookListCount(member_num);
+	   	
+	   	request.setAttribute("bookCount", bookCount);
+		request.setAttribute("member_num", member_num);
+		request.setAttribute("list", list);
+
+	   request.setAttribute("container", "../member/mypage/mybooking.jsp");
+	   return "layout/home";
+   }
+   
+   // 마이페이지 예약내역 자세히보기 
+   @RequestMapping("/m_bookinglistDetail.do")
+   public String m_bookinglistDetail(HttpServletRequest request, HttpSession session, @RequestParam int book_num) {
+//	   int member_num = (Integer)session.getAttribute("member_num");
+	   AdminBookDto abdto = mservice.m_GetBookDetail(book_num);
+	   
+	   request.setAttribute("abdto", abdto);
+
+	   request.setAttribute("container", "../member/mypage/mybookingDetail.jsp");
+	   return "layout/home";
+   }
+   
+   // 마이페이지 룸서비스내역 메뉴
+   @RequestMapping("/m_roomservicelist.do")
+   public String m_roomservicelist(HttpServletRequest request, HttpSession session) {
+	   
+	   request.setAttribute("container", "../member/mypage/myorder.jsp");
+	   return "layout/home";
+   }
+   
    // 내 정보수정 클릭 (수정 폼 이동)
    @RequestMapping("/infoEdit.do")
    public String infoEdit(HttpServletRequest request, HttpSession session) {
@@ -386,17 +456,106 @@ public class MemberController {
    
    // 내 정보수정 처리
    @RequestMapping("/infoEditComplete.do")
-   public String infoEditComplete(HttpServletRequest request,
-         @ModelAttribute MemberDto mbdto) {
-      String inputPass = mbdto.getPassword();
-      String pass = passEncoder.encode(inputPass);
-      mbdto.setPassword(pass);
-      mservice.updateMember(mbdto);
+   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto, @RequestParam int isPicChanged) {
+	   String inputPass = mbdto.getPassword();
+	   String pass = passEncoder.encode(inputPass);
+	   mbdto.setPassword(pass);
+	   //mservice.updateMember(mbdto);
 
-      request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
-      return "layout/home";
+	   // 프로필 이미지 수정 부분
+//	   System.out.println(isPicChanged); // 1로 변경하면 이미지 체인지
+	   
+	   // mbdto에서 기존 사진파일 가져옴
+	   MultipartFile image = mbdto.getUpfile();
+//	   System.out.println(image);
+
+	   if(mbdto.getMember_pic().equals("user.svg")){ // 기본 이미지 일때는 원래 이미지 삭제X
+//		   System.out.println("aa");
+		   
+		   //이미지를 업로드할 경로 구하기
+		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
+		   String member_pic = image.getOriginalFilename();
+	
+		   // 중복되는 파일명을 막기위해 현재 시간을 파일명 끝에 넣어준다.
+		   Date now = new Date();
+		   String nowstr = String.valueOf(now.getTime());
+	
+		   int index = member_pic.lastIndexOf(".");
+		   String fileExt = member_pic.substring(index + 1);
+		   member_pic = member_pic.substring(0, index);
+		   member_pic = member_pic + nowstr + "." +fileExt;
+		
+		   //이미지 저장 메서드 호출
+		   SpringFileWriter fileWriter = new SpringFileWriter();
+	
+		   //writeFile(실제이미지파일, 저장할 경로, 저장될 이름) 
+		   fileWriter.writeFile(image, path, member_pic);
+	
+		   //이미지 리사이징을 위한 부분2
+		   String orgFilePath = path + "/" + member_pic;
+	
+		   try {
+			   ReviewDao.makeThumbnail(orgFilePath, member_pic, fileExt, path);
+	
+		   }catch(Exception e) {
+			   System.out.println(e);
+		   }
+	
+		   mbdto.setMember_pic(member_pic);
+		   System.out.println("memberpic change!!");
+	   
+		   mservice.updateMember(mbdto);
+	   }
+	   else if(isPicChanged == 1){ // 기본X말고 다른 이미지 있을때 기존 이미지 삭제
+//		   System.out.println("bb");
+		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
+		   String member_pic = image.getOriginalFilename();
+		   
+		   // 이미지 삭제 부분
+		   File f = new File(path + "/" + mbdto.getMember_pic());
+		   if(f.exists())
+			   f.delete();
+//		   int member_num = mbdto.getMember_num();
+//		   mservice.pic_delete(member_num);
+	
+		   // 중복되는 파일명을 막기위해 현재 시간을 파일명 끝에 넣어준다.
+		   Date now = new Date();
+		   String nowstr = String.valueOf(now.getTime());
+	
+		   int index = member_pic.lastIndexOf(".");
+		   String fileExt = member_pic.substring(index + 1);
+		   member_pic = member_pic.substring(0, index);
+		   member_pic = member_pic + nowstr + "." +fileExt;
+		
+		   //이미지 저장 메서드 호출
+		   SpringFileWriter fileWriter = new SpringFileWriter();
+	
+		   //writeFile(실제이미지파일, 저장할 경로, 저장될 이름) 
+		   fileWriter.writeFile(image, path, member_pic);
+	
+		   //이미지 리사이징을 위한 부분2
+		   String orgFilePath = path + "/" + member_pic;
+	
+		   try {
+			   ReviewDao.makeThumbnail(orgFilePath, member_pic, fileExt, path);
+	
+		   }catch(Exception e) {
+			   System.out.println(e);
+		   }
+	
+		   mbdto.setMember_pic(member_pic);
+//		   System.out.println("memberpic change!!");
+		 
+		   mservice.updateMember(mbdto);
+		   
+	   }else{ // 이미지 변경안하고 수정할 때
+		   mservice.updateMember(mbdto);
+	   }
+	   request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
+	   return "layout/home";
 
    }
+   
    
    // 가입완료 버튼 클릭시
 //   @RequestMapping(value="/joinok.do", method=RequestMethod.POST)
@@ -414,14 +573,10 @@ public class MemberController {
    
  //가입완료 버튼 클릭시 - 혜수수정
    @RequestMapping(value="/joinok.do", method=RequestMethod.POST)
-   public String joinok(HttpServletRequest request, @ModelAttribute MemberDto mbdto,
-         @RequestParam("year")String year, @RequestParam("month")String month,
-         @RequestParam("day")String day) {
+   public String joinok(HttpServletRequest request, @ModelAttribute MemberDto mbdto) {
       String inputPass = mbdto.getPassword();
       String pass = passEncoder.encode(inputPass);
       mbdto.setPassword(pass);
-
-      mbdto.setBirth(year + "-" + month +"-" + day); // 생년월일 값 따로 전송
 
       mservice.insertMember(mbdto);
       request.setAttribute("container", "../member/join/joincomplete.jsp");
@@ -571,38 +726,7 @@ public class MemberController {
       }
    }
    
-   
-   
-   // google로그인 페이지 불러오는 
-//   @RequestMapping(value="/googleLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
-//   public String googleLogin(HttpServletRequest request, HttpSession session, Model model){
-//	
-//	   // 구글code 발행 
-//	   OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-//	   // 로그인페이지 이동 url생성 
-//	   String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-//	   
-//	   System.out.println("구글 : " + url);
-//	   
-//	   request.setAttribute("google_url", url);
-////	   model.addAttribute("google_url", url);
-//	   
-//	   // 생성한 인증 URL을 전달 
-//	   return "redirect:url";
-//	   //return "page1/login.all";
-//   }
-//   
-//   
-//   // 구글 로그인 성공하면 불러오는 페이지 (구글 Callback호출 메소드)
-//   @RequestMapping(value = "oauth2callback.do", method = { RequestMethod.GET, RequestMethod.POST })
-//   public String googleCallback(@RequestParam String code) {
-//
-//	   System.out.println("Google login success");
-//
-//	   // 성공하면 메인페이지로 리다이렉트
-//	   return "redirect:home.do";
-//   }
-   
+   // 카카오 로그인
    @RequestMapping(value="/kakaoLogin")
    public String login(@RequestParam("code") String code, HttpSession session, HttpServletRequest request) {
 	   //, @RequestParam(value="id") String id 
@@ -621,8 +745,7 @@ public class MemberController {
        
        //얻어온 정보로 회원 가입 강제로 시킴
        //기존에 이미 가입된 회원인지 확인
-       //만약 가입되지 않았다면 새로 가입시키고
-       //가입 된 사람이라면 그냥 그 가입된 아이디의 멤버넘을 받아서 세션으로 올려준다.
+       //만약 가입되지 않았다면 새로 가입시키고 , 가입 된 사람이라면 그냥 그 가입된 아이디의 멤버넘을 받아서 세션으로 올려준다.
        String user_email = (String)userInfo.get("email");
        String user_id = "kakao_" + userInfo.get("id");
        String user_name = (String)userInfo.get("nickname");
@@ -631,26 +754,57 @@ public class MemberController {
        mbdto.setId(user_id);
        mbdto.setPassword("********");
        mbdto.setName(user_name);
-       mbdto.setPhone("01012345678");
-       mbdto.setBirth("1990" + "-" + "01" +"-" + "01");
+       mbdto.setPhone("kakao_phone");
+       mbdto.setBirth("1900" + "-" + "01" +"-" + "01");
        mbdto.setEmail(user_email);
        
        String id = mbdto.getId();
        int idchk = mservice.userIdCheck(id);
+       int member_num = 0;
        if(idchk == 0) // 가입되지 않음 (아이디=0)
        {
     	   mservice.insertMember(mbdto);
 //    	   session.setAttribute("member_num", mbdto.getMember_num());
     	   session.setAttribute("mbdto", mbdto);
-    	   session.setAttribute("member_num", mservice.getMembernum_kakao(id));
-    	   request.setAttribute("container", "../layout/indexmain.jsp");
-    	   return "layout/home";
-    	   
+    	   member_num =  mservice.getMembernum_kakao(id);
+    	  
        }else{ // 가입된 아이디있음 (아이디=1)
-    	   session.setAttribute("member_num", mservice.getMembernum_kakao(id));
-    	   request.setAttribute("container", "../layout/indexmain.jsp");
-    	   return "layout/home";
+    	  member_num =  mservice.getMembernum_kakao(id);
        }
+       
+       //현재 로그인 한 고객이 숙박중이거나 혹은 체크아웃한지 일주일 이내인지 알아낸다.
+       //이 고객에 한 해 리뷰 작성하기 버튼이 보이기 때문임.
+       // 현재 숙박중 여부를 ishere에 저장, 숙박 or 일주일이내 여부를 book_num 으로 저장 
+       int ishere = mservice.isHere(member_num);
+       System.out.println("ishere " + ishere);
+       if(ishere==1) {
+      	 session.setAttribute("ishere", 1);
+       }else {
+      	 session.setAttribute("ishere", 0);
+       }
+       
+       int book_num = 0;
+       // 문희쌤 왈 트라이 캐치를 해주자!!
+       try {
+      	 //리뷰 작성이 가능한 고객(숙박중이거나 체크아웃한지 일주일 이내)의 예약번호를 세션에 저장한다.
+      	 book_num = mservice.isReviewAvailable(member_num);
+       }catch(Exception e) {
+      	 System.out.println(e);
+       }
+       
+  	 session.setAttribute("book_num", book_num);
+  	 
+  	 //로그인 한 고객의 grade를 세션에 올려준다.
+  	 String grade = mservice.getMemberData(member_num).getGrade();
+  	 session.setAttribute("grade", grade);
+  	 
+  	 //로그인 한 고객의 이름을 세션에 올려준다 
+  	 String name = mservice.getMemberData(member_num).getName();
+  	 session.setAttribute("name", name);
+
+  	 session.setAttribute("member_num", member_num);
+  	 request.setAttribute("container", "../layout/indexmain.jsp");
+  	 return "layout/home";
        
 //       return "/member/login/kakaologin";
    }

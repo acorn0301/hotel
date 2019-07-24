@@ -29,7 +29,7 @@
 		</div>
 	
 		<b id="chkmsg">${msg}</b><br><br>
-		<div class="col-sm-3 text-center">
+		<div class="btncenter">
 			<button id="findIdOk" type="submit">확인</button>
 		</div>
 	</form>

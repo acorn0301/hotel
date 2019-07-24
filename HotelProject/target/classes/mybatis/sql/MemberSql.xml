@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
    <!-- 회원가입(회원추가) -->
    <insert id="memberInsert" parameterType="mbdto">
-      insert into member(member_num,id,password,name,birth,phone,email,joinday,grade) values (
-      memberseq.nextval,#{id},#{password},#{name},#{birth},#{phone},#{email},sysdate,'c')
+      insert into member(member_num,id,password,name,birth,phone,email,joinday,grade,member_pic) values (
+      memberseq.nextval,#{id},#{password},#{name},#{birth},#{phone},#{email},sysdate,'c','user.svg')
    </insert>
 
    <!-- 로그인 (id와 pw가 일치하면1 없으면0 사용자 정보 담고있는 객체 반환)-->
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원 정보 수정 -->
 	<update id="infoEdit" parameterType="mbdto">
- 		update member set password=#{password},phone=#{phone},email=#{email} where member_num=#{member_num}
+ 		update member set password=#{password},phone=#{phone},email=#{email},member_pic=#{member_pic} where member_num=#{member_num}
 	</update>
 	
 	<!-- 아이디 중복체크 -->
@@ -80,9 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		TO_CHAR(trunc(check_out+7), 'yyyy-MM-dd HH24miSS') >=  TO_CHAR(trunc(SYSDATE), 'yyyy-MM-dd HH24miSS'))]]>
 	</select>
 	
-	
 	<!-- 장희 수정 끝 -->
-	
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="withdrawal" parameterType="mbdto">
@@ -93,4 +91,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMembernum_kakao" parameterType="String" resultType="int">
 		select member_num from member where id=#{id}
 	</select>
+	
+	<!-- 마이페이지 - 예약 확인 내역 (member_num으로 예약데이터 얻기) -->
+	<select id="m_GetBookList" parameterType="int" resultType="spring.data.AdminBookDto">
+		select book_num, add_bed,breakfast_count, b.room_num, hotel_local, room_local, 
+		head_count, check_in, check_out,
+		m.name, m.id, book_day
+		from book b, member m,
+		(select hotel_local, room_num, room_local 
+		from hotel h, room r 
+		where h.hotel_num = r.hotel_num) a 
+		where b.room_num = a.room_num and
+		b.member_num = m.member_num and
+		m.member_num = #{member_num}
+		order by book_day 
+	</select>
+	
+	<!-- 내 예약 확인내역 갯수 -->
+	<select id="m_GetBookListCount" resultType="int">
+		select count(*) from book where member_num = #{member_num}
+	</select>
+	
+	<!-- 예약확인 자세히보기 -->
+	<select id="m_GetBookDetail" parameterType="int" resultType="spring.data.AdminBookDto">
+		select
+		b.*, 
+		m.name, m.id, m.phone, m.email, 
+		r.room_local, r.price, r.room_name, r.type, r.hotel_num, 
+		h.hotel_local 
+		from book b, room r, hotel h, member m 
+		where r.room_num = b.room_num 
+		and r.hotel_num = h.hotel_num 
+		and b.member_num = m.member_num 
+		and book_num=#{book_num}
+	</select>
+	
 </mapper>

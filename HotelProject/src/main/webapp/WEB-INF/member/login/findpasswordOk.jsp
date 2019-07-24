@@ -20,7 +20,7 @@
 <h5>이메일 확인 후 로그인 해주시기 바랍니다</h5>
 <br>
 <br>
-<div class="col-sm-3 text-center">
+<div class="btncenter">
 <input type="submit" id="loginGo" value="로그인 하러가기">
 </div>
 </form>
