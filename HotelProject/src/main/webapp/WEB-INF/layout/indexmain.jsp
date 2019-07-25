@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Noto+Serif+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel="stylesheet" href="css/hsStyle.css"> 
 <link rel="stylesheet" href="css/hjStyle.css">
@@ -29,6 +30,14 @@
 <!-- 하단 슬라이드 js --> 
 <script src="js/slick.min.js"></script>
 
+<style type="text/css">
+/* 영은 메인-리뷰 css */
+.reviewComm { margin-left: 15px;}
+.reviewComm a { font-size : 14px; color:#99948b; }
+.reviewid { font-size : 12px; margin-left: 17px; color:#70695b; }
+.main_review { margin: 12px 18px; font-family: 'Noto Serif KR', serif; }
+
+</style>
 </head>
 <body>
 
@@ -166,7 +175,8 @@
 							<div class="search_sub">인원</div>
 							<div class="countDiv " >
 								<div class="count_su">
-									<input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1">
+									<!-- <input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1"> -->
+									<span class="check_count2" id="check_count2">2</span>
 								</div>
 							</div>
 						</div>
@@ -176,6 +186,7 @@
 						
 				<!-- 검색버튼 -->
 				<div class="dateBoxJH">
+					<input type="hidden" name="head_count" id="headCountHidden" value="0">
 					<input type="hidden" name="step" value="1">	
 					<input type="submit" id="reservationBtn1" value="객실검색">
 				</div>
@@ -221,7 +232,7 @@
 						<button type="button" onclick="headCountFunction(1)" class="headCountBtn rightFloat">+</button>
 						<button type="button" onclick="headCountFunction(-1)" class="headCountBtn rightFloat">-</button>
 						
-						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="1" class="rightFloat">
+						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="2" class="rightFloat" name="head_count">
 					</div>
 					
 					<div class="modal_text">
@@ -332,84 +343,20 @@
 
 <br>
 
-<!-- 리뷰 슬라이드 -->
+<!-- 리뷰 슬라이드 (영은 수정) -->
 <div class="ex_slide">
-    <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-    <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-    <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-    <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-        <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-        <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
-    
-        <div class="main_review_div">
-    	<a href="#">
-    	<img src="images/etc/1.jpg" alt="" title="이미지1">
- 	    </a>
-  	    <div class="main_review_div_center">
-	    1st hotel <br>
-		<a href="#">어쩌구 저쩌구 <br></a>
-		2019-01-01 ~ 2019-09-30 <br>
-	    </div>
-    </div>
+	<c:forEach items="${list }" var="dto">
+	    <div class="main_review_div">
+	    	<a href="reviewlist.do">
+	    	<img src="http://192.168.0.38:9000/HotelProject/save/review/${dto.review_img }" alt="" title="이미지1">
+	 	    </a>
+	  	    <div class="main_review">
+	  	    <i class="fas fa-quote-left" style="color:lightgray; font-size: 1.3em"></i>&nbsp;<br>
+			<div class="reviewComm"><a href="reviewlist.do">${dto.review_comment}</a></div>
+			<span class="reviewid"><strong>${dto.id}</strong></span> 님
+		    </div>
+    	</div>
+   </c:forEach>
 </div>
 
     

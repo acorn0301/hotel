@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="member">
    <!-- 회원가입(회원추가) -->
    <insert id="memberInsert" parameterType="mbdto">
-      insert into member(member_num,id,password,name,birth,phone,email,joinday,grade,member_pic) values (
-      memberseq.nextval,#{id},#{password},#{name},#{birth},#{phone},#{email},sysdate,'c','user.svg')
+      insert into member(member_num,id,password,name,phone,email,joinday,grade,member_pic) values (
+      memberseq.nextval,#{id},#{password},#{name},#{phone},#{email},sysdate,'c','user.svg')
    </insert>
 
    <!-- 로그인 (id와 pw가 일치하면1 없으면0 사용자 정보 담고있는 객체 반환)-->
@@ -105,6 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		b.member_num = m.member_num and
 		m.member_num = #{member_num}
 		order by book_day 
+		desc
 	</select>
 	
 	<!-- 내 예약 확인내역 갯수 -->
@@ -124,6 +125,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and r.hotel_num = h.hotel_num 
 		and b.member_num = m.member_num 
 		and book_num=#{book_num}
+	</select>
+	
+	<!-- 내 룸서비스 주문내역 -->
+	<select id="m_GetOrderList" parameterType="int" resultType="spring.data.AdminOrderDto">
+		select 
+        o.*, 
+        
+        mb.name, mb.id, mb.phone, mb.email,
+        b.book_num, b.room_num,
+        r.room_local, r.hotel_num,
+        h.hotel_local
+        from room_order o,   member mb, room r, book b, hotel h
+        where
+        
+        o.member_num = mb.member_num and
+        mb.member_num = b.member_num and
+        b.room_num = r.room_num and
+        r.hotel_num = h.hotel_num and
+        
+        mb.member_num = #{member_num}
+        order by o.time
+        desc
+	</select>
+	
+	<!-- 룸서비스 메뉴정보 받을때 -->
+	<select id="m_GetOrderDetailByOrderNum" parameterType="int" resultType="spring.data.AdminOrderDetailDto">
+		select 
+		od.*, mn.*
+		from order_detail od, room_order o, menu mn 
+		where od.order_num=o.order_num 
+		and mn.menu_num = od.menu_num
+		and od.order_num=#{order_num}
+	</select>
+	
+	<!-- 내 룸서비스 주문내역 자세히보기(개별내역)-->
+	<select id="m_GetOrderDataDetail" parameterType="int" resultType="spring.data.AdminOrderDto">
+		select 
+        o.*, 
+        
+        mb.name, mb.id, mb.phone, mb.email,
+        b.book_num, b.room_num,
+        r.room_local, r.hotel_num,
+        h.hotel_local
+        from room_order o,   member mb, room r, book b, hotel h
+        where
+        
+        o.member_num = mb.member_num and
+        mb.member_num = b.member_num and
+        b.room_num = r.room_num and
+        r.hotel_num = h.hotel_num and
+        
+        o.order_num = #{order_num}    
+	</select>
+	
+	<!-- 개별 예약 취소 -->
+	<select id="m_BookCancel" parameterType="int">
+		update book set book_status = 5 where book_num = #{book_num}
+	</select>
+	
+	<!-- 개별 룸서비스 주문취소 -->
+	<select id="m_OrderCancel" parameterType="int">
+		update room_order set room_status = 5 where order_num = #{order_num}
 	</select>
 	
 </mapper>

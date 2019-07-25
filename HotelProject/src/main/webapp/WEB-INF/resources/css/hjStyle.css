@@ -74,6 +74,18 @@ li{
 }
 
 
+#hjBody .notRoom{
+	padding: 30px 20px 20px 20px;
+	text-align: center;
+	color: grey;
+	font-weight: bold;
+}
+
+#hjBody .notRoom i{
+	font-size: 5em;
+	color: lightgrey;
+	padding-bottom: 20px;
+}
 
 /* --------- CSS 통일하기위한 클래스 name 겹치는 css */
 
@@ -179,6 +191,7 @@ li{
    padding: 7px 5px 10px;
    margin: 1rem 0 3rem;
    border: 3px solid #685845;
+   background-color: white;
 }
 
 
@@ -209,6 +222,7 @@ li{
    border-radius: 50px;
    margin-right: 10px;
    text-align: center;
+   padding: 0;
 }
 
 
@@ -241,6 +255,7 @@ li{
    color: white;
    margin: 1rem 0 2rem 0;
    font-size: 12pt;
+   border-radius: 0;
 }
 
 
@@ -308,7 +323,7 @@ li{
 
 /* 세팅창 컨텐츠 */
 .searchSettingContents{
-   padding: 15px;
+   padding: 9px 15px 15px 15px;
 }
 
 .headCountText{
@@ -359,7 +374,7 @@ li{
 
 #roomListNum{
    font-size: 9pt;
-   background-color: PaleGoldenRod;
+   background-color: #f1ebd6;
    border-radius: 5rem;
    font-weight: bold;
    top: 50%;
@@ -401,6 +416,7 @@ li{
    background-color: #685845;
    color: white;
    font-size: 11pt;
+	border-radius: 0;
 }
 
 
@@ -428,12 +444,14 @@ li{
 
 /* 자세히 보기 팝업 테두리 */
 #hjBody #aboutRoomModalborder{
-   position: fixed;
+   position: absolute;
+   left:50%;
+   top: 50%;
+   transform:translate(-50%,-50%);
    border-radius: 10px;
    width: 290px;
    height: 480px;
-   left: 5%;
-   top: 17%;
+
 }
 
 #aboutRoomModal{
@@ -537,17 +555,20 @@ textarea{
    color: white;
    margin-top: 1rem;
    font-size: 12pt;
+   border-radius: 0;
 }
 
 .reservationBtn3_1{
    float: left;
     width: 50%;
     padding-right: 10px;
+    border-radius: 0;
 }
 
 .reservationBtn3_2{
    float: left;
     width: 50%;
+    border-radius: 0;
 }
 
 .floatClear{
@@ -558,7 +579,10 @@ textarea{
    margin-right: 10px;
 }
 
-
+.reservationBtns{
+	height: 70px;
+	margin-bottom: 1rem;
+}
 
 
 /* ----------------------STEP 4 예약확인------------------ */
@@ -571,7 +595,12 @@ textarea{
    margin: 1.2rem 0;
 }
 
-#step3
+.noaccountSub2{
+   width: 70px;
+   display: inline-block;
+   margin: 1.2rem 0;
+}
+
 
 
 /* 호텔지점글씨 강조 */
@@ -580,12 +609,6 @@ textarea{
    font-weight: bold;
    padding-top: 0.7rem;
 }
-
-
-#step4Page .noaccountSub{
-
-}
-
 
 
 #step4Page #totalPrice{
@@ -602,7 +625,7 @@ textarea{
 
 
 #step4Page hr{
-   border: solid 1px palegoldenrod;
+   border: solid 1px #f1ebd6;
 }
 
 #step4Page .reservationContents{
@@ -622,7 +645,9 @@ textarea{
 }
 
 #step4Page .infoInput{
-   width: 180px;
+   width: 70%;
+   float: right;
+   margin-top: 7px;
 }
 
 
@@ -630,7 +655,6 @@ textarea{
    margin: 2rem 0 2rem;
    padding: 1rem 0 0;
    border-top: 2px solid sienna;
-   
 }
 
 
@@ -685,7 +709,7 @@ textarea{
 
 
 #step5Page hr{
-   border: solid 1px palegoldenrod;
+   border: solid 1px #f1ebd6;
 }
 
 
@@ -740,6 +764,7 @@ textarea{
    padding: 1.2rem 0;
    width: 49%;
    font-size: 12pt;
+   border-radius: 0;
 }
 
 
@@ -844,6 +869,7 @@ textarea{
 
 #main_search .reservationBtn{
    text-align: center;
+    border-radius: 0;
 }
 
 #main_search #reservationBtn1{
@@ -854,6 +880,7 @@ textarea{
    color: white;
    margin: 1rem 0 0 0;
    font-size: 12pt;
+   border-radius: 0;
 }
 
 /* 장희 추가 css 시작  */

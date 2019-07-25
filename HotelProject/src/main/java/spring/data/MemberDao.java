@@ -136,5 +136,30 @@ public class MemberDao extends SqlSessionDaoSupport{
 	   return getSqlSession().selectOne("member.m_GetBookDetail", book_num);
    }
    
+   // 마이페이지 - 내 룸서비스 주문내역 목록
+   public List<AdminOrderDto> m_GetOrderList(int member_num){
+	   return getSqlSession().selectList("member.m_GetOrderList", member_num);
+   }
+   
+   // 룸서비스 메뉴정보 받을때
+   public List<AdminOrderDetailDto> m_getOrderDetailByOrderNum(int order_num){
+	   return getSqlSession().selectList("member.m_GetOrderDetailByOrderNum", order_num);
+   }
+
+   // 내 룸서비스 주문내역 자세히보기(개별내역)
+   public AdminOrderDto m_GetOrderDataDetail(int order_num) {
+	   return getSqlSession().selectOne("member.m_GetOrderDataDetail", order_num);
+   }
+   
+   // 개별 예약 취소
+   public void m_bookCancel(int book_num){
+	   getSqlSession().update("member.m_BookCancel", book_num);
+   }
+
+   // 개별 룸서비스 주문취소
+   public void m_orderCancel(int order_num) {
+	   getSqlSession().update("member.m_OrderCancel", order_num);
+   }
+   
    
 }

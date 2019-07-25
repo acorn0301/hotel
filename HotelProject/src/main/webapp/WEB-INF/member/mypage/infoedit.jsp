@@ -51,11 +51,6 @@ function check(){
 	
 }
 
-// 사진변경 버튼 클릭
-function btnChange(){
-	
-}
-
 // 기존 사진 삭제
 function pic_delete(){
 	alert("aa");
@@ -75,7 +70,7 @@ function pic_delete(){
 	<h4 class="tit">내 정보 수정&nbsp;&nbsp;<i class="fas fa-user-edit"></i></h4>
 </div>
 <br>
-<h6 id="editNo">※ 아이디 / 이름 / 생년월일은 수정하실 수 없습니다</h6>
+<h6 id="editNo">※ 아이디 / 이름은 수정하실 수 없습니다</h6>
 	<div class="form_group"></div>
 	<!-- 아이디 -->
 	<div id="formid">

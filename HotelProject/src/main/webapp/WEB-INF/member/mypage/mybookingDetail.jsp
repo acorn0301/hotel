@@ -32,7 +32,13 @@
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">예약상태</td>
-				<td class="bookdetail_table_td"> ${abdto.book_status }</td>	
+				<td class="bookdetail_table_td">
+					<c:if test="${abdto.book_status==0 }">예약대기</c:if>
+					<c:if test="${abdto.book_status==1 }">예약접수</c:if>
+					<c:if test="${abdto.book_status==2 }">숙박중</c:if>
+					<c:if test="${abdto.book_status==3 }">지난예약</c:if>
+					<c:if test="${abdto.book_status==5 }">취소예약</c:if>
+				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">접수일시</td>
@@ -133,10 +139,21 @@
 		</table>	
 	</div><br>
 	
-	<div class="mybookingbtn">
-		<input type="submit" id="mybookingCancel" value="예약취소" onclick="">
+	<div class="btncenter">
 		<input type="button" id="mybookinglist" value="목록가기" onclick="history.back()">
+		<input type="submit" id="mybookingCancel" value="예약취소" onclick="mybookingCancel()">
 	</div><br>
+	
+	<script type="text/javascript">
+		function mybookingCancel(){ //예약 취소 버튼을 눌렀을 때 
+			let chk = confirm("예약을 취소하시겠습니까?");
+			if(chk){
+				location.href="m_bookCancelOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status};
+			}
+			
+		}
+	
+	</script>
 
 </div>
 </div>

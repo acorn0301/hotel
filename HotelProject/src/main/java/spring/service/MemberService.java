@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import spring.data.AdminBookDto;
 import spring.data.AdminDao;
+import spring.data.AdminOrderDetailDto;
+import spring.data.AdminOrderDto;
 import spring.data.BookDto;
 import spring.data.MemberDao;
 import spring.data.MemberDto;
@@ -130,6 +132,31 @@ public class MemberService {
     // 예약 내역 자세히보기
     public AdminBookDto m_GetBookDetail(int book_num){
     	return mbdao.m_GetBookDetail(book_num);
+    }
+    
+    // 마이페이지 - 내 룸서비스 주문내역 목록
+    public List<AdminOrderDto> m_GetOrderList(int member_num){
+    	return mbdao.m_GetOrderList(member_num);
+    }
+    
+    // 룸서비스 메뉴정보 받을때
+    public List<AdminOrderDetailDto> m_getOrderDetailByOrderNum(int order_num){
+ 	   return mbdao.m_getOrderDetailByOrderNum(order_num);
+    }
+    
+    // 내 룸서비스 주문내역 자세히보기(개별내역)
+    public AdminOrderDto m_GetOrderDataDetail(int order_num) {
+    	return mbdao.m_GetOrderDataDetail(order_num);
+    }
+
+    // 개별 예약 취소
+    public void m_bookCancel(int book_num){
+    	mbdao.m_bookCancel(book_num);
+    }
+
+    // 개별 룸서비스 주문취소
+    public void m_orderCancel(int order_num) {
+    	mbdao.m_orderCancel(order_num);
     }
 
 }

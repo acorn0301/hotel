@@ -307,6 +307,13 @@
             </div>
          </div>
          
+         <c:if test="${size==0 }">
+			<div class="notRoom">
+				<i class="fas fa-exclamation-triangle"></i><br>
+					조건에 해당하는 객실이 없습니다.
+			</div>
+		</c:if>
+					       
          <%-- <c:if test="">--%>
          <!-- 목록을 출력할 dto를 fbdto로 -->
             <c:forEach var="fbdto" items="${roomList }">
@@ -316,7 +323,6 @@
                      <!-- 폼 -->
                      <form action="booking.do" method="post">
                         <div class="roomInfoSpan">
-                           
                            
                            <!-- 객실 넘버 -->
                            <div id="roomListNum">${fbdto.room_num }</div>
@@ -449,14 +455,14 @@
                   <!-- step1,2에서 들어왔을 때 값 0 -->
                   <c:if test="${sessionScope.fbdto.add_bed == 0 }">
                      <b class="rightFloat">
-                     <input type="text" id="bedAddPrice" value="0" size="4" class="bedCountBorderNone" readonly="readonly">
+                     <input type="text" id="bedAddPrice" value="0" size="10" class="bedCountBorderNone" readonly="readonly">
                      원</b>
                   </c:if>
                   
                   <!-- step4에서 들어왔을 때 값 표시 -->
                   <c:if test="${sessionScope.fbdto.add_bed != 0 }">
                      <b class="rightFloat">
-                     <input type="text" id="bedAddPrice" value="${sessionScope.fbdto.add_bed *40000}" size="4" class="bedCountBorderNone" readonly="readonly">
+                     <input type="text" id="bedAddPrice" value="${sessionScope.fbdto.add_bed *40000}" size="10" class="bedCountBorderNone" readonly="readonly">
                      원</b>
                   </c:if>
                   
@@ -507,13 +513,13 @@
                <!-- step1,2에서 들어왔을 때 값 0 -->
                <c:if test="${sessionScope.fbdto.breakfast_count == 0 }">
                   <b class="rightFloat">
-                  <input type="text" id="breakfastAddPrice" value="0" size="4" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
+                  <input type="text" id="breakfastAddPrice" value="0" size="10" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
                </c:if>
                
                <!-- step4에서 들어왔을 때 값 표시 -->
                <c:if test="${sessionScope.fbdto.breakfast_count != 0 }">
                   <b class="rightFloat">
-                  <input type="text" id="breakfastAddPrice" value="${sessionScope.fbdto.breakfast_count*25000}" size="4" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
+                  <input type="text" id="breakfastAddPrice" value="${sessionScope.fbdto.breakfast_count*25000}" size="10" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
                </c:if>
                
                <!-- 값이 있을 때 값 보내기 -->
@@ -587,13 +593,13 @@
             <!-- 비회원 정보 입력 -->
             <div class="reservationBorder">
                <div class="reservationContents">
-                  <span class="smalltext noaccountSub">이름</span>
-                  <input type="text" placeholder="이름 입력" required="required" name="name" id="ncname" size="15" class="infoInput">
+                  <span class="smalltext noaccountSub2">이름</span>
+                  <input type="text" placeholder="이름 입력" required="required" name="name" id="ncname" class="infoInput">
                   
                   <br>
                   
-                  <span class="smalltext noaccountSub">전화번호</span>
-                  <input type="text" placeholder="전화번호 입력" required="required" name="phone" id="ncphone" size="15" class="infoInput">
+                  <span class="smalltext noaccountSub2">전화번호</span>
+                  <input type="text" placeholder="전화번호 입력" required="required" name="phone" id="ncphone" class="infoInput">
                </div>
             </div>   
             
@@ -609,43 +615,50 @@
             <div class="reservationBorder">
                <div class="reservationContents">
                   <div>
-                     <span class="smalltext noaccountSub">호텔</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-hotel"></i>&nbsp;&nbsp;호텔</span>
                      <span class="reserveHotel rightFloat">${fbdto.hotel_local}</span>
                   </div>
  
  
                    <div>
-                     <span class="smalltext noaccountSub">객실</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-home"></i>&nbsp;&nbsp;객실</span>
                      <span class="contents">${fbdto.room_name}</span>
                   </div>
                   
                   
                   <div>
-                     <span class="smalltext noaccountSub">인원</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-users"></i>&nbsp;&nbsp;인원</span>
                      <span class="contents">${fbdto.head_count}명</span>
                   </div>
                   
                   
                   <div>
-                     <span class="smalltext noaccountSub">체크인</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;체크인</span>
                      <span class="contents">${fbdto.check_in}</span>
                   </div>
                   
                   
                   <div>
-                     <span class="smalltext noaccountSub">체크아웃</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;체크아웃</span>
                      <span class="contents">${fbdto.check_out}</span>
                   </div>
                   
                   
                   <div>
-                     <span class="smalltext noaccountSub">룸구성</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-couch"></i>&nbsp;&nbsp;룸구성</span>
                      <span class="contents">${fbdto.room_config}</span>
                   </div>
                   
                   
                   <div>
-                     <span class="smalltext noaccountSub">침대</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-bed"></i>&nbsp;&nbsp;침대</span>
                      <span class="contents">${fbdto.type}</span>
                   </div>
             
@@ -657,7 +670,8 @@
                   <c:if test="${fbdto.head_count > 3 }">
                      <!-- 침대를 추가했다면 갯수표시 / 미추가시 "없음" 표시 ---------->
                      <div>
-                        <span class="smalltext noaccountSub">침대 추가</span>
+                        <span class="smalltext noaccountSub">
+                        <i class="fas fa-bed"></i>&nbsp;&nbsp;침대 추가</span>
                         <c:if test="${sessionScope.fbdto.add_bed== 0}">
                            <span class="contents">없음</span>
                         </c:if>
@@ -669,7 +683,8 @@
                   
                   <!-- 조식인원이 있을시 인원 표시 / 없을시 "없음" 표시 -------->
                   <div>
-                     <span class="smalltext noaccountSub">조식</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-utensils"></i>&nbsp;&nbsp;조식</span>
                      <c:if test="${sessionScope.fbdto.breakfast_count== 0}">
                         <span class="contents">없음</span>
                      </c:if>
@@ -710,7 +725,8 @@
                   
                   <!-- 총 요금 합계 -->
                   <div class="totalPriceDiv">
-                     <span class="smalltext noaccountSub">요금 합계</span>
+                     <span class="smalltext noaccountSub">
+                     <i class="fas fa-won-sign"></i>&nbsp;&nbsp;요금 합계</span>
                      <span id="totalPrice" class="contents">${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000} 원</span>
                   </div>
                </div>
