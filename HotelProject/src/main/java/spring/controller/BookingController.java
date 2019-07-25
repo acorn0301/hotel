@@ -86,6 +86,8 @@ public class BookingController {
 			//호텔지점 리스트 출력
 			List<HotelDto> Locallist=bookService.HotelLocalList(); //bookService에 있는 HotelLocalList 가져오기
 			request.setAttribute("localList", Locallist); //리스트에 리스트 저장
+			
+			
 		}
 		
 		//'STEP 2 객실 선택' 페이지로 넘어갈 때
@@ -162,8 +164,10 @@ public class BookingController {
 			
 			//객실 리스트 출력
 			List<RoomDto> roomList=bookService.RoomList(fbdto);
+			int size = roomList.size();
 			
 			/*request.setAttribute("hotel_local", hotel_local);*/
+			request.setAttribute("size", size);
 			request.setAttribute("roomList", roomList);
 			
 			System.out.println("head_count: "+fbdto.getHead_count());

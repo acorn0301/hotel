@@ -1,8 +1,6 @@
 $(document).ready(function(){
 	
-	// 메인화면 기본 인원 2명으로
-	var hch = document.getElementById("headCountHidden");
-	hch.value = 2;
+	
 
    // (STEP3) hidden 값 삽입
    // *1 은 숫자열로 바꿔준다.

@@ -307,6 +307,13 @@
             </div>
          </div>
          
+         <c:if test="${size==0 }">
+			<div class="notRoom">
+				<i class="fas fa-exclamation-triangle"></i><br>
+					조건에 해당하는 객실이 없습니다.
+			</div>
+		</c:if>
+					       
          <%-- <c:if test="">--%>
          <!-- 목록을 출력할 dto를 fbdto로 -->
             <c:forEach var="fbdto" items="${roomList }">
@@ -316,7 +323,6 @@
                      <!-- 폼 -->
                      <form action="booking.do" method="post">
                         <div class="roomInfoSpan">
-                           
                            
                            <!-- 객실 넘버 -->
                            <div id="roomListNum">${fbdto.room_num }</div>

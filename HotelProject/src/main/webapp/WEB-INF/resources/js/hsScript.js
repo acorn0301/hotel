@@ -36,6 +36,11 @@ $(document).ready(function () {
 
 //STEP 2 페이지
 $(document).ready(function(){
+	
+	// 메인화면 기본 인원 2명으로
+	var hch = document.getElementById("headCountHidden");
+	hch.value = 2;
+	
    //메인 체크인+체크아웃 오늘 날짜로 디폴트시키기
       //오늘날짜 구하기
       var today = new Date();
