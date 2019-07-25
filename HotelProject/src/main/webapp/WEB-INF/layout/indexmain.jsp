@@ -40,6 +40,16 @@
 </style>
 </head>
 <body>
+
+<script>
+//장희 추가 스크립트
+
+
+
+</script>
+
+
+
 <div class="hyebody"> <!-- 혜수 메인페이지 시작 -->
 
 <!-- main 슬라이드 -->
@@ -89,27 +99,39 @@
 				
 				
 				<!-- 체크인 부트스트랩 -->
+				<!-- 
 				<div class="check_in_select">
 					<div class="form-group">
-						<!-- Date input -->
+						Date input
 						<input class="form-control" id="datepicker1" name="check_in" placeholder="checkIn" type="text" onchange = "checkDate('datepicker1','In')">
 					</div>
 				</div>
 				
-				<!-- 체크아웃 부트스트랩 -->
+				체크아웃 부트스트랩
 				<div class="check_out_select">
 					<div class="form-group">
-						<!-- Date input -->
+						Date input
 						<input class="form-control" id="datepicker2" name="check_out" placeholder="checkout" type="text" onchange = "checkDate('datepicker2','Out')">
 					</div>
-				</div>
+				</div> -->
 				
 				<div class="setting">
 					<div class="setting_date">
 						<!--  체크인 -->
-						<div class="checkIn">
+						<div class="checkIn" onclick="openCheckIn()">
 							<div class="search_sub">체크인</div>
-							<div class="checkIn_date" id="checkIn_date">
+							<div class="checkIn_date dateBoxJH" id="checkIn_date">
+							
+								
+								<!-- 장희 : 체크인 박스 위치 이동  -->
+								
+								<div class="check_in_select">
+									<div class="form-group">
+										<!-- Date input -->
+										<input class="form-control" id="datepicker1" name="check_in" placeholder="checkIn" type="text" onchange = "checkDate('datepicker1','In')" readonly="readonly">
+									</div>
+								</div>
+								
 								<div class="checkIn_date_inner">
 								
 									</div>
@@ -125,7 +147,17 @@
 						<!--  체크인 -->
 						<div class="checkOut">
 							<div class="search_sub">체크아웃</div>
-							<div class="checkOut_date" id="checkOut_date">
+							<div class="checkOut_date dateBoxJH" id="checkOut_date">
+							
+								<!-- 장희 : 체크아웃 박스 위치 이동 -->
+							<div class="check_out_select">
+								<div class="form-group">
+<!-- 									Date input -->
+									<input class="form-control" id="datepicker2" name="check_out" placeholder="checkout" type="text" onchange = "checkDate('datepicker2','Out')" readonly="readonly">
+								</div>
+							</div>
+									
+							
 								<div class="checkIn_date_inner">
 									<div class="checkOut_y_m">
 										<div class="checkOut_year" id="checkOut_year">2019</div>
@@ -139,11 +171,12 @@
 					
 					
 						<!-- 인원 -->
-						<div class="checkCount">
+						<div class="checkCount dateBoxJH">
 							<div class="search_sub">인원</div>
-							<div class="countDiv">
+							<div class="countDiv " >
 								<div class="count_su">
-									<input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1">
+									<!-- <input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1"> -->
+									<span class="check_count2" id="check_count2">2</span>
 								</div>
 							</div>
 						</div>
@@ -152,7 +185,8 @@
 						
 						
 				<!-- 검색버튼 -->
-				<div>
+				<div class="dateBoxJH">
+					<input type="hidden" name="head_count" id="headCountHidden" value="0">
 					<input type="hidden" name="step" value="1">	
 					<input type="submit" id="reservationBtn1" value="객실검색">
 				</div>
@@ -198,7 +232,7 @@
 						<button type="button" onclick="headCountFunction(1)" class="headCountBtn rightFloat">+</button>
 						<button type="button" onclick="headCountFunction(-1)" class="headCountBtn rightFloat">-</button>
 						
-						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="1" class="rightFloat">
+						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="2" class="rightFloat" name="head_count">
 					</div>
 					
 					<div class="modal_text">

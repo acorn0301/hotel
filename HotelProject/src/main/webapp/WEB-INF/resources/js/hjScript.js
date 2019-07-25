@@ -1,5 +1,6 @@
-//STEP 2 페이지
 $(document).ready(function(){
+	
+	
 
    // (STEP3) hidden 값 삽입
    // *1 은 숫자열로 바꿔준다.
@@ -21,7 +22,6 @@ $(document).ready(function(){
    $('#aboutRoomModalBack').click(function(){
       $('#aboutRoomModalBack').addClass('aboutRoomModalBack');
    });
-   
 })
 
 
@@ -68,6 +68,7 @@ $(function(){
 
    //input을 datepicker로 선언
    $("#datepicker1").datepicker({
+	  ignoreReadonly: true,
       dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -93,6 +94,7 @@ $(function(){
     });
    
    $("#datepicker2").datepicker({
+	  ignoreReadonly: true,
       dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -146,21 +148,20 @@ function value_insert(){
    var v = document.getElementById("formHeadCountValue");
    
    var c = document.getElementById("check_count2");
+   
+   v = v.value;
 
-   v_val = parseInt(v.value);
-   c_val = parseInt(c.value);
+   c.innerHTML = v;
    
-   c.value = v_val;
+   var hch = document.getElementById("headCountHidden");
    
-   //글씨색 진하고 굵게
-   //c.style.color = "#3a3125";
-   //c.style.fontWeight = "bold";
+   hch.value = v;
 }
 
 // breakfast_count
-let bc = 0;
+bc = 0;
 // add_bed
-let ab = 0;
+ab = 0;
 
 
 

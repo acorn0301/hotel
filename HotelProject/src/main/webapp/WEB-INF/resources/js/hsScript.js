@@ -36,6 +36,11 @@ $(document).ready(function () {
 
 //STEP 2 페이지
 $(document).ready(function(){
+	
+	// 메인화면 기본 인원 2명으로
+	var hch = document.getElementById("headCountHidden");
+	hch.value = 2;
+	
    //메인 체크인+체크아웃 오늘 날짜로 디폴트시키기
       //오늘날짜 구하기
       var today = new Date();
@@ -148,6 +153,7 @@ $(function(){
 
    //input을 datepicker로 선언
    $("#datepicker1").datepicker({
+	   ignoreReadonly: true,
       dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -173,6 +179,7 @@ $(function(){
     });
    
    $("#datepicker2").datepicker({
+	   ignoreReadonly: true,
       dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
