@@ -182,11 +182,11 @@
                <label>
                      <!-- 1. 다른페이지에서 넘어왔을 때 값 유지 -->
                      <c:if test="${fbdto.hotel_num != null }">
-                        <input type="text" name="check_in" required="required"id="datepicker1" value="${fbdto.check_in}" onchange="sameCheck()">
+                        <input type="text" name="check_in" required="required"id="datepicker1" value="${fbdto.check_in}" onchange="sameCheck()" readonly="readonly">
                      </c:if>
                      <!-- 2. 첫 접속 시 -->
                      <c:if test="${fbdto.hotel_num == null }">
-                        <input type="text" class="noBold" name="check_in" required="required"id="datepicker1" placeholder="체크인 날짜 선택" onchange="sameCheck()">
+                        <input type="text" class="noBold" name="check_in" required="required"id="datepicker1" placeholder="체크인 날짜 선택" onchange="sameCheck()" readonly="readonly">
                      </c:if>
                   <i class="far fa-calendar-alt color2"></i>
                </label>
@@ -198,11 +198,11 @@
                <label>
                      <!-- 1. 다른페이지에서 넘어왔을 때 값 유지 -->
                      <c:if test="${fbdto.hotel_num != null }">
-                           <input type="text" name="check_out" required="required" id="datepicker2" value="${fbdto.check_out}" onchange="sameCheck()">
+                           <input type="text" name="check_out" required="required" id="datepicker2" value="${fbdto.check_out}" onchange="sameCheck()" readonly="readonly">
                      </c:if>
                      <!-- 2. 첫 접속 시 -->
                      <c:if test="${fbdto.hotel_num == null }">
-                        <input type="text" class="noBold" name="check_out" required="required" id="datepicker2" placeholder="체크아웃 날짜 선택" onchange="sameCheck()">
+                        <input type="text" class="noBold" name="check_out" required="required" id="datepicker2" placeholder="체크아웃 날짜 선택" onchange="sameCheck()" readonly="readonly">
                      </c:if>
                   <i class="far fa-calendar-alt color2"></i>
                </label>   
