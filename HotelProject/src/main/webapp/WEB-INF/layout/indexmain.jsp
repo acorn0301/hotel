@@ -166,7 +166,8 @@
 							<div class="search_sub">인원</div>
 							<div class="countDiv " >
 								<div class="count_su">
-									<input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1">
+									<!-- <input type="text" class="check_count2" name="head_count" value="1" id="check_count2" required="required" size="1"> -->
+									<span class="check_count2" id="check_count2">2</span>
 								</div>
 							</div>
 						</div>
@@ -176,6 +177,7 @@
 						
 				<!-- 검색버튼 -->
 				<div class="dateBoxJH">
+					<input type="hidden" name="head_count" id="headCountHidden" value="0">
 					<input type="hidden" name="step" value="1">	
 					<input type="submit" id="reservationBtn1" value="객실검색">
 				</div>
@@ -221,7 +223,7 @@
 						<button type="button" onclick="headCountFunction(1)" class="headCountBtn rightFloat">+</button>
 						<button type="button" onclick="headCountFunction(-1)" class="headCountBtn rightFloat">-</button>
 						
-						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="1" class="rightFloat">
+						<input type="text" id="formHeadCountValue" class="countBorderNone rightFloat" value="1" size="2" class="rightFloat" name="head_count">
 					</div>
 					
 					<div class="modal_text">

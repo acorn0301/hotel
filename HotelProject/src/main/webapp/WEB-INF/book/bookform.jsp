@@ -449,14 +449,14 @@
                   <!-- step1,2에서 들어왔을 때 값 0 -->
                   <c:if test="${sessionScope.fbdto.add_bed == 0 }">
                      <b class="rightFloat">
-                     <input type="text" id="bedAddPrice" value="0" size="4" class="bedCountBorderNone" readonly="readonly">
+                     <input type="text" id="bedAddPrice" value="0" size="10" class="bedCountBorderNone" readonly="readonly">
                      원</b>
                   </c:if>
                   
                   <!-- step4에서 들어왔을 때 값 표시 -->
                   <c:if test="${sessionScope.fbdto.add_bed != 0 }">
                      <b class="rightFloat">
-                     <input type="text" id="bedAddPrice" value="${sessionScope.fbdto.add_bed *40000}" size="4" class="bedCountBorderNone" readonly="readonly">
+                     <input type="text" id="bedAddPrice" value="${sessionScope.fbdto.add_bed *40000}" size="10" class="bedCountBorderNone" readonly="readonly">
                      원</b>
                   </c:if>
                   
@@ -507,13 +507,13 @@
                <!-- step1,2에서 들어왔을 때 값 0 -->
                <c:if test="${sessionScope.fbdto.breakfast_count == 0 }">
                   <b class="rightFloat">
-                  <input type="text" id="breakfastAddPrice" value="0" size="4" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
+                  <input type="text" id="breakfastAddPrice" value="0" size="10" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
                </c:if>
                
                <!-- step4에서 들어왔을 때 값 표시 -->
                <c:if test="${sessionScope.fbdto.breakfast_count != 0 }">
                   <b class="rightFloat">
-                  <input type="text" id="breakfastAddPrice" value="${sessionScope.fbdto.breakfast_count*25000}" size="4" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
+                  <input type="text" id="breakfastAddPrice" value="${sessionScope.fbdto.breakfast_count*25000}" size="10" class="breakfastCountBorderNone" readonly="readonly">&nbsp;원</b>
                </c:if>
                
                <!-- 값이 있을 때 값 보내기 -->
@@ -587,13 +587,13 @@
             <!-- 비회원 정보 입력 -->
             <div class="reservationBorder">
                <div class="reservationContents">
-                  <span class="smalltext noaccountSub">이름</span>
-                  <input type="text" placeholder="이름 입력" required="required" name="name" id="ncname" size="15" class="infoInput">
+                  <span class="smalltext noaccountSub2">이름</span>
+                  <input type="text" placeholder="이름 입력" required="required" name="name" id="ncname" class="infoInput">
                   
                   <br>
                   
-                  <span class="smalltext noaccountSub">전화번호</span>
-                  <input type="text" placeholder="전화번호 입력" required="required" name="phone" id="ncphone" size="15" class="infoInput">
+                  <span class="smalltext noaccountSub2">전화번호</span>
+                  <input type="text" placeholder="전화번호 입력" required="required" name="phone" id="ncphone" class="infoInput">
                </div>
             </div>   
             
