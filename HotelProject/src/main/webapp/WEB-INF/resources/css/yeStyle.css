@@ -1,7 +1,7 @@
 	#loginForm a {color: gray;}
 	a:HOVER{ text-decoration: none; font-weight: bold;}
 	
-	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#m_mybookingForm, #m_myorderForm,
+	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#m_mybookingForm, 
 	#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm, .withdrawalForm{
 		margin: -10px;
 	}
@@ -38,9 +38,10 @@
 	text-align: center;
 }
 
+/* submit 버튼 부분*/
 #loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk, #wdok,
 #mybookingForm, #myorderForm{
-/*     display: block; */
+/*  display: block; */
     width: 245px;
     height: 45px;
     line-height: 40px;
@@ -54,7 +55,7 @@
     border-radius:5px;
 }
 
-#withdrawalCancel, #withdrawalOk ,#mybookinglist ,#mybookingCancel{ 
+#withdrawalCancel, #withdrawalOk ,#mybookinglist ,#mybookingCancel, #myroomsCancel, #myroomslist{ 
 	color:white; 
 	display: inline; 
 	font-size: 17px; 
@@ -62,8 +63,9 @@
 	border: 0; 
 	width: 150px;
 }
-#withdrawalOk, #mybookingCancel { background-color : #3a3125;}
-#withdrawalCancel, #mybookinglist { background-color :#cfc6b2;}
+
+#withdrawalOk, #mybookingCancel, #myroomsCancel{ background-color : #3a3125;}
+#withdrawalCancel, #mybookinglist, #myroomslist { background-color :#cfc6b2;}
 	
 	.inputbox {
     border: 0;
@@ -108,10 +110,6 @@
 	.linkLIst a{ text-decoration:none; color:#666; display: block;}
 	.linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
 
-
-/* input[class="user_id"]::-webkit-input-placeholder{
-        color:red;
-    } */
 
 
 .error {
@@ -276,7 +274,7 @@
 
 
 
-
+/* 마이페이지 프로필 수정(사진) 부분 */
 .profile_photo {
     position: relative;
     width: 100px;
@@ -487,7 +485,7 @@ ul,li{ list-style: none; }
 	border-right: 0;
 }
 
-/* 예약 리스트 페이지를 위한.. */
+/* 예약 리스트 페이지 */
 
 .list_hotel_local{
 	color: grey;
@@ -501,6 +499,7 @@ ul,li{ list-style: none; }
 	border-bottom: 1px solid lightgrey;
 }
 .booklist_div{
+	
 }
 
 .list_status, .list_name, .list_id, .list_book_day{
@@ -545,5 +544,40 @@ ul,li{ list-style: none; }
 }
 .bookdetail_table_td{
 	padding: 10px 10px 10px 20px;
-	
+}
+.img-circle{ width: 30px;}
+
+
+
+
+/* 마이페이지 - 내 룸서비스 내역 */
+/* .tr_strong{
+	border-bottom: 1px solid grey;
+} */
+.dashboard_div {
+     padding: 0; 
+/* 	padding: 0 0px 0px 10px; */
+}
+.dashboard_div_div{
+	padding: 0 0px 0px 10px;
+}
+
+.dashboard_tr {
+    border-bottom: 1px solid lightgrey;
+    width: 100%;
+}
+.dashboard_li_div3 {
+    font-size: 11pt;
+    padding: 20px 20px 15px 50px;
+    /* border-bottom: 1px solid lightgrey; */
+}
+.dashboard_table {
+    width: 100%;
+}
+table {
+    background-color: transparent;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }

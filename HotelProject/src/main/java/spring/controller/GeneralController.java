@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.HotelDao;
 import spring.data.HotelDto;
+import spring.data.ReviewDto;
 import spring.service.BookService;
 import spring.service.HotelService;
+import spring.service.ReviewService;
 
 @Controller
 public class GeneralController {
@@ -21,6 +23,8 @@ public class GeneralController {
 	//bookService에서 메소드 의존성 주입
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	ReviewService rservice;
 		
 	@Autowired
 	HotelService hservice;
@@ -63,6 +67,11 @@ public class GeneralController {
 		// 혜정 - 호텔지점 리스트 출력
 		List<HotelDto> Locallist=bookService.HotelLocalList(); //bookService에 있는 HotelLocalList 가져오기
 		request.setAttribute("localList", Locallist); //리스트에 리스트 저장
+		
+		
+		// 영은 -리뷰 데이타 최근 7개 가져오기 
+		List<ReviewDto> list = rservice.getList(1, 5);
+		request.setAttribute("list", list);
 		
 		return "layout/home";
 	}

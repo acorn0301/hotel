@@ -42,11 +42,11 @@
 		<div class="admin_title_div">
 			<div class="admin_title_text">
 				예약내역
-				<c:if test="${book_status==0 }">예약대기</c:if>
+<%-- 				<c:if test="${book_status==0 }">예약대기</c:if>
 				<c:if test="${book_status==1 }">예약완료</c:if>
 				<c:if test="${book_status==2 }">체크인</c:if>
 				<c:if test="${book_status==3 }">숙박중</c:if>
-				<c:if test="${book_status==4 }">체크아웃</c:if>
+				<c:if test="${book_status==4 }">체크아웃</c:if> --%>
 			</div>
 		</div>
 			<div class="dashboard_div_table">
@@ -85,8 +85,17 @@
 										<fmt:formatDate value="${dto.check_in }" pattern="MM / dd"/>
 									 	-
 									 	<fmt:formatDate value="${dto.check_out }" pattern="MM / dd "/></span>
-										<span class="list_status">(${book_status })</span>
+										<%-- <span class="list_status">(${book_status })</span> --%>
+									&nbsp; 
+								 	<div>
+										<c:if test="${abdto.book_status==0 }">예약대기</c:if>
+										<c:if test="${abdto.book_status==1 }">예약접수</c:if>
+										<c:if test="${abdto.book_status==2 }">숙박중</c:if>
+										<c:if test="${abdto.book_status==3 }">지난예약</c:if>
+										<c:if test="${abdto.book_status==5 }">취소예약</c:if>
+								 	</div>
 								</div>
+								
 							</div>
 							</div>
 						</li>	

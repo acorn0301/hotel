@@ -9,16 +9,17 @@ public class MemberDto {
    private String id;
    private String password;
    private String name;
-   private String birth;
-   private String year;
-   private String month;
-   private String day;
+//   private String birth;
+//   private String year;
+//   private String month;
+//   private String day;
    private Timestamp joinday;
    private String email;
    private String phone;
    private String grade;
    private String member_pic;
    private MultipartFile upfile;
+//   private int readcount;
    
    public String getMember_pic() {
 	return member_pic;
@@ -51,12 +52,12 @@ public class MemberDto {
    public void setName(String name) {
       this.name = name;
    }
-   public String getBirth() {
-      return birth;
-   }
-   public void setBirth(String birth) {
-      this.birth = birth;
-   }
+//   public String getBirth() {
+//      return birth;
+//   }
+//   public void setBirth(String birth) {
+//      this.birth = birth;
+//   }
    public Timestamp getJoinday() {
       return joinday;
    }
@@ -82,24 +83,24 @@ public class MemberDto {
       this.grade = grade;
    }
    
-   public String getYear() {
-	   return year;
-   }
-   public void setYear(String year) {
-	   this.year = year;
-   }
-   public String getMonth() {
-	   return month;
-   }
-   public void setMonth(String month) {
-	   this.month = month;
-   }
-   public String getDay() {
-	   return day;
-   }
-   public void setDay(String day) {
-	   this.day = day;
-   }
+//   public String getYear() {
+//	   return year;
+//   }
+//   public void setYear(String year) {
+//	   this.year = year;
+//   }
+//   public String getMonth() {
+//	   return month;
+//   }
+//   public void setMonth(String month) {
+//	   this.month = month;
+//   }
+//   public String getDay() {
+//	   return day;
+//   }
+//   public void setDay(String day) {
+//	   this.day = day;
+//   }
    
    public MultipartFile getUpfile() {
 	   return upfile;
@@ -108,6 +109,14 @@ public class MemberDto {
 	   this.upfile = upfile;
    }
    
+   
+//   public int getReadcount() {
+//	   return readcount;
+//   }
+//   public void setReadcount(int readcount) {
+//	   this.readcount = readcount;
+//   }
+//   
    
    
   

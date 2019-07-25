@@ -45,7 +45,7 @@
 		<li class="first"><a href="m_bookinglist.do">예약 확인/취소</a></li>
 		<li><a href="m_roomservicelist.do">룸서비스 주문내역</a></li>
 		<li><a href="infoEdit.do">내 정보수정</a></li>
-		<li><a href="qnalist.do">문의하기</a></li>			
+		<li><a href="qnaform.do?pageNum=1">문의하기</a></li>			
 		<li class="last"><a href="withdrawal.do">회원탈퇴</a></li>
 	</ul>
 </div>

@@ -30,6 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import spring.data.AdminBookDto;
+import spring.data.AdminOrderDetailDto;
+import spring.data.AdminOrderDto;
 import spring.data.BookDto;
 import spring.data.EmailDto;
 import spring.data.EmailSender;
@@ -304,21 +306,26 @@ public class MemberController {
    @RequestMapping("/logout.do")
    public String logout(HttpSession session) {
       
-	  session.removeAttribute("member_num");
-	  session.removeAttribute("book_num");
-	  session.removeAttribute("grade");
-	  session.removeAttribute("ishere");
-	  session.removeAttribute("name");
-	  session.removeAttribute("container");
-	  session.removeAttribute("msg");
-	  session.removeAttribute("fbdto");
-	  session.removeAttribute("url");
-//	  session.invalidate();
+//	  session.removeAttribute("member_num");
+//	  session.removeAttribute("book_num");
+//	  session.removeAttribute("grade");
+//	  session.removeAttribute("ishere");
+//	  session.removeAttribute("name");
+//	  session.removeAttribute("container");
+//	  session.removeAttribute("msg");
+//	  session.removeAttribute("fbdto");
+//	  session.removeAttribute("url");
 	  
-	  kakao.kakaoLogout((String)session.getAttribute("access_Token"));
-      session.removeAttribute("access_Token");
-      session.removeAttribute("userId");
+	   //카카오 로그인 한 경우에는 이것도 삭제해야 한다.
+	   //사실 이건 없어도 된다..
+//	  if(session.getAttribute("access_Token")!=null){
+//		  kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+//	      session.removeAttribute("access_Token");
+//	      session.removeAttribute("userId");
+//	  }
 	  
+	  session.invalidate();
+
       //로그아웃 되는 로직을 짜보세요.
       //세션도 깔끔하게 지워줍시다. 
       return "redirect:home.do";
@@ -385,23 +392,15 @@ public class MemberController {
    public String m_bookinglist(HttpServletRequest request, HttpSession session) {
 	   // member_num으로 예약한 정보리스트를 가져와야함
 	   int member_num = (Integer)session.getAttribute("member_num");
-	   
+
 	   List<AdminBookDto> list = null;
-		
-//		if(book_status == 1) {
-//			list = aservice.getBookListCheckInToday();
-//		}else if(book_status == 4) {
-//			list = aservice.getBookListCheckOutToday();
-//		}else {
-//			list = aservice.getBookListByStatus(book_status);
-//		}
-	   
-	   	list = mservice.m_getBookList(member_num);
-	   	int bookCount = mservice.m_GetBookListCount(member_num);
-	   	
-	   	request.setAttribute("bookCount", bookCount);
-		request.setAttribute("member_num", member_num);
-		request.setAttribute("list", list);
+
+	   list = mservice.m_getBookList(member_num);
+	   int bookCount = mservice.m_GetBookListCount(member_num);
+
+	   request.setAttribute("bookCount", bookCount);
+	   request.setAttribute("member_num", member_num);
+	   request.setAttribute("list", list);
 
 	   request.setAttribute("container", "../member/mypage/mybooking.jsp");
 	   return "layout/home";
@@ -410,22 +409,76 @@ public class MemberController {
    // 마이페이지 예약내역 자세히보기 
    @RequestMapping("/m_bookinglistDetail.do")
    public String m_bookinglistDetail(HttpServletRequest request, HttpSession session, @RequestParam int book_num) {
-//	   int member_num = (Integer)session.getAttribute("member_num");
+	   //int member_num = (Integer)session.getAttribute("member_num");
 	   AdminBookDto abdto = mservice.m_GetBookDetail(book_num);
-	   
+
 	   request.setAttribute("abdto", abdto);
 
 	   request.setAttribute("container", "../member/mypage/mybookingDetail.jsp");
 	   return "layout/home";
    }
    
+   // 예약내역 개별 삭제
+   @RequestMapping("/m_bookCancelOne.do")
+   public String m_bookCancelOne(HttpServletRequest request, @RequestParam int book_num, @RequestParam int book_status) {
+	   mservice.m_bookCancel(book_num);
+	   
+	   return "redirect:m_bookinglist.do?book_status=" + book_status;
+   }
+   
    // 마이페이지 룸서비스내역 메뉴
    @RequestMapping("/m_roomservicelist.do")
    public String m_roomservicelist(HttpServletRequest request, HttpSession session) {
+	   // member_num으로 주문한 룸서비스 리스트를 가져와야함
+	   int member_num = (Integer)session.getAttribute("member_num");
+
+	   List<AdminOrderDto> list = mservice.m_GetOrderList(member_num);
 	   
+	   for(AdminOrderDto a:list) {
+		   List<AdminOrderDetailDto> temp = mservice.m_getOrderDetailByOrderNum(a.getOrder_num());
+			a.setOrder_detail(temp);
+		}
+
+	   int size = list.size();
+
+	   request.setAttribute("size", size);
+	   request.setAttribute("room_status", member_num);
+	   request.setAttribute("list", list);
+
 	   request.setAttribute("container", "../member/mypage/myorder.jsp");
 	   return "layout/home";
    }
+   
+   // 마이페이지 룸서비스내역 자세히 보기
+   @RequestMapping("/m_roomservicelistDetail.do")
+   public String m_roomservicelistDetail(HttpServletRequest request, HttpSession session, @RequestParam int order_num) {
+
+	   AdminOrderDto aodto = mservice.m_GetOrderDataDetail(order_num);
+	   List<AdminOrderDetailDto> oddto = mservice.m_getOrderDetailByOrderNum(order_num);
+	   aodto.setOrder_detail(oddto);
+
+	   int totalPrice = 0;
+
+	   for(AdminOrderDetailDto a:oddto) {
+		   totalPrice += a.getMenu_price()*a.getQty();
+	   }
+
+	   request.setAttribute("totalPrice", totalPrice);
+	   request.setAttribute("aodto", aodto);
+
+	   request.setAttribute("container", "../member/mypage/myorderDetail.jsp");
+	   return "layout/home";
+   }
+   
+   // 개별 룸서비스 주문취소
+ 	@RequestMapping("/m_OrderCancelOne.do")
+ 	public String orderCancelOne(HttpServletRequest request, @RequestParam int room_status, @RequestParam int order_num) {
+ 		
+ 		mservice.m_orderCancel(order_num);
+
+ 		return "redirect:m_roomservicelist.do?room_status=" + room_status;
+
+ 	}
    
    // 내 정보수정 클릭 (수정 폼 이동)
    @RequestMapping("/infoEdit.do")
@@ -757,7 +810,6 @@ public class MemberController {
        mbdto.setPassword("********");
        mbdto.setName(user_name);
        mbdto.setPhone("kakao_phone");
-       mbdto.setBirth("1900" + "-" + "01" +"-" + "01");
        mbdto.setEmail(user_email);
        
        String id = mbdto.getId();
