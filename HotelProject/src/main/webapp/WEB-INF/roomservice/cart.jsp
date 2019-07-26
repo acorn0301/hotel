@@ -139,11 +139,11 @@
 	<c:set var="sum" value="0"/> <!-- 합계 구할 변수 -->
 		<tr>
 			<th width="2%"><input type="checkbox" class="alldelchk" name="chk" checked="checked"></th>
-			<th width="15%">상품</th>
-			<th width="15%">메뉴명</th>
-			<th width="15%">수량</th>
-			<th width="15%">가격</th>
-			<th width="15%">삭제</th>
+			<th width="16%">상품</th>
+			<th width="16%">메뉴명</th>
+			<th width="16%">수량</th>
+			<th width="16%">가격</th>
+			<th width="16%">삭제</th>
 		</tr>
 			<c:forEach var="mndto" items="${mnlist}" varStatus="i">
 				<tr>

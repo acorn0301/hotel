@@ -257,32 +257,37 @@ public String cartDelete(HttpServletRequest request,
 	
 	//세션 카트리스트 전체 삭제
 	//session.getAttribute("cdtolist");
-	
-	
+
 	List<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
 	
-	for(int i=0 ; i<mnlist.size() ; i++){
-		if(cdto.getMenu_num() == mnlist.get(i).getMenu_num()){
-			mnlist.remove(i);
-		}
+	if(mnlist == null){
+		request.setAttribute("container", "../roomservice/cart.jsp");
 	}
-	
-	session.setAttribute("mnlist", mnlist);
-	
-	List<CartDto> clist = (ArrayList<CartDto>)session.getAttribute("cdtolist");
-	
-	for(int i=0 ; i<clist.size() ; i++){
-		if(cdto.getMenu_num() == clist.get(i).getMenu_num()){
-			clist.remove(i);
+	if(mnlist != null){
+		
+		for(int i=0 ; i<mnlist.size() ; i++){
+			if(cdto.getMenu_num() == mnlist.get(i).getMenu_num()){
+				mnlist.remove(i);
+			}
 		}
-	}
 	
-	session.setAttribute("clist", clist);
-	
-	int m = mnlist.size();
-	if( m == 0 )
-	{
-		session.setAttribute("mnlist", null);
+		session.setAttribute("mnlist", mnlist);
+		
+		List<CartDto> clist = (ArrayList<CartDto>)session.getAttribute("cdtolist");
+		
+		for(int i=0 ; i<clist.size() ; i++){
+			if(cdto.getMenu_num() == clist.get(i).getMenu_num()){
+				clist.remove(i);
+			}
+		}
+		
+		session.setAttribute("clist", clist);
+		
+		int m = mnlist.size();
+		if( m == 0 )
+		{
+			session.setAttribute("mnlist", null);
+		}
 	}
 	
 	return "redirect:cart.do";
@@ -405,8 +410,9 @@ public String orderComplete(HttpSession session,
 		oddservice.OrderDetailInsert(oddto);
 	}
 	
+	session.removeAttribute("mnlist");
 	session.removeAttribute("cdtolist");
-
+	
 	request.setAttribute("container", "../roomservice/ordercomplete.jsp");
 	return "layout/home";
 }
