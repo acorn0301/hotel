@@ -140,9 +140,9 @@
 			<th width="5%"><input type="checkbox" class="alldelchk" name="chk" checked="checked"></th>
 			<th width="20%">상품</th>
 			<th width="20%">메뉴명</th>
-			<th width="20%">수량</th>
+			<th width="15%">수량</th>
 			<th width="10%">가격</th>
-			<th width="10%">&nbsp;</th>
+			<th width="15%">삭제</th>
 		</tr>
 			<c:forEach var="mndto" items="${mnlist}" varStatus="i">
 				<tr>
@@ -168,13 +168,12 @@
 						<input type="hidden" name="menu_num" value="${mndto.menu_num}">
 						<button type="button"
 						class="cart_sm_button"
-						onclick="location.href='cartdelete.do?menu_num=${mndto.menu_num}&qty=${mndto.qty}'">삭제</button>
+						onclick="location.href='cartdelete.do?menu_num=${mndto.menu_num}&qty=${mndto.qty}'">x</button>
 					</td>
 				</tr>
 			</c:forEach>
 			<tr>
 				<td colspan="6">
-				<br>
 					<button type="button" class="cart_button" id="btndel">선택삭제</button>   
 					<button type="button" class="cart_button" id="all">전체선택</button>
 					<button type="button" class="cart_button" id="order">주문하기</button>
