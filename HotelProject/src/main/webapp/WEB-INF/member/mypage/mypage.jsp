@@ -10,7 +10,9 @@
 <link rel="stylesheet" href="css/yeStyle.css">
 </head>
 <body>
-
+<%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
 
 <div id="mypageForm">
 <form action="" method="post">
@@ -24,7 +26,7 @@
 <div class="myinfo">
 	<h3>[ ${mbdto.name} ] 님의 마이페이지</h3><br>
 	<div>
-		<img src="http://localhost:9000/HotelProject/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
+		<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
 		<span class="mask"></span>
 	</div>
 </div>

@@ -63,6 +63,9 @@ function pic_delete(){
 
 
 </script>
+<%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
 
 <div id="EditForm">
 <form name="edit" class="form-inline" action="infoEditComplete.do" method="post" onsubmit="return check()" enctype="multipart/form-data">
@@ -148,7 +151,7 @@ function pic_delete(){
 	<div class="pic">
 		<div class="profile_photo">
 			<div class="select_img">
-				<img src="http://localhost:9000/HotelProject/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
+				<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
 				<input type="hidden" name="member_pic" value="${mbdto.member_pic }">
 			</div>
 			<span class="mask"></span>
