@@ -31,7 +31,7 @@
 					<input type="hidden" name="cnt" value="${mndto.qty}">
 				</td>
 				<td>
-					<i>${mndto.menu_price * mndto.qty}</i>
+					<i><fmt:formatNumber pattern=",000" value="${mndto.menu_price * mndto.qty}"/></i>
 					<c:set var="sum" value="${sum + mndto.menu_price * mndto.qty}"/>
 					<!-- hidden -->
 					<%-- <input type="hidden" name="order_num" value="${maxOrderNum}"> --%>
@@ -45,7 +45,9 @@
 <!-- 					<input type="hidden" name="room_status" value="접수">
  -->					<input type="hidden" name="total_price" value="${sum}">
 					
-	<div class="totalPrice"><b>Total </b> <c:out value="${sum}"/> </div>
+	<div class="totalPrice"><b>Total </b>
+		 <fmt:formatNumber pattern=",000" value="${sum}"/>
+	</div>
 <br><br><br>
 	<b>추가 요청사항</b> 
 <br><br>
