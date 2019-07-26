@@ -17,7 +17,7 @@
 
 <div class="qna_body_title_div">
 	<div class="qna_title_text">
-			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
+			<div class="arrow_back" onclick="location.href='adminBookList.do?book_status=${abdto.book_status}'"><i class="fas fa-chevron-left"></i></div>
 			<div>예약상세</div>
 			<div class="clearBoth"></div>	
 	</div>
@@ -53,6 +53,10 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">회원명</td>
 				<td class="bookdetail_table_td"> ${abdto.name }(${abdto.id })</td>	
+			</tr>
+			<tr class="bookdetail_table_tr">
+				<td class="bookdetail_table_th bookdetail_table_td">인원</td>
+				<td class="bookdetail_table_td"> ${abdto.head_count } 명</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">체크인</td>
@@ -108,18 +112,7 @@
 				<td class="bookdetail_table_th bookdetail_table_td">객실타입</td>
 				<td class="bookdetail_table_td"> ${abdto.room_name } ${abdto.type }</td>	
 			</tr>
-			<%-- <tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">회원명</td>
-				<td class="bookdetail_table_td"> ${abdto.name }(${abdto.id })</td>	
-			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">체크인</td>
-				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_in }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">체크아웃</td>
-				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_out }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr> --%>
+			
 		</table>	
 	</div>
 	
@@ -155,7 +148,7 @@
 							<button onclick="cancelRevoke()">취소철회</button>
 							<button onclick="bookDelete()">예약삭제</button>				
 						</c:if>
-						<button class="lastBtn" onclick="">정보수정</button>				
+						<button class="lastBtn" onclick="location.href='adminBookEditForm.do?book_num=${abdto.book_num}'">정보수정</button>				
 						
 					</td>
 				</tr>
@@ -175,8 +168,24 @@
 
 	//확인 처리 버튼을 눌렀을 때  
 	function nextStep(){
-	
-		location.href="adminBookNestStepOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status};			
+		
+		//어떤 상태로 변경될 지 알려준다. 
+		let book_status = ${abdto.book_status};
+		let next_status = "";
+		switch(book_status){
+		case 0 :
+			next_status = "예약접수";
+			break;
+		case 1 :
+			next_status = "숙박중";
+			break;
+		case 2 :
+			next_status = "지난예약";
+			break;
+			
+		}		
+		alert('예약 상태가 ' + next_status + "(으)로 변경됩니다. ");
+		location.href="adminBookNestStepOne.do?book_num=" + ${abdto.book_num} + "&book_status=" + ${abdto.book_status} ;			
 	} 
 	
 	//예약 취소 버튼을 눌렀을 때 

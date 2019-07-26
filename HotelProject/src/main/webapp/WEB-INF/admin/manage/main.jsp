@@ -139,7 +139,7 @@
 		
 		<div class="dashboard_qna_divs" onclick="location.href='adminMenuList.do'">
 			<div class="icon_with_badge">
-				<i class='fas fa-hamburger color9'></i>
+				<i class='fas fa-hamburger color6'></i>
 			</div>	
 				<br>
 			
@@ -181,7 +181,7 @@
 		</div>
 		<div class="dashboard_qna_divs li_last_right">
 			<div class="icon_with_badge">
-				<i class='fas fa-sitemap color6'></i>
+				<i class='fas fa-sitemap color7'></i>
 			</div>
 				
 				<br>

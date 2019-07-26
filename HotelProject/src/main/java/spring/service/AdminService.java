@@ -14,6 +14,7 @@ import spring.data.BookDao;
 import spring.data.BookDto;
 import spring.data.MemberDto;
 import spring.data.MenuDto;
+import spring.data.OrderDto;
 import spring.data.RoomDto;
 
 @Service
@@ -137,6 +138,19 @@ public class AdminService {
 		return adao.getMenuList(start, end);
 	}
 	
+	
+	//메뉴 타입 가져오기 
+	public List<MenuDto> getAllMenuType(){
+		return adao.getAllMenuType();
+	}
+	
+
+	//메뉴 추가하기 
+	public void insertMenu(MenuDto mndto) {
+		 adao.insertMenu(mndto);
+	}
+	
+	
 	//호텔 별 객실 리스트 가져오기
 	public List<RoomDto> getRoomListByHotel(int hotel_num){
 		return adao.getRoomListByHotel(hotel_num);
@@ -148,8 +162,8 @@ public class AdminService {
 	}
 	
 	//예약 건 다음 스텝으로 넘기기
-	public void bookNextStep(int book_num) {
-		adao.bookNextStep(book_num);
+	public void bookNextStep(int book_num, int book_status) {
+		adao.bookNextStep(book_num, book_status);
 	}
 	
 	//예약 건 취소하기
@@ -175,5 +189,25 @@ public class AdminService {
 	//주문 건 취소를 철회하기
 	public void orderCancelRevoke(int order_num) {
 		adao.orderCancelRevoke(order_num);
+	}
+	
+	//모든 메뉴 리스트 가져오기
+	public List<MenuDto> getAllMenu(){
+		return adao.getAllMenu();
+	}
+	
+	//특정 order_num의 order_detail 데이타 모두 삭제하기
+	public void removeAllOrderDetail(int order_num) {	
+		adao.removeAllOrderDetail(order_num);
+	}
+	
+	//주문 데이타 수정 업데이트 
+	public void updateOrder(OrderDto odto) {
+		adao.updateOrder(odto);
+	}
+	
+	//예약 데이타 수정 업데이트
+	public void updateBook(BookDto bdto) {
+		adao.updateBook(bdto);
 	}
 }

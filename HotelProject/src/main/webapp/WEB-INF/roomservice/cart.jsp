@@ -115,6 +115,10 @@
 </script>
 </head>
 <body>
+ <%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
+  
 
 <!-- 장바구니에 아무것도 없을때 뜨는 페이지 -->
 <c:if test="${mnlist == null}">
@@ -151,7 +155,7 @@
 						<input type="checkbox" class="delchk" name="chk" menu_num="${mndto.menu_num}" checked="checked">
 					</td>
 					<td>
-						<img alt="${mndto.menu_name_kor}" src="${mndto.menu_img}" name="menu_img"
+						<img alt="${mndto.menu_name_kor}" src="<%=root %>/save/images/menu/${mndto.menu_img }" name="menu_img"
 						class="img-responsive" width="100%" height="50">
 					</td>
 					<td>

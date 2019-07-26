@@ -96,7 +96,7 @@ ul{
 .inputbox{
 	border: 0;
     padding: 11px 20px;
-    height: 48px;
+    /* height: 48px; */
     font-size: 16px;
     width: 100%;
   
@@ -114,7 +114,7 @@ ul{
 	
 	border: 0;
     padding: 11px 20px;
-    height: 48px;
+    /* height: 48px; */
     font-size: 16px;
     
     background: url(https://ssl.pstatic.net/static/m/cafe/mobile/sp_wm_vert_x2_20151228.png);
@@ -472,7 +472,7 @@ a{
 }
 
 .admin_body{
-	margin : 0 -10px 0 -20px;
+	margin : 0 -10px -10px -20px;
 }
 
 .dashboard_li_gun{
@@ -564,8 +564,9 @@ a{
 
 .dashboard_tr_buttons button{
     border: 1px solid #c3b4ae;
+    width: 22%;
     border-radius: 8px;
-    padding: 6px 12px;
+    padding: 6px 9px;
     margin-right: 0px;
     font-size: 14px;
 	color: #685845;
@@ -602,13 +603,13 @@ a{
 	color: #8e8680;	
 }
 .color5{
-	color: #b36154;
+	color: #b36154d4;
 }
 .color6{
 	color: #cc9999;
 }
 .color7{
-	color: #996666;
+	color: #996666cf;
 }
 .color8{
 	color: #86A3C3;
@@ -751,6 +752,48 @@ a{
 /* 주문내역 상세 페이지를 위한 css  */
 .tr_strong{
 	border-bottom: 1px solid grey;
+}
+
+
+
+/* 주문 내역 수정 페이지를 위한 css  */
+.editBtns{
+	border: 1px solid #c3b4ae;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #685845;
+    background-color: #ffffffc7;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+
+.twoBtns button{
+	width: 45%;
+}
+
+.td_for_selectbox{
+	padding: 0;
+}
+
+.td_for_selectbox .selectbox{
+	font-size: 1em;
+}
+.plus_icon{
+	float: right;
+    font-size: 1.2em;
+    margin-top: -3px;
+    opacity: 0.5;
+}
+
+.admin_textarea{
+	
+	height: 40px;
+	font-size: 1em;
+}
+.td_for_textarea{
+	padding: 5px 5px 5px 20px;
 }
 
 

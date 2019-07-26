@@ -9,18 +9,28 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import spring.data.AdminBookDto;
 import spring.data.AdminOrderDetailDto;
 import spring.data.AdminOrderDto;
+import spring.data.BookDto;
 import spring.data.MemberDto;
 import spring.data.MenuDto;
+import spring.data.OrderDetailDto;
+import spring.data.OrderDto;
 import spring.data.QnaDto;
+import spring.data.ReviewDao;
 import spring.data.RoomDto;
 import spring.service.AdminService;
+import spring.service.MenuService;
+import spring.service.OrderDetailService;
 import spring.service.QnaService;
+import upload.file.SpringFileWriter;
 
 @Controller
 public class AdminController {
@@ -30,6 +40,12 @@ public class AdminController {
 	
 	@Autowired
 	QnaService qservice;
+	
+	@Autowired
+	MenuService mnservice;
+	
+	@Autowired
+	OrderDetailService odservice;
 	
 	//관리자 메인페이지를 보여준다 
 	@RequestMapping("/admin.do")
@@ -151,6 +167,7 @@ public class AdminController {
 		
 	}
 	
+	//개별 주문 내역 상세 조회 
 	@RequestMapping("/adminOrderListDetail.do")
 	public String adminOrderDetail(HttpServletRequest request, @RequestParam int order_num) {
 		
@@ -334,6 +351,69 @@ public class AdminController {
 		return "layout/home";
 	}
 	
+	//메뉴 추가 폼 띄우기 
+	@RequestMapping("/adminMenuAddForm.do")
+	public String menuAddForm(HttpServletRequest request) {
+		
+		//메뉴 카테고리 가져오기..
+		List<MenuDto> list = aservice.getAllMenuType();
+		
+		request.setAttribute("list", list);
+		request.setAttribute("container", "../admin/db/menu/addform.jsp");
+		return "layout/home";
+	}
+	
+	//메뉴 추가 처리하기
+	@PostMapping("/adminMenuAdd.do")
+	public String menuAdd(HttpServletRequest request, @ModelAttribute MenuDto mndto) {
+				
+		//이미지 파일  처리 
+		MultipartFile image = mndto.getUpfile();
+		
+		//이미지를 업로드할 경로 구하기
+		String path = request.getSession().getServletContext().getRealPath("/save/images/menu");	
+		System.out.println("path: " + path);
+		
+		//파일명
+		String menu_img = image.getOriginalFilename();
+		
+		//중복되는 파일명을 막기위해 현재 시간을 파일명 끝에 넣어준다.
+		Date now = new Date();
+		String nowstr = String.valueOf(now.getTime());
+		
+		int index = menu_img.lastIndexOf("."); 
+		String fileExt = menu_img.substring(index + 1); 
+		menu_img = menu_img.substring(0, index); 		
+		menu_img = menu_img + nowstr + "." + fileExt;
+
+		
+				
+		//이미지 저장 메서드 호출
+		SpringFileWriter fileWriter = new SpringFileWriter();
+		
+		//writeFile(실제이미지파일, 저장할 경로, 저장될 이름) 
+		fileWriter.writeFile(image, path, menu_img);
+		
+
+		//이미지 리사이징을 위한 부분2
+		String orgFilePath = path + "/" + menu_img;
+		
+		try {
+			ReviewDao.makeThumbnail(orgFilePath, menu_img, fileExt, path);
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		
+		
+		mndto.setMenu_img(menu_img);
+		
+		
+		aservice.insertMenu(mndto);
+		
+		return "redirect:adminMenuList.do";
+	}
+	
 	
 	//관리자 -> 호텔 db관리 리스트
 	@RequestMapping("/adminHotelList.do")
@@ -373,7 +453,7 @@ public class AdminController {
 		//다음 스텝으로 넘기는 작업을 for문으로 처리한다.
 		for(String b:book_nums) {
 			int b_int = Integer.parseInt(b);
-			aservice.bookNextStep(b_int);
+			aservice.bookNextStep(b_int, book_status);
 		}	
 		
 		return "redirect:adminBookList.do?book_status=" + book_status;
@@ -382,9 +462,9 @@ public class AdminController {
 	//개별 예약건 다음 스텝으로 넘기는 메서드
 	@RequestMapping("/adminBookNestStepOne.do")
 	public String bookNextStepOne(HttpServletRequest request, @RequestParam int book_num, @RequestParam int book_status) {
-		aservice.bookNextStep(book_num);
+		aservice.bookNextStep(book_num, book_status);
 		
-		return "redirect:adminBookList.do?book_status=" + book_status;
+		return "redirect:adminBookListDetail.do?book_num=" + book_num;
 	}
 	
 	//예약 내역 취소하는 메서드
@@ -441,10 +521,38 @@ public class AdminController {
 			
 			return "redirect:adminBookList.do?book_status=" + book_status;
 		}
-		
+
+	//예약내역 수정 폼을 호출하는 메서드
+		@RequestMapping("/adminBookEditForm.do")
+		public String bookEditForm(HttpServletRequest request, @RequestParam int book_num) {
+			
+
+			AdminBookDto abdto = aservice.getBookDetail(book_num);
+			
+			
+			//객실 정보 리스트를 받아서 넘겨준다.
+			//이건 원래 ajax로 처리하는게 맞는데,. (인원수와 체크인 체크아웃 시간을 고려해서) 시간관계상 생략한다.
+			
+			int hotel_num = abdto.getHotel_num(); 
+			List<RoomDto> list = aservice.getRoomListByHotel(hotel_num);
+			
+			request.setAttribute("list", list);
+			request.setAttribute("abdto", abdto);
+			request.setAttribute("container", "../admin/manage/bookedit.jsp");
+			return "layout/home";
+
+		}	
 	
-	
 		
+	//예약내역 수정 처리 메서드
+		@PostMapping("/adminBookEdit.do")
+		public String bookEdit(HttpServletRequest request, @ModelAttribute BookDto bdto) {
+			
+			System.out.println("head : " + bdto.getHead_count());
+			aservice.updateBook(bdto);
+			
+			return "redirect:adminBookListDetail.do?book_num=" + bdto.getBook_num();
+		}
 		
 		
 		
@@ -472,7 +580,7 @@ public class AdminController {
 	public String orderNextStepOne(HttpServletRequest request, @RequestParam int order_num, @RequestParam int room_status) {
 		aservice.orderNextStep(order_num);
 		
-		return "redirect:adminBookList.do?room_status=" + room_status;
+		return "redirect:adminOrderList.do?room_status=" + room_status;
 	}
 	
 	//주문내역 취소하는 메서드
@@ -526,6 +634,64 @@ public class AdminController {
 			}
 			
 			return "redirect:adminOrderList.do?room_status=" + room_status;
+
+		}
+		
+	//주문내역 수정 폼을 호출하는 메서드
+		@RequestMapping("/adminOrderEditForm.do")
+		public String orderEditForm(HttpServletRequest request, @RequestParam int order_num) {
+			
+			//order_num으로 부터 정보를 받아와서 넘겨주자 
+			AdminOrderDto aodto = aservice.getOrderData(order_num); 
+			List<AdminOrderDetailDto> oddto = aservice.getOrderDetailByOrderNum(order_num);
+			aodto.setOrder_detail(oddto);
+			int oddtoSize = oddto.size();
+			
+			//메뉴 추가를 위해 메뉴 리스트를 가져온다 
+			List<MenuDto> menulist = aservice.getAllMenu();
+			
+			request.setAttribute("menulist", menulist);
+			request.setAttribute("aodto", aodto);
+			request.setAttribute("oddtoSize", oddtoSize);
+			request.setAttribute("container", "../admin/manage/orderedit.jsp");
+			return "layout/home";
+
+		}
+		
+	//주문내역 수정 처리 메서드 
+		@PostMapping("/adminOrderEdit.do")
+		public String orderEditForm(HttpServletRequest request, @RequestParam int oddto_index, @ModelAttribute OrderDto odto) {
+		
+			int order_num = odto.getOrder_num();
+			
+			
+			//기존 order_detail db 삭제 
+			aservice.removeAllOrderDetail(order_num);
+			
+			//받아온 order deteil 값들은 모두 순서대로 order_detail 테이블에 넣어줘야...
+			for(int i = 0 ; i <= oddto_index ; i++ ) {
+				
+				int menu_num = Integer.parseInt(request.getParameter("menu_num" + i));
+				int qty = Integer.parseInt(request.getParameter("qty" + i));
+				
+				//메뉴를 선택하지 않았거나, 수량이 0개이면 db에 삽입하지 않습니다.
+				if(menu_num == 0 || qty == 0) {
+					continue;
+				}
+				
+				OrderDetailDto oddto = new OrderDetailDto();
+				oddto.setMenu_num(menu_num);
+				oddto.setQty(qty);
+				oddto.setOrder_num(order_num);
+				
+				//db에 새로 저장하기 
+				odservice.OrderDetailInsert(oddto);
+			}
+			
+			//변경된 주문상태, 요청사항을 room_order 테이블에 update 시켜준다.
+			aservice.updateOrder(odto);
+			
+			return "redirect:adminOrderListDetail.do?order_num=" + order_num;
 
 		}
 	

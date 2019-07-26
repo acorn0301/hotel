@@ -1,5 +1,7 @@
 package spring.data;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MenuDto {
 	private int menu_num;
 	private String menu_type;
@@ -11,7 +13,16 @@ public class MenuDto {
 	private int menu_type_num;
 	private int qty;
 	
+	private MultipartFile upfile;
+
 	
+	
+	public MultipartFile getUpfile() {
+		return upfile;
+	}
+	public void setUpfile(MultipartFile upfile) {
+		this.upfile = upfile;
+	}
 	public int getQty() {
 		return qty;
 	}

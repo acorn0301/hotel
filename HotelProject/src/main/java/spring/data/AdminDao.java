@@ -130,6 +130,16 @@ public class AdminDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectOne("adminGetTotalMenuCount");
 	}
 	
+	//메뉴 타입 가져오기 
+	public List<MenuDto> getAllMenuType(){
+		return getSqlSession().selectList("adminGetMenuType");
+	}
+	
+	//메뉴 추가하기 
+	public void insertMenu(MenuDto mndto) {
+		getSqlSession().insert("adminInsertMenu", mndto);
+	}
+	
 	
 	//호텔 별 객실 리스트 가져오기
 	public List<RoomDto> getRoomListByHotel(int hotel_num){
@@ -142,8 +152,14 @@ public class AdminDao extends SqlSessionDaoSupport{
 	}
 	
 	//예약 건 다음 스텝으로 넘기기
-	public void bookNextStep(int book_num) {
-		getSqlSession().update("adminBookNextStep", book_num);
+	public void bookNextStep(int book_num, int book_status) {
+		if(book_status==1) {
+			getSqlSession().update("adminBookNextStepCheckIn", book_num);
+		}else if(book_status==2) {
+			getSqlSession().update("adminBookNextStepCheckOut", book_num);
+		}else {
+			getSqlSession().update("adminBookNextStep", book_num);
+		}
 	}
 	
 	//예약 건 취소하기
@@ -169,5 +185,25 @@ public class AdminDao extends SqlSessionDaoSupport{
 	//주문 건 취소를 철회하기
 	public void orderCancelRevoke(int order_num) {
 		getSqlSession().update("adminOrderCancelRevoke", order_num);
+	}
+	
+	//모든 메뉴 리스트 가져오기
+	public List<MenuDto> getAllMenu(){
+		return getSqlSession().selectList("adminGetAllMenu");
+	}
+	
+	//특정 order_num의 order_detail 데이타 모두 삭제하기
+	public void removeAllOrderDetail(int order_num) {
+		getSqlSession().delete("adminRemoveOrderDetail", order_num);
+	}
+	
+	//주문 데이타 수정 업데이트 
+	public void updateOrder(OrderDto odto) {
+		getSqlSession().update("adminUpdateOrder", odto);
+	}
+	
+	//예약 데이타 수정 업데이트
+	public void updateBook(BookDto bdto) {
+		getSqlSession().update("adminUpdateBook", bdto);
 	}
 }

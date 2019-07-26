@@ -74,6 +74,10 @@ function openModal(title,img,desc,menu_num){
 		</a>
    	</div>
   </section> --%>
+ <%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
+  
   
  <div class="hyebody">
    
@@ -142,8 +146,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list0}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -167,8 +171,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list1}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -193,8 +197,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list2}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -219,8 +223,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list3}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -245,8 +249,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list4}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -271,8 +275,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list5}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -297,8 +301,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list6}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>
@@ -323,8 +327,8 @@ function openModal(title,img,desc,menu_num){
   		<c:forEach var="mndto" items="${list7}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
     			<a href="#" class="list_a" data-toggle="modal" data-target="#myModal"
-    			 onclick="openModal('${mndto.menu_name_eng}','${mndto.menu_img}','${mndto.menu_desc}','${mndto.menu_num}')">
-	    			<img src="${mndto.menu_img}" class="img-responsive" width="99.9%" height="200">
+    			 onclick="openModal('${mndto.menu_name_eng}','<%=root %>/save/images/menu/${mndto.menu_img }','${mndto.menu_desc}','${mndto.menu_num}')">
+	    			<img src="<%=root %>/save/images/menu/${mndto.menu_img }" class="img-responsive" width="99.9%" height="200">
 	    			<div class="center_div">
 	    			<b>${mndto.menu_name_eng}</b>
 	    			<br>

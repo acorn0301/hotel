@@ -18,7 +18,7 @@
 <div class="qna_body_title_div">
 	<div class="qna_title_text">
 	
-			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
+			<div class="arrow_back" onclick="location.href='adminOrderList.do?room_status=${aodto.room_status}'"><i class="fas fa-chevron-left"></i></div>
 			<div>주문상세</div>
 			<div class="clearBoth"></div>
 	
@@ -137,7 +137,7 @@
 							<button onclick="cancelRevoke()">취소철회</button>
 							<button onclick="bookDelete()">주문삭제</button>				
 						</c:if>
-						<button class="lastBtn" onclick="">정보수정</button>				
+						<button class="lastBtn" onclick="location.href='adminOrderEditForm.do?order_num=${aodto.order_num}'">정보수정</button>				
 						
 					</td>
 				</tr>

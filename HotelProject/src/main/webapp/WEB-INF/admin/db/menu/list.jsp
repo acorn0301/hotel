@@ -14,7 +14,9 @@
 </head>
 <body>
 
-
+<%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
 <div class="admin_body">
 
 	<div class="qna_body_title_div">
@@ -30,6 +32,18 @@
 		<div class="admin_title_div">
 			<div class="admin_title_text">메뉴목록</div>
 		</div>
+		
+		<table class="dashboard_table">
+				<tr class="dashboard_tr_buttons twoBtns">
+					<td colspan="2">
+						
+						<button onclick="search()" id="selectNoneBtn">검  색</button>
+						<button onclick="location.href='adminMenuAddForm.do'" id="selectAllBtn">메뉴추가</button>
+						
+					</td>
+				</tr>
+		</table>
+		
 		<div class="dashboard_div_table">
 			<ul>
 			
@@ -38,7 +52,7 @@
 						<div onClick="location.href='adminMenuListDetail.do?menu_num=${dto.menu_num}'">
 							<div class="dashboard_li_div3">
 								<div class="userlist_div">
-									<div class="user_list_divs user_list_div_1"><img class="img-circle" src=${dto.menu_img }></div>
+									<div class="user_list_divs user_list_div_1"><img class="img-circle" src="<%=root %>/save/images/menu/${dto.menu_img }"></div>
 									<div class="user_list_divs user_list_div_2">${dto.menu_name_kor }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>
@@ -93,6 +107,9 @@
 		</ul>
 	</div>
 	<!-- 페이징 끝 -->
+	
+	
+	
 
 </div>
 

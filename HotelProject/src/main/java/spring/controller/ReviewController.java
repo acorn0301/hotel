@@ -280,7 +280,8 @@ public class ReviewController {
 		MultipartFile image = rvdto.getUpfile();
 		
 		//이미지를 업로드할 경로 구하기
-		String path = request.getSession().getServletContext().getRealPath("/save/review");		
+		String path = request.getSession().getServletContext().getRealPath("/save/review");	
+		System.out.println("path: " + path);
 		
 		//파일명
 		String review_img = image.getOriginalFilename();

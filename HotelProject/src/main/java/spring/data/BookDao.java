@@ -34,6 +34,13 @@ public class BookDao extends SqlSessionDaoSupport{
 	//예약정보 DB에 삽입
 	public void insertBook(FinalBookDto fdto)
 	{
+		//체크인 , 체크아웃 시간 디폴트값 설정 - 장희 수정 
+		String check_in = fdto.getCheck_in();
+		check_in += " 15:00";
+		String check_out = fdto.getCheck_out();
+		check_out += " 11:00";
+		fdto.setCheck_in(check_in);		
+		fdto.setCheck_out(check_out);
 		getSqlSession().insert("insertBook",fdto);	
 	}
 	

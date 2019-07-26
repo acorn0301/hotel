@@ -169,6 +169,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	
+	
+	
+	<!-- Menu Table --> 
+	
 	<select id="adminGetTotalMenuCount" resultType="int">
 		select count(*) from menu
 	</select>
@@ -176,6 +181,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="adminGetMenuList" resultType="mndto" parameterType="HashMap">
 		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from menu order by menu_num asc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
 	</select>
+	
+	<select id="adminGetMenuType" resultType="mndto">
+		select distinct menu_type, menu_type_num from menu order by menu_type_num asc
+	</select>
+	
+	<select id="adminInsertMenu" parameterType="mndto">
+	 	insert into menu values (menuseq.nextval, #{menu_type}, #{menu_name_eng}, #{menu_name_kor}, #{menu_price}, #{menu_img}, #{menu_desc}, #{menu_type_num})
+	</select>
+	
+	
+	
+	
+	
 	
 	<select id="adminGetRoomListByHotel" resultType="rmdto" parameterType="int">
 		select * from room where hotel_num=#{hotel_num} order by room_local
@@ -192,6 +210,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="adminBookNextStep" parameterType="int">
 		update book set book_status = book_status+1 where book_num = #{book_num}
+	</select>
+	
+	<!-- book_status 1->2 로 변경시 check_in 을 sysdate로 바꿔준다.  -->
+	<select id="adminBookNextStepCheckIn" parameterType="int">
+		update book set book_status = book_status+1, check_in = sysdate where book_num = #{book_num}
+	</select>
+	
+	<!-- book_status 2->3 로 변경시 check_out 을 sysdate로 바꿔준다.  -->
+	<select id="adminBookNextStepCheckOut" parameterType="int">
+		update book set book_status = book_status+1, check_out = sysdate where book_num = #{book_num}
 	</select>
 	
 	<select id="adminBookCancel" parameterType="int">
@@ -216,4 +244,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<!-- 전체 메뉴 리스트를 가져온다  -->
+	<select id="adminGetAllMenu" resultType="mndto">
+		select * from menu order by menu_num
+	</select>
+	
+	
+	<!-- 특정 order_num의 order_detail 데이타를 모두 삭제하기  -->
+	<select id="adminRemoveOrderDetail" parameterType="int">
+		delete from order_detail where order_num = #{order_num}
+	</select>
+	
+	<!-- 변경된 주문 데이타 room_order에 업데이트  -->
+	<select id="adminUpdateOrder" parameterType="odto">
+		update room_order set room_status = #{room_status} , memo = #{memo} where order_num = #{order_num}
+	</select>
+
+	<!-- 변경된 예약 데이타 book에 업데이트 -->
+	<select id="adminUpdateBook" parameterType="bdto">
+		update book set 
+		check_in = to_date(#{check_in}, 'yyyy-MM-dd HH24:MI'), 
+		check_out = to_date(#{check_out}, 'yyyy-MM-dd HH24:MI'), 
+		room_num=#{room_num},
+		head_count = #{head_count}, 
+		book_memo = #{book_memo}, 
+		book_status = #{book_status}, 
+		add_bed = #{add_bed}, 
+		breakfast_count = #{breakfast_count}
+		where book_num = #{book_num}
+	</select>
 </mapper>

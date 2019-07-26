@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>book edit form</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,7 @@
 <div class="qna_body_title_div">
 	<div class="qna_title_text">
 			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
-			<div>예약상세</div>
+			<div>예약정보수정</div>
 			<div class="clearBoth"></div>	
 	</div>
 </div>
@@ -46,10 +46,7 @@
 					<c:if test="${abdto.book_status==5 }">취소예약</c:if>
 				</td>	
 			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">접수일시</td>
-				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.book_day }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr>
+			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">회원명</td>
 				<td class="bookdetail_table_td"> ${abdto.name }(${abdto.id })</td>	
@@ -62,23 +59,7 @@
 				<td class="bookdetail_table_th bookdetail_table_td">체크아웃</td>
 				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_out }" pattern="yyyy-MM-dd HH:mm"/></td>	
 			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">결제가격</td>
-				<td class="bookdetail_table_td"> 
-					객실 - <fmt:formatNumber value="${abdto.price }" pattern="#,##0"/>원
-					<c:if test="${abdto.add_bed != 0 }">
-						<br>추가침대 - <fmt:formatNumber value="${abdto.add_bed*40000 }" pattern="#,##0"/>원
-					</c:if>
-					<c:if test="${abdto.breakfast_count != 0 }">
-						<br>조식 -  <fmt:formatNumber value="${abdto.breakfast_count*25000 }" pattern="#,##0"/>원
-					</c:if>	
-					
-					<br>
-					<b>총  <fmt:formatNumber value="${abdto.price + abdto.breakfast_count*25000  + abdto.add_bed*40000 }" pattern="#,##0"/>원</b>
-									
-				
-				</td>	
-			</tr>
+			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">추가사항</td>
 				<td class="bookdetail_table_td">
@@ -108,18 +89,7 @@
 				<td class="bookdetail_table_th bookdetail_table_td">객실타입</td>
 				<td class="bookdetail_table_td"> ${abdto.room_name } ${abdto.type }</td>	
 			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">회원명</td>
-				<td class="bookdetail_table_td"> ${abdto.name }(${abdto.id })</td>	
-			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">체크인</td>
-				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_in }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr>
-			<tr class="bookdetail_table_tr">
-				<td class="bookdetail_table_th bookdetail_table_td">체크아웃</td>
-				<td class="bookdetail_table_td"> <fmt:formatDate value="${abdto.check_out }" pattern="yyyy-MM-dd HH:mm"/></td>	
-			</tr>
+		
 		</table>	
 	</div>
 	
@@ -155,7 +125,7 @@
 							<button onclick="cancelRevoke()">취소철회</button>
 							<button onclick="bookDelete()">예약삭제</button>				
 						</c:if>
-						<button class="lastBtn" onclick="">정보수정</button>				
+						<button class="lastBtn" onclick="location.href='adminBookEditForm.do?book_num=${abdto.book_num}'">정보수정</button>				
 						
 					</td>
 				</tr>
