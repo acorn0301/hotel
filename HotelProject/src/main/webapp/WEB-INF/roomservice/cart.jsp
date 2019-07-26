@@ -136,12 +136,13 @@
 <!-- 장바구니에  물건이 있을때 뜨는 페이지 -->
 <c:if test="${mnlist != null}">
 	<table class="table">
+	<c:set var="sum" value="0"/> <!-- 합계 구할 변수 -->
 		<tr>
-			<th width="5%"><input type="checkbox" class="alldelchk" name="chk" checked="checked"></th>
-			<th width="20%">상품</th>
-			<th width="20%">메뉴명</th>
+			<th width="2%"><input type="checkbox" class="alldelchk" name="chk" checked="checked"></th>
+			<th width="15%">상품</th>
+			<th width="15%">메뉴명</th>
 			<th width="15%">수량</th>
-			<th width="10%">가격</th>
+			<th width="15%">가격</th>
 			<th width="15%">삭제</th>
 		</tr>
 			<c:forEach var="mndto" items="${mnlist}" varStatus="i">
@@ -162,6 +163,7 @@
 					</td>
 					<td>
 						<fmt:formatNumber pattern=",000" value="${mndto.menu_price*mndto.qty}"/>
+						<c:set var="sum" value="${sum+(mndto.menu_price*mndto.qty)}"/>
 					</td>
 					<td>
 						<!-- hidden -->
@@ -172,6 +174,11 @@
 					</td>
 				</tr>
 			</c:forEach>
+			<tr>
+				<td colspan="6"> 
+					<div class="totalPrice"><b>Total </b> <fmt:formatNumber pattern=",000" value="${sum}"/> </div>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="6">
 					<button type="button" class="cart_button" id="btndel">선택삭제</button>   

@@ -684,7 +684,6 @@ button.modal_button {
 button.cart_sm_button {
 	border: 0;
     border-radius: 300px;
-    padding: 3px 8px 3px 8px;
     /* margin-right: 10px; */
     font-size: 12px;
     color: #eeeeee;
@@ -692,15 +691,16 @@ button.cart_sm_button {
 }
 
 button.cart_button {
-    float: right;
+	float: right;
     border: 0;
     border-radius: 3px;
-    padding: 3px 8px 3px 8px;
+    padding: 3px 4px 3px 4px;
     margin-right: -10px;
     margin-left: 13px;
     font-size: 12px;
     color: #eeeeee;
     background-color: #5d4c358a;
+    margin-top: 4px;
 }
 
 table.table {
