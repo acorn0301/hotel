@@ -47,8 +47,9 @@
 
 
 </script>
-
-
+<%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
 
 <div class="hyebody"> <!-- 혜수 메인페이지 시작 -->
 
@@ -348,7 +349,7 @@
 	<c:forEach items="${list }" var="dto">
 	    <div class="main_review_div">
 	    	<a href="reviewlist.do">
-	    	<img src="http://192.168.0.38:9000/HotelProject/save/review/${dto.review_img }" alt="" title="이미지1">
+	    	<img src="<%=root%>/save/review/${dto.review_img }" alt="" title="이미지1">
 	 	    </a>
 	  	    <div class="main_review">
 	  	    <i class="fas fa-quote-left" style="color:lightgray; font-size: 1.3em"></i>&nbsp;<br>
