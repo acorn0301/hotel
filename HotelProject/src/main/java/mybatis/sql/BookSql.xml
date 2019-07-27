@@ -25,7 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		hotel_num = #{hotel_num}
 		and 
 		room_num not in 
-		(select room_num from book where (check_in < #{check_in} and check_out > #{check_out}) or (check_in < #{check_out} and check_out > #{check_in}) or (check_in >= #{check_in} and check_out <= #{check_out}))]]>
+		(select room_num from book 
+		where (check_in < to_date(#{check_in}, 'yyyy-MM-dd HH24:MI') and check_out > to_date(#{check_out},'yyyy-MM-dd HH24:MI')) 
+		or (check_in < to_date(#{check_out},'yyyy-MM-dd HH24:MI') and check_out > to_date(#{check_in}, 'yyyy-MM-dd HH24:MI')) 
+		or (check_in >= to_date(#{check_in}, 'yyyy-MM-dd HH24:MI') and check_out <= to_date(#{check_out},'yyyy-MM-dd HH24:MI')))]]>
 	</select>
 	
 	

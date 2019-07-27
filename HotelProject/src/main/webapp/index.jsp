@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Welcome</title>
+		<title>1st Hotel</title>
 	</head> 
 	<body>
 		<c:redirect url="home.do"></c:redirect>

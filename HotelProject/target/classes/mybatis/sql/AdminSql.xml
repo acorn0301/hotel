@@ -179,7 +179,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="adminGetMenuList" resultType="mndto" parameterType="HashMap">
-		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from menu order by menu_num asc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from menu order by menu_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>			
 	</select>
 	
 	<select id="adminGetMenuType" resultType="mndto">
@@ -189,6 +189,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="adminInsertMenu" parameterType="mndto">
 	 	insert into menu values (menuseq.nextval, #{menu_type}, #{menu_name_eng}, #{menu_name_kor}, #{menu_price}, #{menu_img}, #{menu_desc}, #{menu_type_num})
 	</select>
+	
+	
+	<select id="adminGetMenuData" resultType="mndto" parameterType="int">
+		select * from menu where menu_num = #{menu_num}
+	</select>
+	
+	<select id="adminDeleteMenu" parameterType="int">
+		delete from menu where menu_num = #{menu_num}
+	</select>
+	
+	
 	
 	
 	

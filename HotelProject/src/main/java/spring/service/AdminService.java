@@ -150,6 +150,19 @@ public class AdminService {
 		 adao.insertMenu(mndto);
 	}
 	
+	//개별 메뉴 상세 정보 가져오기 
+	public MenuDto getMenuData(int menu_num) {
+		return adao.getMenuData(menu_num);
+	}
+	
+	//메뉴 삭제하기
+	public void deleteMenu(int menu_num) {
+		adao.deleteMenu(menu_num);
+	}
+	
+	
+	
+	
 	
 	//호텔 별 객실 리스트 가져오기
 	public List<RoomDto> getRoomListByHotel(int hotel_num){

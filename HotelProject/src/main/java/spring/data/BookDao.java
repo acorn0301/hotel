@@ -20,6 +20,12 @@ public class BookDao extends SqlSessionDaoSupport{
 	//객실 리스트 출력
 	public List<RoomDto> RoomList(FinalBookDto fbdto)
 	{
+		String check_in = fbdto.getCheck_in();
+		check_in += " 15:00";
+		String check_out = fbdto.getCheck_out();
+		check_out += " 11:00";
+		fbdto.setCheck_in(check_in);		
+		fbdto.setCheck_out(check_out);
 		return getSqlSession().selectList("RoomList",fbdto);
 	}
 	

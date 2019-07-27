@@ -351,6 +351,18 @@ public class AdminController {
 		return "layout/home";
 	}
 	
+	//개별 메뉴 상세페이지 띄우기
+	@RequestMapping("/adminMenuListDetail.do")
+	public String menuListDetail(HttpServletRequest request, @RequestParam int menu_num) {
+		
+		MenuDto mndto = aservice.getMenuData(menu_num);
+		
+		request.setAttribute("mndto", mndto);
+		request.setAttribute("container", "../admin/db/menu/detail.jsp");
+		return "layout/home";
+		
+	}
+	
 	//메뉴 추가 폼 띄우기 
 	@RequestMapping("/adminMenuAddForm.do")
 	public String menuAddForm(HttpServletRequest request) {
@@ -413,6 +425,44 @@ public class AdminController {
 		
 		return "redirect:adminMenuList.do";
 	}
+	
+	//메뉴 수정 폼 띄우기
+	@RequestMapping("/adminMenuEditForm.do")
+	public String menuAddForm(HttpServletRequest request, @RequestParam int menu_num) {
+		
+		MenuDto dto = aservice.getMenuData(menu_num);
+		
+		request.setAttribute("dto", dto);
+		request.setAttribute("container", "../admin/db/menu/editform.jsp");
+		return "layout/home";
+	}
+	
+	
+	//메뉴 수정 처리
+	@PostMapping("/adminMenuEdit.do")
+	public String menuEdit(HttpServletRequest request, @ModelAttribute MenuDto mndto) {
+		
+		//수정 메서드 
+		
+		return "redirect:adminMenuListDetail.do?menu_num=" + mndto.getMenu_num();
+	}
+	
+	
+	//메뉴 삭제 처리 
+	@RequestMapping("/adminMenuDelete.do")
+	public String menuDelete(HttpServletRequest request, @RequestParam int menu_num) {
+		
+		//삭제 메서드 
+		aservice.deleteMenu(menu_num);
+		return "redirect:adminMenuList.do";
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//관리자 -> 호텔 db관리 리스트

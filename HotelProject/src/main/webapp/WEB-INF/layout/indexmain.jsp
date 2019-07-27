@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>1st Hotel</title>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo|Noto+Serif+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/jhStyle.css">
