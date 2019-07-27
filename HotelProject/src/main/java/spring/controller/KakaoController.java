@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
@@ -24,10 +23,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class KakaoController {
 	
-	HttpServletRequest request;
 	
-	private final String K_CLIENT_ID = "648cef1155eab095ac302a90bb64baa6";
-    private final String K_REDIRECT_URI = request.getContextPath() + "/kakaoLogin";
+	private final static String K_CLIENT_ID = "648cef1155eab095ac302a90bb64baa6";
+    private final static String K_REDIRECT_URI = "http://localhost:9000/HotelProject/kakaoLogin";
 
     public String getAuthorizationUrl(HttpSession session) {
 
