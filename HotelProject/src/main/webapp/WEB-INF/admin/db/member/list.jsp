@@ -36,7 +36,7 @@
 				<c:forEach items="${list}" var="dto">
 					<li>
 						<div onClick="location.href='adminBookListDetail.do?member_num=${dto.member_num}'">
-							<div class="dashboard_li_div2">
+							<div class="dashboard_li_div2 db_member_div">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><img src="http://localhost:9003/HotelProject/save/member_pic/${dto.member_pic }"></div>
 									<div class="user_list_divs user_list_div_2">${dto.name } (${dto.id })</div>

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/yeStyle.css">
+<link rel="stylesheet" href="css/jhStyle.css">
 <script src="js/yeScript.js"></script>
 
 </head>
@@ -16,8 +17,16 @@
 	<form action="findId.do" method="post">
 	<div class="headTit">
 		<h2 class="tit">아이디 찾기</h2>
-	</div><br><br>
-		<p class="text-center">아래 가입하신 이름과 이메일주소를 입력해주세요<br><br>
+	</div>
+		
+		<!-- <p class="text-center">아래 가입하신 이름과 이메일주소를 입력해주세요<br><br> -->
+		
+							<div class="dashboard_li_empty">
+								<i class="fas fa-search"></i><br>
+								가입시 사용하신 이름과 이메일주소를 입력해주세요
+							</div>
+					
+		
 		<div class="form_group"></div>
 		
 		<div class="form_group">

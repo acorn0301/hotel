@@ -163,7 +163,8 @@ ul{
 }
 
 .btn_submit{
-	background-color: palegoldenrod;
+	background-color: #3a3125;
+	color: #f1ebd6;
 	
 }
 
@@ -295,7 +296,7 @@ a{
 
 .info_date{
 	color: #999;
-    font-size: 13px;
+    font-size: 0.8em;
 }
 
 .info_readcount{
@@ -412,7 +413,7 @@ a{
     bottom: -1px;
     right: -1px;
     min-width: 69px;
-    background: sienna;
+    background: #3a3125;
     border: 1px solid rgba(0,0,0,0.1);
     font-size: 15px;
     line-height: 100%;
@@ -421,6 +422,20 @@ a{
     color: white;
     z-index: 10;
 }
+
+/* qna delete form 을 위한..  */
+.deleteform_div{
+	margin: 0 -10px -10px -10px;
+}
+
+.li_comment img{
+	width: 25px;
+    border-radius: 100%;
+    margin-right: 15px;
+    margin-left: -40px;
+}
+
+
 
 
 
@@ -648,6 +663,10 @@ a{
 	padding: 10px 10px 10px 20px;
 /*  	border-bottom: 1px solid lightgrey;
  */ }
+ 
+ 
+ 
+
 .dashboard_li_div3{
 	font-size: 11pt;
 	padding: 10px 10px 10px 20px;
@@ -684,6 +703,11 @@ a{
 
 
 /* 로고를 위한 css */
+
+.logo_div{
+	padding: 0px 50px;;
+	margin-bottom: 30px;
+}
 
 @keyframes twinkle {
       10% {
@@ -834,7 +858,10 @@ a{
 	padding-right:20px;
 	text-align: right;
 }
-
+.db_member_div{
+	
+	padding-left: 15px;
+}
 
 /* 메뉴 리스트 페이지를 위한 css
  */

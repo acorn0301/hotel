@@ -7,7 +7,7 @@
 	}
 	
 	#idBtn {display: inline-block; float: left;}
-	.loginMsg {margin: 5px 15px;}
+	.loginMsg {margin: 5px 15px; text-align:center;}
 	.dateForm {margin-bottom: 15px; padding: 0 20px;}
 	.telForm {margin-top: -15px;}
 	
@@ -15,7 +15,11 @@
 	
 	#chkmsg { color: red;}
 	
-	.loginPlus {text-align: center; font-size: 13px;}
+	.loginPlus {text-align: center; font-size: 13px; margin-bottom: 20px;}
+	.loginPlus span{
+		margin: 0px 15px;
+		font-weight: bold;
+	}
 	.google_login {
 		display:block;
 		text-align: center; 
@@ -30,9 +34,11 @@
 	
 	#kakao_btn{border:0px; background-color: white;}
 	
-	#editNo {text-align: right;}
+	#editNo {text-align: right; margin-right: 10px;}
 	
-	.myinfo{text-align: center; }
+	.myinfo{text-align: center; margin-top: 20px;}
+	.myinfo h4{color: #685845; font-weight: bold; margin-bottom: 0px; }
+	.myinfo span{font-size:0.8em; color: grey;}
 
  .btncenter{
 	text-align: center;
@@ -106,10 +112,13 @@
 	
 	
 	.linkBox{margin:0; padding:0; font-size:15px; line-height:160%; color:#666666;-webkit-text-size-adjust:none; }
-	.linkLIst, .linkLIst li{ list-style:none; margin:15px 0px; padding:10px 5px;}
+	.linkLIst, .linkLIst li{ list-style:none; margin:15px 0px; padding:10px 5px; font-weight: lighter; font-size: 1.1em;}
 	.linkLIst a{ text-decoration:none; color:#666; display: block;}
 	.linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
-
+	.linkLIst>li>a>i{width:22px;}
+	.linkLIst>li>a>div{padding-right:0;}
+	.linkLIst>li>a>div>i{font-size: 1.2em;}
+	
 
 
 .error {
@@ -227,7 +236,7 @@
 .btn_type {
     display: block;
     width: 100%;
-    padding: 20px 0 15px;
+    padding: 20px;
     font-size: 18px;
     font-weight: 600;
     text-align: center;
@@ -236,13 +245,13 @@
     box-sizing: border-box;
 }
 
-#btnCancel, #btnAgree {text-decoration: none;}
+#btnCancel, #btnAgree {text-decoration: none; border-radius: 5px;}
 .btn_default { color:#fff; background-color: #e3dfda;}
 .btn_primary { color: #fff; background-color: #3a3125; }
 
 .btn_area {margin: 30px 0 9px}
 
-.btn_area.double { overflow: hidden; margin: 29px -5px 0 }
+.btn_area.double { overflow: hidden; /* margin: 29px -5px 0 */ }
 
 .btn_area.double>span {
 	display: block;
@@ -408,7 +417,9 @@ ul,li{ list-style: none; }
 	border-radius: 10px;
 	margin: 0px;
 }
-
+.order_table_div{
+	margin-top: 20px;
+}
 .dashboard_div_table ul{
 	padding : 0;
 	margin : 0;
@@ -556,7 +567,11 @@ ul,li{ list-style: none; }
 } */
 .dashboard_div {
      padding: 0; 
+/* margin-top: -20px; */
 /* 	padding: 0 0px 0px 10px; */
+}
+.margin_top_adj{
+	margin-top: -20px;
 }
 .dashboard_div_div{
 	padding: 0 0px 0px 10px;
@@ -581,3 +596,15 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+
+
+
+
+
+/* 장희 추가 */
+
+/* .login_logo{
+ 	width: 100%;
+ 	
+} */

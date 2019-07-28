@@ -40,7 +40,7 @@
 						<div onClick="location.href='adminBookListDetail.do?room_num=${dto.room_num}'">
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
-									<div class="user_list_divs user_list_div_1"><img src="images/room/${dto.room_img }"></div>
+									<div class="user_list_divs user_list_div_1"><%-- <img src="images/room/${dto.room_img }"> --%></div>
 									<div class="user_list_divs user_list_div_2"> <b>${dto.room_local}호</b>  ${dto.room_name } ${dto.type }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>
@@ -71,7 +71,7 @@
 						<div onClick="location.href='adminBookListDetail.do?room_num=${dto.room_num}'">
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
-									<div class="user_list_divs user_list_div_1"><img src="images/room/${dto.room_img }"></div>
+									<div class="user_list_divs user_list_div_1"><%-- <img src="images/room/${dto.room_img }"> --%></div>
 									<div class="user_list_divs user_list_div_2"><b>${dto.room_local}호 </b> ${dto.room_name } ${dto.type }</div>
 									<div class="user_list_divs user_list_div_3"><i class="fas fa-chevron-right arrow_right"></i></div>
 								</div>

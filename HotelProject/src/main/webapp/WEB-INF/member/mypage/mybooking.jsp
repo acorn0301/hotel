@@ -38,7 +38,7 @@
 				</div> -->
 	<br>			
 
-	<div class="dashboard_div">
+	<div class="dashboard_div margin_top_adj">
 		<div class="admin_title_div">
 			<div class="admin_title_text">
 				예약내역

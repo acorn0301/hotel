@@ -6,6 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/yeStyle.css">
+<link rel="stylesheet" href="css/jhStyle.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -13,11 +14,20 @@
 <body>
 
 <div class="withdrawalForm">
+
+
 <form action="withdrawalOk.do" method="post">
 <div class="headTit">
 	<h4 class="tit">회원 탈퇴&nbsp;&nbsp;</h4>
-</div><br><br>
-<p class="text-center">아래 가입하신 비밀번호를 입력하세요<br><br>
+</div><!-- <br><br>
+<p class="text-center">아래 가입하신 비밀번호를 입력하세요<br><br> -->
+
+							<div class="dashboard_li_empty">
+								<i class="fas fa-sad-tear"></i><br>
+								더 좋은 서비스로 찾아뵙지 못해 죄송합니다<br>
+								탈퇴를 원하시면 아이디와 비밀번호를 입력하세요
+							</div>
+					
 
 	<div class="form_group"></div>
 	<!-- 아이디 -->

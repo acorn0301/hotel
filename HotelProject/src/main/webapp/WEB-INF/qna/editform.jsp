@@ -20,7 +20,7 @@
 		var result  = confirm('글 수정을 취소하시겠습니까?');
 		
 		if(result){
-			location.href="qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num;
+			location.href="qnacontent.do?pageNum=" + pageNum + "&board_num=" + board_num + "&fromWhere=${fromWhere}&category=${category}&board_status=" + ${board_status};
 		}else{
 			
 		}	

@@ -57,7 +57,9 @@
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">단가</td>
-				<td class="bookdetail_table_td"> ${mndto.menu_price }</td>	
+				<td class="bookdetail_table_td">
+					<fmt:formatNumber value="${mndto.menu_price }" pattern="#,##0"/> 원
+				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">메뉴설명</td>

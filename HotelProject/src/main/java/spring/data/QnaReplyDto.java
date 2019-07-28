@@ -14,8 +14,16 @@ public class QnaReplyDto {
 	private String name;
 	private String grade;
 	
+	private String member_pic;
 	
 	
+	
+	public String getMember_pic() {
+		return member_pic;
+	}
+	public void setMember_pic(String member_pic) {
+		this.member_pic = member_pic;
+	}
 	public String getGrade() {
 		return grade;
 	}

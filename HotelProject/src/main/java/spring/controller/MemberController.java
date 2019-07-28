@@ -267,7 +267,7 @@ public class MemberController {
 	    	 String name = mservice.getMemberData(member_num).getName();
 	    	 session.setAttribute("name", name);
 	    	 
-	         if(session.getAttribute("url") != "" )
+	         if(((String)session.getAttribute("url")).length() > 0)
 	         {
 	            String url = (String)session.getAttribute("url");
 	            session.removeAttribute("url");
@@ -283,7 +283,7 @@ public class MemberController {
 	         
 	         //장희 수정 끝 
 	
-	         return "layout/home"; 
+	         return "redirect:home.do"; 
          
 	      }else{ //아이디는 존재하지만 비밀번호가 틀린 경우
 	    	  session.setAttribute("member", null);

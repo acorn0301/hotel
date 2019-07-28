@@ -38,11 +38,15 @@
 	}
 </script>
 
+<%
+		String root=request.getContextPath();//프로젝트 루트 경로
+%>
+
 <div id="qna_content_div">
 	
 	<!-- 제목 및 메뉴 부분 -->
 	<div class="qna_title_div">
-		<div><span onclick="gotoList(${pageNum}, '${fromWhere }', '${category }', ${board_status })"> < 목록으로</span></div>
+		<div><span onclick="gotoList(${pageNum}, '${fromWhere }', '${category }', ${board_status })"><i class="fas fa-chevron-left"></i>  목록으로</span></div>
 		<h2 class="qna_title">${qdto.subject }</h2>
 		<div class="qna_writer_wrap">
 			<div class="info">${qdto.writer }</div>
@@ -86,18 +90,27 @@
 					<li class="li_comment">
 						<span>
 							<b>
+								<!-- 관리자 댓글  -->
 								<c:if test="${qrdto.grade == 'a' }">
+								
+									<!-- 관리자가 보는 관리자 댓글 -->
 									<c:if test="${fromWhere == 'admin' }">
-										관리자(${qrdto.name })
+										<img src="<%=root %>/save/member_pic/${qrdto.member_pic }">관리자(${qrdto.name })
 									</c:if>
+									
+									<!-- 일반 고객이 보는 관리자 댓글 --> 
 									<c:if test="${fromWhere != 'admin' }">
-										관리자
+										<img src="<%=root %>/save/images/logo/logo2.png">관리자
 									</c:if>
-						
+					
 								</c:if>
+								
+								<!-- 일반 고객 댓글  -->
 								<c:if test="${qrdto.grade != 'a' }">
-									${qrdto.name}
+									<img src="<%=root %>/save/member_pic/${qrdto.member_pic }">${qrdto.name}
 								</c:if>
+								
+								
 							</b>
 						</span><br>
 						<div class="li_comment_content"> ${qrdto.reply_content }</div>

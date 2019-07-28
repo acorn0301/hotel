@@ -2,8 +2,8 @@
 
 #hjBody{
    font-size: 11pt;
-/*    margin-left: -10px;
-   margin-right: -10px; */
+    margin-left: -10px;
+   margin-right: -10px; 
 }
 
 /*------------- 페이지 공용 클래스 ---------------*/
@@ -93,7 +93,7 @@ li{
    height: 40px;
     background-color: #685845;
     color: white;
-    margin: -20px -10px 0;
+    margin: 0;
 }
 
 .qna_title_text{
@@ -581,6 +581,7 @@ textarea{
 
 .reservationBtns{
 	height: 70px;
+	padding: 0px 5px;
 	margin-bottom: 1rem;
 }
 
