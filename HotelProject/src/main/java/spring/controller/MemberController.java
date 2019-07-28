@@ -60,7 +60,9 @@ public class MemberController {
 
    // 로그인 버튼 클릭시  -> 로그인 폼 
    @RequestMapping("/login.do")
-   public String loginForm(HttpServletRequest request) {
+   public String loginForm(HttpServletRequest request, HttpSession session, @RequestParam(value="url", defaultValue="") String url) {
+	  
+	  session.setAttribute("url", url);
       request.setAttribute("container", "../member/login/loginmain.jsp");
 	  request.setAttribute("msg", "");
 
@@ -265,7 +267,7 @@ public class MemberController {
 	    	 String name = mservice.getMemberData(member_num).getName();
 	    	 session.setAttribute("name", name);
 	    	 
-	         if(session.getAttribute("url") != null )
+	         if(session.getAttribute("url") != "" )
 	         {
 	            String url = (String)session.getAttribute("url");
 	            session.removeAttribute("url");

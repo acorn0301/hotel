@@ -234,13 +234,13 @@
 		
 	//주문 삭제 버튼을 눌렀을 때 
 	function bookDelete(){
-		alert('아직 구현되지 않은 기능입니다.');
+		alert('준비중입니다.');
 	}
 	
 	//조건검색 버튼을 눌렀을 때 
 	
 	function search(){
-		alert('아직 구현되지 않은 기능입니다.');
+		alert('준비중입니다.');
 	}
 	
 	

@@ -125,7 +125,7 @@
 			
 			<tr class="dashboard_tr_buttons">
 					<td colspan="2">
-						<button onclick="history.back()">목록으로</button>				
+						<button onclick="location.href='adminOrderList.do?room_status=${aodto.room_status}'">목록으로</button>				
 						
 						<c:if test="${aodto.room_status < 5}">
 							<c:if test="${aodto.room_status <3 }">
@@ -177,15 +177,10 @@
 				
 	}
 	
-	//예약 삭제 버튼을 눌렀을 때 
-	function bookDelete(){
-		alert('아직 구현되지 않은 기능입니다.');
-	}
 
-		
 	//주문 삭제 버튼을 눌렀을 때 
 	function bookDelete(){
-		alert('아직 구현되지 않은 기능입니다.');
+		alert('준비중입니다.');
 	}
 </script>
 

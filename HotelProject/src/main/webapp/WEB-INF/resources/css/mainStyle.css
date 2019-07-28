@@ -116,59 +116,6 @@
 	right: 0px;
 }
 
-
-/* 
-
-.titleLogo{
-	
-	크기가 작을 때
-	
-	display: inline;
-		크기가 커질 때
-	
-	
+.review_body{
+	margin: 20px -10px -10px -10px;
 }
-
-모바일 사이즈에서의 navbar-brand css : 로고 위치를 중앙으로 해야함 
-.navbar-brand2{ 
-	text-align: center;
-    ft: ;
-    padding: 14px 14px;
-    font-size: 18px;
-    line-height: 20px;
-}
-.my-navbar-brand{
-	
-	크기가 작을 때
-	
-	
-	
-		크기가 커질 때
-	@media (min-width: @grid-float-breakpoint){
-		float: left; 
-    	padding: 20px; 
-    	line-height: 20px; 
-	}
-}
-
-
-.my-navbar-header{
-	
-	크기가 작을 때
-	
-	text-align: center;
-	
-		크기가 커질 때
-	@media (min-width: @grid-float-breakpoint){
-		
-		text-align: left;
-	}
-}
-
- */
-
-
-/*
-
-
-*/

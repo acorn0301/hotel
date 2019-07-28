@@ -49,11 +49,14 @@ public class ReviewController {
 	
 	//후기 게시판 버튼을 눌렀을 때 
 	@RequestMapping("/reviewlist.do")
-	public String reviewlist(HttpServletRequest request) {
+	public String reviewlist(HttpServletRequest request, HttpSession session) {
 		
-		request.setAttribute("container", "../review/list.jsp");
+		int member_num = 0;
+		if(session.getAttribute("member_num") != null) {
+			member_num = (Integer)session.getAttribute("member_num");
+		}
 		
-		return "layout/home";
+		return "redirect:http://firsthotel-review.herokuapp.com/" + member_num;
 	}
 	
 	

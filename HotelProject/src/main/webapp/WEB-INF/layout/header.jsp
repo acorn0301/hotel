@@ -79,7 +79,7 @@
 		<li><a href="booking.do">빠른예약</a></li>
 		
 		
-		<li><a href="reviewlist.do">리뷰게시판</a></li>
+		<li><a href="http://firsthotel-review.herokuapp.com/${sessionScope.member_num ==null ? 0 : sessionScope.member_num }">리뷰게시판</a></li>
 		<li><a href="qnalist.do">문의게시판</a></li>
 		
 		<li class="padding_li"></li>

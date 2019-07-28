@@ -113,11 +113,14 @@
 
 </div>
 
+<script type="text/javascript">
+
+	function search(){
+		alert('준비중입니다.');
+	}
+</script>
+
 </body>
 </html>
 
-
-
-</body>
-</html>
 
