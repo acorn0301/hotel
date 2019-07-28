@@ -705,7 +705,7 @@ a{
 /* 로고를 위한 css */
 
 .logo_div{
-	padding: 0px 50px;;
+	padding: 20px 50px 0px 50px;
 	margin-bottom: 30px;
 }
 

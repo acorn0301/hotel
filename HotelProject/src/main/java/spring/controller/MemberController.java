@@ -526,7 +526,7 @@ public class MemberController {
 	   MultipartFile image = mbdto.getUpfile();
 //	   System.out.println(image);
 
-	   if(mbdto.getMember_pic().equals("user.svg")){ // 기본 이미지 일때는 원래 이미지 삭제X
+	   if(mbdto.getMember_pic().equals("user.svg") && isPicChanged==1){ // 기본 이미지 일때는 원래 이미지 삭제X
 //		   System.out.println("aa");
 		   
 		   //이미지를 업로드할 경로 구하기
@@ -562,8 +562,7 @@ public class MemberController {
 		   System.out.println("memberpic change!!");
 	   
 		   mservice.updateMember(mbdto);
-	   }
-	   else if(isPicChanged == 1){ // 기본X말고 다른 이미지 있을때 기존 이미지 삭제
+	   }else if(isPicChanged == 1){ // 기본X말고 다른 이미지 있을때 기존 이미지 삭제
 //		   System.out.println("bb");
 		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
 		   String member_pic = image.getOriginalFilename();

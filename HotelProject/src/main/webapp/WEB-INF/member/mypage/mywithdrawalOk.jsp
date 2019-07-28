@@ -6,6 +6,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/yeStyle.css">
+<link rel="stylesheet" href="css/jhStyle.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -14,8 +15,14 @@
 <form action="home.do" method="post">
 <div class="withdrawalForm">
 <br>
-<h4>회원 탈퇴가 완료되었습니다</h4> 
-<h5>회원님의 정보가 정상적으로 삭제되었습니다.</h5><br>
+
+	<div class="dashboard_li_empty">
+		<i class="fas fa-check-square"></i><br>
+		회원 탈퇴가 완료되었습니다<br>
+		회원님의 정보가 정상적으로 삭제되었습니다
+	</div>
+
+
 </div>
 
 <div>

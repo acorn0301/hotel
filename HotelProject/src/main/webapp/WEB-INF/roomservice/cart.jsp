@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/hsStyle.css">
+<link rel="stylesheet" href="css/jhStyle.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <script type="text/javascript">
 	$(function(){
@@ -123,9 +124,16 @@
 <!-- 장바구니에 아무것도 없을때 뜨는 페이지 -->
 <c:if test="${mnlist == null}">
 <div class="null_cart">
-		<i class='fas fa-bullhorn' style='font-size:70px; color:#3a3125;'></i>
+		<!-- <i class='fas fa-bullhorn' style='font-size:70px; color:#3a3125;'></i>
 		<br><br>
-		<h4><b>장바구니가 비어 있습니다.</b></h4> 
+		<h4><b>장바구니가 비어 있습니다.</b></h4>  -->
+		
+		<div class="dashboard_li_empty">
+			<i class="fas fa-shopping-cart" style="padding-right:15px;"></i><br>
+				장바구니가 비어 있습니다
+		</div>
+		
+		
 		<div class="container">
   		  <div class="row">
 			<div class="col-sm-offset-3 col-sm-6">

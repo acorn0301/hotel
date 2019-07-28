@@ -7,7 +7,7 @@
 	}
 	
 	#idBtn {display: inline-block; float: left;}
-	.loginMsg {margin: 5px 15px; text-align:center;}
+	.loginMsg {margin: 5px 15px; text-align:center; color: grey;}
 	.dateForm {margin-bottom: 15px; padding: 0 20px;}
 	.telForm {margin-top: -15px;}
 	
@@ -285,10 +285,34 @@
 
 /* 마이페이지 프로필 수정(사진) 부분 */
 .profile_photo {
-    position: relative;
+   /*  position: relative;
     width: 100px;
-    height: 100px;
-    margin: 15px
+    height: 100px; */
+    margin: auto;
+    width: 200px;
+    height: 210px;
+}
+.photo_change_div{
+	opacity: 0;
+    width: 200px;
+    height: 200px;
+    position: relative;
+    top: -200px;
+    z-index: 10;
+}
+
+#btnDelete i{
+	font-size: 2.5em;
+	color:grey;
+}
+.photo_delete_div{
+	position: relative;
+	top: -240px;
+	left: 170px;
+	width: 50px;
+	margin: 0;
+	z-index: 11;
+	
 }
 
 .btn_file label .btn2 {
@@ -315,10 +339,22 @@
     cursor: pointer;
 }
 
+.profileBtns{
+	width: 100%;
+	border-radius: 5px;
+	border: 0;
+	background-color: #f1ebd6;
+	color : #3a3125b8;
+	font-weight: bold;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+	
+}
 
 .btn_file label {
     display: inline-block;
-    width: 77px;
+    /* width: 49%; */
     height: 30px;
     cursor: pointer;
 }
@@ -327,7 +363,7 @@
     display: inline-block;
     vertical-align: top;
     text-decoration: none!important;
-    margin-top:60px;
+    margin-top:0;
     height: 35px;
     
 }

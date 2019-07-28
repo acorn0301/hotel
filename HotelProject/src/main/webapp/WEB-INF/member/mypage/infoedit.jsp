@@ -6,7 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="css/yeStyle.css">
-<link rel="stylesheet" href="images/">
 <style type="text/css">
 
 </style>
@@ -53,7 +52,7 @@ function check(){
 
 // 기존 사진 삭제
 function pic_delete(){
-	alert("aa");
+	console.log('pic_delete');
 	var that = $(this);
 	$.ajax({
 		url : "pic_delete.do?member_pic"
@@ -73,6 +72,89 @@ function pic_delete(){
 	<h4 class="tit">내 정보 수정&nbsp;&nbsp;<i class="fas fa-user-edit"></i></h4>
 </div>
 <br>
+	
+<!-- 프로필사진 -->
+	<div style="text-align:center;">
+		<div class="profile_photo">
+			<div class="select_img">
+				<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" />
+				<input type="hidden" name="member_pic" value="${mbdto.member_pic }">
+			</div>
+			<span class="mask"></span>
+			
+			<div class="photo_change_div">
+				<div class="btn_file">
+					<label for="inputImage" class="btn_model">
+						 <b id="btnChangeProfile" class="" onclick="return btnChange()" style="width:200px; height:200px;">사진변경</b> 
+						<!-- <button id="btnChangeProfile" class="profileBtns" type="button">사진변경</button> -->				
+					</label>
+					<input type="hidden" name="isPicChanged" value="0" id="isPicChanged">
+					<input type="file" name="upfile" class="inputbox_file" id="inputImage">
+		        </div>
+			</div>	
+			
+			<div class="photo_delete_div">		
+				<span class="" id="btnDelete" class="profileBtns">
+					<i class="far fa-trash-alt"  onclick="pic_delete()"></i>
+				</span> 
+			</div>
+			
+		</div>
+		
+		
+		
+		<script type="text/javascript">
+			$("#inputImage").change(function(){
+				if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     	$(".select_img img").attr("src", data.target.result);
+				     	$(".select_img img").css({
+				     		"width" : "200px",
+				     		"height" : "200px"
+				     	})
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				}
+				
+				// isPicChanged 값을 0-> 1로 변경
+				$("#isPicChanged").val("1");
+			});
+		</script>
+		
+
+		
+<!-- 		<div class="btn_area_btm">
+			<span class="btn_file">
+			<label for="inputImage" class="btn_model">
+				<b id="btnChangeProfile" class="btn2" onclick="return btnChange()">사진변경</b>
+			</label>
+			<input type="hidden" name="isPicChanged" value="0" id="isPicChanged">
+			<input type="file" name="upfile" class="inputbox_file" id="inputImage">
+	        </span>
+		</div>
+		
+		<script type="text/javascript">
+			$("#inputImage").change(function(){
+				if(this.files && this.files[0]) {
+				    var reader = new FileReader;
+				    reader.onload = function(data) {
+				     	$(".select_img img").attr("src", data.target.result);
+				    }
+				    reader.readAsDataURL(this.files[0]);
+				}
+				
+				// isPicChanged 값을 0-> 1로 변경
+				$("#isPicChanged").val("1");
+			});
+		</script>
+	           
+		<span class="btn_model">
+		<b id="btnDelete" class="btn2" onclick="pic_delete()">삭제</b>
+		</span> -->
+	
+     </div>
+
 <h6 id="editNo">※ 아이디 / 이름은 수정하실 수 없습니다</h6>
 	<div class="form_group"></div>
 	<!-- 아이디 -->
@@ -147,51 +229,7 @@ function pic_delete(){
 		</div>
 	</div>
 
-	<!-- 프로필사진 -->
-	<div class="pic">
-		<div class="profile_photo">
-			<div class="select_img">
-				<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" width="100" height="100" />
-				<input type="hidden" name="member_pic" value="${mbdto.member_pic }">
-			</div>
-			<span class="mask"></span>
-			
-		</div>
-		
-		<div class="btn_area_btm">
-			<span class="btn_file">
-			<label for="inputImage" class="btn_model">
-				<b id="btnChangeProfile" class="btn2" onclick="return btnChange()">사진변경</b>
-			</label>
-			<input type="hidden" name="isPicChanged" value="0" id="isPicChanged">
-			<input type="file" name="upfile" class="inputbox_file" id="inputImage">
-	        </span>
-		</div>
-		
-		<script type="text/javascript">
-			$("#inputImage").change(function(){
-				if(this.files && this.files[0]) {
-				    var reader = new FileReader;
-				    reader.onload = function(data) {
-				     	$(".select_img img").attr("src", data.target.result);
-				    }
-				    reader.readAsDataURL(this.files[0]);
-				}
-				
-				// isPicChanged 값을 0-> 1로 변경
-				$("#isPicChanged").val("1");
-			});
-		</script>
-	           
-		<span class="btn_model">
-		<b id="btnDelete" class="btn2" onclick="pic_delete()">삭제</b>
-		</span>
-		<script type="text/javascript">
-		
-		
-		</script>
-		
-     </div>
+	
      
 	<div class="form_group"></div><br>
 	<!-- hidden -->
