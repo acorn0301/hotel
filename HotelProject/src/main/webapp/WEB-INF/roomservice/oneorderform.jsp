@@ -11,9 +11,22 @@
 </head>
 <body>
 <div class="hyebody">
-<div class="margin_div">
-<h2 class="margin_h2">주문하기</h2>
+<div class="margin_div minus_margin_div">
+<!-- <h2 class="margin_h2">주문하기</h2> -->
+
+  <!-- 상단 서비스 메뉴명 -->
+ <div class="qna_body_title_div">
+	<div class="qna_title_text">룸서비스</div></div>
+	
+	
+<!-- 카테고리 별 상단 메뉴 -->
+   	<div class="admin_title_div admin_title_div_order">
+	<div class="sub_title_div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주문확인</div></div>
+
 <br>
+
+<div class="div_for_table" style="margin-top:-20px;">
+
 <form action="oneordercomplete.do?member_num=${sessionScope.member_num}">
 	<table class="table">
 		<c:set var="sum" value="0"/>
@@ -49,11 +62,21 @@
 					<input type="hidden" name="total_price" value="${sum}">
 					
 	<div class="totalPrice"><b>Total </b> <fmt:formatNumber pattern=",000" value="${sum}"/> </div>
-<br><br><br>
-	<b>추가 요청사항</b> 
-<br><br>
-	<textarea  class="form-control" rows="5" name="memo" placeholder="룸서비스 이용시 요청 하실 사항이 있으시면 입력해 주십시오."></textarea>
-		<br>
+
+
+
+	<div class="menu_memo_div">
+
+		<div><b>추가 요청사항</b></div> 
+	
+		<textarea  class="form-control" rows="5" name="memo" placeholder="룸서비스 이용시 요청 하실 사항이 있으시면 입력해 주십시오."></textarea>
+			
+			
+		</div>	
+	
+	
+	
+	<br>
 	<div class="center_div">
 	<h4>이대로 주문하시겠습니까?</h4>
 <div class="container">
@@ -64,7 +87,7 @@
 		<button type="submit" class="room_btn2">주문하기</button>
 </div></div></div>
 	</div>
-</form>
+</form></div>
 <br><br>
 </div>
 </div>

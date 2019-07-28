@@ -76,75 +76,49 @@ public class MenuController {
 	@RequestMapping("/insertcart.do")
 	public String insertCart(HttpServletRequest request,
 			HttpSession session,
-			@ModelAttribute CartDto cdto,
+			@ModelAttribute MenuDto mndto,
 			@RequestParam(value="qty",defaultValue="1") int qty)
 	{
-		//session.removeAttribute("cdtolist");
-		//담기버튼을 눌렀을 때 할 일
-		//1. 기존 세션에 cdtolist가 있는가?(널인가 아닌가?)
-		//2. 없으면 세션에 새로 하나 만든다.
-		//3. clist 선언한다
-		//4. clist 에 세션에서 받아온 cdtolist를 담는다
-		//방금 받아온 걔의 memu_num이 기존 clist에 있는지 확인 후 있으면 수량만 ++ 해줌 없으면 clist.add
-		//6. 세션에 다시 clist 를 올린다. session.setAttribute("cdtolist",clist)
-		//7. 다시 roomaservice.do 를 호출한다.
-
-		//ArrayList<CartDto> clist = new ArrayList<CartDto>(); 
 		
-		if(cdto.getMenu_num() == 0)
-		{
-			session.setAttribute("cdtolist", "");
-			request.setAttribute("container", "../roomservice/menulist.jsp");
+		
+		List<MenuDto> mnlist = new ArrayList<MenuDto>();
+		
+		if(session.getAttribute("mnlist")!=null) { //기존에 세션에 저장된 장바구니가 있는 경우 
 			
-		}else{
-
-			List<CartDto> clist = new ArrayList<CartDto>();
-			if(session.getAttribute("cdtolist") != null){
-				clist = (ArrayList<CartDto>) session.getAttribute("cdtolist");
-			}
+			//기존 세션값을 받아온다.
+			mnlist = (List<MenuDto>)session.getAttribute("mnlist");
 			
-			clist.add(cdto);
-			session.setAttribute("cdtolist", clist);
-
-			//list에 잘 담겼는지 확인용
-//			for(CartDto c:clist){
-//				System.out.println(c.getMenu_num());
-//				System.out.println(c.getQty());
-//
-//			}
+			//기존 세션값에 이미 이 메뉴가 있는지 검사한다.
+			//이미 있던 메뉴라면 수량만 늘려주고, 없던 메뉴라면 새로 추가한다.
 			
-			List<CartDto> finallist = new ArrayList<CartDto>();
-
-			//수량 증가
-			for(CartDto c:clist)
-			{
-				int already = 0;
-				//메뉴넘 꺼내서 파이널리스트에 가지고 있는지 파악
-				for(CartDto f:finallist){
-					if(c.getMenu_num()==f.getMenu_num()){
-						f.setQty(f.getQty()+qty);
-						already++;
-						break;
-					}
+			int already = 0; //이미 장바구니에 담겨져 있는 메뉴인지 확인할 변수 
+			
+			for(MenuDto mm:mnlist) { //mnlist를 쭉 살펴본다.
+				
+				if(mm.getMenu_num() == mndto.getMenu_num()) { //이미 존재하는 메뉴인 것으로 발견된다면 
+					mm.setQty(mm.getQty() + mndto.getQty()); //기존 수량 더하기 새로 담은 수량을 합쳐서 저장 
+					already = 1; //이미 장바구니에 담겨진 메뉴임을 변수에 반영한다.
+					break; //for문을 빠져나간다.
 				}
-				if(already==0)
-					finallist.add(c);
 			}
-
-			//수량 증가 후 mnlist에 최종으로 추가
-			List<MenuDto> mnlist=new ArrayList<MenuDto>();
-			for(CartDto ff:finallist)
-			{
-				MenuDto temp = new MenuDto();
-				temp = mnservice.menuCartList(ff.getMenu_num());
-				temp.setQty(ff.getQty());
-				mnlist.add(temp);
+			
+			if(already == 0) { //위에 for문을 돌렸음에도 불구하고 already가 0이라는건 장바구니에 처음 담기는 메뉴라는 의미이므로 
+					mnlist.add(mndto); //mnlist에 받아온거 그대로 추가한다.
 			}
-
-			request.setAttribute("mnlist", mnlist);
-			session.setAttribute("mnlist", mnlist);
-			request.setAttribute("container", "../roomservice/cart.jsp");
+			
+		}else { //기존에 세션에 저장된 장바구니가 없는 경우 
+			
+			//받아온 정보를 집어넣어준다.
+			
+			mnlist.add(mndto);
+			
+			
 		}
+			
+			//세션에 mnlist를 올린다.
+			session.setAttribute("mnlist", mnlist);
+			
+
 
 	return "redirect:roomaservice.do";
 }
@@ -153,25 +127,31 @@ public class MenuController {
 //장바구니로 이동(menu_num 가지고 이동)
 @RequestMapping("/cart.do")
 public String cart(HttpServletRequest request,
-		HttpSession session,
-		@ModelAttribute CartDto cdto)
+		HttpSession session)
 {
-
-	//장바구니 버튼을 눌렀을 때 할일
-	//1. 세션에 cdtolist가 비어있는지 확인 -> 비어있으면 "" 빈거 하나 만들기
-	//2. 비어있지 않다면 세션으로부터 받아서 clist에 추가
-	//3. request.setAttribute("mnlist",clist) 해서 jsp 로 예쁘게 보내준다.
-
-	if(session.getAttribute("cdtolist") == null){
-		request.setAttribute("cdtolist", "");
-		request.setAttribute("container", "../roomservice/cart.jsp");
-
-	}else{
+	//세션에서 mnlist 받아다가 request로 cart.jsp에 보내주기만 하면 끝! 
+	if(session.getAttribute("mnlist") == null){  //세션에 mnlist가 비어있다면 그냥 빈 채로 보내고 
+		request.setAttribute("mnlist", null);
+	
+	}else{ //세션에 mnlist가 비어있지 않다면 메뉴정보를 함께 담아서(이름,사진,가격 등등) 
+				
+		List<MenuDto> mnlist = (List<MenuDto>)session.getAttribute("mnlist");
 		
-		request.setAttribute("mnlist", session.getAttribute("mnlist"));
-		request.setAttribute("container", "../roomservice/cart.jsp");
+		for(MenuDto mm : mnlist) {
+			MenuDto mndto = mnservice.menuCartList(mm.getMenu_num());
+			mm.setMenu_img(mndto.getMenu_img());
+			mm.setMenu_name_eng(mndto.getMenu_name_eng());
+			mm.setMenu_name_kor(mndto.getMenu_name_kor());
+			mm.setMenu_price(mndto.getMenu_price());
+			mm.setMenu_type(mndto.getMenu_type());
+			mm.setMenu_type_num(mndto.getMenu_type_num());
+		}
+		
+		request.setAttribute("mnlist", mnlist);
+		session.setAttribute("mnlist", mnlist);
 	}
-
+	
+	request.setAttribute("container", "../roomservice/cart.jsp");
 	return "layout/home";
 }
 
@@ -200,7 +180,7 @@ public String oneCartComplete(HttpSession session,
 		@ModelAttribute OrderDetailDto oddto,
 		@ModelAttribute MemberDto mbdto,
 		@RequestParam(value="menu_num", defaultValue="0") int menu_num,
-		@RequestParam(value="pty",defaultValue="1") int qty,
+		@RequestParam(value="qty",defaultValue="1") int qty,
 		@RequestParam int member_num){
 	
 	//주문 1개 값 얻어서 데이터 저장
@@ -226,7 +206,7 @@ public String oneCartComplete(HttpSession session,
 	request.setAttribute("maxOrderNum", maxOrderNum);	
 	
 	//orderdetail 테이블에 데이터 보내기
-	session.getAttribute("mnlist");
+
 	
 	oddto.setOrder_num(maxOrderNum);
 	for(MenuDto dto : onelist) {
@@ -235,84 +215,99 @@ public String oneCartComplete(HttpSession session,
 		oddservice.OrderDetailInsert(oddto);
 	}
 	
-//	session.removeAttribute("cdtolist");
-	
+		
 	request.setAttribute("qty", qty);
 	request.setAttribute("onelist", onelist);
+	
 	request.setAttribute("container", "../roomservice/oneordercomplete.jsp");
 	return "layout/home";
 }
 
-//장바구니 일부 품목 삭제
+//장바구니 개별 품목 삭제
 @RequestMapping("/cartdelete.do")
 public String cartDelete(HttpServletRequest request,
 		HttpSession session,
-		@RequestParam int menu_num,
-		@RequestParam int qty,
-		@ModelAttribute CartDto cdto
-		)
+		@RequestParam int menu_num)
 {
-	//System.out.println("메뉴넘!:"+menu_num);
-	//System.out.println("수량!:"+qty);
-	
-	//세션 카트리스트 전체 삭제
-	//session.getAttribute("cdtolist");
 
+	//세션에서 mnlist를 가져온다.
 	List<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
 	
-	if(mnlist == null){
-		request.setAttribute("container", "../roomservice/cart.jsp");
-	}
-	if(mnlist != null){
+	//받아온 menu_num과 일치하는 데이타를 찾아준다
+	for(int i = 0 ; i < mnlist.size() ; i++ ) {
 		
-		for(int i=0 ; i<mnlist.size() ; i++){
-			if(cdto.getMenu_num() == mnlist.get(i).getMenu_num()){
-				mnlist.remove(i);
-			}
+		if(menu_num == mnlist.get(i).getMenu_num()) { //해당 데이타를 찾았다면 
+			mnlist.remove(i); //삭제한다.
 		}
+	}
 	
+	//새로 재정비 된 mnlist를 다시 세션에 보내준다. 
 		session.setAttribute("mnlist", mnlist);
-		
-		List<CartDto> clist = (ArrayList<CartDto>)session.getAttribute("cdtolist");
-		
-		for(int i=0 ; i<clist.size() ; i++){
-			if(cdto.getMenu_num() == clist.get(i).getMenu_num()){
-				clist.remove(i);
-			}
-		}
-		
-		session.setAttribute("clist", clist);
-		
-		int m = mnlist.size();
-		if( m == 0 )
-		{
-			session.setAttribute("mnlist", null);
-		}
+	
+	//만약 전부 삭제되었다면 mnlist도 비워준다. 
+	if(mnlist.size()==0) {
+		session.removeAttribute("mnlist");
 	}
+	
+	
+	
+//	if(mnlist == null){
+//		request.setAttribute("container", "../roomservice/cart.jsp");
+//	}
+//	if(mnlist != null){
+//		
+//		for(int i=0 ; i<mnlist.size() ; i++){
+//			if(cdto.getMenu_num() == mnlist.get(i).getMenu_num()){
+//				mnlist.remove(i);
+//			}
+//		}
+//	
+//		session.setAttribute("mnlist", mnlist);
+//		
+//		List<CartDto> clist = (ArrayList<CartDto>)session.getAttribute("cdtolist");
+//		
+//		for(int i=0 ; i<clist.size() ; i++){
+//			if(cdto.getMenu_num() == clist.get(i).getMenu_num()){
+//				clist.remove(i);
+//			}
+//		}
+//		
+//		session.setAttribute("clist", clist);
+//		
+//		int m = mnlist.size();
+//		if( m == 0 )
+//		{
+//			session.setAttribute("mnlist", null);
+//		}
+//	}
 	
 	return "redirect:cart.do";
 }
 
-//장바구니 일부 품목 삭제
+//장바구니 선택 품목 삭제
 @RequestMapping("/manycartdelete.do")
 public String manycartDelete(HttpServletRequest request,
 		HttpSession session,
-		@RequestParam String menu_nums,
-		@ModelAttribute CartDto cdto
-		)
+		@RequestParam String menu_nums)
 {
 	List<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
 	
-	String []nums=menu_nums.split(",");
+	//받아온 menu_nums를 배열로 변환 (바로 숫자형 배열로는 저장이 안되는구만!)
+	String []nums = menu_nums.split(",");
+	
+	//숫자형 배열로 변환 
 	int []intnums = new int[nums.length];
+	
 	for(int i = 0 ; i < nums.length ; i++){
 		intnums[i] = Integer.parseInt(nums[i]);
 	}
+	
 	
 	for(int nn:intnums)
 	{
 		for(int j = 0; j < mnlist.size() ; j++){
 			
+			//만약 menu_num이 세션에 있는것과 일치한다면 모두 삭제해준다.
 			if(nn == mnlist.get(j).getMenu_num()){
 				mnlist.remove(j);
 			}
@@ -320,27 +315,32 @@ public String manycartDelete(HttpServletRequest request,
 		
 	}
 	
+	//세션에 새로 저장한다. 
 	session.setAttribute("mnlist", mnlist);
 	
+		
+	//만약 모두 삭제된 경우 mnlist를 세션에서 삭제한다. => 이거 굳이 해야됨? -장희-
 	int m = mnlist.size();
 	if( m == 0 ){
-		session.setAttribute("mnlist", null);
+		session.removeAttribute("mnlist");
 	}
 	
-	menu_nums= "";
 	return "redirect:cart.do";
 }
 
 //주문상세페이지로 이동
+//체크로 선택된 주문들만 menu_nums로 넘어옵니다 
 @RequestMapping("/orderform.do")
 public String orderform(HttpSession session,
 		HttpServletRequest request,
-		@RequestParam String menu_nums,
-		@ModelAttribute MenuDto mndto)
+		@RequestParam String menu_nums)
 {
 	
+	//세션에 저장된 mnlist 받아온다. 
 	ArrayList<MenuDto> mnlist = (ArrayList<MenuDto>)session.getAttribute("mnlist");
 	
+	
+	//받아온 menu_nums를 정수형 배열로 변환합니다.
 	String []nums=menu_nums.split(",");
 	int []intnums = new int[nums.length];
 	
@@ -348,15 +348,19 @@ public String orderform(HttpSession session,
 		intnums[i] = Integer.parseInt(nums[i]);
 	}
 	
+	
+	//기존 세션에 저장된 mnlist와 비교해서 살아남는 주문들만 최종적으로 mnlist에 담겨져야 합니다. 
 	for(int i=0; i<intnums.length; i++){
+		
 		int alive = 0;
+		
 		for(int j=0; j<mnlist.size(); j++){
 			if(intnums[i] == mnlist.get(i).getMenu_num()){
 				alive ++;
 				break;
 			}
 		}
-		if(alive == 0){
+		if(alive == 0){ //살아남지 못한것들은 삭제 
 			mnlist.remove(i);
 		}
 	}
@@ -375,14 +379,12 @@ public String orderform(HttpSession session,
 public String orderComplete(HttpSession session,
 		HttpServletRequest request,
 		@ModelAttribute OrderDto odto,
-		@ModelAttribute OrderDetailDto oddto,
-		@RequestParam(value="menu_num", defaultValue="0") int menu_num,
-		@RequestParam(value="pty",defaultValue="1") int qty,
-		@RequestParam int member_num)
+		@ModelAttribute OrderDetailDto oddto)
+		
 {
 	
 	//member_num 이용해서 name 얻고 보내기
-	session.getAttribute("member_num");
+	int member_num = (Integer)session.getAttribute("member_num");
 	
 	String name = mnservice.MemberName(member_num);
 	int room_local = mnservice.MemberRoom(member_num);
@@ -398,17 +400,20 @@ public String orderComplete(HttpSession session,
 	
 	request.setAttribute("maxOrderNum", maxOrderNum);	
 	
+	
+	
+	List<MenuDto> mnlist=(ArrayList)session.getAttribute("mnlist");
+	
+	
 	//orderdetail 테이블에 데이터 보내기
-	session.getAttribute("mnlist");
-	
-	List<MenuDto> mndto=(ArrayList)session.getAttribute("mnlist");
-	
 	oddto.setOrder_num(maxOrderNum);
-	for(MenuDto dto : mndto) {
+	for(MenuDto dto : mnlist) {
 		oddto.setMenu_num(dto.getMenu_num());
 		oddto.setQty(dto.getQty());
 		oddservice.OrderDetailInsert(oddto);
 	}
+	
+	request.setAttribute("mnlist", mnlist);
 	
 	session.removeAttribute("mnlist");
 	session.removeAttribute("cdtolist");

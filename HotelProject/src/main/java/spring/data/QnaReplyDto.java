@@ -11,6 +11,7 @@ public class QnaReplyDto {
 	private int member_num;
 	
 	//qna_reply db에는 없는 항 - 조인을 통해 member 테이블로부터 가져온다 
+	private String id;
 	private String name;
 	private String grade;
 	
@@ -18,6 +19,12 @@ public class QnaReplyDto {
 	
 	
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getMember_pic() {
 		return member_pic;
 	}

@@ -107,7 +107,7 @@
 								
 								<!-- 일반 고객 댓글  -->
 								<c:if test="${qrdto.grade != 'a' }">
-									<img src="<%=root %>/save/member_pic/${qrdto.member_pic }">${qrdto.name}
+									<img src="<%=root %>/save/member_pic/${qrdto.member_pic }">${qrdto.id}
 								</c:if>
 								
 								

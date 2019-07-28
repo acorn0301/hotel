@@ -623,7 +623,7 @@ ul li.bxslider_li {
 .size_badge_susu {
 	color: #ffffff;
 	position: fixed;
-	bottom: 60px;
+	bottom: 70px;
 	right: 20px;
 	z-index: 10;
 	background-color: #b36154;
@@ -692,8 +692,20 @@ button.cart_sm_button {
 }
 
 button.cart_button {
-	float: right;
-    border: 0;
+
+	border: 1px solid #c3b4ae;
+    width: 22%;
+    border-radius: 8px;
+    padding: 6px 9px;
+    margin-right: 0px;
+    font-size: 14px;
+    color: #685845;
+    background-color: #ffffffc7;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    vertical-align: middle;
+	
+  /*   border: 0;
     border-radius: 3px;
     padding: 3px 4px 3px 4px;
     margin-right: -10px;
@@ -701,7 +713,7 @@ button.cart_button {
     font-size: 12px;
     color: #eeeeee;
     background-color: #5d4c358a;
-    margin-top: 4px;
+    margin-top: 4px; */
 }
 
 table.table {
@@ -711,7 +723,8 @@ table.table {
 
 table.table th {
 	text-align: center;
-	color: #585858;
+    color: grey;
+    font-weight: normal;
 }
 
 table.table td {
@@ -726,7 +739,7 @@ div.complete_msg {
 /* 총 주문액 css */
 div.totalPrice {
 	float: right;
-	margin-right: 10px;
+	margin-right: 30px;
 }
 
 input.center {
@@ -1109,4 +1122,49 @@ z-index:10;}
 	height: 6px;
 	background: #808080;
 	transition: left 0.3s ease;
+}
+
+
+
+
+/*장희수정 */
+
+.minus_margin_div{
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.sub_title_div{
+	margin-right: 0;
+	margin-top: 0;
+}
+
+.admin_title_div_order{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.div_for_table{
+	margin-left:10px;
+	margin-right: 10px;
+}
+
+.menu_memo_div{
+	margin: 10px;
+	padding-top: 50px;
+}
+
+.menu_memo_div>div{
+	margin: 10px;
+}
+
+
+.table>tbody>tr.cart_table_tr>td{
+	vertical-align: middle;
+}
+
+#order{
+	background-color: #c3b4ae;
+    color: white;
+    border: 1px solid #c3b4ae;
 }

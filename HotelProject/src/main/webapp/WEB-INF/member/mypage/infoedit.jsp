@@ -77,7 +77,7 @@ function pic_delete(){
 	<div style="text-align:center;">
 		<div class="profile_photo">
 			<div class="select_img">
-				<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray;" />
+				<img src="<%=root%>/save/member_pic/${mbdto.member_pic }" style="border-radius:100%; border:1px solid lightgray; width:200px; height: 200px;" />
 				<input type="hidden" name="member_pic" value="${mbdto.member_pic }">
 			</div>
 			<span class="mask"></span>

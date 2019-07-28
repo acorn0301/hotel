@@ -80,7 +80,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="qnaReplyList" parameterType="int" resultType="qrdto">
-		select reply_num, board_num, reply_content, reply_writeday, a.member_num, b.name, b.grade, b.member_pic
+		select reply_num, board_num, reply_content, reply_writeday, a.member_num, b.name, b.grade, b.member_pic, b.id
 		from qna_reply a, member b 
 		where a.board_num = #{board_num} 
 		and a.member_num=b.member_num

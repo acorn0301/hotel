@@ -21,16 +21,16 @@
 			console.log("선택된 체크박스 개수:"+selcnt.length);
 			//선택된 체크박스가 없을 경우 경고
 			if(selcnt.length==0){
-				alert("선택해주세요");
+				alert("하나 이상의 주문을 선택해주세요");
 				return false;
 			}
 			
 			var menu_num=""; //선택한 글에서 num을 얻어서 ,로 연결
-			for(i=0;i<chkcnt.length;i++)
+			for(i=0 ; i<chkcnt.length ; i++)
 			{
 				if(chkcnt[i].checked){
-					var n=$(".delchk").eq(i).attr("menu_num");
-					menu_num+=n+",";
+					var n= $(".delchk").eq(i).attr("menu_num");
+					menu_num += n + ",";
 				}	
 			}
 			//console.log(menu_num);
@@ -39,7 +39,7 @@
 			//,제거 확인하기
 			//console.log(menu_num);
 			//컨트롤러 호출
-			location.href="manycartdelete.do?menu_nums="+menu_num;
+			location.href="manycartdelete.do?menu_nums=" + menu_num;
 		});
 		
  		 //주문시 체크한것들만 num 연결해서 넘기기
@@ -51,7 +51,7 @@
  			console.log("선택된 체크박스 개수:"+selcnt.length);
  			//선택된 체크박스가 없을 경우 경고
  			if(selcnt.length==0){
- 				alert("선택해주세요");
+ 				alert("하나 이상의 주문을 선택해주세요");
  				return false;
  			}
  			
@@ -120,6 +120,18 @@
 		String root=request.getContextPath();//프로젝트 루트 경로
 %>
   
+<div class="hyebody" style="margin-left:0; margin-right:0;">
+<div class="margin_div minus_margin_div"> 
+   <!-- 상단 서비스 메뉴명 -->
+ <div class="qna_body_title_div">
+	<div class="qna_title_text">룸서비스</div></div>
+	
+	
+	<!-- 카테고리 별 상단 메뉴 -->
+   	<div class="admin_title_div admin_title_div_order">
+	<div class="sub_title_div">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장바구니</div></div> 
+  
+  
 
 <!-- 장바구니에 아무것도 없을때 뜨는 페이지 -->
 <c:if test="${mnlist == null}">
@@ -147,7 +159,9 @@
 
 <!-- 장바구니에  물건이 있을때 뜨는 페이지 -->
 <c:if test="${mnlist != null}">
-	<table class="table">
+
+<div class="div_for_table" style="margin:0">
+	<table class="table cart_table">
 	<c:set var="sum" value="0"/> <!-- 합계 구할 변수 -->
 		<tr>
 			<th width="2%"><input type="checkbox" class="alldelchk" name="chk" checked="checked"></th>
@@ -158,7 +172,7 @@
 			<th width="16%">삭제</th>
 		</tr>
 			<c:forEach var="mndto" items="${mnlist}" varStatus="i">
-				<tr>
+				<tr class="cart_table_tr">
 					<td>
 						<input type="checkbox" class="delchk" name="chk" menu_num="${mndto.menu_num}" checked="checked">
 					</td>
@@ -170,7 +184,7 @@
 						${mndto.menu_name_eng}
 					</td>
 					<td>
-						${mndto.qty}
+						${mndto.qty} 개
 						<input type="hidden" class="qty" name="qty" qty="${mndto.qty}" value="${mndto.qty}">
 					</td>
 					<td>
@@ -180,27 +194,35 @@
 					<td>
 						<!-- hidden -->
 						<input type="hidden" name="menu_num" value="${mndto.menu_num}">
-						<button type="button"
+						
+						<i class="fas fa-times" style="font-size:1.5em; color: lightgrey;" onclick="location.href='cartdelete.do?menu_num=${mndto.menu_num}&qty=${mndto.qty}'"></i>
+						<%-- <button type="button"
 						class="cart_sm_button"
-						onclick="location.href='cartdelete.do?menu_num=${mndto.menu_num}&qty=${mndto.qty}'">x</button>
+						onclick="location.href='cartdelete.do?menu_num=${mndto.menu_num}&qty=${mndto.qty}'">x</button> --%>
 					</td>
 				</tr>
 			</c:forEach>
 			<tr>
 				<td colspan="6"> 
-					<div class="totalPrice"><b>Total </b> <fmt:formatNumber pattern=",000" value="${sum}"/> </div>
+					<div class="totalPrice"><b>Total </b>  &nbsp;&nbsp;<fmt:formatNumber pattern=",000" value="${sum}"/> 원 </div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6">
-					<button type="button" class="cart_button" id="btndel">선택삭제</button>   
+				<td colspan="6" style="padding: 0;">
+					<button type="button" class="cart_button" onclick="location.href='roomaservice.do'">목록으로</button>
 					<button type="button" class="cart_button" id="all">전체선택</button>
-					<button type="button" class="cart_button" id="order">주문하기</button>
+					<button type="button" class="cart_button" id="btndel">선택삭제</button>   
+					
+					<button type="button" class="cart_button important_btn" id="order" >주문하기</button>
 				</td>
 			</tr>
 	</table>
+	
+	</div>
 </c:if>
 <br><br><br><br>
+</div>
+</div>
 </body>
 </html>
 

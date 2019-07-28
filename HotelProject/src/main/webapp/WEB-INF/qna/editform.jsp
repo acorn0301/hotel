@@ -27,7 +27,6 @@
 	};
 	
 	function check(f, password){
-		alert(f + password + $("#password").val());
 		if(password == $("#password").val()){
 			return true;
 		}else{		
@@ -53,7 +52,7 @@
 
 	
 	<div class="textbox">
-		<textarea name="content" id="content" class="blind" rows="15" cols="40"> ${qdto.content }</textarea>
+		<textarea id="content" name="content" class="write_textarea" rows="3" cols="30" >${qdto.content }</textarea>
 	</div>
 	
 	<div class="btns_group"> 

@@ -140,7 +140,7 @@ function openModal(title,img,desc,menu_num){
    	<div class="admin_title_div">
 	<div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Breakfast</div></div>
 		
-<div class="container">
+<div class="container" style="padding-left:0; padding-right:0;">
 <section class="et-slide" id="tab-Breakfast"> <!-- 슬라이드 생성시 필요한 section -->
   <div class="row">
   		<c:forEach var="mndto" items="${list0}" varStatus="i">
@@ -165,7 +165,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specialties</div></div>
 
-<div class="container">
+<div class="container" style="padding-left:0; padding-right:0;">
  <section class="et-slide" id="tab-Specialties">
   <div class="row">
   		<c:forEach var="mndto" items="${list1}" varStatus="i">
@@ -191,7 +191,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bakery</div></div>
  
- <div class="container">
+ <div class="container" style="padding-left:0; padding-right:0;">
  <section class="et-slide" id="tab-Bakery">
   <div class="row">
   		<c:forEach var="mndto" items="${list2}" varStatus="i">
@@ -217,7 +217,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appetizers</div></div>
 
-<div class="container">
+<div class="container" style="padding-left:0; padding-right:0;">
  <section class="et-slide" id="tab-Appetizers">
   <div class="row">
   		<c:forEach var="mndto" items="${list3}" varStatus="i">
@@ -243,7 +243,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pastas</div></div>
 
- <div class="container">
+ <div class="container" style="padding-left:0; padding-right:0;">
   <section class="et-slide" id="tab-Pastas">
   <div class="row">
   		<c:forEach var="mndto" items="${list4}" varStatus="i">
@@ -269,7 +269,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dessert</div></div> 
  
- <div class="container">
+ <div class="container" style="padding-left:0; padding-right:0;">
   <section class="et-slide" id="tab-Dessert">
   <div class="row">
   		<c:forEach var="mndto" items="${list5}" varStatus="i">
@@ -295,7 +295,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beverage</div></div>
  
- <div class="container">
+ <div class="container" style="padding-left:0; padding-right:0;">
   <section class="et-slide" id="tab-Beverage">
   <div class="row">
   		<c:forEach var="mndto" items="${list6}" varStatus="i">
@@ -321,7 +321,7 @@ function openModal(title,img,desc,menu_num){
 <div class="admin_title_div">
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drink</div></div>
  
- <div class="container">
+ <div class="container" style="padding-left:0; padding-right:0;">
   <section class="et-slide" id="tab-Drink">
   <div class="row">
   		<c:forEach var="mndto" items="${list7}" varStatus="i">

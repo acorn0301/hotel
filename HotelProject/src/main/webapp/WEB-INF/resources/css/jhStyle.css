@@ -66,7 +66,7 @@ ul{
 }
 
 .span_category{
-	font-size : 0.7rem;
+	font-size : 0.8em;
 	color: lightgrey;
 }
 .qna_write_btn_div a{
@@ -362,7 +362,7 @@ a{
     border-bottom: 1px solid #ececec;
 }
 .li_comment_content{
-	padding: 10px 0 10px 0;
+	padding: 0px 0 10px 0;
 }
 
 .comment_box_write_inbox{
@@ -429,10 +429,11 @@ a{
 }
 
 .li_comment img{
-	width: 25px;
+	width: 30px;
     border-radius: 100%;
-    margin-right: 15px;
+    margin-right: 10px;
     margin-left: -40px;
+    border: 1px solid lightgrey;
 }
 
 
@@ -904,4 +905,14 @@ a{
 /* 리액트 전용 페이지를 위한 css.. */
 .react_body{
 	margin : -8px;
+}
+
+
+
+
+
+/* 남의 css 건드리기  */
+.minus_margin_div{
+	margin-left: -10px;
+	margin-right: -10px;
 }
