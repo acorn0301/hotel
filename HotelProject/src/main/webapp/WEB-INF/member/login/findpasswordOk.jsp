@@ -16,9 +16,15 @@
 <form class="form-inline" action="login.do" method="post">
 <br>
 <!-- <h1><i class="fas fa-bullhorn"></i></h1> -->
-<h4>귀하의 이메일 주소로 임시 비밀번호를 발송 하였습니다</h4>
+<div class="dashboard_li_empty">
+    <i class="far fa-grin-squint"></i><br>
+	귀하의 이메일 주소로 임시 비밀번호를 발송 하였습니다<br>
+	이메일 확인 후 로그인 해주시기 바랍니다<br>
+</div>
+
+<!-- <h4>귀하의 이메일 주소로 임시 비밀번호를 발송 하였습니다</h4>
 <h5>이메일 확인 후 로그인 해주시기 바랍니다</h5>
-<br>
+<br> -->
 <br>
 <div class="btncenter">
 <input type="submit" id="loginGo" value="로그인 하러가기">
