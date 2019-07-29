@@ -82,10 +82,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 장희 수정 끝 -->
 	
+	
 	<!-- 회원 탈퇴 -->
-	<delete id="withdrawal" parameterType="mbdto">
-		delete from member where id=#{id} and password=#{password}
+	<!-- 문의 댓글/리뷰댓글/리뷰타인댓글/리뷰글/주문상세/주문/예약/ 멤버까지 삭제 -->
+	
+	<delete id="qna_replyDel" parameterType="int">
+		delete from qna_reply where member_num = #{member_num}
 	</delete>
+	<delete id="review_replyDel" parameterType="int">
+		delete from review_reply where member_num = #{member_num}
+	</delete>
+	
+	<!-- 사용자가 남긴 글에 달린 타인의 댓글도 삭제  -->
+	<delete id="review_peoplereplyDel" parameterType="int">
+		delete from review_reply
+		where review_num in
+		(select review_num from review r, book b
+		where r.book_num=b.book_num
+		and b.member_num = #{member_num})
+	</delete>
+	
+	<!-- 리뷰글 삭제 -->
+	<delete id="reviewDel" parameterType="int">
+		delete from review
+		where review_num in
+		(select review_num from review r, book b
+		where r.book_num=b.book_num
+		and b.member_num = #{member_num})
+	</delete>
+	
+	<!-- 주문상세 삭제 -->
+	<delete id="order_detailDel">
+		delete from order_detail 
+		where order_num in 
+		(select order_num 
+		from room_order 
+		where member_num = #{member_num})
+	</delete>
+	
+	<delete id="room_orderDel" parameterType="int">
+		delete from room_order where member_num = #{member_num}
+	</delete>
+	<delete id="bookDel" parameterType="int">
+		delete from book where member_num = #{member_num}
+	</delete>
+	
+	<!-- 멤버삭제 (아이디/비밀번호 받아서 처리) -->
+	<delete id="withdrawal" parameterType="mbdto">
+		delete from member where member_num = #{member_num}
+	</delete>
+	
+	<!-- <delete id="withdrawal" parameterType="mbdto">
+		delete from member where id=#{id} and password=#{password}
+	</delete> -->
+	
+	
 	
 	<!-- 아이디로 member_num얻기 (카카오부분) -->
 	<select id="getMembernum_kakao" parameterType="String" resultType="int">
@@ -139,7 +190,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from room_order o,   member mb, room r, book b, hotel h
         where
         
-        o.member_num = mb.member_num and
+        o.book_num = b.book_num and
         mb.member_num = b.member_num and
         b.room_num = r.room_num and
         r.hotel_num = h.hotel_num and
@@ -171,7 +222,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from room_order o,   member mb, room r, book b, hotel h
         where
         
-        o.member_num = mb.member_num and
+       o.book_num = b.book_num and
         mb.member_num = b.member_num and
         b.room_num = r.room_num and
         r.hotel_num = h.hotel_num and
@@ -187,6 +238,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 개별 룸서비스 주문취소 -->
 	<select id="m_OrderCancel" parameterType="int">
 		update room_order set room_status = 5 where order_num = #{order_num}
+	</select>
+	
+	<!-- 내 룸서비스 주문내역 확인갯수 -->
+	<select id="m_GetOrderListCount" resultType="int" parameterType="int">
+		select count(*) from room_order o, book b 
+		where o.book_num = b.book_num 
+		and b.member_num = #{member_num}
 	</select>
 	
 </mapper>

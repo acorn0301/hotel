@@ -106,10 +106,14 @@ public class MemberService {
     }
     //장희 수정 끝 
     
-    // 회원 탈퇴
+    
+    
+    // 회원 탈퇴 처리 (문의 댓글/리뷰댓글/리뷰타인댓글/리뷰글/주문상세/주문/예약/ 멤버까지 삭제)
     public void withdrawal(MemberDto mbdto)
     {
+    	// 문의 댓글 삭제
     	mbdao.withdrawal(mbdto);
+    	
     }
 
     // member_num 값 얻기 (id만 받아서)
@@ -157,6 +161,12 @@ public class MemberService {
     // 개별 룸서비스 주문취소
     public void m_orderCancel(int order_num) {
     	mbdao.m_orderCancel(order_num);
+    }
+    
+    // 내 룸서비스 주문내역 확인갯수
+    public int m_GetOrderListCount(int member_num)
+    {
+ 	   return mbdao.m_GetOrderListCount(member_num);
     }
 
 }

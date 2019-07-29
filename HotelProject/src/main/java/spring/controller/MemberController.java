@@ -392,20 +392,32 @@ public class MemberController {
    // 마이페이지 예약내역 메뉴
    @RequestMapping("/m_bookinglist.do")
    public String m_bookinglist(HttpServletRequest request, HttpSession session) {
-	   // member_num으로 예약한 정보리스트를 가져와야함
-	   int member_num = (Integer)session.getAttribute("member_num");
+	   
+	   try{
+		   // member_num으로 예약한 정보리스트를 가져와야함
+		   int member_num = (Integer)session.getAttribute("member_num");
+		   
+		   MemberDto mbdto = mservice.getMemberData(member_num);
+		   request.setAttribute("mbdto", mbdto);
 
-	   List<AdminBookDto> list = null;
+		   List<AdminBookDto> list = null;
 
-	   list = mservice.m_getBookList(member_num);
-	   int bookCount = mservice.m_GetBookListCount(member_num);
+		   list = mservice.m_getBookList(member_num);
+		   
+		   int bookCount = mservice.m_GetBookListCount(member_num);
 
-	   request.setAttribute("bookCount", bookCount);
-	   request.setAttribute("member_num", member_num);
-	   request.setAttribute("list", list);
+		   request.setAttribute("bookCount", bookCount);
+		   request.setAttribute("member_num", member_num);
+		   request.setAttribute("list", list);
 
-	   request.setAttribute("container", "../member/mypage/mybooking.jsp");
-	   return "layout/home";
+		   request.setAttribute("container", "../member/mypage/mybooking.jsp");
+		   return "layout/home";
+
+	   }catch(Exception e){
+		   session.setAttribute("url", "m_bookinglist.do");
+		   session.setAttribute("msg", "accessErr");
+		   return "redirect:login.do";
+	   }
    }
    
    // 마이페이지 예약내역 자세히보기 
@@ -428,28 +440,43 @@ public class MemberController {
 	   return "redirect:m_bookinglist.do?book_status=" + book_status;
    }
    
-   // 마이페이지 룸서비스내역 메뉴
+   // 마이페이지 룸서비스 주문내역 메뉴
    @RequestMapping("/m_roomservicelist.do")
    public String m_roomservicelist(HttpServletRequest request, HttpSession session) {
-	   // member_num으로 주문한 룸서비스 리스트를 가져와야함
-	   int member_num = (Integer)session.getAttribute("member_num");
+	   try{
+		   // member_num으로 주문한 룸서비스 리스트를 가져와야함
+		   int member_num = (Integer)session.getAttribute("member_num");
+		   
+		   MemberDto mbdto = mservice.getMemberData(member_num);
+		   request.setAttribute("mbdto", mbdto);
 
-	   List<AdminOrderDto> list = mservice.m_GetOrderList(member_num);
-	   
-	   for(AdminOrderDto a:list) {
-		   List<AdminOrderDetailDto> temp = mservice.m_getOrderDetailByOrderNum(a.getOrder_num());
-			a.setOrder_detail(temp);
-		}
+		   List<AdminOrderDto> list = mservice.m_GetOrderList(member_num);
 
-	   int size = list.size();
+		   for(AdminOrderDto a:list) {
+			   List<AdminOrderDetailDto> temp = mservice.m_getOrderDetailByOrderNum(a.getOrder_num());
+			   a.setOrder_detail(temp);
+		   }
 
-	   request.setAttribute("size", size);
-	   request.setAttribute("room_status", member_num);
-	   request.setAttribute("list", list);
+		   int size = list.size();
+		   
+		   int RoomsCount = mservice.m_GetOrderListCount(member_num);
+		   request.setAttribute("RoomsCount", RoomsCount);
 
-	   request.setAttribute("container", "../member/mypage/myorder.jsp");
-	   return "layout/home";
+		   request.setAttribute("size", size);
+		   request.setAttribute("room_status", member_num);
+		   request.setAttribute("list", list);
+
+		   request.setAttribute("container", "../member/mypage/myorder.jsp");
+		   return "layout/home";
+	   }catch(Exception e){
+		   System.out.println("mypage error : " + e);
+		   session.setAttribute("url", "m_roomservicelist.do");
+		   session.setAttribute("msg", "accessErr");
+		   return "redirect:login.do";
+	   }
    }
+   
+   
    
    // 마이페이지 룸서비스내역 자세히 보기
    @RequestMapping("/m_roomservicelistDetail.do")
@@ -510,10 +537,9 @@ public class MemberController {
 //
 //   }
    
-   
    // 내 정보수정 처리
    @RequestMapping("/infoEditComplete.do")
-   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto, @RequestParam int isPicChanged) {
+   public String infoEditComplete(HttpServletRequest request, @ModelAttribute MemberDto mbdto, @RequestParam int isPicChanged, @RequestParam int isPicDel) {
 	   String inputPass = mbdto.getPassword();
 	   String pass = passEncoder.encode(inputPass);
 	   mbdto.setPassword(pass);
@@ -526,43 +552,50 @@ public class MemberController {
 	   MultipartFile image = mbdto.getUpfile();
 //	   System.out.println(image);
 
-	   if(mbdto.getMember_pic().equals("user.svg") && isPicChanged==1){ // 기본 이미지 일때는 원래 이미지 삭제X
+	   if(mbdto.getMember_pic().equals("user.svg") && isPicChanged==1){ // 기본 이미지 일때
 //		   System.out.println("aa");
 		   
-		   //이미지를 업로드할 경로 구하기
-		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
-		   String member_pic = image.getOriginalFilename();
-	
-		   // 중복되는 파일명을 막기위해 현재 시간을 파일명 끝에 넣어준다.
-		   Date now = new Date();
-		   String nowstr = String.valueOf(now.getTime());
-	
-		   int index = member_pic.lastIndexOf(".");
-		   String fileExt = member_pic.substring(index + 1);
-		   member_pic = member_pic.substring(0, index);
-		   member_pic = member_pic + nowstr + "." +fileExt;
+		   if(isPicChanged != 1){ // 이미지 변경안할경우 (나머지만 업데이트)
+			   mservice.updateMember(mbdto);
+			   
+		   }else{ // 기본 이미지 일때는 원래 이미지 삭제X
+			   //이미지를 업로드할 경로 구하기
+			   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
+			   String member_pic = image.getOriginalFilename();
 		
-		   //이미지 저장 메서드 호출
-		   SpringFileWriter fileWriter = new SpringFileWriter();
-	
-		   //writeFile(실제이미지파일, 저장할 경로, 저장될 이름) 
-		   fileWriter.writeFile(image, path, member_pic);
-	
-		   //이미지 리사이징을 위한 부분2
-		   String orgFilePath = path + "/" + member_pic;
-	
-		   try {
-			   ReviewDao.makeThumbnail(orgFilePath, member_pic, fileExt, path);
-	
-		   }catch(Exception e) {
-			   System.out.println(e);
+			   // 중복되는 파일명을 막기위해 현재 시간을 파일명 끝에 넣어준다.
+			   Date now = new Date();
+			   String nowstr = String.valueOf(now.getTime());
+		
+			   int index = member_pic.lastIndexOf(".");
+			   String fileExt = member_pic.substring(index + 1);
+			   member_pic = member_pic.substring(0, index);
+			   member_pic = member_pic + nowstr + "." +fileExt;
+			
+			   //이미지 저장 메서드 호출
+			   SpringFileWriter fileWriter = new SpringFileWriter();
+		
+			   //writeFile(실제이미지파일, 저장할 경로, 저장될 이름) 
+			   fileWriter.writeFile(image, path, member_pic);
+		
+			   //이미지 리사이징을 위한 부분2
+			   String orgFilePath = path + "/" + member_pic;
+		
+			   try {
+				   ReviewDao.makeThumbnail(orgFilePath, member_pic, fileExt, path);
+		
+			   }catch(Exception e) {
+				   System.out.println(e);
+			   }
+		
+			   mbdto.setMember_pic(member_pic);
+			   System.out.println("memberpic change!!");
+		   
+			   mservice.updateMember(mbdto);
 		   }
-	
-		   mbdto.setMember_pic(member_pic);
-		   System.out.println("memberpic change!!");
-	   
-		   mservice.updateMember(mbdto);
-	   }else if(isPicChanged == 1){ // 기본X말고 다른 이미지 있을때 기존 이미지 삭제
+		   
+	   }
+	   else if(isPicChanged == 1){ // 기본이미지 말고 다른(예전에 변경된)이미지 있을때 기존 이미지 삭제
 //		   System.out.println("bb");
 		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
 		   String member_pic = image.getOriginalFilename();
@@ -604,9 +637,24 @@ public class MemberController {
 		 
 		   mservice.updateMember(mbdto);
 		   
-	   }else{ // 이미지 변경안하고 수정할 때
+	   }else if(isPicDel == 1){ // 삭제버튼 클릭시 기존사진 삭제되면서 기본 프로필사진으로 바뀜
+		   System.out.println(isPicDel);
+		   String path = request.getSession().getServletContext().getRealPath("/save/member_pic");		
+//		   String member_pic = image.getOriginalFilename();
+		   
+		   // 이미지 삭제 부분
+		   File f = new File(path + "/" + mbdto.getMember_pic());
+		   if(f.exists())
+			   f.delete();
+		   
+		   mbdto.setMember_pic("user.svg");
+//		   mbdto.setMember_pic(member_pic);
+		   mservice.updateMember(mbdto);
+		   
+	   }else{ // 이미지 변경안하고 다른 정보만 수정할 때
 		   mservice.updateMember(mbdto);
 	   }
+	   
 	   request.setAttribute("container", "../member/mypage/infoeditcomplete.jsp");
 	   return "layout/home";
 
@@ -754,32 +802,41 @@ public class MemberController {
    // 회원탈퇴 처리
    @RequestMapping(value="/withdrawalOk.do", method=RequestMethod.POST)
    public String withdrawalOk(HttpServletRequest request, HttpSession session, @ModelAttribute MemberDto mbdto){
-	   
-	  int member_num = (Integer)session.getAttribute("member_num"); // 로그인된 세션 멤버넘가져오기
-	  MemberDto member = mservice.getMemberData(member_num); // 멤버넘으로 멤버데이터 가져옴
-	  request.setAttribute("member", member);
-	  
-	  MemberDto check = mservice.loginCheck1(mbdto);
-	  
-	  if(check != null)
-      {
-//		  System.out.println(mbdto.getId().equals(member.getId()) && (passEncoder.matches(mbdto.getPassword(), member.getPassword())));
-		  if(mbdto.getId().equals(member.getId()) && (passEncoder.matches(mbdto.getPassword(), member.getPassword()))){
-		  mservice.withdrawal(member);
-		  session.removeAttribute("member_num");
+	   try{ 
+		   int member_num = (Integer)session.getAttribute("member_num"); // 로그인된 세션 멤버넘가져오기
+		   
+		   MemberDto member = mservice.getMemberData(member_num); // 멤버넘으로 멤버데이터 가져옴
+		   request.setAttribute("member", member);
+		   MemberDto check = mservice.loginCheck1(mbdto);
 
-		  request.setAttribute("container", "../member/mypage/mywithdrawalOk.jsp");
-		  return "layout/home";
-		  }else{
-			  request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
-			  request.setAttribute("container", "../member/mypage/mywithdrawal.jsp");
-	          return "layout/home";
-		  }
-      }else{
-    	  request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
-          request.setAttribute("container", "../member/mypage/mywithdrawal.jsp");
-          return "layout/home";
-      }
+		   if(check != null)
+		   {
+			   //		  System.out.println(mbdto.getId().equals(member.getId()) && (passEncoder.matches(mbdto.getPassword(), member.getPassword())));
+			   if(mbdto.getId().equals(member.getId()) && (passEncoder.matches(mbdto.getPassword(), member.getPassword()))){
+				   
+				   member.setMember_num((Integer)session.getAttribute("member_num"));
+				   mservice.withdrawal(mbdto);
+				   mservice.withdrawal(member);
+				   session.removeAttribute("member_num");
+
+				   request.setAttribute("container", "../member/mypage/mywithdrawalOk.jsp");
+				   return "layout/home";
+			   }else{
+				   request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
+				   request.setAttribute("container", "../member/mypage/mywithdrawal.jsp");
+				   return "layout/home";
+			   }
+		   }else{
+			   request.setAttribute("msg", " ※ 아이디 or 비밀번호를 다시 확인해주세요");
+			   request.setAttribute("container", "../member/mypage/mywithdrawal.jsp");
+			   return "layout/home";
+		   }
+	   }catch(Exception e){
+		   session.setAttribute("url", "withdrawal.do");
+		   session.setAttribute("msg", "accessErr");
+		   return "redirect:login.do";
+	   }
+	  
    }
    
    // 카카오 로그인

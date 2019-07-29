@@ -108,10 +108,34 @@ public class MemberDao extends SqlSessionDaoSupport{
    }
    //장희 수정 끝
    
-   // 회원 탈퇴
+   
+   
+   // 회원 탈퇴 처리 (문의 댓글/리뷰댓글/리뷰타인댓글/리뷰글/주문상세/주문/예약/ 멤버까지 삭제)
    public void withdrawal(MemberDto mbdto)
    {
-	   getSqlSession().delete("member.withdrawal", mbdto);
+	   // 문의 댓글 삭제
+	   getSqlSession().delete("member.qna_replyDel", mbdto.getMember_num());
+	   
+	   // 리뷰 댓글 삭제
+	   getSqlSession().delete("member.review_replyDel", mbdto.getMember_num());
+	   
+	   // 리뷰 타인의 댓글까지 삭제
+	   getSqlSession().delete("member.review_peoplereplyDel", mbdto.getMember_num());
+	   
+	   // 리뷰 글 삭제
+	   getSqlSession().delete("member.reviewDel", mbdto.getMember_num());
+	   
+	   // 주문 상세 내역 삭제
+	   getSqlSession().delete("member.order_detailDel", mbdto.getMember_num());
+	   
+	   // 주문 내역 삭제
+	   getSqlSession().delete("member.room_orderDel", mbdto.getMember_num());
+	   
+	   // 예약 내역 삭제
+	   getSqlSession().delete("member.bookDel", mbdto.getMember_num());
+	   
+	   // 멤버 삭제 (최종 멤버까지 삭제-탈퇴)
+	   getSqlSession().delete("member.withdrawal",  mbdto.getMember_num());
    }
    
    // member_num 값 얻기 (id만 받아서)
@@ -159,6 +183,12 @@ public class MemberDao extends SqlSessionDaoSupport{
    // 개별 룸서비스 주문취소
    public void m_orderCancel(int order_num) {
 	   getSqlSession().update("member.m_OrderCancel", order_num);
+   }
+   
+   // 내 룸서비스 주문내역 확인갯수
+   public int m_GetOrderListCount(int member_num)
+   {
+	   return getSqlSession().selectOne("member.m_GetOrderListCount", member_num);
    }
    
    
