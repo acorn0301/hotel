@@ -116,12 +116,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from order_detail 
 		where order_num in 
 		(select order_num 
-		from room_order 
-		where member_num = #{member_num})
+		from room_order o, book b 
+		where o.book_num = b.book_num 
+		and b.member_num = #{member_num})
 	</delete>
 	
 	<delete id="room_orderDel" parameterType="int">
-		delete from room_order where member_num = #{member_num}
+		delete from room_order where book_num in 
+		(select book_num from book where member_num = #{member_num})
 	</delete>
 	<delete id="bookDel" parameterType="int">
 		delete from book where member_num = #{member_num}
