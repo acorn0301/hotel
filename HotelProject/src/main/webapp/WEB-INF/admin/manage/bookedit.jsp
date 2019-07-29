@@ -139,10 +139,10 @@
 			
 			<tr class="dashboard_tr_buttons twoBtns">
 					<td colspan="2">
-						<button onclick="history.back()">수정취소</button>				
+						<button type="button" onclick="history.back()">수정취소</button>				
 						
 						
-						<button class="lastBtn" type="submit">수정확인</button>			
+						<button type="submit" class="lastBtn">수정확인</button>			
 						
 					</td>
 				</tr>

@@ -121,7 +121,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from room_order o,   member mb, room r, book b, hotel h
         where
         
-        o.member_num = mb.member_num and
+        o.book_num = b.book_num and
         mb.member_num = b.member_num and
         b.room_num = r.room_num and
         r.hotel_num = h.hotel_num and
@@ -138,8 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         h.hotel_local
         from room_order o,   member mb, room r, book b, hotel h
         where
-        
-        o.member_num = mb.member_num and
+        o.book_num = b.book_num and
         mb.member_num = b.member_num and
         b.room_num = r.room_num and
         r.hotel_num = h.hotel_num and
@@ -186,20 +185,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select distinct menu_type, menu_type_num from menu order by menu_type_num asc
 	</select>
 	
-	<select id="adminInsertMenu" parameterType="mndto">
+	<insert id="adminInsertMenu" parameterType="mndto">
 	 	insert into menu values (menuseq.nextval, #{menu_type}, #{menu_name_eng}, #{menu_name_kor}, #{menu_price}, #{menu_img}, #{menu_desc}, #{menu_type_num})
-	</select>
+	</insert>
 	
 	
 	<select id="adminGetMenuData" resultType="mndto" parameterType="int">
 		select * from menu where menu_num = #{menu_num}
 	</select>
 	
-	<select id="adminDeleteMenu" parameterType="int">
+	<delete id="adminDeleteMenu" parameterType="int">
 		delete from menu where menu_num = #{menu_num}
-	</select>
+	</delete>
 	
+	<delete id="adminDelteOrderDetailByMenuDelete" parameterType="int">
+		delete from order_detail where menu_num = #{menu_num}
+	</delete>
 	
+	<update id="adminUpdateMenu" parameterType="mndto">
+		update menu set menu_type = #{menu_type}, menu_type_num = #{menu_type_num}, menu_name_kor = #{menu_name_kor}, menu_name_eng = #{menu_name_eng}, menu_price = #{menu_price}, menu_desc = #{menu_desc}
+		where menu_num = #{menu_num}
+	</update>
 	
 	
 	
@@ -219,40 +225,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select e.*, m.* from emp e, member m where e.member_num = m.member_num
 	</select>
 	
-	<select id="adminBookNextStep" parameterType="int">
+	<update id="adminBookNextStep" parameterType="int">
 		update book set book_status = book_status+1 where book_num = #{book_num}
-	</select>
+	</update>
 	
 	<!-- book_status 1->2 로 변경시 check_in 을 sysdate로 바꿔준다.  -->
-	<select id="adminBookNextStepCheckIn" parameterType="int">
+	<update id="adminBookNextStepCheckIn" parameterType="int">
 		update book set book_status = book_status+1, check_in = sysdate where book_num = #{book_num}
-	</select>
+	</update>
 	
 	<!-- book_status 2->3 로 변경시 check_out 을 sysdate로 바꿔준다.  -->
-	<select id="adminBookNextStepCheckOut" parameterType="int">
+	<update id="adminBookNextStepCheckOut" parameterType="int">
 		update book set book_status = book_status+1, check_out = sysdate where book_num = #{book_num}
-	</select>
+	</update>
 	
-	<select id="adminBookCancel" parameterType="int">
+	<update id="adminBookCancel" parameterType="int">
 		update book set book_status = 5 where book_num = #{book_num}
-	</select>
+	</update>
 	
-	<select id="adminBookCancelRevoke" parameterType="int">
+	<update id="adminBookCancelRevoke" parameterType="int">
 		update book set book_status = 0 where book_num = #{book_num}
-	</select>
+	</update>
 	
 	
-	<select id="adminOrderNextStep" parameterType="int">
+	<update id="adminOrderNextStep" parameterType="int">
 		update room_order set room_status = room_status+1 where order_num = #{order_num}
-	</select>
+	</update>
 	
-	<select id="adminOrderCancel" parameterType="int">
+	<update id="adminOrderCancel" parameterType="int">
 		update room_order set room_status = 5 where order_num = #{order_num}
-	</select>
+	</update>
 	
-	<select id="adminOrderCancelRevoke" parameterType="int">
+	<update id="adminOrderCancelRevoke" parameterType="int">
 		update room_order set room_status = 0 where order_num = #{order_num}
-	</select>
+	</update>
 	
 	
 	<!-- 전체 메뉴 리스트를 가져온다  -->
@@ -262,20 +268,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 특정 order_num의 order_detail 데이타를 모두 삭제하기  -->
-	<select id="adminRemoveOrderDetail" parameterType="int">
+	<delete id="adminRemoveOrderDetail" parameterType="int">
 		delete from order_detail where order_num = #{order_num}
-	</select>
+	</delete>
 	
 	<!-- 변경된 주문 데이타 room_order에 업데이트  -->
-	<select id="adminUpdateOrder" parameterType="odto">
+	<update id="adminUpdateOrder" parameterType="odto">
 		update room_order set room_status = #{room_status} , memo = #{memo} where order_num = #{order_num}
-	</select>
+	</update>
 
 	<!-- 변경된 예약 데이타 book에 업데이트 -->
-	<select id="adminUpdateBook" parameterType="bdto">
+	<update id="adminUpdateBook" parameterType="bdto">
 		update book set 
 		check_in = to_date(#{check_in}, 'yyyy-MM-dd HH24:MI'), 
-		check_out = to_date(#{check_out}, 'yyyy-MM-dd HH24:MI'), 
+		check_out = to_date(#{check_out},'yyyy-MM-dd HH24:MI'),
+		<!-- check_in = #{check_in},
+		check_out = #{check_out}, -->
 		room_num=#{room_num},
 		head_count = #{head_count}, 
 		book_memo = #{book_memo}, 
@@ -283,5 +291,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		add_bed = #{add_bed}, 
 		breakfast_count = #{breakfast_count}
 		where book_num = #{book_num}
-	</select>
+	</update>
 </mapper>

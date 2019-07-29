@@ -150,14 +150,15 @@
       </div>
    </c:if>
    
+   <div style="clear:both;"></div>
    
    <!-- "STEP 1 호텔/날짜 선택" 페이지 (step이 0일 때 나타남) -->
    <c:if test="${step==0}">
       <div id="step1Page">
-         <h1>예약하기</h1>
+         <!-- <h1>예약하기</h1> -->
          
-         <div class="caption">예약을 원하시는 <b>호텔, 날짜, 인원</b>을 선택후<br>
-         <b>객실검색 버튼</b>을 눌러주세요.</div>
+        <!--  <div class="caption">예약을 원하시는 <b>호텔, 날짜, 인원</b>을 선택후<br>
+         <b>객실검색 버튼</b>을 눌러주세요.</div> -->
          
          <div class="admin_title_div">
             <div class="admin_title_text">
@@ -414,8 +415,8 @@
    <c:if test="${step==2 }">
       <div id="step3Page">
       
-         <h1>옵션</h1>
-         <div class="caption">객실 이용에 필요한 옵션사항을 선택하세요.</div>
+         <!-- <h1>옵션</h1>
+         <div class="caption">객실 이용에 필요한 옵션사항을 선택하세요.</div> -->
          
          
          <!-- 폼 -->
@@ -541,7 +542,7 @@
             </div>
             
             <div class="textareaDiv">
-               <textarea rows="4" placeholder="호텔 이용시 요청 또는 문의하실 사항이 있으면 입력해 주십시오." name="book_memo" id="book_memo">${sessionScope.fbdto.book_memo }</textarea>
+               <textarea rows="4" placeholder="요청 또는 문의하실 사항이 있으면 입력해 주십시오" name="book_memo" id="book_memo">${sessionScope.fbdto.book_memo }</textarea>
             </div>
             
             <!-- 현재 로그아웃 상태일 때 비회원/회원 버튼 두가지 -->
@@ -577,9 +578,9 @@
    <c:if test="${step==3 }">
       <div id="step4Page">
       
-         <h1>비회원 예약</h1>
+        <!--  <h1>비회원 예약</h1>
          
-         <div class="caption">예약확인 시 필요한 정보를 입력해주세요.</div>
+         <div class="caption">예약확인 시 필요한 정보를 입력해주세요.</div> -->
          
          <!-- insertNc.do = 비회원 예약 컨트롤러 -->
          <form action="insertNC.do" method="post">
@@ -766,10 +767,10 @@
       <!------------------- 로그인시 예약확인 페이지(member_num이 있음) ----------------->
       <%-- <c:if test="${member_num!=null }"> --%>
          <div id="step5Page">
-      
+      <!-- 
          <h1>회원 예약</h1>
          
-         <div class="caption">예약 정보를 확인해주세요.</div>
+         <div class="caption">예약 정보를 확인해주세요.</div> -->
          
          <form action="insert.do" method="post">
                   
@@ -943,7 +944,7 @@
             해당 날짜에 늦지 않게 체크인 부탁드립니다.</div>
             <br>
             <input type="button" value="예약확인" class="reservationBtn4" onclick="location.href='m_bookinglist.do'">
-			<input type="button" value="룸서비스" class="reservationBtn4" onclick="location.href='roomaservice.do'">
+			<input type="button" value="메인으로" class="reservationBtn4" onclick="location.href='home.do'">
          </div>
       </div>
    </c:if>

@@ -291,7 +291,7 @@ li{
 /* '다시 설정하기' div */
 .reSetting{
    margin: 0 0 1.5rem 1rem;
-   padding-top: 4rem;
+   padding-top: 15px;
 }
 
 
@@ -527,6 +527,8 @@ li{
 .textareaDiv{
    text-align: center;
    margin-bottom: 1.6rem;
+   margin-left: 10px;
+   margin-right: 10px;
 }
 
 textarea{

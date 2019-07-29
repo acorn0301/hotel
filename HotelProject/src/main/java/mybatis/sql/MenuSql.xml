@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="roomOrderInsert" parameterType="odto">
 		insert into
 		room_order values
-		(orderseq.nextval,sysdate,#{member_num},#{memo},0,#{total_price})
+		(orderseq.nextval,sysdate,#{memo},0,#{total_price},#{book_num})
 	</insert>
 	<select id="roomOrderMax" resultType="int">
 		select max(order_num) from

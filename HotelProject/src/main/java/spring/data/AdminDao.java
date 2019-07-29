@@ -147,9 +147,14 @@ public class AdminDao extends SqlSessionDaoSupport{
 	
 	//메뉴 삭제하기
 	public void deleteMenu(int menu_num) {
+		getSqlSession().delete("adminDelteOrderDetailByMenuDelete", menu_num);
 		getSqlSession().delete("adminDeleteMenu", menu_num);
 	}
 	
+	//메뉴 수정하기 
+	public void updateMenu(MenuDto mndto) {
+		getSqlSession().update("adminUpdateMenu", mndto);
+	}
 	
 	
 	
@@ -218,6 +223,12 @@ public class AdminDao extends SqlSessionDaoSupport{
 	
 	//예약 데이타 수정 업데이트
 	public void updateBook(BookDto bdto) {
+		
+		System.out.println("update book call");
+		bdto.setCheck_in(bdto.getCheck_in() + " 15:00");
+		bdto.setCheck_out(bdto.getCheck_out() + " 11:00");
+		System.out.println("check in : " + bdto.getCheck_in());
 		getSqlSession().update("adminUpdateBook", bdto);
+		System.out.println("update book call end");
 	}
 }

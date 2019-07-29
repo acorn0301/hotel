@@ -60,6 +60,7 @@ public class AdminOrderDto {
 	
 	//book
 	private int book_num;
+	
 	private int room_num;
 	
 	//room

@@ -159,6 +159,10 @@ public class AdminService {
 	public void deleteMenu(int menu_num) {
 		adao.deleteMenu(menu_num);
 	}
+	//메뉴 수정하기 
+	public void updateMenu(MenuDto mndto) {
+		adao.updateMenu(mndto);
+	}
 	
 	
 	

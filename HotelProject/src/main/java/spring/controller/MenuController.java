@@ -392,6 +392,13 @@ public String orderComplete(HttpSession session,
 	request.setAttribute("room_local", room_local);
 	request.setAttribute("member_name",name);
 	
+	//현재 묵고있는 예약건의 book_num을 알아내야 한다. 
+	
+	int book_num = (Integer)session.getAttribute("book_num");
+	System.out.println("book_num : " + book_num);
+	
+	odto.setBook_num(book_num);
+	
 	//room_order 테이블에 저장
 	oservice.roomOrderInsert(odto);
 	

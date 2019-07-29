@@ -20,14 +20,14 @@
 <div class="qna_body_title_div">
 	<div class="qna_title_text">
 			<div class="arrow_back" onclick="history.back()"><i class="fas fa-chevron-left"></i></div>
-			<div>메뉴추가</div>
+			<div>메뉴수정</div>
 			<div class="clearBoth"></div>	
 	</div>
 </div>
 
 <div class="dashboard_div">
 	
-	<form action="adminMenuEdit.do" method="post" enctype="multipart/form-data">
+	<form action="adminMenuEdit.do" method="post" >
 	
 	<div class="admin_title_div">
 		<div class="admin_title_text">메뉴정보</div>
@@ -36,7 +36,7 @@
 		<table class="bookdetail_table">
 			<tr class="bookdetail_table_tr">
 				<td colspan="2" class="bookdetail_table_td td_for_selectbox">
-					<img width="100%" src="<%=root %>/save/images/menu/${dto.menu_img }">
+					<img width="100%" src="<%=root %>/save/images/menu/${mndto.menu_img }">
 				</td>	
 			</tr>
 		
@@ -55,28 +55,28 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">국문이름</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_name_kor" class="inputbox" id="menu_name_kor" title="메뉴명(국문)"  value="${dto.menu_name_kor }" required="required">				
+					<input type="text" name="menu_name_kor" class="inputbox" id="menu_name_kor" title="메뉴명(국문)"  value="${mndto.menu_name_kor }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">영문이름</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_name_eng" class="inputbox" id="menu_name_eng" title="메뉴명(한글)"  value="${dto.menu_name_eng }" required="required">				
+					<input type="text" name="menu_name_eng" class="inputbox" id="menu_name_eng" title="메뉴명(한글)"  value="${mndto.menu_name_eng }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">메뉴가격</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_price" class="inputbox" id="menu_price" title="메뉴가격"  value="${dto.menu_price }" required="required">				
+					<input type="text" name="menu_price" class="inputbox" id="menu_price" title="메뉴가격"  value="${mndto.menu_price }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">메뉴설명</td>
 				<td class="bookdetail_table_td td_for_textarea">
-					<textarea id="menu_desc" name="menu_desc" class="write_textarea admin_textarea" rows="1" cols="10" >${dto.menu_desc }</textarea>				
+					<textarea id="menu_desc" name="menu_desc" class="write_textarea admin_textarea" rows="1" cols="10" >${mndto.menu_desc }</textarea>				
 				</td>	
 			</tr>
 			
@@ -97,9 +97,7 @@
 			
 			<tr class="dashboard_tr_buttons twoBtns">
 					<td colspan="2">
-						<button onclick="history.back()">취소</button>				
-						
-						
+						<button type="button" onclick="editCancel(${mndto.menu_num})">취소</button>									
 						<button class="lastBtn" type="submit">확인</button>			
 						
 					</td>
@@ -114,6 +112,7 @@
 	<!-- 히든으로 넘길것!! -->
 
 	<input type="hidden" id="menu_type" name="menu_type" value="Breakfast">
+	<input type="hidden" name="menu_num" value="${mndto.menu_num }">
 
 </form>
 </div>
@@ -121,6 +120,11 @@
 
 
 <script>
+
+	//카테고리 초기화
+	$("#menu_type_select").val(${mndto.menu_type_num}).prop("selected", true);
+
+	
 
 	$("#menu_type_select").change( function(){
 		let menu_type_num = $("#menu_type_select").val();
@@ -130,9 +134,9 @@
 		let menu_type = menu_type_arr[menu_type_num];
 		console.log(menu_type);
 		$("#menu_type").val(menu_type);
-	})
+	});
 	
-	
+	/* 
 	//이미지 미리보기 처리
 	$("#upfile").change(function(){
 				if(this.files && this.files[0]) {
@@ -143,7 +147,17 @@
 				    }
 				    reader.readAsDataURL(this.files[0]);
 				}
-	});
+	}); */
+	
+	
+	function editCancel(menu_num){
+		console.log(menu_num);
+		let chk = confirm('메뉴 수정을 취소하시겠습니까?');
+		console.log("chk" , chk);
+		if(chk){
+			location.href="adminMenuListDetail.do?menu_num=" + menu_num;
+		}
+	}}
 				
 			
 </script>

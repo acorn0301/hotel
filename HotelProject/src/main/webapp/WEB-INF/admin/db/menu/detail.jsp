@@ -68,8 +68,8 @@
 			
 			<tr class="dashboard_tr_buttons twoBtns">
 				<td colspan="2">
-					<button onclick="location.href='adminMenuEditForm.do?menu_num=${mndto.menu_num}'">수정</button>								
-					<button class="lastBtn" onclick="deleteMenu()">삭제</button>			
+					<button type="button" onclick="location.href='adminMenuEditForm.do?menu_num=${mndto.menu_num}'">수정</button>								
+					<button type="button" class="lastBtn" onclick="deleteMenu(${mndto.menu_num})">삭제</button>			
 					
 				</td>
 			</tr>
@@ -86,11 +86,11 @@
 
 <script>
 
-function deleteMenu(){
+function deleteMenu(menu_num){
 	let menu_name = '${mndto.menu_name_kor}';
 	let chk = confirm(menu_name+'(을)를 삭제하시겠습니까?');
 	if(chk){
-		location.href="adminMenuDelete.do?menu_num=" + ${mndto.menu_num};
+		location.href="adminMenuDelete.do?menu_num=" + menu_num;
 	}
 }
 

@@ -1,6 +1,5 @@
 package spring.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import spring.data.MemberDto;
 import spring.data.MenuDto;
 import spring.data.OrderDetailDto;
 import spring.data.OrderDto;
-import spring.data.QnaDto;
 import spring.data.ReviewDao;
 import spring.data.RoomDto;
 import spring.service.AdminService;
@@ -428,11 +426,14 @@ public class AdminController {
 	
 	//메뉴 수정 폼 띄우기
 	@RequestMapping("/adminMenuEditForm.do")
-	public String menuAddForm(HttpServletRequest request, @RequestParam int menu_num) {
+	public String menuEditForm(HttpServletRequest request, @RequestParam int menu_num) {
 		
-		MenuDto dto = aservice.getMenuData(menu_num);
+		MenuDto mndto = aservice.getMenuData(menu_num);
+		//메뉴 카테고리 가져오기..
+		List<MenuDto> list = aservice.getAllMenuType();
 		
-		request.setAttribute("dto", dto);
+		request.setAttribute("list", list);
+		request.setAttribute("mndto", mndto);
 		request.setAttribute("container", "../admin/db/menu/editform.jsp");
 		return "layout/home";
 	}
@@ -442,7 +443,9 @@ public class AdminController {
 	@PostMapping("/adminMenuEdit.do")
 	public String menuEdit(HttpServletRequest request, @ModelAttribute MenuDto mndto) {
 		
+		System.out.println("edit do called");
 		//수정 메서드 
+		aservice.updateMenu(mndto);
 		
 		return "redirect:adminMenuListDetail.do?menu_num=" + mndto.getMenu_num();
 	}
@@ -452,6 +455,7 @@ public class AdminController {
 	@RequestMapping("/adminMenuDelete.do")
 	public String menuDelete(HttpServletRequest request, @RequestParam int menu_num) {
 		
+		System.out.println("menu delete call");
 		//삭제 메서드 
 		aservice.deleteMenu(menu_num);
 		return "redirect:adminMenuList.do";
@@ -596,12 +600,13 @@ public class AdminController {
 		
 	//예약내역 수정 처리 메서드
 		@PostMapping("/adminBookEdit.do")
-		public String bookEdit(HttpServletRequest request, @ModelAttribute BookDto bdto) {
+		public String bookEdit(@ModelAttribute BookDto bdto) {
 			
-			System.out.println("head : " + bdto.getHead_count());
+			System.out.println("bdto get book nu : " + bdto.getBook_num());
 			aservice.updateBook(bdto);
 			
-			return "redirect:adminBookListDetail.do?book_num=" + bdto.getBook_num();
+//			return "redirect:adminBookListDetail.do?book_num=" + bdto.getBook_num();
+			return "redirect:home.do";
 		}
 		
 		

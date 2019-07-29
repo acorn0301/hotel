@@ -6,12 +6,19 @@ public class OrderDto {
 	private int order_num;
 	private Timestamp time;
 	private int room_num;
-	private int member_num;
 	private String memo;
 	private String room_status;
 	private int total_price;
+	private int book_num;
 	
 	
+	
+	public int getBook_num() {
+		return book_num;
+	}
+	public void setBook_num(int book_num) {
+		this.book_num = book_num;
+	}
 	public int getTotal_price() {
 		return total_price;
 	}
@@ -36,12 +43,7 @@ public class OrderDto {
 	public void setRoom_num(int room_num) {
 		this.room_num = room_num;
 	}
-	public int getMember_num() {
-		return member_num;
-	}
-	public void setMember_num(int member_num) {
-		this.member_num = member_num;
-	}
+
 	public String getMemo() {
 		return memo;
 	}
