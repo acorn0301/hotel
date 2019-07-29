@@ -236,7 +236,7 @@ function check(){
    <!-- hidden -->
    <input type="hidden" name="member_num" value="${mbdto.member_num}">
 
-   <div class="col-sm-3 text-center">
+   <div class="btncenter">
       <input type="button" value="취소" id="memberEditCancel" onclick="history.back()">
       <input type="submit" value="수정 완료" id="editOk">
    </div>
