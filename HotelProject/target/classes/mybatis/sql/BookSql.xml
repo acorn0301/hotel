@@ -45,15 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	 
 	 <!-- 회원 예약 정보 저장 -->
-	 <select id="insertBook" parameterType="fbdto">
+	 <insert id="insertBook" parameterType="fbdto">
 		insert into book values (bookseq.nextval, #{member_num}, to_date(#{check_in},'yyyy-MM-dd HH24:MI'), to_date(#{check_out}, 'yyyy-MM-dd HH24:MI'), #{room_num}, #{head_count}, #{book_memo}, 0, sysdate, #{add_bed}, #{breakfast_count})
-	</select>
+	</insert>
 	
 	
 	<!-- 비회원 // 예약확인을 위한 최소한의 회원가입 정보 저장 (이름이랑 폰번호만 삽입됨) -->
-	<select id="insertInfo_notMember" parameterType="mbdto">
+	<insert id="insertInfo_notMember" parameterType="mbdto">
 		insert into member values (memberseq.nextval, 'nc_id', 'nc_password', #{name}, sysdate, sysdate, 'nc_email', #{phone}, 'NC', 'user.svg')
-	</select>
+	</insert>
 	
 	
 	<!-- (비회원 예약 시) 가장 최근에 추가된 멤버num -->

@@ -43,9 +43,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from qna where board_status = 0
 	</select>
 	
-	<select id="qnaAdminReplyComplete" parameterType="int">
+	<update id="qnaAdminReplyComplete" parameterType="int">
 		update qna set board_status = 1 where board_num = #{board_num}
-	</select>
+	</update>
 	
 	<select id="qnaGetWriter" resultType="String" parameterType="int">
 		select name from member where member_num=#{member_num}
@@ -63,21 +63,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select board_pass from qna where board_num=#{board_num}
 	</select>
 	
-	<select id="qnaDeleteData" parameterType="int">
+	<delete id="qnaDeleteData" parameterType="int">
 		delete from qna where board_num = #{board_num}
-	</select>
+	</delete>
 	
 	<select id="qnaReplyTotalCount" parameterType="int" resultType="int">
 		select count(*) from qna_reply where board_num = #{board_num}
 	</select>
 	
-	<select id="qnaUpdateData" parameterType="qdto">
+	<update id="qnaUpdateData" parameterType="qdto">
 		update qna set subject = #{subject}, content = #{content} where board_num=#{board_num}
-	</select>
+	</update>
 	
-	<select id="qnaReplyInsertData" parameterType="qrdto">
+	<insert id="qnaReplyInsertData" parameterType="qrdto">
 		insert into qna_reply values (replyseq.nextval, #{board_num}, #{reply_content}, sysdate, #{member_num})
-	</select>
+	</insert>
 	
 	<select id="qnaReplyList" parameterType="int" resultType="qrdto">
 		select reply_num, board_num, reply_content, reply_writeday, a.member_num, b.name, b.grade, b.member_pic, b.id
@@ -87,9 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by reply_writeday asc
 	</select>
 	
-	<select id="qnaReadCount" parameterType="int">
+	<update id="qnaReadCount" parameterType="int">
 		update qna set readcount = readcount+1 where board_num=#{board_num}
-	</select>
+	</update>
 	
 	
 </mapper>
