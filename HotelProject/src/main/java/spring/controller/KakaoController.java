@@ -25,7 +25,7 @@ public class KakaoController {
 	
 	
 	private final static String K_CLIENT_ID = "648cef1155eab095ac302a90bb64baa6";
-    private final static String K_REDIRECT_URI = "http://localhost:9000/HotelProject/kakaoLogin";
+    private final static String K_REDIRECT_URI = "http://15.164.144.128:8080/HotelProject/kakaoLogin";
 
     public String getAuthorizationUrl(HttpSession session) {
 

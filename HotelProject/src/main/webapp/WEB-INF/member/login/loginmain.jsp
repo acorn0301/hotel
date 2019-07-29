@@ -179,7 +179,7 @@
 <!-- 카카오 로그인 버튼 -->
 	<div class="btncenter">
 	<c:if test="${userId == null}">
-		<a href="https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://localhost:9000/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll">
+		<a href="https://accounts.kakao.com/login?continue=https://kauth.kakao.com/oauth/authorize?client_id%3D648cef1155eab095ac302a90bb64baa6%26redirect_uri%3Dhttp://15.164.144.128:8080/HotelProject/kakaoLogin%26response_type%3Dcode#pageLoginPoll">
 			<img src="images/mypage/kakao_btn.png" height="40px;">
 		</a>
 	</c:if>

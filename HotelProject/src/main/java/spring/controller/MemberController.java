@@ -875,6 +875,7 @@ public class MemberController {
        int member_num = 0;
        if(idchk == 0) // 가입되지 않음 (아이디=0)
        {
+    	   
     	   mservice.insertMember(mbdto);
 //    	   session.setAttribute("member_num", mbdto.getMember_num());
     	   session.setAttribute("mbdto", mbdto);
@@ -915,8 +916,9 @@ public class MemberController {
   	 session.setAttribute("name", name);
 
   	 session.setAttribute("member_num", member_num);
-  	 request.setAttribute("container", "../layout/indexmain.jsp");
-  	 return "layout/home";
+//  	 request.setAttribute("container", "../layout/indexmain.jsp");
+//  	 return "layout/home";
+  	 return "redirect:home.do";
        
 //       return "/member/login/kakaologin";
    }

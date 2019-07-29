@@ -25,6 +25,7 @@ import spring.data.OrderDto;
 import spring.data.ReviewDao;
 import spring.data.RoomDto;
 import spring.service.AdminService;
+import spring.service.MemberService;
 import spring.service.MenuService;
 import spring.service.OrderDetailService;
 import spring.service.QnaService;
@@ -44,6 +45,9 @@ public class AdminController {
 	
 	@Autowired
 	OrderDetailService odservice;
+	
+	@Autowired
+	MemberService mbservice;
 	
 	//관리자 메인페이지를 보여준다 
 	@RequestMapping("/admin.do")
@@ -269,6 +273,33 @@ public class AdminController {
 		return "layout/home";
 	}
 	
+	
+	@RequestMapping("/adminMemberDetail.do")
+	public String memberDetail(HttpServletRequest request, @RequestParam int member_num) {
+		
+		//받아온 member_num으로 회원정보를 받아온다. 
+		MemberDto mbdto = mbservice.getMemberData(member_num);
+		
+		request.setAttribute("mbdto", mbdto);
+		request.setAttribute("container", "../admin/db/member/detail.jsp");
+
+		return "layout/home";
+	}
+	
+	@RequestMapping("/adminMemberDelete.do")
+	public String memberDelete(HttpServletRequest request, @RequestParam int member_num) {
+		
+		MemberDto mbdto = new MemberDto();
+		mbdto.setMember_num(member_num);
+		
+		//회원 탈퇴 처리 
+		mbservice.withdrawal(mbdto);
+		
+		return "redirect:adminMemberList.do";
+		
+	}
+	
+	
 	//관리자 -> 메뉴 db관리 리스트
 	@RequestMapping("/adminMenuList.do")
 	public String adminMenuList(HttpServletRequest request, @RequestParam(value="pageNum", defaultValue="1") int currentPage, HttpSession session) {
@@ -443,7 +474,6 @@ public class AdminController {
 	@PostMapping("/adminMenuEdit.do")
 	public String menuEdit(HttpServletRequest request, @ModelAttribute MenuDto mndto) {
 		
-		System.out.println("edit do called");
 		//수정 메서드 
 		aservice.updateMenu(mndto);
 		
@@ -455,7 +485,6 @@ public class AdminController {
 	@RequestMapping("/adminMenuDelete.do")
 	public String menuDelete(HttpServletRequest request, @RequestParam int menu_num) {
 		
-		System.out.println("menu delete call");
 		//삭제 메서드 
 		aservice.deleteMenu(menu_num);
 		return "redirect:adminMenuList.do";
@@ -602,11 +631,10 @@ public class AdminController {
 		@PostMapping("/adminBookEdit.do")
 		public String bookEdit(@ModelAttribute BookDto bdto) {
 			
-			System.out.println("bdto get book nu : " + bdto.getBook_num());
 			aservice.updateBook(bdto);
 			
-//			return "redirect:adminBookListDetail.do?book_num=" + bdto.getBook_num();
-			return "redirect:home.do";
+			return "redirect:adminBookListDetail.do?book_num=" + bdto.getBook_num();
+//			return "redirect:home.do";
 		}
 		
 		
