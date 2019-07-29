@@ -1,52 +1,50 @@
-	#loginForm a {color: gray;}
-	a:HOVER{ text-decoration: none; font-weight: bold;}
-	
-	#mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#m_mybookingForm, 
-	#findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm, .withdrawalForm{
-		margin: -10px;
-	}
-	
-	#idBtn {display: inline-block; float: left;}
-	.loginMsg {margin: 5px 15px; text-align:center; color: grey;}
-	.dateForm {margin-bottom: 15px; padding: 0 20px;}
-	.telForm {margin-top: -15px;}
-	
-	#joincomplete, #findPwOkForm, #findIdOkForm, .withdrawalForm{text-align: center;}
-	
-	#chkmsg { color: red;}
-	
-	.loginPlus {text-align: center; font-size: 13px; margin-bottom: 20px;}
-	.loginPlus span{
-		margin: 0px 15px;
-		font-weight: bold;
-	}
-	.google_login {
-		display:block;
-		text-align: center; 
-		width: 100%;
-		height:33px;
-		line-height:35px;
-		font-size: 15px;
-		border : 1px solid #3a3125;
-		margin-top: -10px;
-	}
-/* 	.google_login a { display: block; }*/	
-	
-	#kakao_btn{border:0px; background-color: white;}
-	
-	#editNo {text-align: right; margin-right: 10px;}
-	
-	.myinfo{text-align: center; margin-top: 20px;}
-	.myinfo h4{color: #685845; font-weight: bold; margin-bottom: 0px; }
-	.myinfo span{font-size:0.8em; color: grey;}
+   #loginForm a {color: gray;}
+   a:HOVER{ text-decoration: none; font-weight: bold;}
+   
+   #mypageForm,#loginForm,#joinForm,#EditForm,#joinagree,#m_mybookingForm, 
+   #findPwForm,#findPwOkForm,#findIdForm,#findIdOkForm, .withdrawalForm{
+      margin: -10px;
+   }
+   
+   #idBtn {display: inline-block; float: left;}
+   .loginMsg {margin: 5px 15px; text-align:center; color: grey;}
+   .dateForm {margin-bottom: 15px; padding: 0 20px;}
+   .telForm {margin-top: -15px;}
+   
+   #joincomplete, #findPwOkForm, #findIdOkForm, .withdrawalForm{text-align: center;}
+   
+   #chkmsg { color: red;}
+   
+   .loginPlus {text-align: center; font-size: 13px; margin-bottom: 20px;}
+   .loginPlus span{
+      margin: 0px 15px;
+      font-weight: bold;
+   }
+   .google_login {
+      display:block;
+      text-align: center; 
+      width: 100%;
+      height:33px;
+      line-height:35px;
+      font-size: 15px;
+      border : 1px solid #3a3125;
+      margin-top: -10px;
+   }
+/*    .google_login a { display: block; }*/   
+   
+   #kakao_btn{border:0px; background-color: white;}
+   
+   #editNo {text-align: right; margin-right: 10px;}
+   
+   .myinfo{text-align: center; margin-top: 20px;}
+   .myinfo h4{color: #685845; font-weight: bold; margin-bottom: 0px; }
+   .myinfo span{font-size:0.8em; color: grey;}
 
  .btncenter{
-	text-align: center;
+   text-align: center;
 }
 
-/* submit 버튼 부분*/
-#loginOk, #joinOk, #editOk, #mypageGo, #loginGo, #findPwOk, #findIdOk, #wdok,
-#mybookingForm, #myorderForm{
+#loginOk, #joinOk{
 /*  display: block; */
     width: 245px;
     height: 45px;
@@ -61,19 +59,43 @@
     border-radius:5px;
 }
 
-#withdrawalCancel, #withdrawalOk ,#mybookinglist ,#mybookingCancel, #myroomsCancel, #myroomslist{ 
-	color:white; 
-	display: inline; 
-	font-size: 17px; 
-	height: 40px; 
-	border: 0; 
-	width: 150px;
+/* submit 버튼 부분*/
+#mypageGo, #findPwOk, #findIdOk, #wdok,#loginGo, #editOk,
+#mybookingForm, #myorderForm, #withdrawalOk, #mybookingCancel, #myroomsCancel, #withdrawalOk{
+/*  display: block; */
+    width: 45%;
+    height: 45px;
+    line-height: 40px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: #f1ebd6;
+    background-color: #3a3125;
+    border-radius:5px;
 }
 
-#withdrawalOk, #mybookingCancel, #myroomsCancel{ background-color : #3a3125;}
-#withdrawalCancel, #mybookinglist, #myroomslist { background-color :#cfc6b2;}
-	
-	.inputbox {
+/* 취소부분 */
+#memberEditCancel, #findIdCancel, #findPwCancel, #withdrawalCancel,#mybookinglist, #myroomslist
+{
+/*  display: block; */
+    width: 45%;
+    height: 45px;
+    line-height: 40px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: white; 
+    background-color: #cfc6b2;;
+    border-radius:5px;
+    display: inline; 
+}
+
+   
+   .inputbox {
     border: 0;
     padding: 11px 20px;
     height: 48px;
@@ -84,10 +106,10 @@
     -webkit-appearance: none;
     -webkit-box-sizing: border-box;
     border-radius: 2px;
-	}
-	
-	.user_id{
-	border: 0;
+   }
+   
+   .user_id{
+   border: 0;
     padding: 11px 20px;
     height: 48px;
     font-size: 16px;
@@ -97,92 +119,92 @@
     -webkit-appearance: none;
     -webkit-box-sizing: border-box;
     border-radius: 2px;
-	}
-	
-	.form_group {
+   }
+   
+   .form_group {
     background-color: white;
     border-bottom: 1px solid #e5e5e5;
-	}
-	
-	.headTit {position: relative; height: 45px; background-color: #685845;}
-	.headTit .tit{line-height: 45px; font-size: 18px; font-weight: normal; color: #ffffff; text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 0 25px 0 40px;}
-	.headTit .btnBack{position:absolute; top: 0; left: 0;}
-	.headTit .btnBack a{display: block; width: 30px; height: 35px; padding: 20px 25px; margin-top:5px; background: url(../images/mypage/left-arrow.png) no-repeat 15px 12px; background-size: auto 15px; text-indent: -9999px;}
-	
-	
-	
-	.linkBox{margin:0; padding:0; font-size:15px; line-height:160%; color:#666666;-webkit-text-size-adjust:none; }
-	.linkLIst, .linkLIst li{ list-style:none; margin:15px 0px; padding:10px 5px; font-weight: lighter; font-size: 1.1em;}
-	.linkLIst a{ text-decoration:none; color:#666; display: block;}
-	.linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
-	.linkLIst>li>a>i{width:22px;}
-	.linkLIst>li>a>div{padding-right:0;}
-	.linkLIst>li>a>div>i{font-size: 1.2em;}
-	
+   }
+   
+   .headTit {position: relative; height: 45px; background-color: #685845;}
+   .headTit .tit{line-height: 45px; font-size: 18px; font-weight: normal; color: #ffffff; text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin: 0 25px 0 40px;}
+   .headTit .btnBack{position:absolute; top: 0; left: 0;}
+   .headTit .btnBack a{display: block; width: 30px; height: 35px; padding: 20px 25px; margin-top:5px; background: url(../images/mypage/left-arrow.png) no-repeat 15px 12px; background-size: auto 15px; text-indent: -9999px;}
+   
+   
+   
+   .linkBox{margin:0; padding:0; font-size:15px; line-height:160%; color:#666666;-webkit-text-size-adjust:none; }
+   .linkLIst, .linkLIst li{ list-style:none; margin:15px 0px; padding:10px 5px; font-weight: lighter; font-size: 1.1em;}
+   .linkLIst a{ text-decoration:none; color:#666; display: block;}
+   .linkBox li{border-bottom: 1px solid #e5e5e5; padding: 5px 15px;}
+   .linkLIst>li>a>i{width:22px;}
+   .linkLIst>li>a>div{padding-right:0;}
+   .linkLIst>li>a>div>i{font-size: 1.2em;}
+   
 
 
 .error {
-	display: block;
-	margin: 5px 30px;
-	font-size: 13px;
-	line-height: 14px;
-	color: red
+   display: block;
+   margin: 5px 30px;
+   font-size: 13px;
+   line-height: 14px;
+   color: red
 }
 
 .error_next_box {
-	display: block;
-	margin: 9px 0 -2px;
-	font-size: 12px;
-	line-height: 14px;
-	color: red
+   display: block;
+   margin: 9px 0 -2px;
+   font-size: 12px;
+   line-height: 14px;
+   color: red
 }
 
 .terms_p2 {
-	font-size: 12px;
-	line-height: 15px;
-	margin-top: -11px;
-	padding: 0 0 27px;
-	color: #8e8e8e
+   font-size: 12px;
+   line-height: 15px;
+   margin-top: -11px;
+   padding: 0 0 27px;
+   color: #8e8e8e
 }
 
 .terms_bx_list {
-	margin-top: 4px;
-	padding: 0 20px;
+   margin-top: 4px;
+   padding: 0 20px;
 }
 
 .terms_necessary {color:red}
 
 .terms_bx {
-	display: block;
-	padding-top: 30px
+   display: block;
+   padding-top: 30px
 }
 
 .terms_box {
-	position: relative;
-	overflow: auto;
-	height: 150px;
-	margin-top: 8px;
-	padding: 12px;
-	border: 1px solid #dadada;
-	background: #fffdfa;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	scrollbar-base-color: #d9d9d9;
-	scrollbar-arrow-color: #8e8e8e;
-	scrollbar-3dlight-color: #d9d9d9;
-	scrollbar-darkshadow-color: #d9d9d9;
-	scrollbar-face-color: #d9d9d9;
-	scrollbar-highlight-color: #d9d9d9;
-	scrollbar-shadow-color: #d9d9d9;
-	scrollbar-track-color: #f2f2f2;
-	-webkit-overflow-scrolling: touch;
+   position: relative;
+   overflow: auto;
+   height: 150px;
+   margin-top: 8px;
+   padding: 12px;
+   border: 1px solid #dadada;
+   background: #fffdfa;
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+   scrollbar-base-color: #d9d9d9;
+   scrollbar-arrow-color: #8e8e8e;
+   scrollbar-3dlight-color: #d9d9d9;
+   scrollbar-darkshadow-color: #d9d9d9;
+   scrollbar-face-color: #d9d9d9;
+   scrollbar-highlight-color: #d9d9d9;
+   scrollbar-shadow-color: #d9d9d9;
+   scrollbar-track-color: #f2f2f2;
+   -webkit-overflow-scrolling: touch;
 }
 
 .terms_box .article {
-	font-size: 12px;
-	line-height: 16px;
-	color: #666
+   font-size: 12px;
+   line-height: 16px;
+   color: #666
 }
 
 .terms_chk_all{ padding: 0 20px;}
@@ -193,41 +215,41 @@
 
 
 .input_chk {
-	position: relative;
-	display: block;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	margin: 10px;
-	
+   position: relative;
+   display: block;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+   margin: 10px;
+   
 }
 
 .input_chk input {
-	position: absolute;
-	top: 50%;
-	left: 1px;
-	width: 20px;
-	height: 20px;
-	margin-top: -10px;
-	outline: 0
+   position: absolute;
+   top: 50%;
+   left: 1px;
+   width: 20px;
+   height: 20px;
+   margin-top: -10px;
+   outline: 0
 }
 
 
 .input_chk label {
-	position: relative;
-	display: block;
-	width: 100%;
-	padding-left: 29px;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 21px;
-	cursor: pointer;
-	color: #333;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box
+   position: relative;
+   display: block;
+   width: 100%;
+   padding-left: 29px;
+   font-size: 14px;
+   font-weight: 700;
+   line-height: 21px;
+   cursor: pointer;
+   color: #333;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box
 }
 
 .input_chk input:focus ~label{
-	outline: dotted thin
+   outline: dotted thin
 }
 
 .chk_all_txt{font-size: 16px;}
@@ -254,29 +276,29 @@
 .btn_area.double { overflow: hidden; /* margin: 29px -5px 0 */ }
 
 .btn_area.double>span {
-	display: block;
-	float: left;
-	width: 50%
+   display: block;
+   float: left;
+   width: 50%
 }
 
 .btn_area.double span:before {
-	content: '';
-	display: block;
-	clear: both
+   content: '';
+   display: block;
+   clear: both
 }
 
 .btn_area>span .btn_type {
-	width: auto;
-	margin: 0 5px
+   width: auto;
+   margin: 0 5px
 }
 
 .btn_type:active, .btn_type:focus, .btn_type:hover, .btn_type:visited{
-	text-decoration: none;
-	color:white;
+   text-decoration: none;
+   color:white;
 }
 
 .btn_type+.btn_type {
-	margin-top: 10px
+   margin-top: 10px
 }
 
 
@@ -293,7 +315,7 @@
     height: 210px;
 }
 .photo_change_div{
-	opacity: 0;
+   opacity: 0;
     width: 200px;
     height: 200px;
     position: relative;
@@ -302,17 +324,17 @@
 }
 
 #btnDelete i{
-	font-size: 2.5em;
-	color:grey;
+   font-size: 2.5em;
+   color:grey;
 }
 .photo_delete_div{
-	position: relative;
-	top: -240px;
-	left: 170px;
-	width: 50px;
-	margin: 0;
-	z-index: 11;
-	
+   position: relative;
+   top: -240px;
+   left: 170px;
+   width: 50px;
+   margin: 0;
+   z-index: 11;
+   
 }
 
 .btn_file label .btn2 {
@@ -340,16 +362,16 @@
 }
 
 .profileBtns{
-	width: 100%;
-	border-radius: 5px;
-	border: 0;
-	background-color: #f1ebd6;
-	color : #3a3125b8;
-	font-weight: bold;
-	padding: 10px;
-	font-weight: bold;
-	font-size: 1.2em;
-	
+   width: 100%;
+   border-radius: 5px;
+   border: 0;
+   background-color: #f1ebd6;
+   color : #3a3125b8;
+   font-weight: bold;
+   padding: 10px;
+   font-weight: bold;
+   font-size: 1.2em;
+   
 }
 
 .btn_file label {
@@ -409,7 +431,7 @@ input[type=file] {
 }
 
 .pic{
-	display: inline-flex;
+   display: inline-flex;
 }
 
 
@@ -440,122 +462,141 @@ ul,li{ list-style: none; }
 }
 
 .dashboard_div2{
-	
-	padding: 0 0px 0px 10px;
+   
+   padding: 0 0px 0px 10px;
 }
 
 
 .dashboard_div_title{
-	padding-left: 5px;
+   padding-left: 5px;
 }
 
 .dashboard_div_table{
-	border-radius: 10px;
-	margin: 0px;
+   border-radius: 10px;
+   margin: 0px;
 }
 .order_table_div{
-	margin-top: 20px;
+   margin-top: 20px;
 }
 .dashboard_div_table ul{
-	padding : 0;
-	margin : 0;
+   padding : 0;
+   margin : 0;
 }
 
 .dashboard_li_div{
-	font-size: 11pt;
-	padding: 10px 10px 10px 20px;
-	border-bottom: 1px solid lightgrey;
+   font-size: 11pt;
+   padding: 10px 10px 10px 20px;
+   border-bottom: 1px solid lightgrey;
 }
 
 .dashboard_li_div i{
-	margin-right: 5px;
+   margin-right: 5px;
 }
 
 
 .dashboard_li_number{
-	float:right;
-	padding-right:20px;
-	font-weight: bold;
-	font-size: 15pt;
-	position: relative;
-	top: -5px;
+   float:right;
+   padding-right:20px;
+   font-weight: bold;
+   font-size: 15pt;
+   position: relative;
+   top: -5px;
 }
 
 .dashboar_li_label{
-	width: 100px;
-	color: royalblue;
+   width: 100px;
+   color: royalblue;
 }
 
 .admin_body{
-	margin : 0 -10px 0 -20px;
+   margin : 0 -10px 0 -20px;
 }
 
 .dashboard_li_gun{
-	font-size: 11pt;
-	color: grey;
-	font-weight: lighter;
-	position:relative;
-	top: -1px;
+   font-size: 11pt;
+   color: grey;
+   font-weight: lighter;
+   position:relative;
+   top: -1px;
 }
 
 /* 관리자 컬러 */
 
 .color1{
-	color: #ddc173;
+   color: #ddc173;
 }
 .color2{
-	color: #91a16a;
+   color: #91a16a;
 }
 .color3{
-	color: #738986;
+   color: #738986;
 }
 .color4{
-	color: #8e8680;	
+   color: #8e8680;   
 }
 .color5{
-	color: #b36154;
+   color: #b36154;
 }
 .color6{
-	color: #cc9999;
+   color: #cc9999;
 }
 .color7{
-	color: #996666;
+   color: #996666;
 }
 .color8{
-	color: #86A3C3;
+   color: #86A3C3;
 }
 .color9{
-	color: #bc6ca7;
+   color: #bc6ca7;
 }
 
 .li_last_right{
-	border-right: 0;
+   border-right: 0;
 }
 
 /* 예약 리스트 페이지 */
 
 .list_hotel_local{
-	color: grey;
+   color: grey;
 }
 .list_room_local{
-	margin-left: 10px;
+   margin-left: 10px;
 }
 .dashboard_li_div2{
-	font-size: 11pt;
-	padding: 10px 10px 10px 20px;
-	border-bottom: 1px solid lightgrey;
+   font-size: 11pt;
+   padding: 10px 10px 10px 20px;
+   border-bottom: 1px solid lightgrey;
 }
 .booklist_div{
-	
+   
 }
 
 .list_status, .list_name, .list_id, .list_book_day{
-	color: grey;
-	font-weight: ;
+   color: grey;
+   font-weight: ;
 }
+
+.checkday i{
+   font-size: 22px;
+   color: #a69d77;
+   
+}
+
 .list_check_in_out{
-	font-weight: lighter;
-	font-size: 20pt;
+   font-weight: lighter;
+   font-size: 20pt;
+}
+.dashboard_li_empty{
+   
+   padding: 40px 20px 20px 20px;
+   text-align: center;
+   font-size: 1.2em;
+   color: grey;
+}
+.dashboard_li_empty i {
+   font-size: 5em;
+   color: lightgrey;
+   padding-bottom: 20px;
 }
 
 
@@ -572,25 +613,25 @@ ul,li{ list-style: none; }
 }
 
 .bookdetail_label{
-	width: 50px;
-	border-right : 1px solid lightgrey;
+   width: 50px;
+   border-right : 1px solid lightgrey;
 }
 
 .bookdetail_table{
-	width: 100%;
-	font-size: 
+   width: 100%;
+   font-size: 
 }
 
 .bookdetail_table_tr{
-	border-bottom: 1px solid lightgrey;
+   border-bottom: 1px solid lightgrey;
 }
 .bookdetail_table_th{
-	width: 30%;
-	border-right: 1px solid lightgrey;
-	
+   width: 30%;
+   border-right: 1px solid lightgrey;
+   
 }
 .bookdetail_table_td{
-	padding: 10px 10px 10px 20px;
+   padding: 10px 10px 10px 20px;
 }
 .img-circle{ width: 30px;}
 
@@ -599,18 +640,18 @@ ul,li{ list-style: none; }
 
 /* 마이페이지 - 내 룸서비스 내역 */
 /* .tr_strong{
-	border-bottom: 1px solid grey;
+   border-bottom: 1px solid grey;
 } */
 .dashboard_div {
      padding: 0; 
 /* margin-top: -20px; */
-/* 	padding: 0 0px 0px 10px; */
+/*    padding: 0 0px 0px 10px; */
 }
 .margin_top_adj{
-	margin-top: -20px;
+   margin-top: -20px;
 }
 .dashboard_div_div{
-	padding: 0 0px 0px 10px;
+   padding: 0 0px 0px 10px;
 }
 
 .dashboard_tr {
@@ -619,7 +660,7 @@ ul,li{ list-style: none; }
 }
 .dashboard_li_div3 {
     font-size: 11pt;
-    padding: 20px 20px 15px 50px;
+    padding: 20px 20px 15px 30px;
     /* border-bottom: 1px solid lightgrey; */
 }
 .dashboard_table {
@@ -641,6 +682,6 @@ table {
 /* 장희 추가 */
 
 /* .login_logo{
- 	width: 100%;
- 	
+    width: 100%;
+    
 } */

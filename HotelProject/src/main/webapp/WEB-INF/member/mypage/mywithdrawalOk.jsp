@@ -16,19 +16,18 @@
 <div class="withdrawalForm">
 <br>
 
-	<div class="dashboard_li_empty">
-		<i class="fas fa-check-square"></i><br>
-		회원 탈퇴가 완료되었습니다<br>
-		회원님의 정보가 정상적으로 삭제되었습니다
-	</div>
-
+   <div class="dashboard_li_empty">
+      <i class="fas fa-check-square"></i><br>
+      회원 탈퇴가 완료되었습니다<br>
+      회원님의 정보가 정상적으로 삭제되었습니다
+      <br>
+   </div>
 
 </div>
 
-<div>
-	<input type="submit" value="메인으로" id="wdok">
+<div class="btncenter">
+   <input type="submit" value="메인으로" id="wdok">
 </div>
 </form>
 </body>
 </html>
-
