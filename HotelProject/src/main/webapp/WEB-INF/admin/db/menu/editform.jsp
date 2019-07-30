@@ -44,7 +44,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">카테고리</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select class="selectbox"  name="menu_type_num" id="menu_type_select">
+					<select class="selectbox attr"  name="menu_type_num" id="menu_type_select">
 						<c:forEach items="${list }" var="dto">
 							<option value="${dto.menu_type_num}">${dto.menu_type }</option>
 						</c:forEach>
@@ -55,28 +55,34 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">국문이름</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_name_kor" class="inputbox" id="menu_name_kor" title="메뉴명(국문)"  value="${mndto.menu_name_kor }" required="required">				
+					<input type="text" name="menu_name_kor" class="inputbox attr" id="menu_name_kor" title="메뉴명(국문)"  value="${mndto.menu_name_kor }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">영문이름</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_name_eng" class="inputbox" id="menu_name_eng" title="메뉴명(한글)"  value="${mndto.menu_name_eng }" required="required">				
+					<input type="text" name="menu_name_eng" class="inputbox attr" id="menu_name_eng" title="메뉴명(한글)"  value="${mndto.menu_name_eng }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">메뉴가격</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<input type="text" name="menu_price" class="inputbox" id="menu_price" title="메뉴가격"  value="${mndto.menu_price }" required="required">				
+					<input type="text" name="menu_price" class="inputbox attr" id="menu_price" title="메뉴가격"  value="${mndto.menu_price }" required="required">				
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">메뉴설명</td>
 				<td class="bookdetail_table_td td_for_textarea">
-					<textarea id="menu_desc" name="menu_desc" class="write_textarea admin_textarea" rows="1" cols="10" >${mndto.menu_desc }</textarea>				
+					<textarea id="menu_desc" name="menu_desc" class="write_textarea admin_textarea attr" rows="1" cols="10" >${mndto.menu_desc }</textarea>				
+				</td>	
+			</tr>
+			<tr class="bookdetail_table_tr">
+				<td class="bookdetail_table_th bookdetail_table_td">관리자메모</td>
+				<td class="bookdetail_table_td td_for_textarea">
+					<textarea id="log_meno" name="log_memo" class="write_textarea admin_textarea" rows="1" cols="10" > </textarea>				
 				</td>	
 			</tr>
 			
@@ -113,6 +119,7 @@
 
 	<input type="hidden" id="menu_type" name="menu_type" value="Breakfast">
 	<input type="hidden" name="menu_num" value="${mndto.menu_num }">
+	<input type="hidden" name="log_attr" id="log_attr" value="">
 
 </form>
 </div>
@@ -121,6 +128,18 @@
 
 <script>
 
+	let log_attr = []; 
+	//attr 변경시마다 log_attr에 반영 
+	
+	$('.attr').change(function(){
+		let attr = $(this).attr("name");
+		if(log_attr.indexOf(attr) == -1){
+			log_attr.push(attr);
+			console.log("log_attr: " , log_attr);
+		}
+		$("#log_attr").val(log_attr.join(","));
+	});
+
 	//카테고리 초기화
 	$("#menu_type_select").val(${mndto.menu_type_num}).prop("selected", true);
 
@@ -128,11 +147,9 @@
 
 	$("#menu_type_select").change( function(){
 		let menu_type_num = $("#menu_type_select").val();
-		console.log(menu_type_num);
 		let menu_type_arr = ['Breakfast', 'Specialties', 'Bakery', 'Appetizers', 'Pastas', 'Dessert', 'Beverage', 'Drink'];
 		
 		let menu_type = menu_type_arr[menu_type_num];
-		console.log(menu_type);
 		$("#menu_type").val(menu_type);
 	});
 	
@@ -157,7 +174,7 @@
 		if(chk){
 			location.href="adminMenuListDetail.do?menu_num=" + menu_num;
 		}
-	}}
+	}
 				
 			
 </script>

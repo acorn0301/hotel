@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org// DTD Config 3.0//EN"
 		<typeAlias type="spring.data.RoomDto" alias="rmdto"/> 
 		<typeAlias type="spring.data.OrderDetailDto" alias="oddto"/> 
 		<typeAlias type="spring.data.FinalBookDto" alias="fbdto"/>
+		<typeAlias type="spring.data.AdminlogDto" alias="ldto"/>
 		
 
 	</typeAliases>

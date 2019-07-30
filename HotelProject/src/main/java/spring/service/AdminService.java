@@ -10,6 +10,7 @@ import spring.data.AdminBookDto;
 import spring.data.AdminDao;
 import spring.data.AdminOrderDetailDto;
 import spring.data.AdminOrderDto;
+import spring.data.AdminlogDto;
 import spring.data.BookDao;
 import spring.data.BookDto;
 import spring.data.MemberDto;
@@ -173,10 +174,20 @@ public class AdminService {
 		return adao.getRoomListByHotel(hotel_num);
 	}
 	
+	//객실 상세 정보 가져오기 
+	public RoomDto getRoomdetail(int room_num) {
+		return adao.getRoomdetail(room_num);
+	}
+	
 	//호텔 넘버별 호텔 이름 가져오기
 	public String getHotelLocalByHotelNum(int hotel_num) {
 		return adao.getHotelLocalByHotelNum(hotel_num);
 	}
+	
+	
+	
+	
+	
 	
 	//예약 건 다음 스텝으로 넘기기
 	public void bookNextStep(int book_num, int book_status) {
@@ -226,5 +237,23 @@ public class AdminService {
 	//예약 데이타 수정 업데이트
 	public void updateBook(BookDto bdto) {
 		adao.updateBook(bdto);
+	}
+	
+	
+	
+	//admin log 에 데이타 넣기
+	public void insertLog(AdminlogDto ldto) {
+		adao.insertLog(ldto);
+	}
+	
+	//admin log 리스트 가져오기
+	public List<AdminlogDto> getLogList(int start, int end){
+		return adao.getLogList(start, end);
+				
+	}
+	
+	//admin log total count 
+	public int getLogTotalCount() {
+		return adao.getLogTotalCount();
 	}
 }

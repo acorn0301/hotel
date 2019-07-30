@@ -143,7 +143,7 @@
 			</div>	
 				<br>
 			
-				<div class="dashboard_qna_divs_text"><span>메뉴관리</span></div> 		
+				<div class="dashboard_qna_divs_text" ><span>메뉴관리</span></div> 		
 		</div>
 		
 		
@@ -161,7 +161,7 @@
 	<div class="clearBoth"></div>
 	
 	<div class="dashboard_qna_div">
-		<div class="dashboard_qna_divs">
+		<div class="dashboard_qna_divs" onclick="alert('준비중입니다.')">
 			<div class="icon_with_badge">
 				<i class='fas fa-user-tie color2'></i>
 			</div>
@@ -171,7 +171,7 @@
 				<div class="dashboard_qna_divs_text"><span>직원관리</span></div> 
 			
 		</div>
-		<div class="dashboard_qna_divs">
+		<div class="dashboard_qna_divs" onclick="alert('준비중입니다.')">
 			<div class="icon_with_badge">
 				<i class='fas fa-comments color1'></i>
 			</div>	
@@ -179,7 +179,7 @@
 			
 				<div class="dashboard_qna_divs_text"><span>리뷰관리</span></div> 		
 		</div>
-		<div class="dashboard_qna_divs li_last_right">
+		<div class="dashboard_qna_divs li_last_right" onclick="location.href='adminLogList.do'">
 			<div class="icon_with_badge">
 				<i class='fas fa-sitemap color7'></i>
 			</div>

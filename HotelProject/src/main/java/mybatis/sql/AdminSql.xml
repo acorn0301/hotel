@@ -216,6 +216,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from room where hotel_num=#{hotel_num} order by room_local
 	</select>
 	
+	<select id="adminGetRoomDetail" resultType="rmdto" parameterType="int">
+		select * from room where room_num = #{room_num}
+	</select> 
+	
+	
+	
+	
 	<select id="adminGetHotelLocalByHotelNum" resultType="String" parameterType="int">
 		select hotel_local from hotel where hotel_num=#{hotel_num}
 	</select>
@@ -292,4 +299,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		breakfast_count = #{breakfast_count}
 		where book_num = #{book_num}
 	</update>
+	
+	
+	
+	
+	
+	<!-- admin log 에 기록 남기기  -->
+	<insert id="adminInsertAdminLog" parameterType="ldto">
+		insert into adminlog values (logseq.nextval, #{member_num}, sysdate, #{log_table}, #{log_act}, #{log_memo}, #{log_attr})
+	</insert>
+	
+	<!-- admin log list 가져오기 -->
+	<select id="adminGetAdminLogList" resultType="ldto" parameterType="HashMap">
+		<![CDATA[select a.* from (select ROWNUM as RNUM,b.* from (select * from adminlog order by log_num desc)b )a where a.RNUM>=#{start} and a.RNUM<=#{end}]]>	
+	</select>
+	
+	<!-- admin log totalCount 가져오기  -->
+	<select id="adminLogTotalCount" resultType="int">
+		select count(*) from adminlog
+	</select>
 </mapper>

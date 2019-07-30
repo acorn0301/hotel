@@ -165,6 +165,14 @@ public class AdminDao extends SqlSessionDaoSupport{
 		return getSqlSession().selectList("adminGetRoomListByHotel", hotel_num);
 	}
 	
+	//객실 상세 정보 가져오기 
+	public RoomDto getRoomdetail(int room_num) {
+		return getSqlSession().selectOne("adminGetRoomDetail", room_num);
+	}
+	
+	
+	
+	
 	//호텔 넘버별 호텔 이름 가져오기
 	public String getHotelLocalByHotelNum(int hotel_num) {
 		return getSqlSession().selectOne("adminGetHotelLocalByHotelNum", hotel_num);
@@ -230,5 +238,28 @@ public class AdminDao extends SqlSessionDaoSupport{
 		System.out.println("check in : " + bdto.getCheck_in());
 		getSqlSession().update("adminUpdateBook", bdto);
 		System.out.println("update book call end");
+	}
+	
+	
+	
+	
+	
+	//admin log 에 데이타 넣기
+	public void insertLog(AdminlogDto ldto) {
+		System.out.println("log insert!!");
+		getSqlSession().insert("adminInsertAdminLog", ldto);
+	}
+	
+	//admin log 리스트 가져오기
+	public List<AdminlogDto> getLogList(int start, int end){
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("start", start);
+		map.put("end", end);
+		return getSqlSession().selectList("adminGetAdminLogList", map);
+	}
+	
+	//admin log total count 
+	public int getLogTotalCount() {
+		return getSqlSession().selectOne("adminLogTotalCount");
 	}
 }

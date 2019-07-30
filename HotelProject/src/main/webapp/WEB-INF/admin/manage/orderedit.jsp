@@ -42,7 +42,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">주문상태</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select class="selectbox"  name="room_status" id="room_status_select">
+					<select class="selectbox attr"  name="room_status" id="room_status_select">
 						<option value="0">신규주문</option>
 						<option value="1">준비중</option>
 						<option value="2">처리완료</option>
@@ -71,7 +71,7 @@
 				<td class="bookdetail_table_td td_for_textarea">
 				
 					<!-- textarea 로 하는게 나을것 같기도 함  -->
-					<textarea id="memo" name="memo" class="write_textarea admin_textarea" rows="1" cols="10" >${aodto.memo }</textarea>				
+					<textarea id="memo" name="memo" class="write_textarea admin_textarea attr" rows="1" cols="10" >${aodto.memo }</textarea>				
 					
 					<%-- <input type="text" value="${aodto.memo }" name="memo"> --%>
 					
@@ -104,7 +104,7 @@
 						<td class="bookdetail_table_td td_for_selectbox"> 
 					
 					
-						<select class="selectbox" name="menu_num${oddto_index}" id="menu_num_select${oddto_index}">
+						<select class="selectbox attr" name="menu_num${oddto_index}" id="menu_num_select${oddto_index}">
 							<option value="0">메뉴를 선택해 주세요</option>
 							<c:forEach items="${menulist }" var="dto">
 								<option value="${dto.menu_num }">${dto.menu_name_kor } (${dto.menu_type })</option>
@@ -117,7 +117,7 @@
 					<tr class="bookdetail_table_tr tr_strong">
 						<td class="bookdetail_table_th bookdetail_table_td ">수량</td>
 						<td class="bookdetail_table_td td_for_selectbox"> 
-							<select class="selectbox"  name="qty${oddto_index}" id="qty_select${oddto_index}">
+							<select class="selectbox attr"  name="qty${oddto_index}" id="qty_select${oddto_index}">
 								<c:forEach begin="0" end="20" var="i">
 									<option value="${i }">${i } 개</option>
 								</c:forEach>
@@ -171,6 +171,8 @@
 	
 	<!-- 히든으로 넘겨야 하는  -->
 	<input type="hidden" value="${aodto.order_num }" name="order_num">
+	<input type="hidden" value="" name="log_attr" id="log_attr">
+	
 	
 	</form>	
 	</div>
@@ -182,6 +184,17 @@
 
 <script>
 
+	let log_attr = []; 
+	//attr 변경시마다 log_attr에 반영 
+	
+	$('.attr').change(function(){
+		let attr = $(this).attr("name");
+		if(log_attr.indexOf(attr) == -1){
+			log_attr.push(attr);
+			console.log("log_attr: " , log_attr);
+		}
+		$("#log_attr").val(log_attr.join(","));
+	});
 
 	//주문상태 select 초기값 설정
 	$("#room_status_select").val(${aodto.room_status}).prop("selected", true);
@@ -243,7 +256,7 @@
 			'<td class="bookdetail_table_td td_for_selectbox">'+
 			
 			
-				'<select class="selectbox" name="menu_num'+ oddto_index +'" id="menu_num_select">'+
+				'<select class="selectbox " name="menu_num'+ oddto_index +'" id="menu_num_select">'+
 					'<option value="0">메뉴를 선택해 주세요</option>'+
 					'<c:forEach items="${menulist }" var="dto">'+
 						'<option value="${dto.menu_num }">${dto.menu_name_kor } (${dto.menu_type })</option>'+

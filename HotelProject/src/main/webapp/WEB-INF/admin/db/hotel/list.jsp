@@ -37,7 +37,7 @@
 				
 				
 					<li>
-						<div onClick="location.href='adminBookListDetail.do?room_num=${dto.room_num}'">
+						<div onClick="location.href='adminRoomDetail.do?room_num=${dto.room_num}'">
 							<div class="dashboard_li_div2">
 								<div class="userlist_div">
 									<div class="user_list_divs user_list_div_1"><%-- <img src="images/room/${dto.room_img }"> --%></div>

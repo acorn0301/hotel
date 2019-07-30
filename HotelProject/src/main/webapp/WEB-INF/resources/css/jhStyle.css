@@ -852,6 +852,7 @@ a{
 .user_list_div_2{
 	width: 60%;
 	padding-top: 5px;
+	font-size: .9em;
 }
 .user_list_div_3{
 	width:20px;
@@ -915,4 +916,36 @@ a{
 .minus_margin_div{
 	margin-left: -10px;
 	margin-right: -10px;
+}
+
+
+
+
+
+
+/* 로그 페이지를 위한 */
+.log_div{
+	white-space: pre-wrap;
+    word-wrap: break-word;
+    width: 85%;
+    float: left;
+}
+
+.dashboard_log_table li{
+	border-bottom: 1px solid lightgrey;
+	padding: 10px 0px 10px 15px;
+}
+.log_simpletime{
+	clear: both; 
+	color: grey; 
+	font-size: .7em;
+}
+.log_member_pic{
+	float : left;
+	margin-right: 10px;
+}
+.log_member_pic img{
+	width: 25px;
+	border-radius: 100%;
+	border: 1px solid lightgrey;
 }

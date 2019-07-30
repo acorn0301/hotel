@@ -39,7 +39,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">예약상태</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select class="selectbox"  name="book_status" id="book_status_select">
+					<select class="selectbox attr"  name="book_status" id="book_status_select">
 						<option value="0">예약대기</option>
 						<option value="1">예약접수</option>
 						<option value="2">숙박중</option>
@@ -56,7 +56,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">인원</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select class="selectbox" id="head_count_select" name="head_count">
+					<select class="selectbox attr" id="head_count_select" name="head_count">
 						<c:forEach begin="0" end="6" var="i">
 							<option value="${i }">${i } 명</option>
 						</c:forEach>
@@ -67,26 +67,26 @@
 			<tr class="bookdetail_table_tr ">
 				<td class="bookdetail_table_th bookdetail_table_td">체크인</td>
 				<td class="bookdetail_table_td td_for_selectbox"> <fmt:formatDate value="${abdto.check_in }" pattern="yyyy-MM-dd" var="chkin"/>
-					<input class="selectbox" name="check_in" type="date" value="${chkin}" />
+					<input class="selectbox attr" name="check_in" type="date" value="${chkin}" />
 				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr ">
 				<td class="bookdetail_table_th bookdetail_table_td">체크아웃</td>
 				<td class="bookdetail_table_td td_for_selectbox"> <fmt:formatDate value="${abdto.check_out }" pattern="yyyy-MM-dd" var="chkout" />
-					<input type="date" name="check_out" class="selectbox" value="${chkout}" />
+					<input type="date" name="check_out" class="selectbox attr" value="${chkout}" />
 				</td>	
 			</tr>
 			
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">요청사항</td>
 				<td class="bookdetail_table_td td_for_textarea">
-					<textarea id="reply_content" name="book_memo" class="write_textarea admin_textarea" rows="1" cols="10" >${abdto.book_memo }</textarea>				
+					<textarea id="reply_content" name="book_memo" class="write_textarea admin_textarea attr" rows="1" cols="10" >${abdto.book_memo }</textarea>				
 				</td>	
 			</tr>
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">추가침대</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select name="add_bed" class="selectbox" id="add_bed_select">
+					<select name="add_bed" class="selectbox attr" id="add_bed_select">
 						<option value="0">0 개</option>
 						<option value="1">1 개</option>
 						<option value="2">2 개</option>
@@ -96,7 +96,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">조식인원</td>
 				<td class="bookdetail_table_td td_for_selectbox">
-					<select name="breakfast_count" class="selectbox" id="breakfast_count_select">
+					<select name="breakfast_count" class="selectbox attr" id="breakfast_count_select">
 						<c:forEach begin="0" end="${abdto.head_count }" var="i">
 							<option value="${i }">${i } 명</option>
 						</c:forEach>
@@ -117,7 +117,7 @@
 			<tr class="bookdetail_table_tr">
 				<td class="bookdetail_table_th bookdetail_table_td">객실정보</td>
 				<td class="bookdetail_table_td td_for_selectbox"> 
-					<select class="selectbox" name="room_num" id="room_num_select">
+					<select class="selectbox attr" name="room_num" id="room_num_select">
 						<c:forEach items="${list }" var="dto" >
 							<option value="${dto.room_num }">${dto.room_num } ${dto.room_name } ${dto.type }  (${dto.room_local } 호)</option>
 						</c:forEach>
@@ -156,6 +156,7 @@
 	<!-- 히든으로 넘길것!! -->
 	<input type="hidden" value="${abdto.book_num }" name="book_num">
 	<input type="hidden" value="" id="head_count_change">
+	<input type="hidden" value="" name="log_attr" id="log_attr">
 
 
 </form>
@@ -164,6 +165,20 @@
 
 
 <script>
+
+		let log_attr = []; 
+		//attr 변경시마다 log_attr에 반영 
+		
+		$('.attr').change(function(){
+			let attr = $(this).attr("name");
+			if(log_attr.indexOf(attr) == -1){
+				log_attr.push(attr);
+				console.log("log_attr: " , log_attr);
+			}
+			$("#log_attr").val(log_attr.join(","));
+		});
+
+
 	//예약 상태 selectbox 초기화 
 		$("#book_status_select").val(${abdto.book_status}).prop("selected", true);
 
