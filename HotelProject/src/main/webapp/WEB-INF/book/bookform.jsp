@@ -335,7 +335,9 @@
                            <span class="roomListName">${fbdto.room_name }</span>
                            
                            <!-- 객실 가격 -->
-                           <span class="roomListPrice rightFloat smalltext"> ${fbdto.price }</span>
+                           <span class="roomListPrice rightFloat smalltext">
+                           		<fmt:formatNumber value="${fbdto.price }" pattern="#,##0"/> 원
+                           </span>
                         
                         </div>
                         
@@ -704,7 +706,10 @@
                      <!-- 기본 객실금액 표시 -->
                      <div>
                         <span class="smalltext noaccountSub">객실 금액</span>
-                        <span class="contents">${fbdto.price}원</span>
+<%--                         <span class="contents">${fbdto.price}원</span> --%>
+                        <span class="contents">
+                        	<fmt:formatNumber value="${fbdto.price}" pattern="#,##0"/> 원
+                        </span>
                      </div>
                   </c:if>
                   
@@ -712,7 +717,10 @@
                   <c:if test="${fbdto.add_bed!=0}">
                      <div>
                         <span class="smalltext noaccountSub">침대 추가 금액</span>
-                        <span class="contents">${fbdto.add_bed*40000}원</span>
+<%--                         <span class="contents">${fbdto.add_bed*40000}원</span> --%>
+						<span class="contents">
+							<fmt:formatNumber value="${fbdto.add_bed*40000}" pattern="#,##0"/> 원
+						</span>	
                      </div>
                   </c:if>
                   
@@ -720,7 +728,10 @@
                   <c:if test="${fbdto.breakfast_count!=0}">
                      <div>
                         <span class="smalltext noaccountSub">조식 금액</span>
-                        <span class="contents">${fbdto.breakfast_count*25000}원</span>
+<%--                         <span class="contents">${fbdto.breakfast_count*25000}원</span> --%>
+						<span class="contents">
+							<fmt:formatNumber value="${fbdto.breakfast_count*25000}" pattern="#,##0"/>원
+						</span>
                      </div>
                   </c:if>
                   
@@ -728,7 +739,10 @@
                   <div class="totalPriceDiv">
                      <span class="smalltext noaccountSub">
                      <i class="fas fa-won-sign"></i>&nbsp;&nbsp;요금 합계</span>
-                     <span id="totalPrice" class="contents">${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000} 원</span>
+               <%--  <span id="totalPrice" class="contents">${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000} 원</span> --%>
+          			 <span id="totalPrice" class="contents">
+          			 	<fmt:formatNumber value="${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000}" pattern="#,##0"/>원
+          			 </span>
                   </div>
                </div>
             </div>
@@ -874,7 +888,10 @@
                      <!-- 기본 객실금액 표시 -->
                      <div>
                         <span class="smalltext noaccountSub">객실 금액</span>
-                        <span class="contents">${fbdto.price}원</span>
+<%--                         <span class="contents">${fbdto.price}원</span> --%>
+                        <span class="contents">
+                        	<fmt:formatNumber value="${fbdto.price}" pattern="#,##0"/> 원
+                        </span>
                      </div>
                   </c:if>
                   
@@ -882,7 +899,10 @@
                   <c:if test="${fbdto.add_bed!=0}">
                      <div>
                         <span class="smalltext noaccountSub">침대 추가 금액</span>
-                        <span class="contents">${fbdto.add_bed*40000}원</span>
+                        <%-- <span class="contents">${fbdto.add_bed*40000}원</span> --%>
+                        <span class="contents">
+                        	<fmt:formatNumber value="${fbdto.add_bed*40000}" pattern="#,##0"/> 원
+                        </span>
                      </div>
                   </c:if>
                   
@@ -890,7 +910,10 @@
                   <c:if test="${fbdto.breakfast_count!=0}">
                      <div>
                         <span class="smalltext noaccountSub">조식 금액</span>
-                        <span class="contents">${fbdto.breakfast_count*25000}원</span>
+<%--                         <span class="contents">${fbdto.breakfast_count*25000}원</span> --%>
+						<span class="contents">
+                        	<fmt:formatNumber value="${fbdto.breakfast_count*25000}" pattern="#,##0"/> 원
+                        </span>
                      </div>
                   </c:if>
                   
@@ -898,7 +921,11 @@
                   <div class="totalPriceDiv">
                      <span class="smalltext noaccountSub">
                      <i class="fas fa-won-sign"></i>&nbsp;&nbsp;요금 합계</span>
-                     <span id="totalPrice" class="contents">${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000} 원</span>
+                     <%-- <span id="totalPrice" class="contents">${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000} 원</span> --%>
+                     <span id="totalPrice" class="contents">
+                     	<fmt:formatNumber value="${sessionScope.fbdto.price+fbdto.add_bed*40000+fbdto.breakfast_count*25000}" pattern="#,##0"/> 원
+                     </span>
+                     
                   </div>
                </div>
             </div>

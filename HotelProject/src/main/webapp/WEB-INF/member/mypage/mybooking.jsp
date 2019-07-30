@@ -66,9 +66,9 @@
                      <div class="dashboard_li_div2">
                         <div class="booklist_div">
                            <span class="list_hotel_local">${dto.hotel_local }점</span>
-                           <span class="list_room_local color2">${dto.room_local}호 &nbsp;&nbsp;</span>
+                           <span class="list_room_local color2">${dto.room_local}호 &nbsp;</span>
                            <span>
-                              <span class="list_hotel_local"><i class='fas fa-user color1'></i>&nbsp;${dto.head_count }&nbsp;</span>&nbsp;
+                              <span class="list_hotel_local"><i class='fas fa-user color1'></i>&nbsp;${dto.head_count }&nbsp;</span>
                               
                               <c:if test="${dto.add_bed > 0}">
                                  <span class="glyphicon glyphicon-bed color6"></span>&nbsp;
@@ -78,7 +78,7 @@
                                  <i class='fas fa-utensils color7' ></i>
                               </c:if>
                            </span>&nbsp;&nbsp;
-                           <span class="list_book_day color3"><fmt:formatDate value="${dto.book_day }" pattern="yyyy-MM-dd HH:mm"/></span>
+                           <%-- <span class="list_book_day color3"><fmt:formatDate value="${dto.book_day }" pattern="yyyy-MM-dd HH:mm"/></span> --%>
                         </div>
                         
 <%--                         <div class="booklist_div">

@@ -201,7 +201,7 @@ function check(){
 	</div><br>
 	
 	<div class="btncenter">
-		<input type="submit"  value="가입 완료" id="joinOk">
+		<input type="submit" value="가입 완료" id="joinOk">
 	</div><br>
 
 </form>

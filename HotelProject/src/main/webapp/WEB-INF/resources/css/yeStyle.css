@@ -59,6 +59,9 @@
     border-radius:5px;
 }
 
+.div_join {padding-top: 100px; }
+.div_join span { font-size: }
+
 /* submit 버튼 부분*/
 #mypageGo, #findPwOk, #findIdOk, #wdok,#loginGo, #editOk,
 #mybookingForm, #myorderForm, #withdrawalOk, #mybookingCancel, #myroomsCancel, #withdrawalOk{
@@ -575,6 +578,7 @@ ul,li{ list-style: none; }
    color: grey;
    font-weight: ;
 }
+
 
 .checkday i{
    font-size: 22px;
