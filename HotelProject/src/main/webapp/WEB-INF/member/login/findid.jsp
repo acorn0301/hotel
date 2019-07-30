@@ -23,7 +23,7 @@
       
                      <div class="dashboard_li_empty">
                         <i class="fas fa-search"></i><br>
-                        가입시 사용하신 이름과 이메일주소를 입력해주세요
+                        가입시 사용하신 이름과 <br>이메일주소를 입력해주세요
                      </div>
                
       

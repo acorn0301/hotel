@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 비회원 // 예약확인을 위한 최소한의 회원가입 정보 저장 (이름이랑 폰번호만 삽입됨) -->
 	<insert id="insertInfo_notMember" parameterType="mbdto">
-		insert into member values (memberseq.nextval, 'nc_id', 'nc_password', #{name}, sysdate, sysdate, 'nc_email', #{phone}, 'NC', 'user.svg')
+		insert into member values (memberseq.nextval, 'nc_id', 'nc_password', #{name}, sysdate,'nc_email', #{phone}, 'NC', 'user.svg')
 	</insert>
 	
 	
