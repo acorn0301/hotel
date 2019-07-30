@@ -2,8 +2,12 @@ package spring.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import spring.data.QnaDto;
 import spring.data.QnaReplyDto;
+import spring.data.jhClass;
 import spring.service.QnaReplyService;
 import spring.service.QnaService;
 
@@ -104,10 +109,17 @@ public class QnaController {
 
 		Date now = new Date();
 		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    TimeZone tz = TimeZone.getTimeZone("Asia/Seoul"); 
+	    df.setTimeZone(tz);
+	    Calendar cal = df.getCalendar();
+	   
+	    cal = jhClass.CalendarFromString(df.format(now));
+		
 		for(QnaDto d:list) {
 						
 			//작성일을 좀더 심플하게 표현하기 
-			long timediff = now.getTime()-d.getWriteday().getTime();
+			long timediff = cal.getTime().getTime()-d.getWriteday().getTime();
 						
 			timediff /= 1000*60;
 			

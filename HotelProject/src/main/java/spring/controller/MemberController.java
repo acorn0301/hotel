@@ -867,7 +867,7 @@ public class MemberController {
        mbdto.setId(user_id);
        mbdto.setPassword("********");
        mbdto.setName(user_name);
-       mbdto.setPhone("kakao_phone");
+       mbdto.setPhone("00000000000");
        mbdto.setEmail(user_email);
        
        String id = mbdto.getId();

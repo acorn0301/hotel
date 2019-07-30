@@ -266,7 +266,7 @@
    <a href="hotelroom.do">
       <div class="center_div">
          <!-- Ｉｎｔｒｏｄｕｃｅ -->
-         <span class="sub_div_room_text">Intruduce</span>
+         <span class="sub_div_room_text">Introduce</span>
          <span>｜바로가기&nbsp;</span>
       </div>
    </a>
