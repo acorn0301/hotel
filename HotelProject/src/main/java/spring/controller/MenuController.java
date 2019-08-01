@@ -81,7 +81,7 @@ public class MenuController {
 			@RequestParam(value="page",defaultValue="0") int page)
 	{
 		//System.out.println("페이지"+page);
-		//System.out.println("hi");
+		//System.out.println("hi"); 
 		
 		
 		List<MenuDto> mnlist = new ArrayList<MenuDto>();
