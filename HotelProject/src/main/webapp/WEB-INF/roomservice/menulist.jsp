@@ -15,9 +15,12 @@
 <body>
 <script>
 function openModal(title,img,desc,menu_num){
-		
+	var page = $(window).scrollTop();
+	console.log(page);
 	var qty = 1;
 	   
+
+
 	$(".modalTitle").text(title);
  	$(".modalImg").attr("src",img);
 	$(".modalDesc").text(desc);
@@ -32,8 +35,8 @@ function openModal(title,img,desc,menu_num){
  			qty = 1;
  			$("#qty").val(qty);
  		} 
- 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'");
- 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'");
+ 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'");
  	}); 
  	
  	// 수량 + 버튼, 10 이상 선택 불가능
@@ -44,13 +47,17 @@ function openModal(title,img,desc,menu_num){
  			qty = 10;
  			$("#qty").val(qty);
  		}
- 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'");
- 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 		$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'");
+ 		$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'");
  	});
  	
- 	$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"'"); //+"&qty="+qty_val+"'"
- 	$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"'");
+ 	$(".modalCart").attr("onclick","location.href='insertcart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'"); //+"&qty="+qty_val+"'"
+ 	$(".modalOrder").attr("onclick","location.href='onecart.do?menu_num="+menu_num+"&qty="+qty+"&page="+page+"'");
 }
+
+$(function(){
+	$(window).scrollTop(${sessionScope.page});
+});
 </script>
 
 
@@ -134,14 +141,14 @@ function openModal(title,img,desc,menu_num){
 
 
 <!-- Main : 메뉴리스트 통째로 묶음 -->
-<main class="et-main"> 
+<!-- <main class="et-main">  -->
 
 	<!-- 카테고리 별 상단 메뉴 -->
    	<div class="admin_title_div">
 	<div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Breakfast</div></div>
 		
 <div class="container" style="padding-left:0; padding-right:0;">
-<section class="et-slide" id="tab-Breakfast"> <!-- 슬라이드 생성시 필요한 section -->
+<!-- <section class="et-slide" id="tab-Breakfast"> 슬라이드 생성시 필요한 section -->
   <div class="row">
   		<c:forEach var="mndto" items="${list0}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -158,7 +165,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
 </div>
 <br><br>
 
@@ -166,7 +173,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specialties</div></div>
 
 <div class="container" style="padding-left:0; padding-right:0;">
- <section class="et-slide" id="tab-Specialties">
+<!--  <section class="et-slide" id="tab-Specialties"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list1}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -183,7 +190,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
  
 <br><br>
@@ -192,7 +199,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bakery</div></div>
  
  <div class="container" style="padding-left:0; padding-right:0;">
- <section class="et-slide" id="tab-Bakery">
+<!--  <section class="et-slide" id="tab-Bakery"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list2}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -209,7 +216,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
 </div>
 
 <br><br>
@@ -218,7 +225,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appetizers</div></div>
 
 <div class="container" style="padding-left:0; padding-right:0;">
- <section class="et-slide" id="tab-Appetizers">
+<!--  <section class="et-slide" id="tab-Appetizers"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list3}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -235,7 +242,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
  
 <br><br>
@@ -244,7 +251,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pastas</div></div>
 
  <div class="container" style="padding-left:0; padding-right:0;">
-  <section class="et-slide" id="tab-Pastas">
+<!--   <section class="et-slide" id="tab-Pastas"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list4}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -261,7 +268,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
  
 <br><br>
@@ -270,7 +277,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dessert</div></div> 
  
  <div class="container" style="padding-left:0; padding-right:0;">
-  <section class="et-slide" id="tab-Dessert">
+<!--   <section class="et-slide" id="tab-Dessert"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list5}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -287,7 +294,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
  
 <br><br>
@@ -296,7 +303,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Beverage</div></div>
  
  <div class="container" style="padding-left:0; padding-right:0;">
-  <section class="et-slide" id="tab-Beverage">
+<!--   <section class="et-slide" id="tab-Beverage"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list6}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -313,7 +320,7 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
  
 <br><br>
@@ -322,7 +329,7 @@ function openModal(title,img,desc,menu_num){
 <div class="menu_sub_bar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drink</div></div>
  
  <div class="container" style="padding-left:0; padding-right:0;">
-  <section class="et-slide" id="tab-Drink">
+<!--   <section class="et-slide" id="tab-Drink"> -->
   <div class="row">
   		<c:forEach var="mndto" items="${list7}" varStatus="i">
     		<div class="col-sm-6 col-md-4">
@@ -339,9 +346,9 @@ function openModal(title,img,desc,menu_num){
     		</div>
     	</c:forEach>
   	</div>
- </section>
+<!--  </section> -->
  </div>
-</main>
+<!-- </main> -->
 
 <br><br>
 

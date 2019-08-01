@@ -77,8 +77,11 @@ public class MenuController {
 	public String insertCart(HttpServletRequest request,
 			HttpSession session,
 			@ModelAttribute MenuDto mndto,
-			@RequestParam(value="qty",defaultValue="1") int qty)
+			@RequestParam(value="qty",defaultValue="1") int qty,
+			@RequestParam(value="page",defaultValue="0") int page)
 	{
+		//System.out.println("페이지"+page);
+		//System.out.println("hi");
 		
 		
 		List<MenuDto> mnlist = new ArrayList<MenuDto>();
@@ -117,7 +120,7 @@ public class MenuController {
 			
 			//세션에 mnlist를 올린다.
 			session.setAttribute("mnlist", mnlist);
-			
+			session.setAttribute("page", page);
 
 
 	return "redirect:roomaservice.do";
