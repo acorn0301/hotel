@@ -1,24 +1,22 @@
 package spring.controller;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
-import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,27 +95,7 @@ public class ReviewController {
 			return new ArrayList<ReviewDto>();
 		}
 		
-		//각 블럭의 시작페이지와 끝페이지를 구한다
-//		startPage = perBlock*((currentPage-1)/perBlock) + 1 ;
-//		endPage = startPage -1 + perBlock;
-		
-		//아래는 구글 스타일의 페이징을 위한 startPage, endPage변수
-//		startPage = currentPage-2 ;
-//		endPage = currentPage+2  ;
-//		//마지막 블럭의 끝페이지는 총 페이지수와 같아야함 
-//		if(currentPage < (Math.ceil((double)perBlock/2))) {
-//			startPage = 1;
-//			endPage = perBlock;
-//		}
-//		if(currentPage > totalPage - (Math.ceil((double)perBlock/2))) {
-//			startPage = totalPage - perBlock +1;
-//			endPage = totalPage;
-//		}
-//		if(totalPage <= perBlock) {
-//			startPage =1;
-//			endPage = totalPage;
-//		}
-//		
+
 		
 		//각 페이지의 시작번호와 끝번호를 구한다
 		start = (currentPage-1)*perPage +1;
@@ -134,12 +112,20 @@ public class ReviewController {
 		
 		Date now = new Date();
 		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    TimeZone tz = TimeZone.getTimeZone("Asia/Seoul"); 
+	    df.setTimeZone(tz);
+	    Calendar cal = df.getCalendar();
+	   
+	    cal = jhClass.CalendarFromString(df.format(now));
+		
 		for(ReviewDto d:list) {
 						
 			//작성일을 좀더 심플하게 표현하기 
-			long timediff = now.getTime()-d.getReview_writeday().getTime();
+			long timediff = cal.getTime().getTime()-d.getReview_writeday().getTime();
 						
 			timediff /= 1000*60;
+			System.out.println("timediff : " + timediff);
 			
 			
 			if(timediff < 1) {
@@ -187,10 +173,19 @@ public class ReviewController {
 			
 			List<ReviewReplyDto> reply_list = rservice.getReplyList(d.getReview_num());
 			
+			Date now2 = new Date();
+			
+			DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    TimeZone tz2 = TimeZone.getTimeZone("Asia/Seoul"); 
+		    df.setTimeZone(tz);
+		    Calendar cal2 = df.getCalendar();
+		   
+		    cal2 = jhClass.CalendarFromString(df.format(now));
+			
 			//댓글의 작성일을 좀더 심플하게 표현하기 
 			for(ReviewReplyDto r: reply_list) {
 				
-				long timediff = now.getTime()-r.getReview_reply_writeday().getTime();
+				long timediff = cal2.getTime().getTime()-r.getReview_reply_writeday().getTime();
 							
 				timediff /= 1000*60;
 				

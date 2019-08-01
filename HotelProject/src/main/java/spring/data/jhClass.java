@@ -1,9 +1,33 @@
 package spring.data;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class jhClass {
+	
+	
+	   public static Calendar CalendarFromString(String date)
+	    {
+	        Calendar cal = Calendar.getInstance();
+	         
+	        try
+	        {
+	            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	            cal.setTime(formatter.parse(date));
+	        }
+	        catch(ParseException e)
+	        {
+	            e.printStackTrace();
+	        }
+	        return cal;
+	    }
+
+
+	
 
 	public static List<ReviewReplyDto> getSimpletime(List<ReviewReplyDto> list){
 		
@@ -36,3 +60,4 @@ public class jhClass {
 		
 	}
 }
+

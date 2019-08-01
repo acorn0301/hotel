@@ -206,10 +206,13 @@ ul.bxslider {
     padding: 10px 8px 10px 8px;
     color: #fdfdfd;
     line-height: 30px;
-    margin-bottom: 30px;
+   /*  margin-bottom: 30px;
     margin-right: 10%;
-    margin-left: 10%;
+    margin-left: 10%; */
 /*     margin-top: -20px; */
+	width: 90%;
+	margin : auto;
+	margin-bottom: 50px;
 }
 .sub_div_room_text{
    letter-spacing: 0.14em;
