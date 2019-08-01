@@ -41,7 +41,12 @@ function idChk(){
 			if (res.count == 1) {
 				// 1 이면 존재하는 아이디 (중복)
 				$('#user_id').val('');
-				$('#user_id').attr('placeholder','사용중인 아이디입니다!');
+/* 				$('#user_id').attr('placeholder','사용중인 아이디입니다!'); */
+				$('#user_id').addClass('placeholderChange').val('사용중인 아이디입니다!').focus(function(){
+					if(this.value == '사용중인 아이디입니다!' ){
+						$(this).removeClass('placeholderChange').val('');
+					};
+				});
 /* 				$('#user_id').css('color','red'); */
 //				$('#user_id').addClass(".id");
 				$("#joinOk").attr("disabled", true);
