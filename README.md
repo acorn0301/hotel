@@ -1,6 +1,6 @@
 ![main](https://github.com/acorn0301/hotel/blob/master/images/main.png?raw=true)
 
-에이콘 아카데미 Java 프론트엔드 6차과정 1조의 최종 프로젝트 입니다  
+⭐️ 에이콘 아카데미 Java 프론트엔드 6차과정 1조의 최종 프로젝트 입니다  
 * [Slideshow](https://drive.google.com/file/d/1vjzXh2sHRy2dE_zD_3oh_snAuWkGv6Pt/view?usp=sharing)  
 * ~~[Demo]()~~ 서버 이전 준비중입니다. 빠른 시일 내에 복구하겠습니다.
 
