@@ -18,7 +18,8 @@
 * 룸서비스 주문
 ![roomservice](https://github.com/acorn0301/hotel/blob/master/images/2roomservice.png?raw=true)
 
-* SNS - ReactJS로 구현
+* SNS - ReactJS 
+[코드는 여기에](https://github.com/JennyLee4517/react-hotelSNS)
 ![sns](https://github.com/acorn0301/hotel/blob/master/images/3sns.png?raw=true)
 
 * 관리자 페이지
