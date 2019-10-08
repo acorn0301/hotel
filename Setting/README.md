@@ -2,6 +2,7 @@
 
 * 오라클 기준입니다 (MySql 버전은 추후 추가)
 
+0. [acorn0301-db.zip다운](https://github.com/acorn0301/hotel/blob/master/DB/acorn0301-db.zip) [전체 war파일 다운](https://drive.google.com/file/d/1xWFtcdvyC4btICnYHxtPh2J767DCdA6k/view?usp=sharing) [react-리뷰게시판 다운](https://drive.google.com/file/d/12e9A6CwmmoLW5tFZV7L9f5_EweQdRR8l/view?usp=sharing) 
 1. DB 셋팅 - 새 계정 만들기 : acorn0301 (이 계정명을 사용하면 sql문 수정할 필요 없음. 다른 계정명 쓰고 싶으면 각각의 sql 파일 텍스트편집기로 열어서 create table acorn0301 부분에서 이름을 변경하기 - 대문자 필수  )
 2. https://cafe.naver.com/zipsy/2126 => 이 글 참고해서 import 해주기
 3. war 파일 이클립스에서 읽어들이기
